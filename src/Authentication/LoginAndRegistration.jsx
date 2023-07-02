@@ -1,9 +1,49 @@
 import React, { useState } from "react";
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input, InputNumber, notification } from "antd";
 import myimage from "../assets/1.jpg";
+import axios from "axios"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {isEmpty} from "lodash"
+
 function LoginAndRegistration() {
   const [register, setRegiser] = useState(false);
   const [login, setLogin] = useState(true);
+  const [inputs, setInputs] = useState({});
+
+  const navigate=useNavigate()
+
+  const handleChange = (event) => {
+    event.preventDefault()
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+  
+ 
+  const handleSubmit = async () => {
+    // try {
+    //   await axios.post("http://localhost:4001/api/user/register", inputs, { withCredentials: true });
+    //   notification.success({ message: "Registration successful" });
+    // } catch (err) {
+    //   console.log(err);
+    //   notification.error({ message: "User Already Exists" });
+    // }
+
+    localStorage.setItem("name", inputs.username)
+    
+    console.log(localStorage.getItem("name"))
+     
+    if (!isEmpty(localStorage.getItem("name"))) {
+    navigate('/')
+    }   
+ 
+  };
+  
+  useEffect(() => { 
+    
+  })
+
   return (
     <div
       className="flex items-center justify-center w-screen h-screen bg-center bg-cover bg-no-repeat"
@@ -15,7 +55,7 @@ function LoginAndRegistration() {
         <Form className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
           <h1 className="text-3xl text-blue-500 font-medium pb-2 text-center">Admin Login</h1>
           <Form.Item
-            label="Email"
+            label="UserName"
             name="email"
             rules={[
               {
@@ -23,7 +63,7 @@ function LoginAndRegistration() {
               },
             ]}
           >
-            <Input type="email" size="large" />
+            <Input type="text" size="large" name="username" onChange={handleChange}/>
           </Form.Item>
           <Form.Item
             label="Password"
@@ -35,11 +75,11 @@ function LoginAndRegistration() {
               },
             ]}
           >
-            <Input.Password size="large" />
+            <Input.Password size="large" name="password" onChange={handleChange}/>
           </Form.Item>
 
           <Form.Item>
-            <Button htmlType="submit" className="w-full" size="large">
+            <Button htmlType="submit" className="w-full" size="large" onClick={handleSubmit}>
               {login ? "Login" : "Register"}
             </Button>
           </Form.Item>
