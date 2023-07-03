@@ -22,19 +22,22 @@ function Vehicle() {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
+  const [searched, setSearched] = useState([]);
 
   const fetchData = async () => {
     try {
-      const result = await axios.get("http://localhost:4001/api/vehicle");
+      const result = await axios.get(`http://localhost:4001/api/vehicle?search=${searched}`);
       setVehicle(get(result, "data.message"));
     } catch (err) {
       console.log(err);
     }
   };
 
+
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searched]);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -82,45 +85,57 @@ function Vehicle() {
   const columns = [
     {
       title: "DocEntry",
-      dataIndex: "DocEntry",
-      key: "DocEntry",
+      dataIndex: "docentry",
+      key: "docentry",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "VehicleNo",
-      dataIndex: "VehicleNo",
-      key: "VehicleNo",
+      dataIndex: "vehicleno",
+      key: "vehicleno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "DriverName",
-      dataIndex: "DriverName",
-      key: "DriverName",
+      dataIndex: "drivername",
+      key: "drivername",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "DriverPhone",
-      dataIndex: "DriverPhone",
-      key: "DriverPhone",
+      dataIndex: "driverphone",
+      key: "driverphone",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "WhatsappNo",
-      dataIndex: "WhatsappNo",
-      key: "WhatsappNo",
+      dataIndex: "whatsappno",
+      key: "whatsappno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PAN",
-      dataIndex: "PAN",
-      key: "PAN",
+      dataIndex: "pan",
+      key: "pan",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "RCName",
-      dataIndex: "RCName",
-      key: "RCName",
+      dataIndex: "rcname",
+      key: "rcname",
+      render: (text) => <div className="!text-[16px]">{text}</div>,
+    },
+    {
+      title: "Account no",
+      dataIndex: "accno",
+      key: "accno",
+      render: (text) => <div className="!text-[16px]">{text}</div>,
+    },
+    {
+      title: "IFC Code",
+      dataIndex: "ifsccode",
+      key: "ifsccode",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     
@@ -147,7 +162,13 @@ function Vehicle() {
     <div className="flex pt-[15vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-10">
         <div className="flex items-center justify-center">
-          <Select placeholder="seach here" size="large" className="w-1/2" />
+        <Input
+        placeholder="Search here"
+        size="large"
+        className="w-[50%] !m-auto py-3"
+        onChange={(e) => {
+          setSearched(e.target.value);
+        }}/>
         </div>
         <div className="  w-full">
           <div
@@ -191,7 +212,7 @@ function Vehicle() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">VehicleNo</p>}
-            name="vehicle no"
+            name="vehicleno"
             rules={[
               {
                 required: true,

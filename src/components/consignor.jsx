@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
-  Table,
   Tag,
   Select,
   Modal,
@@ -10,6 +9,7 @@ import {
   Input,
   Button,
   notification,
+  Table,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";

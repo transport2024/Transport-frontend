@@ -15,12 +15,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Rootlayouts from "./layouts/rootlayout";
+import Consignee from "./components/consignee";
+import Vehicle from "./components/vehicle"
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Rootlayouts />}>
       <Route path="consignor" element={<Consignor />} />
+      <Route path="consignee" element={<Consignee />} />
+      <Route path="vehicle" element={<Vehicle />} />
        <Route path="admin" element={<LoginAndRegistration />} />
       {/*<Route path="connect3" element={<Connect3 />} />
       <Route path="connect4" element={<Connect4 />} />
