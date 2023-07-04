@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
-  Space,
-  Tag,
   Select,
   Modal,
   Form,
@@ -10,6 +8,7 @@ import {
   Button,
   notification,
   Table,
+  
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -31,6 +30,8 @@ function Consignor() {
       console.log(err);
     }
   };
+
+  console.log( consignors,"prkfn")
 
   useEffect(() => {
     fetchData();
@@ -153,7 +154,19 @@ function Consignor() {
     <div className="flex pt-[15vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-10">
         <div className="flex items-center justify-center">
-          <Select placeholder="seach here" size="large" className="w-1/2" />
+        <Select
+            mode="tags"
+            showSearch
+         
+          placeholder="Type here for Category"
+          // options={searchers}
+          // onChange={(data) => {
+          //   setSearched(data);
+          //   }}
+            className="w-1/2 !m-auto py-3"
+            size="large"
+            showArrow={false}
+        />
         </div>
         <div className="  w-full">
           <div
@@ -165,7 +178,9 @@ function Consignor() {
             <AddOutlinedIcon /> Create
           </div>
         </div>
-        <Table columns={columns} dataSource={consignors} />
+        <div>
+        <Table columns={columns} dataSource={consignors}/>
+      </div>
       </div>
       <Modal
         open={open}

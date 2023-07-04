@@ -36,6 +36,8 @@ function Consignee() {
     fetchData();
   }, []);
 
+  console.log(Consignee,"hb")
+
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {

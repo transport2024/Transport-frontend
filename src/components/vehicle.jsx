@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState,useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -16,24 +16,26 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 function Vehicle() {
   const [Vehicle, setVehicle] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
-  const [searched, setSearched] = useState([]);
+	const [searched, setSearched] = useState([]);
+	const tableRef = useRef(null);
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`http://localhost:4001/api/vehicle?search=${searched}`);
+      const result = await axios.get(
+        `http://localhost:4001/api/vehicle?search=${searched}`
+      );
       setVehicle(get(result, "data.message"));
     } catch (err) {
       console.log(err);
     }
   };
-
-
 
   useEffect(() => {
     fetchData();
@@ -44,24 +46,29 @@ function Vehicle() {
       try {
         await axios.post("http://localhost:4001/api/vehicle", value);
         fetchData();
-        notification.success({ message: "Vehicle Added successfully" });
+        notification.success({
+          message: "Vehicle Added successfully",
+        });
         setOpen(false);
       } catch (err) {
-        notification.error({ message: "Something went wrong" });
+        notification.error({
+          message: "Something went wrong",
+        });
       }
     } else {
       try {
-        await axios.put(
-          `http://localhost:4001/api/vehicle/${updateId}`,
-          value
-        );
+        await axios.put(`http://localhost:4001/api/vehicle/${updateId}`, value);
         fetchData();
-        notification.success({ message: "Vehicle updated successfully" });
+        notification.success({
+          message: "Vehicle updated successfully",
+        });
         setOpen(false);
         form.setFieldValue([]);
         setUpdateId("");
       } catch (err) {
-        notification.error({ message: "Something went wrong" });
+        notification.error({
+          message: "Something went wrong",
+        });
       }
     }
   };
@@ -72,15 +79,42 @@ function Vehicle() {
     setOpen(true);
   };
 
-  const handleDelete = async(value) => {
+  const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/vehicle/${value._id}`)
-      fetchData()
-      notification.success({message:"Deleted Successfully"})
+      await axios.delete(`http://localhost:4001/api/vehicle/${value._id}`);
+      fetchData();
+      notification.success({
+        message: "Deleted Successfully",
+      });
     } catch (err) {
-      notification.error({message:"Something Went Wrong"})
+      notification.error({
+        message: "Something Went Wrong",
+      });
     }
-  }
+  };
+
+  const handleClear = () => {
+    form.setFieldsValue([]);
+  };
+
+  const searchers = [];
+
+  Vehicle &&
+    Vehicle.map((data) => {
+      return searchers.push(
+        { value: data.drivername },
+        { value: data.driverphone },
+        { value: data.vehicleno }
+      );
+    });
+
+
+	const { onDownload } = useDownloadExcel({
+		currentTableRef: tableRef.current,
+		filename: "Web Users",
+		sheet: "Web Users",
+	  });
+	
 
   const columns = [
     {
@@ -138,7 +172,6 @@ function Vehicle() {
       key: "ifsccode",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-    
     {
       title: "Actions",
       render: (text) => (
@@ -151,7 +184,12 @@ function Vehicle() {
           </div>
 
           <div>
-            <DeleteOutlineOutlinedIcon className="!text-md text-green-500 cursor-pointer " onClick={()=>{handleDelete(text)}} />
+            <DeleteOutlineOutlinedIcon
+              className="!text-md text-green-500 cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
+            />
           </div>
         </div>
       ),
@@ -162,25 +200,46 @@ function Vehicle() {
     <div className="flex pt-[15vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-10">
         <div className="flex items-center justify-center">
-        <Input
-        placeholder="Search here"
-        size="large"
-        className="w-[50%] !m-auto py-3"
-        onChange={(e) => {
-          setSearched(e.target.value);
-        }}/>
+          {/* <Input placeholder="Search here" size="large" className="w-[50%] !m-auto py-3"
+						onChange={
+							(e) => {
+								setSearched(e.target.value);
+							}
+						} /> */}
+
+          <Select
+            mode="tags"
+            showSearch
+            placeholder="Type here for Category"
+            options={searchers}
+            onChange={(data) => {
+              setSearched(data);
+            }}
+            className="w-[50%] !m-auto py-3"
+            size="large"
+            showArrow={false}
+          />
         </div>
-        <div className="  w-full">
+        <div className="w-full flex gap-5 items-end justify-end">
           <div
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon /> Create
+            <AddOutlinedIcon />
+            Create
+          </div>
+          <div>
+            <Button
+              onClick={onDownload}
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+            >
+              Export Exel
+            </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Vehicle} />
+        <Table columns={columns} dataSource={Vehicle}  ref={tableRef}/>
       </div>
       <Modal
         open={open}
@@ -277,46 +336,57 @@ function Vehicle() {
             name="rcname"
             rules={[
               {
-                required: true,  
+                required: true,
                 message: "Please input your RCName!",
               },
             ]}
           >
             <Input type="text" size="large" />
           </Form.Item>
-          <Form.Item label={<p className="!text-[16px] font-semibold">AccNo</p>}
-           name="accno"
-        rules={[
-            {
-                required: true,  
+          <Form.Item
+            label={<p className="!text-[16px] font-semibold">AccNo</p>}
+            name="accno"
+            rules={[
+              {
+                required: true,
                 message: "Please input your AccNo!",
               },
-          ]}
-          >
-             <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item label={<p className="!text-[16px] font-semibold">IFSCCode</p>}
-           name="ifsccode"
-        rules={[
-            {
-                required: true,  
-                message: "Please input your IFSCCode!",
-              },
-          ]}
+            ]}
           >
             <Input type="text" size="large" />
-            </Form.Item> 
-
- <div className="save">
-          <Form.Item className="w-[40vw]">
-            <Button
-              htmlType="submit"
-              className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
-            >
-              {updateId === "" ? "Save" : "Update"}
-            </Button>
           </Form.Item>
- </div>
+          <Form.Item
+            label={<p className="!text-[16px] font-semibold">IFSCCode</p>}
+            name="ifsccode"
+            rules={[
+              {
+                required: true,
+                message: "Please input your IFSCCode!",
+              },
+            ]}
+          >
+            <Input type="text" size="large" />
+          </Form.Item>
+
+          <div className="save">
+            <Form.Item className="w-[40vw]">
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}{" "}
+              </Button>
+            </Form.Item>
+            <Form.Item className="w-[40vw]">
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </Modal>
     </div>
