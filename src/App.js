@@ -16,8 +16,11 @@ import {
 } from "react-router-dom";
 import Rootlayouts from "./layouts/rootlayout";
 import Consignee from "./components/consignee";
-import Vehicle from "./components/vehicle"
-
+import Vehicle from "./components/vehicle";
+import Broker from "./components/broker"
+import Memo from "./components2/memoentry";
+import Memodetails from "./components2/memodetails";
+import Reports from "./components3/reportentry"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +28,11 @@ const router = createBrowserRouter(
       <Route path="consignor" element={<Consignor />} />
       <Route path="consignee" element={<Consignee />} />
       <Route path="vehicle" element={<Vehicle />} />
-       <Route path="admin" element={<LoginAndRegistration />} />
+      <Route path="broker" element={<Broker />} />
+      <Route path="memo" element={<Memo />} />
+      <Route path="details" element={<Memodetails />} />
+      <Route path="reports" element={<Reports />} />
+        <Route path="admin" element={<LoginAndRegistration />} />
       {/*<Route path="connect3" element={<Connect3 />} />
       <Route path="connect4" element={<Connect4 />} />
       <Route path="connect5" element={<Connect5 />} />

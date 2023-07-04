@@ -18,12 +18,12 @@ export const items = [
     getItem(<NavLink to="broker">Broker</NavLink>)
   ]),
   getItem("Entry", "sub2", "", [
-    getItem(<NavLink to="connect5">Memo Entries</NavLink>, "5"),
-   
+    getItem(<NavLink to="memo">Memo Entry</NavLink>, "5"),
+    getItem(<NavLink to ="details"> Memo Details </NavLink>, "6")
   ]),
 
-  getItem("Reports", "sub2", "", [
-    getItem(<NavLink to="connect5">Memo Reports</NavLink>, "6"),
+  getItem("Reports", "sub3", "", [
+    getItem(<NavLink to="reports">Report Entry</NavLink>, "7"),
     
   ]),
 ];
