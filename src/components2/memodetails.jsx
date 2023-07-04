@@ -301,7 +301,7 @@ function Memodetails() {
               },
             ]}
           >
-            <Input type="date" size="large" />
+            <Input type="text" size="large" />
           </Form.Item>
 
           <Form.Item label={<p className="!text-[16px] font-semibold">Consignee</p>}

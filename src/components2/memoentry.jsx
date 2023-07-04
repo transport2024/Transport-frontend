@@ -84,6 +84,13 @@ function Memo() {
 
   const columns = [
     {
+      title: "Internal No",
+      dataIndex: "Internal No",
+      key: "Internal No",
+      render: (text) => <div className="!text-[16px]">{text}</div>,
+    },
+    
+    {
       title: "GC No",
       dataIndex: "GC No",
       key: "GC No",
