@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Select,
@@ -15,16 +15,19 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 function Consignor() {
   const [consignors, setConsignors] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
+  const [searched, setSearched] = useState([]);
+  const tableRef = useRef(null);
 
   const fetchData = async () => {
     try {
-      const result = await axios.get("http://localhost:4001/api/consignor");
+      const result = await axios.get(`http://localhost:4001/api/consignor?search=${searched}`);
       setConsignors(get(result, "data.message"));
     } catch (err) {
       console.log(err);
@@ -35,7 +38,11 @@ function Consignor() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searched]);
+
+  const handleClear = () => {
+    form.setFieldsValue([]);
+  };
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -79,6 +86,24 @@ function Consignor() {
       notification.error({message:"Something Went Wrong"})
     }
   }
+
+  console.log(consignors,"rfk")
+  const searchers = [];
+
+  consignors &&
+    consignors.map((data) => {
+      return searchers.push(
+        { value: data.name },
+        { value: data.phone },
+        { value: data.place }
+      );
+    });
+  
+    const { onDownload } = useDownloadExcel({
+      currentTableRef: tableRef.current,
+      filename: "Web Users",
+      sheet: "Web Users",
+      });
 
   const columns = [
     {
@@ -159,16 +184,16 @@ function Consignor() {
             showSearch
          
           placeholder="Type here for Category"
-          // options={searchers}
-          // onChange={(data) => {
-          //   setSearched(data);
-          //   }}
+          options={searchers}
+          onChange={(data) => {
+            setSearched(data);
+            }}
             className="w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
         />
         </div>
-        <div className="  w-full">
+        <div className="w-full flex justify-end items-end gap-5">
           <div
             className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
             onClick={() => {
@@ -177,9 +202,17 @@ function Consignor() {
           >
             <AddOutlinedIcon /> Create
           </div>
+          <div>
+            <Button
+              onClick={onDownload}
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+            >
+              Export Exel
+            </Button>
+          </div>
         </div>
         <div>
-        <Table columns={columns} dataSource={consignors}/>
+        <Table columns={columns} dataSource={consignors}  ref={tableRef}/>
       </div>
       </div>
       <Modal
@@ -288,7 +321,18 @@ function Consignor() {
               <Select.Option value="no">no</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item className="w-[40vw]">
+
+          <Form.Item className="w-[32vw]" >
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] cursor-pointer float-right text-white font-bold tracking-wider"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Form.Item>
+         
+          <Form.Item >
             <Button
               htmlType="submit"
               className="bg-green-500 w-[120px] float-right text-white font-bold tracking-wider"
@@ -296,6 +340,8 @@ function Consignor() {
               {updateId === "" ? "Save" : "Update"}
             </Button>
           </Form.Item>
+          
+
         </Form>
       </Modal>
     </div>

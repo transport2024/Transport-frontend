@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -10,22 +10,26 @@ import {
   Input,
   Button,
   notification,
+  
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 function Consignee() {
   const [Consignee, setConsignee] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
+  const tableRef = useRef(null);
+  const [searched, setSearched] = useState([]);
 
   const fetchData = async () => {
     try {
-      const result = await axios.get("http://localhost:4001/api/consignee");
+      const result = await axios.get(`http://localhost:4001/api/consignee?search=${searched}`);
       setConsignee(get(result, "data.message"));
     } catch (err) {
       console.log(err);
@@ -34,7 +38,7 @@ function Consignee() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searched]);
 
   console.log(Consignee,"hb")
 
@@ -80,6 +84,29 @@ function Consignee() {
       notification.error({message:"Something Went Wrong"})
     }
   }
+
+  const searchers = [];
+
+  console.log(Consignee,"Erkhuubj")
+
+  Consignee &&
+  Consignee.map((data) => {
+      return searchers.push(
+        { value: data.name },
+        { value: data.phone },
+        { value: data.place }
+      );
+    });
+
+  const { onDownload } = useDownloadExcel({
+		currentTableRef: tableRef.current,
+		filename: "Web Users",
+		sheet: "Web Users",
+  });
+  
+  const handleClear = () => {
+    form.setFieldsValue([]);
+  };
 
   const columns = [
     {
@@ -155,19 +182,39 @@ function Consignee() {
     <div className="flex pt-[15vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-10">
         <div className="flex items-center justify-center">
-          <Select placeholder="seach here" size="large" className="w-1/2" />
+        <Select
+            mode="tags"
+            showSearch
+            placeholder="Type here for Category"
+            options={searchers}
+            onChange={(data) => {
+              setSearched(data);
+            }}
+            className="w-[50%] !m-auto py-3"
+            size="large"
+            showArrow={false}
+          />
         </div>
-        <div className="  w-full">
+        <div className="w-full flex gap-5 items-end justify-end">
           <div
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon /> Create
+            <AddOutlinedIcon />
+            Create
+          </div>
+          <div>
+            <Button
+              onClick={onDownload}
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+            >
+              Export Exel
+            </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Consignee} />
+        <Table columns={columns} dataSource={Consignee}  ref={tableRef}/>
       </div>
       <Modal
         open={open}
@@ -275,7 +322,17 @@ function Consignee() {
               <Select.Option value="no">no</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item className="w-[40vw]">
+          <Form.Item className="w-[32vw]" >
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] float-right text-white font-bold tracking-wider"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Form.Item>
+         
+          <Form.Item >
             <Button
               htmlType="submit"
               className="bg-green-500 w-[120px] float-right text-white font-bold tracking-wider"
