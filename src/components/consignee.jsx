@@ -322,17 +322,19 @@ function Consignee() {
               <Select.Option value="no">no</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item className="w-[32vw]" >
+          <div className="w-[40vw]">
+          <div className="flex gap-4 items-end justify-end">
+          <Form.Item>
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] float-right text-white font-bold tracking-wider"
+                className="bg-green-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
                 onClick={handleClear}
               >
                 Clear
               </Button>
             </Form.Item>
          
-          <Form.Item >
+          <Form.Item>
             <Button
               htmlType="submit"
               className="bg-green-500 w-[120px] float-right text-white font-bold tracking-wider"
@@ -340,6 +342,8 @@ function Consignee() {
               {updateId === "" ? "Save" : "Update"}
             </Button>
           </Form.Item>
+         </div>
+        </div>
         </Form>
       </Modal>
     </div>
