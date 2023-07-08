@@ -149,13 +149,7 @@ function Consignor() {
       key: "mail",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-    {
-      title: "Transport",
-      dataIndex: "transport",
-      key: "transport",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
-    },
-
+  
     {
       title: "Actions",
       render: (text) => (
@@ -314,12 +308,6 @@ function Consignor() {
             ]}
           >
             <Input type="mail" size="large" />
-          </Form.Item>
-          <Form.Item label={<p className="!text-[16px] font-semibold">Transport</p>} name="transport" rules={[]}>
-            <Select size="large">
-              <Select.Option value="Yes">Yes</Select.Option>
-              <Select.Option value="no">no</Select.Option>
-            </Select>
           </Form.Item>
 
           <div className="w-[40vw]">

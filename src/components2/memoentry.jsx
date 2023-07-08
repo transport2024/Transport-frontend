@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -16,6 +16,7 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 function Memo() {
   const [Memo, setMemo] = useState([]);
@@ -23,6 +24,7 @@ function Memo() {
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
   const [searched, setSearched] = useState([]);
+  const tableRef = useRef(null);
 
   const fetchData = async () => {
     try {
@@ -33,11 +35,9 @@ function Memo() {
     }
   };
 
-
-
   useEffect(() => {
     fetchData();
-  }, [searched]);
+  }, [searched]);  
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -81,7 +81,25 @@ function Memo() {
       notification.error({message:"Something Went Wrong"})
     }
   }
+  const searchers = [];
 
+  Memo &&
+    Memo.map((data) => {
+      return searchers.push(
+        { value: data.drivername },
+        { value: data.driverphone },
+        { value: data.vehicleno }
+      );
+    });
+
+
+	const { onDownload } = useDownloadExcel({
+		currentTableRef: tableRef.current,
+		filename: "Web Users",
+		sheet: "Web Users",
+	  });
+
+    
   const columns = [
     {
       title: "Internal No",
@@ -144,15 +162,20 @@ function Memo() {
     <div className="flex pt-[15vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-10">
         <div className="flex items-center justify-center">
-        <Input
-        placeholder="Search here"
-        size="large"
-        className="w-[50%] !m-auto py-3"
-        onChange={(e) => {
-          setSearched(e.target.value);
-        }}/>
+        <Select
+            mode="tags"
+            showSearch
+            placeholder="Type here for Category"
+            options={searchers}
+            onChange={(data) => {
+              setSearched(data);
+            }}
+            className="w-[50%] !m-auto py-3"
+            size="large"
+            showArrow={false}
+          />
         </div>
-        <div className="  w-full">
+        <div className="  w-full flex gap-5 items-end justify-end">
           <div
             className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
             onClick={() => {
@@ -161,9 +184,17 @@ function Memo() {
           >
             <AddOutlinedIcon /> Create
           </div>
+          <div>
+      <Button
+        onClick={onDownload}
+        className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+      >
+        Export Exel
+      </Button>
+    </div>
         </div>
-        <Table columns={columns} dataSource={Memo} />
-      </div>
+        <Table columns={columns} dataSource={Memo} ref={tableRef}  />
+      </div>       
       <Modal
         open={open}
         width={700}

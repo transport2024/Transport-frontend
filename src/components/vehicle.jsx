@@ -115,7 +115,6 @@ function Vehicle() {
 		sheet: "Web Users",
 	  });
 	
-
   const columns = [
     {
       title: "DocEntry",
@@ -380,7 +379,7 @@ function Vehicle() {
             <Form.Item className="w-[40vw]">
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
                 onClick={handleClear}
               >
                 Clear

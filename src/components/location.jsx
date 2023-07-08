@@ -18,8 +18,8 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 
-function Broker() {
-  const [Broker, setBroker] = useState([]);
+function Location() {
+  const [Location, setLocation] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
@@ -29,9 +29,9 @@ function Broker() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/broker?search=${searched}`
+        `http://localhost:4001/api/location?search=${searched}`
       );
-      setBroker(get(result, "data.message"));
+      setLocation(get(result, "data.message"));
     } catch (err) {
       console.log(err);
     }
@@ -44,10 +44,10 @@ function Broker() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/broker", value);
+        await axios.post("http://localhost:4001/api/location", value);
         fetchData();
         notification.success({
-          message: "Broker Added successfully",
+          message: "Location Added successfully",
         });
         setOpen(false);
       } catch (err) {
@@ -57,10 +57,10 @@ function Broker() {
       }
     } else {
       try {
-        await axios.put(`http://localhost:4001/api/broker/${updateId}`, value);
+        await axios.put(`http://localhost:4001/api/location/${updateId}`, value);
         fetchData();
         notification.success({
-          message: "Broker updated successfully",
+          message: "Location updated successfully",
         });
         setOpen(false);
         form.setFieldValue([]);
@@ -81,7 +81,7 @@ function Broker() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/broker/${value._id}`);
+      await axios.delete(`http://localhost:4001/api/location/${value._id}`);
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -99,8 +99,8 @@ function Broker() {
 
   const searchers = [];
 
-  Broker &&
-    Broker.map((data) => {
+  Location &&
+    Location.map((data) => {
       return searchers.push(
         { value: data.name }
      );
@@ -116,9 +116,9 @@ function Broker() {
 
   const columns = [
     {
-      title: "Broker Name",
-      dataIndex: "Broker Name",
-      key: "Broker Name",
+      title: "Location Name",
+      dataIndex: "Location Name",
+      key: "Location Name",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
@@ -189,7 +189,7 @@ function Broker() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Broker}  ref={tableRef}/>
+        <Table columns={columns} dataSource={Location}  ref={tableRef}/>
       </div>
       <Modal
         open={open}
@@ -208,12 +208,12 @@ function Broker() {
           form={form}
         >
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Broker Name</p>}
+            label={<p className="!text-[16px] font-semibold">Location Name</p>}
             name="Broker Name"
             rules={[
               {
                 required: true,
-                message: "Please input your Broker Name!",
+                message: "Please input your Location Name!",
               },
             ]}
           >
@@ -245,4 +245,4 @@ function Broker() {
   );
 }
 
-export default Broker;
+export default Location;
