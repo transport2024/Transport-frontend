@@ -124,22 +124,22 @@ function Memo() {
   const columns = [
     {
       title: "Internal No",
-      dataIndex: "Internal No",
-      key: "Internal No",
+      dataIndex: "internalno",
+      key: "internalno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "GC No",
-      dataIndex: "GC No",
-      key: "GC No",
+      dataIndex: "gcno",
+      key: "gcno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "Date",
-      dataIndex: "Date",
-      key: "Date",
+      dataIndex: "date",
+      key: "date",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -156,8 +156,8 @@ function Memo() {
     },
     {
       title: "Driver WhatsappNo",
-      dataIndex: " driver whatsappno",
-      key: "driver whatsappno",
+      dataIndex: "driverwhatsappno",
+      key: "driverwhatsappno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -246,7 +246,7 @@ function Memo() {
         >
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Internal No</p>}
-            name="internal no"
+            name="internalno"
             rules={[
               {
                 required: true,
@@ -258,7 +258,7 @@ function Memo() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Memo/GC No</p>}
-            name="memogc"
+            name="gcno"
             rules={[
               {
                 required: true,
@@ -283,7 +283,7 @@ function Memo() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
-            name="vehicle no"
+            name="vehicleno"
             rules={[
               {
                 required: true,
@@ -313,7 +313,7 @@ function Memo() {
                 Driver Whatsapp Number
               </p>
             }
-            name="driver whatsapp no"
+            name="driverwhatsappno"
             rules={[
               {
                 required: true,
@@ -326,7 +326,7 @@ function Memo() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location From</p>}
-            name="location from"
+            name="locationfrom"
             rules={[
               {
                 required: true,
@@ -338,7 +338,7 @@ function Memo() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location To</p>}
-            name="location to"
+            name="locationto"
             rules={[
               {
                 required: true,

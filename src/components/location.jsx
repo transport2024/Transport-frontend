@@ -117,8 +117,8 @@ function Location() {
   const columns = [
     {
       title: "Location Name",
-      dataIndex: "Location Name",
-      key: "Location Name",
+      dataIndex: "locationname",
+      key: "locationname",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
@@ -150,13 +150,6 @@ function Location() {
     <div className="flex pt-[12vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
-          {/* <Input placeholder="Search here" size="large" className="w-[50%] !m-auto py-3"
-						onChange={
-							(e) => {
-								setSearched(e.target.value);
-							}
-						} /> */}
-
           <Select
             mode="tags"
             showSearch
@@ -209,7 +202,7 @@ function Location() {
         >
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location Name</p>}
-            name="Broker Name"
+            name="location"
             rules={[
               {
                 required: true,

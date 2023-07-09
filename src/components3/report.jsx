@@ -110,64 +110,63 @@ function Report() {
 
         {
             title: "From Date",
-            dataIndex: "from date",
-            key: "from date",
+            dataIndex: "fromdate",
+            key: "fromdate",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
       
           {
               title: "To Date",
-              dataIndex: "To Date",
-              key: "To Date",
+              dataIndex: "todate",
+              key: "todate",
               render: (text) => <div className="!text-[16px]">{text}</div>,
             },
-  
+            {
+              title: "Vehicle No",
+              dataIndex: " vehicleno",
+              key: "vehicleno",
+              render: (text) => <div className="!text-[16px]">{text}</div>,
+            },
+        
         {
             title: "Location From",
-            dataIndex: "Location From",
-            key: "Location From",
+            dataIndex: "locationfrom",
+            key: "locationfrom",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
 
-          {
-            title: "Vehicle No",
-            dataIndex: " Vehicle No",
-            key: "Vehicle No",
-            render: (text) => <div className="!text-[16px]">{text}</div>,
-          },
-      
         {
           title: "Location To",
-          dataIndex: "Location To",
-          key: "Location To",
+          dataIndex: "locationto",
+          key: "locationto",
           render: (text) => <div className="!text-[16px]">{text}</div>,
         },
     
         {
           title: "Consignor",
-          dataIndex: "Consignor",
-          key: "Consignor",
+          dataIndex: "consignor",
+          key: "consignor",
           render: (text) => <div className="!text-[16px]">{text}</div>,
         },
     
         {
             title: "Consignee",
-            dataIndex: "Consignee",
-            key: "Consignee",
+            dataIndex: "consignee",
+            key: "consignee",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
 
       {
           title: "Broker Name",
-          dataIndex: "broker Name",
-          key: "broker name",
+          dataIndex: "brokername",
+          key: "brokername",
           render: (text) => <div className="!text-[16px]">{text}</div>,
         },
 
         {
             title: "LR No",
-            dataIndex: " LR No",
-            key: "LR No",
+            dataIndex: "lrno",
+            key: "lrno",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
           
@@ -247,7 +246,7 @@ function Report() {
         >
  <Form.Item
             label={<p className="!text-[16px] font-semibold">From Date </p>}
-            name="from date"
+            name="fromdate"
             rules={[
               {
                 required: true,
@@ -259,7 +258,7 @@ function Report() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">To Date</p>}
-            name="to date"
+            name="todate"
             rules={[
               {
                 required: true,
@@ -272,7 +271,7 @@ function Report() {
         
  <Form.Item
             label={<p className="!text-[16px] font-semibold"> Vehicle No </p>}
-            name="vehicle no"
+            name="vehicleno"
             rules={[
               {
                 required: true,
@@ -285,7 +284,7 @@ function Report() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location From </p>}
-            name="location from"
+            name="locationfrom"
             rules={[
               {
                 required: true,
@@ -297,7 +296,7 @@ function Report() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location To</p>}
-            name="location to"
+            name="locationto"
             rules={[
               {
                 required: true,
@@ -333,7 +332,7 @@ function Report() {
             </Form.Item> 
 
             <Form.Item label={<p className="!text-[16px] font-semibold">Broker Name</p>}
-           name="broker name"
+           name="brokername"
         rules={[
             {
                 required: true,  
@@ -347,7 +346,7 @@ function Report() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">LR No</p>}
-            name="Lr no"
+            name="lrno"
             rules={[
               {
                 required: true,

@@ -45,7 +45,7 @@ function Memodetails() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/memodetils", value);
+        await axios.post("http://localhost:4001/api/memodetails", value);
         fetchData();
         notification.success({
           message: "memodetails Added successfully",
@@ -127,83 +127,83 @@ function Memodetails() {
   const columns = [
     {
       title: "Location From",
-      dataIndex: "Location From",
-      key: "Location From",
+      dataIndex: "locationfrom",
+      key: "locationfrom",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "Location To",
-      dataIndex: "Location To",
-      key: "Location To",
+      dataIndex: "locationto",
+      key: "locationto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "Consignor",
-      dataIndex: "Consignor",
-      key: "Consignor",
+      dataIndex: "consignor",
+      key: "consignor",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "Consignee",
-      dataIndex: "Consignee",
-      key: "Consignee",
+      dataIndex: "consignee",
+      key: "consignee",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Lot No",
-      dataIndex: "Lot No",
-      key: "Lot No",
+      dataIndex: "lotno",
+      key: "lotno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PR NO From",
-      dataIndex: " PR NO From",
-      key: "PR NO From",
+      dataIndex: "prnofrom",
+      key: "prnofrom",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PR NO To",
-      dataIndex: " PR NO To",
-      key: "PR NO To",
+      dataIndex: "prnoto",
+      key: "prnoto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Quantity",
-      dataIndex: " Quantity",
-      key: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "LR Amount",
-      dataIndex: " LR Amount",
-      key: "LR Amount",
+      dataIndex: "lramount",
+      key: "lramount",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Broker Name",
-      dataIndex: "broker Name",
-      key: "broker name",
+      dataIndex: "brokername",
+      key: "brokername",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Broker Commission",
-      dataIndex: "broker Commission",
-      key: "broker Commission",
+      dataIndex: "brokerCommission",
+      key: "brokerCommission",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Memo Method",
-      dataIndex: "Memo Method",
-      key: "Memo Method",
+      dataIndex: "memomethod",
+      key: "memomethod",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Lorry Foeight",
-      dataIndex: "lorry foeight",
-      key: "lorr foeight",
+      dataIndex: "lorryfoeight",
+      key: "lorryfoeight",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -214,20 +214,20 @@ function Memodetails() {
     },
     {
       title: "Account Paid",
-      dataIndex: "account paid",
-      key: "account paid",
+      dataIndex: "accountpaid",
+      key: "accountpaid",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Invoive No",
-      dataIndex: "invoice no",
-      key: "invoice no",
+      dataIndex: "invoiceno",
+      key: "invoiceno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Value of Goods",
-      dataIndex: "value of goods",
-      key: "value of goods",
+      dataIndex: "valueofgoods",
+      key: "valueofgoods",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -238,8 +238,8 @@ function Memodetails() {
     },
     {
       title: "Press Mark",
-      dataIndex: "Press Mark",
-      key: "Press Mark",
+      dataIndex: "PressMark",
+      key: "PressMark",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -385,7 +385,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Lot No</p>}
-            name="Lot no"
+            name="Lotno"
             rules={[
               {
                 required: true,
@@ -398,7 +398,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">PR No From</p>}
-            name="pr no form"
+            name="prnoform"
             rules={[
               {
                 required: true,
@@ -411,7 +411,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">PR No To</p>}
-            name="Pr no to"
+            name="Prnoto"
             rules={[
               {
                 required: true,
@@ -435,7 +435,7 @@ function Memodetails() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">LR Amount</p>}
-            name="lr amount"
+            name="lramount"
             rules={[
               {
                 required: true,
@@ -448,7 +448,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Broker Name</p>}
-            name="broker name"
+            name="brokername"
             rules={[
               {
                 required: true,
@@ -463,7 +463,7 @@ function Memodetails() {
             label={
               <p className="!text-[16px] font-semibold">Broker Commission</p>
             }
-            name="broker commission"
+            name="brokercommission"
             rules={[
               {
                 required: true,
@@ -476,7 +476,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Memo Method</p>}
-            name="memo method"
+            name="memomethod"
             rules={[
               {
                 required: true,
@@ -493,7 +493,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Lorry Foeight</p>}
-            name="lorry foeight "
+            name="lorryfoeight "
             rules={[
               {
                 required: true,
@@ -524,7 +524,7 @@ function Memodetails() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Account Point</p>}
-            name="account point"
+            name="accountpoint"
             rules={[
               {
                 required: true,
@@ -541,7 +541,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Invoice No</p>}
-            name="invoice no"
+            name="invoiceno"
             rules={[
               {
                 required: true,
@@ -553,7 +553,7 @@ function Memodetails() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Value of Goods</p>}
-            name="value of goods"
+            name="valueofgoods"
             rules={[
               {
                 required: true,
@@ -579,7 +579,7 @@ function Memodetails() {
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Press Mark</p>}
-            name="press mark"
+            name="pressmark"
             rules={[
               {
                 required: true,
