@@ -18,7 +18,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 
-function Report() {
+function ReportEntry() {
   const [Report, setReport] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
@@ -106,60 +106,60 @@ function Report() {
   const columns = [
     {
       title: "From Date",
-      dataIndex: "From Date",
-      key: "From Date",
+      dataIndex: "fromdata",
+      key: "fromdata",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
       title: "To Date",
-      dataIndex: "To Date",
-      key: "tO Date",
+      dataIndex: "todate",
+      key: "todate",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "Vehicle No",
-      dataIndex: "Vehicle No",
-      key: "Vehicle No",
+      dataIndex: "vehicle",
+      key: "vehicle",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
         title: "Location From",
-        dataIndex: "Location From",
-        key: "Location From",
+        dataIndex: "locationfrom",
+        key: "locationfrom",
         render: (text) => <div className="!text-[16px]">{text}</div>,
       },
   
     {
       title: "Location To",
-      dataIndex: "Location To",
-      key: "Location To",
+      dataIndex: "locationto",
+      key: "locationto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
         title: "Consignor",
-        dataIndex: "Consignor",
-        key: "Consignor",
+        dataIndex: "consignor",
+        key: "consignor",
         render: (text) => <div className="!text-[16px]">{text}</div>,
       },
   
       {
           title: "Consignee",
-          dataIndex: "Consignee",
-          key: "Consignee",
+          dataIndex: "consignee",
+          key: "consignee",
           render: (text) => <div className="!text-[16px]">{text}</div>,
         },
         {
             title: "Broker Name",
-            dataIndex: "broker Name",
-            key: "broker name",
+            dataIndex: "brokername",
+            key: "brokername",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
           {
             title: "LR No",
-            dataIndex: " LR No",
-            key: "LR No",
+            dataIndex: "lrno",
+            key: "lrno",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
     {
@@ -360,4 +360,4 @@ function Report() {
   );
 }
 
-export default Report;
+export default ReportEntry;

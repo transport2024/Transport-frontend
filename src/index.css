@@ -4,7 +4,7 @@
 
 
 .ant-menu-item-selected{
-    background-color: rgb(101, 242, 8) !important;
+    background-color: rgb(38,198,97) !important;
     color: white !important;
     font-weight: bold !important;
     
@@ -22,8 +22,6 @@
   
   .ant-menu-submenu-selected >.ant-menu-submenu-title{
     font-weight: bold !important;
-    background-color: rgb(204, 236, 242) !important;
-   
-    color: rgb(101, 242, 8) !important;
+    color: rgb(38,198,97) !important;
   }
 

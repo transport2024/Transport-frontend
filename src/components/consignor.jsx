@@ -8,6 +8,7 @@ import {
   Button,
   notification,
   Table,
+  Drawer
   
 } from "antd";
 import axios from "axios";
@@ -176,7 +177,6 @@ function Consignor() {
         <Select
             mode="tags"
             showSearch
-         
           placeholder="Type here for Category"
           options={searchers}
           onChange={(data) => {
@@ -209,18 +209,23 @@ function Consignor() {
         <Table columns={columns} dataSource={consignors}  ref={tableRef}/>
       </div>
       </div>
-      <Modal
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
         }}
-        footer={false}
+        
+        onClose={() => {
+          setOpen(!open);
+          form.setFieldValue([]);
+          setUpdateId("");
+        }}
       >
         <Form
-          className="grid grid-cols-2 gap-4"
+          className="flex flex-col gap-1"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
@@ -310,7 +315,7 @@ function Consignor() {
             <Input type="mail" size="large" />
           </Form.Item>
 
-          <div className="w-[40vw]">
+        
           <div className="flex gap-4 items-end justify-end">
           <Form.Item>
               <Button
@@ -331,11 +336,11 @@ function Consignor() {
             </Button>
           </Form.Item>
          </div>
-        </div>
+       
           
 
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }

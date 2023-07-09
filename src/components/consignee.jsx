@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Drawer,
   
 } from "antd";
 import axios from "axios";
@@ -209,18 +210,23 @@ function Consignee() {
         </div>
         <Table columns={columns} dataSource={Consignee}  ref={tableRef}/>
       </div>
-      <Modal
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
         }}
         footer={false}
+        onClose={() => {
+          setOpen(!open);
+          form.setFieldValue([]);
+          setUpdateId("");
+        }}
       >
         <Form
-          className="grid grid-cols-2 gap-4"
+          className="flex flex-col gap-1"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
@@ -310,7 +316,7 @@ function Consignee() {
             <Input type="mail" size="large" />
           </Form.Item>
          
-          <div className="w-[40vw]">
+       
           <div className="flex gap-4 items-end justify-end">
           <Form.Item>
               <Button
@@ -331,9 +337,9 @@ function Consignee() {
             </Button>
           </Form.Item>
          </div>
-        </div>
+       
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }

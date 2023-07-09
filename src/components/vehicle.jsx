@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -24,7 +25,9 @@ function Vehicle() {
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
 	const [searched, setSearched] = useState([]);
-	const tableRef = useRef(null);
+  const tableRef = useRef(null);
+  
+  console.log(Vehicle)
 
   const fetchData = async () => {
     try {
@@ -240,18 +243,24 @@ function Vehicle() {
         </div>
         <Table columns={columns} dataSource={Vehicle}  ref={tableRef}/>
       </div>
-      <Modal
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
         }}
+        onClose={() => {
+          setOpen(!open);
+          form.setFieldValue([]);
+          setUpdateId("");
+        }}
         footer={false}
+       
       >
         <Form
-          className="grid grid-cols-2 gap-4"
+          className="flex flex-col gap-1"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
@@ -367,16 +376,9 @@ function Vehicle() {
             <Input type="text" size="large" />
           </Form.Item>
 
-          <div className="save">
-            <Form.Item className="w-[40vw]">
-              <Button
-                htmlType="submit"
-                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
-              >
-                {updateId === "" ? "Save" : "Update"}{" "}
-              </Button>
-            </Form.Item>
-            <Form.Item className="w-[40vw]">
+          <div className="flex items-center gap-10 justify-center">
+           
+            <Form.Item className="w-[10vw]">
               <Button
                 htmlType="submit"
                 className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
@@ -385,9 +387,17 @@ function Vehicle() {
                 Clear
               </Button>
             </Form.Item>
+            <Form.Item className="w-[10vw]">
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}{" "}
+              </Button>
+            </Form.Item>
           </div>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }
