@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -226,11 +227,11 @@ function Report() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Report}  ref={tableRef}/>
+            <Table columns={columns} dataSource={Report} ref={tableRef} pagination={{pageSize:5}} />
       </div>
-      <Modal
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
           setOpen(!open);
           form.setFieldValue([]);
@@ -239,7 +240,7 @@ function Report() {
         footer={false}
       >
         <Form
-          className="grid grid-cols-2 gap-4"
+          className="flex flex-col gap-1"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
@@ -357,27 +358,28 @@ function Report() {
             <Input type="text" size="large" />
           </Form.Item>
 
-          <div className="save">
-            <Form.Item className="w-[40vw]">
-              <Button
-                htmlType="submit"
-                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
-              >
-                {updateId === "" ? "Save" : "Update"}{" "}
-              </Button>
-            </Form.Item>
-            <Form.Item className="w-[40vw]">
-              <Button
-                htmlType="submit"
-                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
-                onClick={handleClear}
-              >
-                Clear
-              </Button>
-            </Form.Item>
-          </div>
+          <div className="flex items-end gap-2 justify-end">
+           
+           <Form.Item >
+             <Button
+               htmlType="submit"
+               className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+               onClick={handleClear}
+             >
+               Clear
+             </Button>
+           </Form.Item>
+           <Form.Item >
+             <Button
+               htmlType="submit"
+               className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
+             >
+               {updateId === "" ? "Save" : "Update"}{" "}
+             </Button>
+           </Form.Item>
+         </div>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }

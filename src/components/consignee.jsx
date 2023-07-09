@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -11,7 +11,6 @@ import {
   Button,
   notification,
   Drawer,
-  
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -30,7 +29,9 @@ function Consignee() {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`http://localhost:4001/api/consignee?search=${searched}`);
+      const result = await axios.get(
+        `http://localhost:4001/api/consignee?search=${searched}`
+      );
       setConsignee(get(result, "data.message"));
     } catch (err) {
       console.log(err);
@@ -41,7 +42,7 @@ function Consignee() {
     fetchData();
   }, [searched]);
 
-  console.log(Consignee,"hb")
+  console.log(Consignee, "hb");
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -76,22 +77,22 @@ function Consignee() {
     setOpen(true);
   };
 
-  const handleDelete = async(value) => {
+  const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/consignee/${value._id}`)
-      fetchData()
-      notification.success({message:"Deleted Successfully"})
+      await axios.delete(`http://localhost:4001/api/consignee/${value._id}`);
+      fetchData();
+      notification.success({ message: "Deleted Successfully" });
     } catch (err) {
-      notification.error({message:"Something Went Wrong"})
+      notification.error({ message: "Something Went Wrong" });
     }
-  }
+  };
 
   const searchers = [];
 
-  console.log(Consignee,"Erkhuubj")
+  console.log(Consignee, "Erkhuubj");
 
   Consignee &&
-  Consignee.map((data) => {
+    Consignee.map((data) => {
       return searchers.push(
         { value: data.name },
         { value: data.phone },
@@ -100,11 +101,11 @@ function Consignee() {
     });
 
   const { onDownload } = useDownloadExcel({
-		currentTableRef: tableRef.current,
-		filename: "Web Users",
-		sheet: "Web Users",
+    currentTableRef: tableRef.current,
+    filename: "Web Users",
+    sheet: "Web Users",
   });
-  
+
   const handleClear = () => {
     form.setFieldsValue([]);
   };
@@ -165,7 +166,12 @@ function Consignee() {
           </div>
 
           <div>
-            <DeleteOutlineOutlinedIcon className="!text-md text-green-500 cursor-pointer " onClick={()=>{handleDelete(text)}} />
+            <DeleteOutlineOutlinedIcon
+              className="!text-md text-green-500 cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
+            />
           </div>
         </div>
       ),
@@ -173,10 +179,10 @@ function Consignee() {
   ];
 
   return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
-        <Select
+          <Select
             mode="tags"
             showSearch
             placeholder="Type here for Category"
@@ -208,7 +214,12 @@ function Consignee() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Consignee}  ref={tableRef}/>
+        <Table
+          columns={columns}
+          dataSource={Consignee}
+          ref={tableRef}
+          pagination={{ pageSize : 5 }}
+        />
       </div>
       <Drawer
         open={open}
@@ -315,29 +326,27 @@ function Consignee() {
           >
             <Input type="mail" size="large" />
           </Form.Item>
-         
-       
+
           <div className="flex gap-4 items-end justify-end">
-          <Form.Item>
+            <Form.Item>
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
+                className="bg-red-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
                 onClick={handleClear}
               >
                 Clear
               </Button>
             </Form.Item>
-         
-          <Form.Item>
-            <Button
-              htmlType="submit"
-              className="bg-green-500 w-[120px] float-right text-white font-bold tracking-wider"
-            >
-              {updateId === "" ? "Save" : "Update"}
-            </Button>
-          </Form.Item>
-         </div>
-       
+
+            <Form.Item>
+              <Button
+                htmlType="submit"
+                className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </Drawer>
     </div>

@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -28,7 +29,9 @@ function Memo() {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`http://localhost:4001/api/memo?search=${searched}`);
+      const result = await axios.get(
+        `http://localhost:4001/api/memo?search=${searched}`
+      );
       setMemo(get(result, "data.message"));
     } catch (err) {
       console.log(err);
@@ -37,31 +40,36 @@ function Memo() {
 
   useEffect(() => {
     fetchData();
-  }, [searched]);  
+  }, [searched]);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
         await axios.post("http://localhost:4001/api/memo", value);
         fetchData();
-        notification.success({ message: "memo Added successfully" });
+        notification.success({
+          message: "memo Added successfully",
+        });
         setOpen(false);
       } catch (err) {
-        notification.error({ message: "Something went wrong" });
+        notification.error({
+          message: "Something went wrong",
+        });
       }
     } else {
       try {
-        await axios.put(
-          `http://localhost:4001/api/memo/${updateId}`,
-          value
-        );
+        await axios.put(`http://localhost:4001/api/memo/${updateId}`, value);
         fetchData();
-        notification.success({ message: "memo updated successfully" });
+        notification.success({
+          message: "memo updated successfully",
+        });
         setOpen(false);
         form.setFieldValue([]);
         setUpdateId("");
       } catch (err) {
-        notification.error({ message: "Something went wrong" });
+        notification.error({
+          message: "Something went wrong",
+        });
       }
     }
   };
@@ -72,34 +80,47 @@ function Memo() {
     setOpen(true);
   };
 
-  const handleDelete = async(value) => {
+  const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/memo/${value._id}`)
-      fetchData()
-      notification.success({message:"Deleted Successfully"})
+      await axios.delete(`http://localhost:4001/api/memo/${value._id}`);
+      fetchData();
+      notification.success({
+        message: "Deleted Successfully",
+      });
     } catch (err) {
-      notification.error({message:"Something Went Wrong"})
+      notification.error({
+        message: "Something Went Wrong",
+      });
     }
-  }
+  };
+
+
+  const handleClear = () => {
+    form.setFieldsValue([]);
+  };
   const searchers = [];
 
   Memo &&
     Memo.map((data) => {
       return searchers.push(
-        { value: data.drivername },
-        { value: data.driverphone },
-        { value: data.vehicleno }
+        {
+          value: data.drivername,
+        },
+        {
+          value: data.driverphone,
+        },
+        {
+          value: data.vehicleno,
+        }
       );
     });
 
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: "Web Users",
+    sheet: "Web Users",
+  });
 
-	const { onDownload } = useDownloadExcel({
-		currentTableRef: tableRef.current,
-		filename: "Web Users",
-		sheet: "Web Users",
-	  });
-
-    
   const columns = [
     {
       title: "Internal No",
@@ -107,7 +128,7 @@ function Memo() {
       key: "Internal No",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-    
+
     {
       title: "GC No",
       dataIndex: "GC No",
@@ -151,7 +172,12 @@ function Memo() {
           </div>
 
           <div>
-            <DeleteOutlineOutlinedIcon className="!text-md text-green-500 cursor-pointer " onClick={()=>{handleDelete(text)}} />
+            <DeleteOutlineOutlinedIcon
+              className="!text-md text-green-500 cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
+            />
           </div>
         </div>
       ),
@@ -159,10 +185,10 @@ function Memo() {
   ];
 
   return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
-        <Select
+          <Select
             mode="tags"
             showSearch
             placeholder="Type here for Category"
@@ -182,23 +208,30 @@ function Memo() {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon /> Create
+            <AddOutlinedIcon />
+            Create
           </div>
           <div>
-      <Button
-        onClick={onDownload}
-        className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
-      >
-        Export Exel
-      </Button>
-    </div>
+            <Button
+              onClick={onDownload}
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+            >
+              Export Exel
+            </Button>
+          </div>
         </div>
-        <Table columns={columns} dataSource={Memo} ref={tableRef}  />
-      </div>       
-      <Modal
+        <Table columns={columns} dataSource={Memo} ref={tableRef} pagination={{pageSize:5}} />
+      </div>
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
+          setOpen(!open);
+          form.setFieldValue([]);
+          setUpdateId("");
+        }}
+
+        onClose={() => {
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
@@ -206,7 +239,7 @@ function Memo() {
         footer={false}
       >
         <Form
-          className="grid grid-cols-2 gap-4"
+          className="flex flex-col gap-1"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
@@ -236,7 +269,7 @@ function Memo() {
             <Input type="text" size="large" />
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold"> Date </p>}
+            label={<p className="!text-[16px] font-semibold">Date</p>}
             name="date"
             rules={[
               {
@@ -248,17 +281,18 @@ function Memo() {
             <Input type="date" size="large" />
           </Form.Item>
 
-          <Form.Item label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
-           name="vehicle no"
-        rules={[
-            {
-                required: true,  
+          <Form.Item
+            label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
+            name="vehicle no"
+            rules={[
+              {
+                required: true,
                 message: "Please input your vehicle no!",
               },
-          ]}
+            ]}
           >
             <Input type="text" size="large" />
-            </Form.Item> 
+          </Form.Item>
 
           <Form.Item
             label={<p className="!text-[16px] font-semibold">DriverPhone</p>}
@@ -274,7 +308,11 @@ function Memo() {
           </Form.Item>
 
           <Form.Item
-            label={<p className="!text-[16px] font-semibold"> Driver Whatsapp Number</p>}
+            label={
+              <p className="!text-[16px] font-semibold">
+                Driver Whatsapp Number
+              </p>
+            }
             name="driver whatsapp no"
             rules={[
               {
@@ -285,7 +323,7 @@ function Memo() {
           >
             <Input type="text" size="large" />
           </Form.Item>
-          
+
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location From</p>}
             name="location from"
@@ -299,40 +337,51 @@ function Memo() {
             <Input type="text" size="large" />
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location To </p>}
+            label={<p className="!text-[16px] font-semibold">Location To</p>}
             name="location to"
             rules={[
               {
-                required: true,  
+                required: true,
                 message: "Please input your location!",
               },
             ]}
           >
             <Input type="text" size="large" />
           </Form.Item>
-          <Form.Item label={<p className="!text-[16px] font-semibold">Commission</p>}
-           name="commission"
-        rules={[
-            {
-                required: true,  
+          <Form.Item
+            label={<p className="!text-[16px] font-semibold">Commission</p>}
+            name="commission"
+            rules={[
+              {
+                required: true,
                 message: "Please input your commission",
               },
-          ]}
+            ]}
           >
-             <Input type="text" size="large" />
+            <Input type="text" size="large" />
           </Form.Item>
- <div className="save">
-          <Form.Item className="w-[40vw]">
-            <Button
-              htmlType="submit"
-              className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
-            >
-              {updateId === "" ? "Save" : "Update"}
-            </Button>
-          </Form.Item>
- </div>
+          <div className="flex items-end gap-2 justify-end">
+           
+           <Form.Item >
+             <Button
+               htmlType="submit"
+               className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+               onClick={handleClear}
+             >
+               Clear
+             </Button>
+           </Form.Item>
+           <Form.Item >
+             <Button
+               htmlType="submit"
+               className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
+             >
+               {updateId === "" ? "Save" : "Update"}{" "}
+             </Button>
+           </Form.Item>
+         </div>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }

@@ -147,8 +147,8 @@ function Location() {
   ];
 
   return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           {/* <Input placeholder="Search here" size="large" className="w-[50%] !m-auto py-3"
 						onChange={
@@ -189,7 +189,7 @@ function Location() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Location}  ref={tableRef}/>
+        <Table columns={columns} dataSource={Location} ref={tableRef} pagination={{pageSize:5}} />
       </div>
       <Modal
         open={open}

@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -216,12 +217,17 @@ function ReportEntry() {
       </Button>
     </div>
         </div>
-        <Table columns={columns} dataSource={Report} ref={tableRef} />
+        <Table columns={columns} dataSource={Report} ref={tableRef} pagination={{pageSize:5}} />
       </div>
-      <Modal
+      <Drawer
         open={open}
-        width={700}
+        width={500}
         onCancel={() => {
+          setOpen(!open);
+          form.setFieldValue([]);   
+          setUpdateId("");
+        }}
+        onClose={() => {
           setOpen(!open);
           form.setFieldValue([]);   
           setUpdateId("");
@@ -355,7 +361,7 @@ function ReportEntry() {
           </Form.Item>
  </div>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 }

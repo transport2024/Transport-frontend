@@ -199,8 +199,8 @@ function Vehicle() {
   ];
 
   return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           {/* <Input placeholder="Search here" size="large" className="w-[50%] !m-auto py-3"
 						onChange={
@@ -241,7 +241,7 @@ function Vehicle() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Vehicle}  ref={tableRef}/>
+        <Table columns={columns} dataSource={Vehicle} ref={tableRef} pagination={{pageSize:5}} />
       </div>
       <Drawer
         open={open}
@@ -376,9 +376,9 @@ function Vehicle() {
             <Input type="text" size="large" />
           </Form.Item>
 
-          <div className="flex items-center gap-10 justify-center">
+          <div className="flex items-end gap-2 justify-end">
            
-            <Form.Item className="w-[10vw]">
+            <Form.Item >
               <Button
                 htmlType="submit"
                 className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
@@ -387,10 +387,10 @@ function Vehicle() {
                 Clear
               </Button>
             </Form.Item>
-            <Form.Item className="w-[10vw]">
+            <Form.Item >
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
               >
                 {updateId === "" ? "Save" : "Update"}{" "}
               </Button>

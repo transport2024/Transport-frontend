@@ -171,8 +171,8 @@ function Consignor() {
   ];
 
   return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
         <Select
             mode="tags"
@@ -206,7 +206,9 @@ function Consignor() {
           </div>
         </div>
         <div>
-        <Table columns={columns} dataSource={consignors}  ref={tableRef}/>
+          <Table columns={columns} dataSource={consignors} ref={tableRef}   pagination={{
+                    pageSize: 5,
+                  }}/>
       </div>
       </div>
       <Drawer
@@ -320,7 +322,7 @@ function Consignor() {
           <Form.Item>
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
+                className="bg-red-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
                 onClick={handleClear}
               >
                 Clear
@@ -330,7 +332,7 @@ function Consignor() {
           <Form.Item>
             <Button
               htmlType="submit"
-              className="bg-green-500 w-[120px] float-right text-white font-bold tracking-wider"
+              className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
             >
               {updateId === "" ? "Save" : "Update"}
             </Button>
