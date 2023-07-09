@@ -21,7 +21,7 @@ import Location from "./components/location";
 import Broker from "./components/broker"
 import Memo from "./components2/memoentry";
 import Memodetails from "./components2/memodetails";
-import Report from "./components3/reportentry";
+import Report from "./components3/report";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
