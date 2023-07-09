@@ -10,7 +10,6 @@ import {
   Input,
   Button,
   notification,
-  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -19,86 +18,95 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 
-function Report() {
-  const [Report, setReport] = useState([]);
+function Location() {
+  const [Location, setLocation] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
 	const [searched, setSearched] = useState([]);
 	const tableRef = useRef(null);
 
-    const fetchData = async () => {
-        try {
-          const result = await axios.get(`http://localhost:4001/api/report?search=${searched}`);
-          setReport(get(result, "data.message"));
-        } catch (err) {
-          console.log(err);
-        }
-      };
-    
-      useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const result = await axios.get(
+        `http://localhost:4001/api/location?search=${searched}`
+      );
+      setLocation(get(result, "data.message"));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [searched]);
+
+  const handleSubmit = async (value) => {
+    if (updateId === "") {
+      try {
+        await axios.post("http://localhost:4001/api/location", value);
         fetchData();
-      }, [searched]);
-    
-      const handleSubmit = async (value) => {
-        if (updateId === "") {
-          try {
-            await axios.post("http://localhost:4001/api/report", value);
-            fetchData();
-            notification.success({ message: "report Added successfully" });
-            setOpen(false);
-          } catch (err) {
-            notification.error({ message: "Something went wrong" });
-          }
-        } else {
-          try {
-            await axios.put(
-              `http://localhost:4001/api/memodetails/${updateId}`,
-              value
-            );
-            fetchData();
-            notification.success({ message: "report updated successfully" });
-            setOpen(false);
-            form.setFieldValue([]);
-            setUpdateId("");
-          } catch (err) {
-            notification.error({ message: "Something went wrong" });
-          }
-        }
-      };
-    
-      const handleEdit = (value) => {
-        form.setFieldsValue(value);
-        setUpdateId(value._id);
-        setOpen(true);
-      };
-    
-      const handleDelete = async(value) => {
-        try {
-          await axios.delete(`http://localhost:4001/api/report/${value._id}`)
-          fetchData()
-          notification.success({message:"Deleted Successfully"})
-        } catch (err) {
-          notification.error({message:"Something Went Wrong"})
-        }
-      }
-    
-      
-      const handleClear = () => {
-        form.setFieldsValue([]);
-      };
-    
-      const searchers = [];
-    
-      Report &&
-        Report.map((data) => {
-          return searchers.push(
-            { value: data.consignor },
-            { value: data.consignee },
-            { value: data.vehicleno }
-          );
+        notification.success({
+          message: "location Added successfully",
         });
-    
+        setOpen(false);
+      } catch (err) {
+        notification.error({
+          message: "Something went wrong",
+        });
+      }
+    } else {
+      try {
+        await axios.put(`http://localhost:4001/api/location/${updateId}`, value);
+        fetchData();
+        notification.success({
+          message: "location updated successfully",
+        });
+        setOpen(false);
+        form.setFieldValue([]);
+        setUpdateId("");
+      } catch (err) {
+        notification.error({
+          message: "Something went wrong",
+        });
+      }
+    }
+  };
+
+  const handleEdit = (value) => {
+    form.setFieldsValue(value);
+    setUpdateId(value._id);
+    setOpen(true);
+  };
+
+  const handleDelete = async (value) => {
+    try {
+      await axios.delete(`http://localhost:4001/api/location/${value._id}`);
+      fetchData();
+      notification.success({
+        message: "Deleted Successfully",
+      });
+    } catch (err) {
+      notification.error({
+        message: "Something Went Wrong",
+      });
+    }
+  };
+
+  const handleClear = () => {
+    form.setFieldsValue([]);
+  };
+
+  const searchers = [];
+
+  Location &&
+    Location.map((data) => {
+      return searchers.push(
+        { value: data.name }
+     );
+    });
+
+
 	const { onDownload } = useDownloadExcel({
 		currentTableRef: tableRef.current,
 		filename: "Web Users",
@@ -106,94 +114,43 @@ function Report() {
 	  });
 	
 
-      const columns = [
+  const columns = [
+    {
+      title: "Location Name",
+      dataIndex: "locationname",
+      key: "locationname",
+      render: (text) => <div className="!text-[16px]">{text}</div>,
+    },
 
-        {
-            title: "From Date",
-            dataIndex: "fromdate",
-            key: "fromdate",
-            render: (text) => <div className="!text-[16px]">{text}</div>,
-          },
-      
-          {
-              title: "To Date",
-              dataIndex: "todate",
-              key: "todate",
-              render: (text) => <div className="!text-[16px]">{text}</div>,
-            },
-            {
-              title: "Vehicle No",
-              dataIndex: " vehicleno",
-              key: "vehicleno",
-              render: (text) => <div className="!text-[16px]">{text}</div>,
-            },
-        
-        {
-            title: "Location From",
-            dataIndex: "locationfrom",
-            key: "locationfrom",
-            render: (text) => <div className="!text-[16px]">{text}</div>,
-          },
+    {
+      title: "Actions",
+      render: (text) => (
+        <div className="flex gap-1">
+          <div>
+            <EditNoteOutlinedIcon
+              className="!text-md text-green-500 cursor-pointer"
+              onClick={() => handleEdit(text)}
+            />
+          </div>
 
-        {
-          title: "Location To",
-          dataIndex: "locationto",
-          key: "locationto",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-    
-        {
-          title: "Consignor",
-          dataIndex: "consignor",
-          key: "consignor",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-    
-        {
-            title: "Consignee",
-            dataIndex: "consignee",
-            key: "consignee",
-            render: (text) => <div className="!text-[16px]">{text}</div>,
-          },
+          <div>
+            <DeleteOutlineOutlinedIcon
+              className="!text-md text-green-500 cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
+            />
+          </div>
+        </div>
+      ),
+    },
+  ];
 
-      {
-          title: "Broker Name",
-          dataIndex: "brokername",
-          key: "brokername",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-
-        {
-            title: "LR No",
-            dataIndex: "lrno",
-            key: "lrno",
-            render: (text) => <div className="!text-[16px]">{text}</div>,
-          },
-          
-        
-        {
-          title: "Actions",
-          render: (text) => (
-            <div className="flex gap-1">
-              <div>
-                <EditNoteOutlinedIcon
-                  className="!text-md text-green-500 cursor-pointer"
-                  onClick={() => handleEdit(text)}
-                />
-              </div>
-    
-              <div>
-                <DeleteOutlineOutlinedIcon className="!text-md text-green-500 cursor-pointer " onClick={()=>{handleDelete(text)}} />
-              </div>
-            </div>
-          ),
-        },
-      ];
-    
-      return (
-    <div className="flex pt-[15vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-10">
+  return (
+    <div className="flex pt-[12vh] pl-4">
+      <div className="w-[75vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
+       
           <Select
             mode="tags"
             showSearch
@@ -207,7 +164,7 @@ function Report() {
             showArrow={false}
           />
         </div>
-<div className="w-full flex gap-5 items-end justify-end">
+        <div className="w-full flex gap-5 items-end justify-end">
           <div
             className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
             onClick={() => {
@@ -226,9 +183,9 @@ function Report() {
             </Button>
           </div>
         </div>
-            <Table columns={columns} dataSource={Report} ref={tableRef} pagination={{pageSize:5}} />
+        <Table columns={columns} dataSource={Location} ref={tableRef} pagination={{pageSize:5}} />
       </div>
-      <Drawer
+      <Modal
         open={open}
         width={500}
         onCancel={() => {
@@ -239,148 +196,48 @@ function Report() {
         footer={false}
       >
         <Form
-          className="flex flex-col gap-1"
+          className="flex flex-col gap-4"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}
         >
- <Form.Item
-            label={<p className="!text-[16px] font-semibold">From Date </p>}
-            name="fromdate"
-            rules={[
-              {
-                required: true,
-                message: "Please input your from date!",
-              },
-            ]}
-          >
-            <Input type="date" size="large" />
-          </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">To Date</p>}
-            name="todate"
+            label={<p className="!text-[16px] font-semibold">Location Name</p>}
+            name="locationname"
             rules={[
               {
                 required: true,
-                message: "Please input your to date!",
-              },
-            ]}
-          >
-            <Input type="date" size="large" />
-          </Form.Item>
-        
- <Form.Item
-            label={<p className="!text-[16px] font-semibold"> Vehicle No </p>}
-            name="vehicleno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your vehicle no!",
+                message: "Please input your Location Name!",
               },
             ]}
           >
             <Input type="text" size="large" />
           </Form.Item>
 
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location From </p>}
-            name="locationfrom"
-            rules={[
-              {
-                required: true,
-                message: "Please input your from location!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location To</p>}
-            name="locationto"
-            rules={[
-              {
-                required: true,
-                message: "Please input your to location!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold"> Consignor </p>}
-            name="consignor"
-            rules={[
-              {
-                required: true,
-                message: "Please input your consignor!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-
-          <Form.Item label={<p className="!text-[16px] font-semibold">Consignee</p>}
-           name="consignee"
-        rules={[
-            {
-                required: true,  
-                message: "Please input your consignee!",
-              },
-          ]}
-          >
-            <Input type="text" size="large" />
-            </Form.Item> 
-
-            <Form.Item label={<p className="!text-[16px] font-semibold">Broker Name</p>}
-           name="brokername"
-        rules={[
-            {
-                required: true,  
-                message: "Please input your broker name",
-              },
-          ]}
-          >
-             <Input type="text" size="large" />
-          </Form.Item>
-
-
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">LR No</p>}
-            name="lrno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your driver lr no!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-
-          <div className="flex items-end gap-2 justify-end">
-           
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
-               onClick={handleClear}
-             >
-               Clear
-             </Button>
-           </Form.Item>
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
-             >
-               {updateId === "" ? "Save" : "Update"}{" "}
-             </Button>
-           </Form.Item>
-         </div>
+          <div className="flex  justify-end items-end">
+            
+            <Form.Item className="w-[10vw]">
+              <Button
+                htmlType="submit"
+                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Form.Item>
+            <Form.Item className="w-[10vw]">
+              <Button
+                htmlType="submit"
+                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}{" "}
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
-      </Drawer>
+      </Modal>
     </div>
   );
 }
 
-export default Report;
+export default Location;

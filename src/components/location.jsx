@@ -202,7 +202,7 @@ function Location() {
         >
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Location Name</p>}
-            name="location"
+            name="locationname"
             rules={[
               {
                 required: true,
