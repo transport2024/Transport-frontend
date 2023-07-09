@@ -129,9 +129,9 @@ function Report() {
           },
 
           {
-            title: "Vehicle NO",
-            dataIndex: " Vehicle NO",
-            key: "Vehicle NO",
+            title: "Vehicle No",
+            dataIndex: " Vehicle No",
+            key: "Vehicle No",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
       
@@ -164,9 +164,9 @@ function Report() {
         },
 
         {
-            title: "LR NO",
-            dataIndex: " LR NO",
-            key: "LR NO",
+            title: "LR No",
+            dataIndex: " LR No",
+            key: "LR No",
             render: (text) => <div className="!text-[16px]">{text}</div>,
           },
           
