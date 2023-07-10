@@ -44,6 +44,7 @@ function Memodetails() {
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
+      console.log(value)
       try {
         await axios.post("http://localhost:4001/api/memodetails", value);
         fetchData();
@@ -51,6 +52,7 @@ function Memodetails() {
           message: "memodetails Added successfully",
         });
         setOpen(false);
+        form.setFieldsValue([])
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -154,19 +156,19 @@ function Memodetails() {
     },
     {
       title: "Lot No",
-      dataIndex: "lotno",
+      dataIndex: "Lotno",
       key: "lotno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PR NO From",
-      dataIndex: "prnofrom",
+      dataIndex: "prnoform",
       key: "prnofrom",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PR NO To",
-      dataIndex: "prnoto",
+      dataIndex: "Prnoto",
       key: "prnoto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -190,7 +192,7 @@ function Memodetails() {
     },
     {
       title: "Broker Commission",
-      dataIndex: "brokerCommission",
+      dataIndex: "brokercommission",
       key: "brokerCommission",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -238,7 +240,7 @@ function Memodetails() {
     },
     {
       title: "Press Mark",
-      dataIndex: "PressMark",
+      dataIndex: "pressmark",
       key: "PressMark",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -490,10 +492,9 @@ function Memodetails() {
           >
             <Input type="text" size="large" />
           </Form.Item>
-
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Lorry Foeight</p>}
-            name="lorryfoeight "
+            name="lorryfoeight"
             rules={[
               {
                 required: true,
@@ -501,6 +502,7 @@ function Memodetails() {
               },
             ]}
           >
+         
             <Input type="text" size="large" />
           </Form.Item>
 
@@ -524,7 +526,7 @@ function Memodetails() {
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Account Point</p>}
-            name="accountpoint"
+            name="accountpaid"
             rules={[
               {
                 required: true,
