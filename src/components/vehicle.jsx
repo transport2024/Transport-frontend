@@ -344,33 +344,7 @@ function Vehicle() {
           >
             <Input type="text" size="large" />
           </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">AccNo</p>}
-            name="accno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your AccNo!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">IFSCCode</p>}
-            name="ifsccode"
-            rules={[
-              {
-                required: true,
-                message: "Please input your IFSCCode!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-
-          <div className="flex items-end gap-2 justify-end">
-           
+          <div className="flex items-end gap-2 justify-end">       
             <Form.Item >
               <Button
                 htmlType="submit"

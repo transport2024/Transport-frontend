@@ -122,13 +122,7 @@ function Memo() {
   });
 
   const columns = [
-    {
-      title: "Internal No",
-      dataIndex: "internalno",
-      key: "internalno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
-    },
-
+    
     {
       title: "GC No",
       dataIndex: "gcno",
@@ -140,6 +134,12 @@ function Memo() {
       title: "Date",
       dataIndex: "date",
       key: "date",
+      render: (text) => <div className="!text-[16px]">{text}</div>,
+    },
+    {
+      title: "Vehicle No",
+      dataIndex: "vehicleno",
+      key: "vehicleno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -245,18 +245,6 @@ function Memo() {
           form={form}
         >
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Internal No</p>}
-            name="internalno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your internal no!",
-              },
-            ]}
-          >
-            <Input type="number" size="large" />
-          </Form.Item>
-          <Form.Item
             label={<p className="!text-[16px] font-semibold">Memo/GC No</p>}
             name="gcno"
             rules={[
@@ -266,7 +254,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="number" size="large" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Date</p>}
@@ -293,7 +281,18 @@ function Memo() {
           >
             <Input type="text" size="large" />
           </Form.Item>
-
+          <Form.Item
+            label={<p className="!text-[16px] font-semibold"> Driver Name</p>}
+            name="drivername"
+            rules={[
+              {
+                required: true,
+                message: "Please input your drivername",
+              },
+            ]}
+          >
+            <Input type="text" size="large" />
+          </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">DriverPhone</p>}
             name="driverphone"
@@ -324,42 +323,6 @@ function Memo() {
             <Input type="text" size="large" />
           </Form.Item>
 
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location From</p>}
-            name="locationfrom"
-            rules={[
-              {
-                required: true,
-                message: "Please input your location!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location To</p>}
-            name="locationto"
-            rules={[
-              {
-                required: true,
-                message: "Please input your location!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Commission</p>}
-            name="commission"
-            rules={[
-              {
-                required: true,
-                message: "Please input your commission",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
           <div className="flex items-end gap-2 justify-end">
            
            <Form.Item >

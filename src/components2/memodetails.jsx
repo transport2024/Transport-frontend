@@ -203,9 +203,9 @@ function Memodetails() {
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Lorry Foeight",
-      dataIndex: "lorryfoeight",
-      key: "lorryfoeight",
+      title: "Lorry Freight",
+      dataIndex: "lorryfreight",
+      key: "lorryfreight",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -492,6 +492,7 @@ function Memodetails() {
           >
             <Input type="text" size="large" />
           </Form.Item>
+          
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Lorry Foeight</p>}
             name="lorryfoeight"
