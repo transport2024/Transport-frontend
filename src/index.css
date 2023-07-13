@@ -2,14 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: #141414 !important;
+  color: gainsboro !important;
+}
 
 .ant-menu-item-selected{
-    background-color: rgb(38,198,97) !important;
-    color: white !important;
+    background-color: blue !important;
+    color: gainsboro !important;
     font-weight: bold !important;
     
   }
+
+   .ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell{
+    background-color: #13041f !important;
+    color: gainsboro !important;
+    border-radius: 0px !important;
+    
+  } 
+
+  .ant-pagination-item a {
+    color: blue !important;
+  }
+
+  .anticon svg{
+    color: white;
+  }
+
+
   
+.ant-menu-submenu-title{
+    color: gainsboro !important;
+  }
+
   .ant-menu-inline{
   padding: 20px 0 20px 0 !important;
   font-size: 18px !important;
@@ -22,6 +47,21 @@
   
   .ant-menu-submenu-selected >.ant-menu-submenu-title{
     font-weight: bold !important;
-    color: rgb(38,198,97) !important;
+    color: gainsboro !important;
   }
 
+
+  .ant-menu-light{
+    background-color:#141414 !important;
+    color: gainsboro;
+
+  }
+
+
+:root{
+  --primary-color:#141414;
+  --secondary-color:blue;
+}
+
+
+  

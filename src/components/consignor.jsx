@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Select,
@@ -8,8 +8,7 @@ import {
   Button,
   notification,
   Table,
-  Drawer
-  
+  Drawer,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -28,14 +27,16 @@ function Consignor() {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`http://localhost:4001/api/consignor?search=${searched}`);
+      const result = await axios.get(
+        `http://localhost:4001/api/consignor?search=${searched}`
+      );
       setConsignors(get(result, "data.message"));
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log( consignors,"prkfn")
+  console.log(consignors, "prkfn");
 
   useEffect(() => {
     fetchData();
@@ -78,17 +79,17 @@ function Consignor() {
     setOpen(true);
   };
 
-  const handleDelete = async(value) => {
+  const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/consignor/${value._id}`)
-      fetchData()
-      notification.success({message:"Deleted Successfully"})
+      await axios.delete(`http://localhost:4001/api/consignor/${value._id}`);
+      fetchData();
+      notification.success({ message: "Deleted Successfully" });
     } catch (err) {
-      notification.error({message:"Something Went Wrong"})
+      notification.error({ message: "Something Went Wrong" });
     }
-  }
+  };
 
-  console.log(consignors,"rfk")
+  console.log(consignors, "rfk");
   const searchers = [];
 
   consignors &&
@@ -99,12 +100,12 @@ function Consignor() {
         { value: data.place }
       );
     });
-  
-    const { onDownload } = useDownloadExcel({
-      currentTableRef: tableRef.current,
-      filename: "Web Users",
-      sheet: "Web Users",
-      });
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: "Web Users",
+    sheet: "Web Users",
+  });
 
   const columns = [
     {
@@ -150,20 +151,25 @@ function Consignor() {
       key: "mail",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-  
+
     {
       title: "Actions",
       render: (text) => (
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md !text-[--secondary-color] cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
-            <DeleteOutlineOutlinedIcon className="!text-md text-green-500 cursor-pointer " onClick={()=>{handleDelete(text)}} />
+            <DeleteOutlineOutlinedIcon
+              className="!text-md !text-[--secondary-color] cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
+            />
           </div>
         </div>
       ),
@@ -172,24 +178,24 @@ function Consignor() {
 
   return (
     <div className="flex pt-[12vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-8">
+      <div className="w-[80vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
-        <Select
+          <Select
             mode="tags"
             showSearch
-          placeholder="Type here for Category"
-          options={searchers}
-          onChange={(data) => {
-            setSearched(data);
+            placeholder="Type here for Category"
+            options={searchers}
+            onChange={(data) => {
+              setSearched(data);
             }}
             className="w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
-        />
+          />
         </div>
         <div className="w-full flex justify-end items-end gap-5">
           <div
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
             }}
@@ -199,17 +205,23 @@ function Consignor() {
           <div>
             <Button
               onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
           </div>
         </div>
         <div>
-          <Table columns={columns} dataSource={consignors} ref={tableRef}   pagination={{
-                    pageSize: 5,
-                  }}/>
-      </div>
+          <Table
+            columns={columns}
+            dataSource={consignors}
+            ref={tableRef}
+            pagination={{
+              pageSize: 5,
+            }}
+         
+          />
+        </div>
       </div>
       <Drawer
         open={open}
@@ -219,7 +231,6 @@ function Consignor() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
-        
         onClose={() => {
           setOpen(!open);
           form.setFieldValue([]);
@@ -317,9 +328,8 @@ function Consignor() {
             <Input type="mail" size="large" />
           </Form.Item>
 
-        
           <div className="flex gap-4 items-end justify-end">
-          <Form.Item>
+            <Form.Item>
               <Button
                 htmlType="submit"
                 className="bg-red-500 w-[130px] !cursor-pointer float-right text-white font-bold tracking-wider"
@@ -328,19 +338,16 @@ function Consignor() {
                 Clear
               </Button>
             </Form.Item>
-         
-          <Form.Item>
-            <Button
-              htmlType="submit"
-              className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
-            >
-              {updateId === "" ? "Save" : "Update"}
-            </Button>
-          </Form.Item>
-         </div>
-       
-          
 
+            <Form.Item>
+              <Button
+                htmlType="submit"
+                className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </Drawer>
     </div>

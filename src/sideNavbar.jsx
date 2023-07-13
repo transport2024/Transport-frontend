@@ -17,13 +17,13 @@ function SideNavbar() {
     }
 
   return (
-    <div className="w-[15vw]">
-      <div className="w-[15vw] h-screen shadow fixed">
-      <div className="text-center flex text-xl font-bold items-center shadow justify-between pl-[6vw] pr-[3vw]  !bg-white h-[10vh]  text-green-500 w-screen py-3">
+    <div className="w-[14vw] h-screen ">
+      <div className="w-[14vw] h-screen border-r border-gray-700 shadow fixed bg-[--primary-color]">
+      <div className="text-center flex text-xl border-b border-gray-700 font-bold items-center shadow justify-between pl-[6vw] pr-[3vw]  !bg-[--primary-color] h-[10vh]   w-screen py-3">
         <h1>Logo</h1>
         {/* <div>{location.pathname.split("/")[1]}</div> */}
         <div>Vehicle Transport Management System</div>
-        <div onClick={handleLogout} className="!text-[16px] text-white bg-green-500 px-2 pb-1 cursor-pointer text-center rounded-md"><LogoutIcon className="!text-[16px]"/>Logout</div>
+        <div onClick={handleLogout} className="!text-[12px] text-white px-3 !bg-[--secondary-color]  pb-1 cursor-pointer text-center rounded-md"><LogoutIcon className="!text-[16px]"/>Logout</div>
       </div>
       <Menu items={items} mode="inline"></Menu>
     </div>
