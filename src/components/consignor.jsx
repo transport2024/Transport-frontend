@@ -25,10 +25,12 @@ function Consignor() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
 
+  console.log(process.env.REACT_APP_URL)
+
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/consignor?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
       );
       setConsignors(get(result, "data.message"));
     } catch (err) {
@@ -49,7 +51,7 @@ function Consignor() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/consignor", value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/consignor`, value);
         fetchData();
         notification.success({ message: "Consignor Added successfully" });
         setOpen(false);
@@ -59,7 +61,7 @@ function Consignor() {
     } else {
       try {
         await axios.put(
-          `http://localhost:4001/api/consignor/${updateId}`,
+          `${process.env.REACT_APP_URL}/api/consignor/${updateId}`,
           value
         );
         fetchData();
@@ -81,7 +83,7 @@ function Consignor() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/consignor/${value._id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/api/consignor/${value._id}`);
       fetchData();
       notification.success({ message: "Deleted Successfully" });
     } catch (err) {
@@ -236,6 +238,7 @@ function Consignor() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
+        className="!bg-[--third-color] !text-white"
       >
         <Form
           className="flex flex-col gap-1"

@@ -57,11 +57,18 @@ body{
 
   }
 
+  .ant-form-item-label >label {
+color: white !important;
+  }
+
 
 :root{
   --primary-color:#141414;
   --secondary-color:blue;
+  --third-color:#13041f
 }
 
-
+.ant-modal-content{
+background-color: #13041f !important;
+}
   

@@ -29,7 +29,7 @@ function Location() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/location?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/location?search=${searched}`
       );
       setLocation(get(result, "data.message"));
     } catch (err) {
@@ -44,7 +44,7 @@ function Location() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/location", value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/location`, value);
         fetchData();
         notification.success({
           message: "Location Added successfully",
@@ -57,7 +57,7 @@ function Location() {
       }
     } else {
       try {
-        await axios.put(`http://localhost:4001/api/location/${updateId}`, value);
+        await axios.put(`${process.env.REACT_APP_URL}/api/location/${updateId}`, value);
         fetchData();
         notification.success({
           message: "Location updated successfully",
@@ -81,7 +81,7 @@ function Location() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/location/${value._id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/api/location/${value._id}`);
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -128,14 +128,14 @@ function Location() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer "
+              className="!text-md text-[--secondary-color] cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -165,7 +165,7 @@ function Location() {
         </div>
         <div className="w-full flex gap-5 items-end justify-end">
           <div
-            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
             }}
@@ -176,7 +176,7 @@ function Location() {
           <div>
             <Button
               onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
@@ -193,6 +193,7 @@ function Location() {
           setUpdateId("");
         }}
         footer={false}
+        className="!bg-[--third-color] !text-white"
       >
         <Form
           className="flex flex-col  gap-4"

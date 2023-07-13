@@ -29,7 +29,7 @@ function Broker() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/broker?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
       );
       setBroker(get(result, "data.message"));
     } catch (err) {
@@ -44,7 +44,7 @@ function Broker() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/broker", value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/broker`, value);
         fetchData();
         notification.success({
           message: "Broker Added successfully",
@@ -57,7 +57,7 @@ function Broker() {
       }
     } else {
       try {
-        await axios.put(`http://localhost:4001/api/broker/${updateId}`, value);
+        await axios.put(`${process.env.REACT_APP_URL}/api/broker/${updateId}`, value);
         fetchData();
         notification.success({
           message: "Broker updated successfully",
@@ -81,7 +81,7 @@ function Broker() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/broker/${value._id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/api/broker/${value._id}`);
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -194,6 +194,7 @@ function Broker() {
           setUpdateId("");
         }}
         footer={false}
+        className="!bg-[--third-color] !text-white"
       >
         <Form
           className="flex flex-col gap-4"

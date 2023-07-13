@@ -30,7 +30,7 @@ function Consignee() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/consignee?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
@@ -47,7 +47,7 @@ function Consignee() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/consignee", value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/consignee`, value);
         fetchData();
         notification.success({ message: "Consignee Added successfully" });
         setOpen(false);
@@ -57,7 +57,7 @@ function Consignee() {
     } else {
       try {
         await axios.put(
-          `http://localhost:4001/api/consignee/${updateId}`,
+          `${process.env.REACT_APP_URL}/api/consignee/${updateId}`,
           value
         );
         fetchData();
@@ -79,7 +79,7 @@ function Consignee() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/consignee/${value._id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/api/consignee/${value._id}`);
       fetchData();
       notification.success({ message: "Deleted Successfully" });
     } catch (err) {
@@ -160,14 +160,14 @@ function Consignee() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer "
+              className="!text-md text-[--secondary-color] cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -180,7 +180,7 @@ function Consignee() {
 
   return (
     <div className="flex pt-[12vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-8">
+      <div className="w-[80vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -197,7 +197,7 @@ function Consignee() {
         </div>
         <div className="w-full flex gap-5 items-end justify-end">
           <div
-            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
             }}
@@ -208,7 +208,7 @@ function Consignee() {
           <div>
             <Button
               onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
@@ -235,6 +235,7 @@ function Consignee() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
+        className="!bg-[--third-color] !text-white"
       >
         <Form
           className="flex flex-col gap-1"
