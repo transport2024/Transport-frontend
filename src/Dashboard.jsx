@@ -170,7 +170,7 @@ function Dashboard() {
              </div>
               <div className="w-[80vw] m-auto">
               <h1 className="!text-[--secondary-color] text-2xl font-bold">Last Five Consignees</h1>
-                  <Table columns={columns} dataSource={consignee.slice(-5)} pagination={false} />
+              <Table columns={columns} dataSource={consignee.slice(-5)} pagination={false}/>
               </div>
           </div>
     </div>
