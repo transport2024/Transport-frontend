@@ -11,7 +11,7 @@ function getItem(label, key, icon, children, type) {
 }
 
 export const items = [
-  getItem("Master", "sub1", "", [
+  getItem(<p>Master</p>, "sub1", "", [
     getItem(<NavLink to="consignor">Consignor</NavLink>, "1"),
     getItem(<NavLink to="consignee">Consignee</NavLink>, "2"),
     getItem(<NavLink to="vehicle">Vehicle</NavLink>, "3"),

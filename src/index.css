@@ -3,41 +3,46 @@
 @tailwind utilities;
 
 body{
-  background-color: #141414 !important;
-  color: gainsboro !important;
+  background-color: rgb(250, 250, 250) !important;
+  color: rgb(12, 16, 147) !important;
 }
 
 .ant-menu-item-selected{
-    background-color: blue !important;
-    color: gainsboro !important;
-    font-weight: bold !important;
-    
+    background-color: rgb(12, 16, 147) !important;
+    color: rgb(250, 250, 250) !important;
+    font-weight: bold !important; 
   }
 
    .ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell{
-    background-color: #13041f !important;
-    color: gainsboro !important;
+    background-color: rgb(250, 250, 250) !important;
+    color: black !important;
     border-radius: 0px !important;
     
   } 
 
+  .ant-menu-sub.ant-menu-inline{
+    background:rgb(250, 250, 250) !important;
+  }
+
   .ant-pagination-item a {
-    color: blue !important;
+    color: rgb(12, 16, 147) !important;
   }
 
   .anticon svg{
-    color: white;
+    color: rgb(250, 250, 250);
   }
 
 
   
 .ant-menu-submenu-title{
-    color: gainsboro !important;
+    color: black !important;
+    background-color: rgb(250, 250, 250)  !important;
   }
 
   .ant-menu-inline{
-  padding: 20px 0 20px 0 !important;
+  padding: 5px 0 5px 0 !important;
   font-size: 18px !important;
+  border:none !important;
   }
   
   
@@ -47,24 +52,24 @@ body{
   
   .ant-menu-submenu-selected >.ant-menu-submenu-title{
     font-weight: bold !important;
-    color: gainsboro !important;
+    color: rgb(12, 16, 147) !important;
   }
 
 
   .ant-menu-light{
-    background-color:#141414 !important;
-    color: gainsboro;
+    background-color:rgb(250, 250, 250) !important;
+    color: black;
 
   }
 
   .ant-form-item-label >label {
-color: white !important;
+color: rgb(250, 250, 250) !important;
   }
 
 
 :root{
-  --primary-color:#141414;
-  --secondary-color:blue;
+  --primary-color:rgb(250, 250, 250) ;
+  --secondary-color:rgb(12, 16, 147);
   --third-color:#13041f
 }
 
