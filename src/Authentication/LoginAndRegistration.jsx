@@ -4,7 +4,8 @@ import myimage from "../assets/1.jpg";
 import axios from "axios"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {isEmpty} from "lodash"
+import { isEmpty } from "lodash"
+
 
 function LoginAndRegistration() {
   const [register, setRegiser] = useState(false);

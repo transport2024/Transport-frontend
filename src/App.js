@@ -22,10 +22,12 @@ import Broker from "./components/broker"
 import Memo from "./components2/memoentry";
 import Memodetails from "./components2/memodetails";
 import Report from "./components3/report";
+import Dashboard from "./Dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Rootlayouts />}>
+    <Route path="/" element={<Dashboard />}/>
       <Route path="consignor" element={<Consignor />} />
       <Route path="consignee" element={<Consignee />} />
       <Route path="vehicle" element={<Vehicle />} />
@@ -40,12 +42,10 @@ const router = createBrowserRouter(
 );
 
 
-
-
 function App() {
-  
-   
-  return <RouterProvider router={router} />;
+  return (
+      <RouterProvider router={router} />   
+  );
 }
 
 export default App;

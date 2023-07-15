@@ -25,7 +25,7 @@ function Consignor() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
 
-  console.log(process.env.REACT_APP_URL)
+
 
   const fetchData = async () => {
     try {
