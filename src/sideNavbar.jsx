@@ -36,15 +36,15 @@ function SideNavbar() {
   }, [current]);
 
   return (
-    <div className="w-[14vw] h-screen bg-[--secondary-color]">
-      <div className="w-[14vw] h-screen border-r border-gray-100  fixed bg-[--primary-color]">
-        <div className="text-center !z-40 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[10vh]   w-screen py-3">
+    <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
+      <div className="w-[14vw] h-screen shadow  fixed bg-[--primary-color]">
+        <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[10vh]   w-screen py-3">
           <h1>Logo</h1>
           <div>{location.pathname.split("/")[1]?location.pathname.split("/")[1]:"Dashboard"}</div>
           <div>Vehicle Transport Management System</div>
           <div
             onClick={handleLogout}
-            className="!text-[15px]  px-3 !bg-[--primary-color] !text-[--secondary-color]  pb-1 cursor-pointer text-center rounded-md"
+            className="!text-[15px]  px-3 !bg-[--primary-color] !text-[--secondary-color]  cursor-pointer text-center rounded-md"
           >
             <LogoutIcon className="!text-[16px]" />Logout
           </div>

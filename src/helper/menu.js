@@ -27,7 +27,7 @@ export const items = [
     display: "flex",
     alignItems: "center",
     justifyContent: "start",
-    paddingLeft: "6px",
+    paddingLeft:"2px",
     gap:2
     
   }}><DashboardCustomizeIcon fontSize="10px" />DashBoard</NavLink>, '0', ""),
@@ -42,31 +42,31 @@ export const items = [
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><Man4Icon fontSize="10px"/>Consignor</NavLink>, "1"),
+    }}>Consignor</NavLink>, "1"),
     getItem(<NavLink to="consignee" style={{
       display: "flex",
       alignItems: "center",
       justifyContent: "start",
       gap:2
-    }}><Diversity3Icon fontSize="10px"/>Consignee</NavLink>, "2"),
+    }}>Consignee</NavLink>, "2"),
     getItem(<NavLink to="vehicle" style={{
       display: "flex",
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><LocalShippingIcon fontSize="10px"/>Vehicle</NavLink>, "3"),
+    }}>Vehicle</NavLink>, "3"),
     getItem(<NavLink to="location" style={{
       display: "flex",
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><PlaceIcon fontSize="10px"/>Location</NavLink>, "4"),
+    }}>Location</NavLink>, "4"),
     getItem(<NavLink to="broker" style={{
       display: "flex",
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><AttributionIcon fontSize="10px"/>Broker</NavLink>,"5"),
+    }}>Broker</NavLink>,"5"),
   ]),
   getItem(<h1 style={{
     display: "flex",
@@ -79,7 +79,7 @@ export const items = [
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><MemoryIcon fontSize="10px"/>Memo Entry</NavLink>, "6"),
+    }}>Memo Entry</NavLink>, "6"),
    
   ]),
 
@@ -94,7 +94,7 @@ export const items = [
       alignItems: "center",
       justifyContent:"start",
       gap:2
-    }}><ReportProblemIcon fontSize="10px"/>Report Entry</NavLink>, "7"),
+    }}>Report Entry</NavLink>, "7"),
     
   ]),
 ];

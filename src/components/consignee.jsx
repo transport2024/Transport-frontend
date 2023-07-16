@@ -11,6 +11,7 @@ import {
   Button,
   notification,
   Drawer,
+  Skeleton,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -26,15 +27,19 @@ function Consignee() {
   const [updateId, setUpdateId] = useState("");
   const tableRef = useRef(null);
   const [searched, setSearched] = useState([]);
+  const [loading,setLoading]=useState(false)
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -214,12 +219,15 @@ function Consignee() {
             </Button>
           </div>
         </div>
+        <Skeleton loading={loading}>
         <Table
           columns={columns}
           dataSource={Consignee}
           ref={tableRef}
           pagination={{ pageSize : 5 }}
         />
+        </Skeleton>
+       
       </div>
       <Drawer
         open={open}
@@ -235,7 +243,7 @@ function Consignee() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
-        className="!bg-[--third-color] !text-white"
+        className="!bg-[--primary-color] !text-white"
       >
         <Form
           className="flex flex-col gap-1"

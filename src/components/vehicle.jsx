@@ -11,6 +11,7 @@ import {
   Button,
   notification,
   Drawer,
+  Skeleton,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -26,17 +27,21 @@ function Vehicle() {
   const [updateId, setUpdateId] = useState("");
 	const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
+  const [loading,setLoading]=useState(false)
   
-  console.log(Vehicle)
+
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
       );
       setVehicle(get(result, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -234,7 +239,10 @@ function Vehicle() {
             </Button>
           </div>
         </div>
+        <Skeleton loading={loading}>
         <Table columns={columns} dataSource={Vehicle} ref={tableRef} pagination={{pageSize:5}} />
+        </Skeleton>
+       
       </div>
       <Drawer
         open={open}
@@ -250,7 +258,7 @@ function Vehicle() {
           setUpdateId("");
         }}
         footer={false}
-        className="!bg-[--third-color] !text-white"
+        className="!bg-[--primary-color] !text-white"
       >
         <Form
           className="flex flex-col gap-1"

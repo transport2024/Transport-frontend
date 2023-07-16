@@ -30,7 +30,7 @@ function Memo() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:4001/api/memo?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/memo?search=${searched}`
       );
       setMemo(get(result, "data.message"));
     } catch (err) {
@@ -43,9 +43,10 @@ function Memo() {
   }, [searched]);
 
   const handleSubmit = async (value) => {
+    console.log(value,"erhu")
     if (updateId === "") {
       try {
-        await axios.post("http://localhost:4001/api/memo", value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/memo`, value);
         fetchData();
         notification.success({
           message: "memo Added successfully",
@@ -58,7 +59,7 @@ function Memo() {
       }
     } else {
       try {
-        await axios.put(`http://localhost:4001/api/memo/${updateId}`, value);
+        await axios.put(`${process.env.REACT_APP_URL}/api/memo/${updateId}`, value);
         fetchData();
         notification.success({
           message: "memo updated successfully",
@@ -82,7 +83,7 @@ function Memo() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`http://localhost:4001/api/memo/${value._id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/api/memo/${value._id}`);
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -144,7 +145,7 @@ function Memo() {
     },
     {
       title: "Driver Name",
-      dataIndex: "driverName",
+      dataIndex: "drivername",
       key: "drivername",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -166,14 +167,14 @@ function Memo() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer "
+              className="!text-md text-[--secondary-color] cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -203,7 +204,7 @@ function Memo() {
         </div>
         <div className="  w-full flex gap-5 items-end justify-end">
           <div
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
             }}
@@ -214,7 +215,7 @@ function Memo() {
           <div>
             <Button
               onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>

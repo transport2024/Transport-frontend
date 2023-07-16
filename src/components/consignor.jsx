@@ -9,6 +9,7 @@ import {
   notification,
   Table,
   Drawer,
+  Skeleton,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -24,21 +25,25 @@ function Consignor() {
   const [updateId, setUpdateId] = useState("");
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
+  const [loading,setLoading]=useState(false)
 
 
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
       );
       setConsignors(get(result, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
-  console.log(consignors, "prkfn");
+
 
   useEffect(() => {
     fetchData();
@@ -111,51 +116,51 @@ function Consignor() {
 
   const columns = [
     {
-      title: "Name",
+      title: <h1 className="!text-[18px]">Name</h1>,
       dataIndex: "name",
       key: "name",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Address",
+      title: <h1 className="!text-[18px]">Address</h1>,
       dataIndex: "address",
       key: "address",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Place",
+      title: <h1 className="!text-[18px]">Place</h1>,
       dataIndex: "place",
       key: "place",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Contact Person",
+      title: <h1 className="!text-[18px] !w-[10vw]">Contact Person</h1>,
       dataIndex: "contactPerson",
       key: "contactPerson",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Phone",
+      title: <h1 className="!text-[18px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "GST NO",
+      title: <h1 className="!text-[18px]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Mail ID",
+      title: <h1 className="!text-[18px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Actions",
+      title: <h1 className="text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -180,7 +185,7 @@ function Consignor() {
 
   return (
     <div className="flex pt-[12vh] pl-4">
-      <div className="w-[80vw] flex flex-col gap-8">
+      <div className="w-[82vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -213,7 +218,7 @@ function Consignor() {
             </Button>
           </div>
         </div>
-        <div>
+        <Skeleton loading={loading}>
           <Table
             columns={columns}
             dataSource={consignors}
@@ -223,7 +228,7 @@ function Consignor() {
             }}
          
           />
-        </div>
+        </Skeleton>
       </div>
       <Drawer
         open={open}
@@ -241,7 +246,7 @@ function Consignor() {
         className="!bg-[--primary-color] !text-blue-500"
       >
         <Form
-          className="flex flex-col gap-1"
+          className="flex flex-col"
           layout="vertical"
           onFinish={handleSubmit}
           form={form}

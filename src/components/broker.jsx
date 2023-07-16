@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   notification,
+  Skeleton,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -24,16 +25,20 @@ function Broker() {
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
 	const [searched, setSearched] = useState([]);
-	const tableRef = useRef(null);
+  const tableRef = useRef(null);
+  const [loading,setLoading]=useState(false)
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
       );
       setBroker(get(result, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -166,7 +171,7 @@ function Broker() {
         </div>
         <div className="w-full flex gap-5 items-end justify-end">
           <div
-            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500"
+            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
             }}
@@ -177,13 +182,16 @@ function Broker() {
           <div>
             <Button
               onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-green-500 hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
           </div>
         </div>
+        <Skeleton loading={loading}>
         <Table columns={columns} dataSource={Broker} ref={tableRef} pagination={{pageSize:5}} />
+        </Skeleton>
+      
       </div>
       <Modal
         open={open}
@@ -194,7 +202,6 @@ function Broker() {
           setUpdateId("");
         }}
         footer={false}
-        className="!bg-[--third-color] !text-white"
       >
         <Form
           className="flex flex-col gap-4"

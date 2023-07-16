@@ -10,9 +10,10 @@ import {
   Input,
   Button,
   notification,
+  Skeleton,
 } from "antd";
 import axios from "axios";
-import { get } from "lodash";
+import { get, set } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -24,16 +25,20 @@ function Location() {
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
 	const [searched, setSearched] = useState([]);
-	const tableRef = useRef(null);
+  const tableRef = useRef(null);
+  const [loading,setLoading]=useState(false)
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/location?search=${searched}`
       );
       setLocation(get(result, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -182,7 +187,10 @@ function Location() {
             </Button>
           </div>
         </div>
+        <Skeleton loading={loading}>
         <Table columns={columns} dataSource={Location} ref={tableRef} pagination={{pageSize:5}} />
+        </Skeleton>
+      
       </div>
       <Modal
         open={open}
@@ -193,7 +201,7 @@ function Location() {
           setUpdateId("");
         }}
         footer={false}
-        className="!bg-[--third-color] !text-white"
+       
       >
         <Form
           className="flex flex-col  gap-4"

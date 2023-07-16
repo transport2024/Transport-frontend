@@ -100,12 +100,12 @@ function Dashboard() {
   return (
     <div className="pt-[15vh] ">
       <div className="!flex gap-10 pl-5   w-[85vw] flex-wrap">
-        <div className="bg-[#a2de97] h-[140px] w-[290px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#a2de97] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
           <img src={myimage1} />
 
           <Statistic
             title={
-              <h1 className="text-white font-normal xl:text-[20px]">
+              <h1 className="text-white font-semibold xl:text-[20px]">
                 Consigner
               </h1>
             }
@@ -118,11 +118,11 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#e56a93] h-[140px] w-[290px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#e56a93] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
           <img src={myimage2} />
           <Statistic
             title={
-              <h1 className="text-white font-normal xl:text-[20px]">
+              <h1 className="text-white font-semibold xl:text-[20px]">
                 Consignee
               </h1>
             }
@@ -135,11 +135,11 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#c3b951] h-[140px] w-[290px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#c3b951] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
           <img src={myimage4} />
           <Statistic
             title={
-              <h1 className="text-white font-normal xl:text-[20px]">
+              <h1 className="text-white font-semibold xl:text-[20px]">
                 Vechicle
               </h1>
             }
@@ -152,11 +152,11 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#74d3d3] h-[140px] w-[290px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#74d3d3] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
           <img src={myimage3} />
           <Statistic
             title={
-              <h1 className="text-white font-normal xl:text-[20px]">Broker</h1>
+              <h1 className="text-white font-semibold xl:text-[20px]">Broker</h1>
             }
             value={broker.length}
             valueStyle={{
@@ -167,15 +167,15 @@ function Dashboard() {
           />
         </div>
           </div>
-          <div className="flex flex-col pt-[8vh] !z-0 pl-5 gap-10">
+          <div className="flex flex-col pt-[8vh] pl-5 gap-10">
               <div className="w-[80vw] m-auto">
-                  <h1 className="!text-[--secondary-color] text-2xl font-bold">Last Five Consignors</h1>
+                  <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last Five Consignors</h1>
           <Skeleton loading={loading}>
-             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
+             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} className="!z-0"/>
                  </Skeleton>
              </div>
               <div className="w-[80vw] m-auto">
-              <h1 className="!text-[--secondary-color] text-2xl font-bold">Last Five Consignees</h1>
+              <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last Five Consignees</h1>
               <Skeleton loading={loading}>
              <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
                  </Skeleton>
