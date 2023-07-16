@@ -238,7 +238,7 @@ function Consignor() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
-        className="!bg-[--third-color] !text-white"
+        className="!bg-[--primary-color] !text-blue-500"
       >
         <Form
           className="flex flex-col gap-1"

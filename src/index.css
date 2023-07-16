@@ -2,78 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   background-color: rgb(250, 250, 250) !important;
   color: rgb(12, 16, 147) !important;
 }
 
-.ant-menu-item-selected{
-    background-color: rgb(12, 16, 147) !important;
-    color: rgb(250, 250, 250) !important;
-    font-weight: bold !important; 
-  }
+.ant-menu-item-selected {
+  background-color: transparent !important;
+  color: rgb(12, 16, 147) !important;
+  font-weight: 700 !important;
+}
 
-   .ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell{
-    background-color: rgb(250, 250, 250) !important;
-    color: black !important;
-    border-radius: 0px !important;
-    
-  } 
+.ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell {
+  background-color: rgb(250, 250, 250) !important;
+  color: black !important;
+  border-radius: 0px !important;
+}
 
-  .ant-menu-sub.ant-menu-inline{
-    background:rgb(250, 250, 250) !important;
-  }
+.ant-menu-sub.ant-menu-inline {
+  background: rgb(250, 250, 250) !important;
+}
 
-  .ant-pagination-item a {
-    color: rgb(12, 16, 147) !important;
-  }
+.ant-pagination-item a {
+  color: rgb(12, 16, 147) !important;
+}
 
-  .anticon svg{
-    color: rgb(250, 250, 250);
-  }
+.anticon svg {
+  color: rgb(250, 250, 250);
+}
 
+.ant-menu-submenu-title {
+  color: black !important;
+  background-color: rgb(250, 250, 250) !important;
+}
 
-  
-.ant-menu-submenu-title{
-    color: black !important;
-    background-color: rgb(250, 250, 250)  !important;
-  }
-
-  .ant-menu-inline{
+.ant-menu-inline {
   padding: 5px 0 5px 0 !important;
   font-size: 18px !important;
-  border:none !important;
-  }
-  
-  
-  .ant-menu-item{
-    height: 50px !important;
-  }
-  
-  .ant-menu-submenu-selected >.ant-menu-submenu-title{
-    font-weight: bold !important;
-    color: rgb(12, 16, 147) !important;
-  }
-
-
-  .ant-menu-light{
-    background-color:rgb(250, 250, 250) !important;
-    color: black;
-
-  }
-
-  .ant-form-item-label >label {
-color: rgb(250, 250, 250) !important;
-  }
-
-
-:root{
-  --primary-color:rgb(250, 250, 250) ;
-  --secondary-color:rgb(12, 16, 147);
-  --third-color:#13041f
+  border: none !important;
 }
 
-.ant-modal-content{
-background-color: #13041f !important;
+.ant-menu-item {
+  height: 50px !important;
 }
-  
+
+.ant-menu-submenu-selected > .ant-menu-submenu-title {
+  font-weight: 700 !important;
+  color: rgb(12, 16, 147) !important;
+}
+
+.ant-menu-light {
+  background-color: rgb(250, 250, 250) !important;
+  color: black;
+}
+
+.ant-form-item-label > label {
+  color: black !important;
+}
+
+.ant-menu-submenu-arrow {
+  padding-top: 10px !important;
+}
+
+:root {
+  --primary-color: rgb(250, 250, 250);
+  --secondary-color: rgb(12, 16, 147);
+  --third-color: #13041f;
+}
+
+.ant-modal-content {
+  background-color: #13041f !important;
+}

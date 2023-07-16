@@ -1,5 +1,17 @@
 import { NavLink } from "react-router-dom";
-
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import PersonIcon from '@mui/icons-material/Person';
+import Man4Icon from '@mui/icons-material/Man4';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import PlaceIcon from '@mui/icons-material/Place';
+import AttributionIcon from '@mui/icons-material/Attribution';
+import InputIcon from '@mui/icons-material/Input';
+import MemoryIcon from '@mui/icons-material/Memory';
+import PatternRoundedIcon from '@mui/icons-material/PatternRounded';
+import DetailsRoundedIcon from '@mui/icons-material/DetailsRounded';
+import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -11,21 +23,78 @@ function getItem(label, key, icon, children, type) {
 }
 
 export const items = [
-  getItem(<NavLink to='/'>DashBoard</NavLink>, '0', ""),
-  getItem(<p>Master</p>, "sub1", "", [
-    getItem(<NavLink to="consignor">Consignor</NavLink>, "1"),
-    getItem(<NavLink to="consignee">Consignee</NavLink>, "2"),
-    getItem(<NavLink to="vehicle">Vehicle</NavLink>, "3"),
-    getItem(<NavLink to="location">Location</NavLink>, "4"),
-    getItem(<NavLink to="broker">Broker</NavLink>)
+  getItem(<NavLink to='/' style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "start",
+    paddingLeft: "6px",
+    gap:2
+    
+  }}><DashboardCustomizeIcon fontSize="10px" />DashBoard</NavLink>, '0', ""),
+  getItem(<p  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent:"start",
+    gap:2
+  }}><PersonIcon fontSize="10px"/>Master</p>, "sub1", "", [
+    getItem(<NavLink to="consignor" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><Man4Icon fontSize="10px"/>Consignor</NavLink>, "1"),
+    getItem(<NavLink to="consignee" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "start",
+      gap:2
+    }}><Diversity3Icon fontSize="10px"/>Consignee</NavLink>, "2"),
+    getItem(<NavLink to="vehicle" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><LocalShippingIcon fontSize="10px"/>Vehicle</NavLink>, "3"),
+    getItem(<NavLink to="location" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><PlaceIcon fontSize="10px"/>Location</NavLink>, "4"),
+    getItem(<NavLink to="broker" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><AttributionIcon fontSize="10px"/>Broker</NavLink>,"5"),
   ]),
-  getItem("Entry", "sub2", "", [
-    getItem(<NavLink to="memo">Memo Entry</NavLink>, "5"),
-    getItem(<NavLink to ="memodetails"> Memo Details </NavLink>, "6")
+  getItem(<h1 style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent:"start",
+    gap:2
+  }}><PatternRoundedIcon fontSize="10px"/>Entry</h1>, "sub2", "", [
+    getItem(<NavLink to="memo" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><MemoryIcon fontSize="10px"/>Memo Entry</NavLink>, "6"),
+   
   ]),
 
-  getItem("Reports", "sub3", "", [
-    getItem(<NavLink to="report">Report Entry</NavLink>, "7"),
+  getItem(<h1 style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent:"start",
+    gap:2
+  }}><ReportRoundedIcon fontSize="10px"/>Reports</h1>, "sub3", "", [
+    getItem(<NavLink to="report" style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"start",
+      gap:2
+    }}><ReportProblemIcon fontSize="10px"/>Report Entry</NavLink>, "7"),
     
   ]),
 ];

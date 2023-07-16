@@ -3,7 +3,7 @@ import myimage1 from "./assets/dash1.png";
 import myimage2 from "./assets/dash2.png";
 import myimage3 from "./assets/dash3.png";
 import myimage4 from "./assets/dash4.png";
-import { Statistic, Table } from "antd";
+import { Statistic, Table,Skeleton } from "antd";
 import CountUp from "react-countup";
 import axios from "axios"
 import { get } from "lodash";
@@ -13,10 +13,12 @@ function Dashboard() {
     const [consignor,setConsignor]=useState([])
     const [consignee,setConsignee]=useState([])
     const [vehicle,setVehicle]=useState([])
-    const [broker, setBroker] = useState([])
+  const [broker, setBroker] = useState([])
+  const [loading,setLoading]=useState(false)
     
 
-    const fetchData = async () => {
+  const fetchData = async () => {
+      setLoading(true)
         try {
           const result1 = await axios.get(
             `${process.env.REACT_APP_URL}/api/consignor`
@@ -36,6 +38,8 @@ function Dashboard() {
             setBroker(get(result4, "data.message"));
         } catch (err) {
           console.log(err);
+        } finally {
+          setLoading(false)
         }
       };
     
@@ -95,7 +99,7 @@ function Dashboard() {
 
   return (
     <div className="pt-[15vh] ">
-      <div className="!flex gap-10 pl-5  w-[85vw] flex-wrap">
+      <div className="!flex gap-10 pl-5   w-[85vw] flex-wrap">
         <div className="bg-[#a2de97] h-[140px] w-[290px] flex flex-col items-center justify-center rounded-md">
           <img src={myimage1} />
 
@@ -163,14 +167,18 @@ function Dashboard() {
           />
         </div>
           </div>
-          <div className="flex flex-col pt-[8vh]  pl-5 gap-10">
+          <div className="flex flex-col pt-[8vh] !z-0 pl-5 gap-10">
               <div className="w-[80vw] m-auto">
                   <h1 className="!text-[--secondary-color] text-2xl font-bold">Last Five Consignors</h1>
-                  <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
+          <Skeleton loading={loading}>
+             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
+                 </Skeleton>
              </div>
               <div className="w-[80vw] m-auto">
               <h1 className="!text-[--secondary-color] text-2xl font-bold">Last Five Consignees</h1>
-              <Table columns={columns} dataSource={consignee.slice(-5)} pagination={false}/>
+              <Skeleton loading={loading}>
+             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
+                 </Skeleton>
               </div>
           </div>
     </div>
