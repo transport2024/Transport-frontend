@@ -18,6 +18,9 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import PrintIcon from "@mui/icons-material/Print";
+import { useNavigate } from "react-router";
+
 
 function Memo() {
   const [Memo, setMemo] = useState([]);
@@ -26,6 +29,8 @@ function Memo() {
   const [updateId, setUpdateId] = useState("");
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
+  const componentRef = useRef();
+  const navigate=useNavigate()
 
   const fetchData = async () => {
     try {
@@ -43,7 +48,7 @@ function Memo() {
   }, [searched]);
 
   const handleSubmit = async (value) => {
-    console.log(value,"erhu")
+    console.log(value, "erhu");
     if (updateId === "") {
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, value);
@@ -59,7 +64,10 @@ function Memo() {
       }
     } else {
       try {
-        await axios.put(`${process.env.REACT_APP_URL}/api/memo/${updateId}`, value);
+        await axios.put(
+          `${process.env.REACT_APP_URL}/api/memo/${updateId}`,
+          value
+        );
         fetchData();
         notification.success({
           message: "memo updated successfully",
@@ -95,7 +103,6 @@ function Memo() {
     }
   };
 
-
   const handleClear = () => {
     form.setFieldsValue([]);
   };
@@ -123,7 +130,6 @@ function Memo() {
   });
 
   const columns = [
-    
     {
       title: "GC No",
       dataIndex: "gcno",
@@ -164,21 +170,26 @@ function Memo() {
     {
       title: "Actions",
       render: (text) => (
-        <div className="flex gap-1">
-          <div>
-            <EditNoteOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer"
-              onClick={() => handleEdit(text)}
-            />
-          </div>
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex gap-1">
+            <div>
+              <EditNoteOutlinedIcon
+                className="!text-md text-[--secondary-color] cursor-pointer"
+                onClick={() => handleEdit(text)}
+              />
+            </div>
 
+            <div>
+              <DeleteOutlineOutlinedIcon
+                className="!text-md text-[--secondary-color] cursor-pointer "
+                onClick={() => {
+                  handleDelete(text);
+                }}
+              />
+            </div>
+          </div>
           <div>
-            <DeleteOutlineOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer "
-              onClick={() => {
-                handleDelete(text);
-              }}
-            />
+            <PrintIcon className="!text-md text-[--secondary-color] cursor-pointer" onClick={()=>{navigate("/vehicleBill")}} />            
           </div>
         </div>
       ),
@@ -221,7 +232,12 @@ function Memo() {
             </Button>
           </div>
         </div>
-        <Table columns={columns} dataSource={Memo} ref={tableRef} pagination={{pageSize:5}} />
+        <Table
+          columns={columns}
+          dataSource={Memo}
+          ref={tableRef}
+          pagination={{ pageSize: 5 }}
+        />
       </div>
       <Drawer
         open={open}
@@ -231,7 +247,6 @@ function Memo() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
-
         onClose={() => {
           setOpen(!open);
           form.setFieldValue([]);
@@ -325,25 +340,24 @@ function Memo() {
           </Form.Item>
 
           <div className="flex items-end gap-2 justify-end">
-           
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
-               onClick={handleClear}
-             >
-               Clear
-             </Button>
-           </Form.Item>
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
-             >
-               {updateId === "" ? "Save" : "Update"}{" "}
-             </Button>
-           </Form.Item>
-         </div>
+            <Form.Item>
+              <Button
+                htmlType="submit"
+                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                htmlType="submit"
+                className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
+              >
+                {updateId === "" ? "Save" : "Update"}{" "}
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </Drawer>
     </div>

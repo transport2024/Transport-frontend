@@ -6,6 +6,7 @@ import { isEmpty } from "lodash";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 
+
 function SideNavbar() {
   const location = useLocation();
   const navigate = useNavigate();

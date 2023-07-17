@@ -23,10 +23,12 @@ import Memo from "./components2/memoentry";
 import Memodetails from "./components2/memodetails";
 import Report from "./components3/report";
 import Dashboard from "./Dashboard";
+import VehicleBills from "./Bills/VehicleBills";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Rootlayouts />}>
+    <>
+     <Route path="/" element={<Rootlayouts />}>
     <Route path="/" element={<Dashboard />}/>
       <Route path="consignor" element={<Consignor />} />
       <Route path="consignee" element={<Consignee />} />
@@ -38,6 +40,8 @@ const router = createBrowserRouter(
       <Route path="report" element={<Report />} />
       <Route path="admin" element={<LoginAndRegistration />} />
     </Route>
+     <Route path="vehicleBill" element={<VehicleBills />} />
+    </>
   )
 );
 
