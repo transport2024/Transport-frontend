@@ -17,7 +17,7 @@ function AddMemoDetails() {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/memo`
       );
 
       setMemoDetails(get(result, "data.message"));
