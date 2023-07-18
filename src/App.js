@@ -1,13 +1,7 @@
 import "./App.css";
 import Consignor from "./components/consignor";
-// import Connect2 from "./components/connect2";
-// import Connect3 from "./components/connect3";
-// import Connect4 from "./components/connect4";
-// import Connect5 from "./components/connect5";
-// import Connect6 from "./components/connect6";
 import SideNavbar from "./sideNavbar";
 import LoginAndRegistration from "./Authentication/LoginAndRegistration";
-
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -20,10 +14,10 @@ import Vehicle from "./components/vehicle";
 import Location from "./components/location";
 import Broker from "./components/broker"
 import Memo from "./components2/memoentry";
-import Memodetails from "./components2/memodetails";
 import Report from "./components3/report";
 import Dashboard from "./Dashboard";
 import VehicleBills from "./Bills/VehicleBills";
+import AddMemoDetails from "./components2/addMemoDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="location" element={<Location />} />
       <Route path="broker" element={<Broker />} />
       <Route path="memo" element={<Memo />} />
-      <Route path="memodetails" element={<Memodetails />} />
+      <Route path="editmemo/:id" element={<AddMemoDetails />} />
       <Route path="report" element={<Report />} />
       <Route path="admin" element={<LoginAndRegistration />} />
     </Route>

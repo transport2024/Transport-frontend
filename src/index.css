@@ -23,6 +23,13 @@ body {
   font-weight: 700 !important;
 }
 
+.ant-select-selector{
+  
+  padding-left: 0;
+}
+
+
+
 .ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell {
   background-color: rgb(250, 250, 250) !important;
   color: black !important;

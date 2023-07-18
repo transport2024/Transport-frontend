@@ -133,14 +133,14 @@ function Broker() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer "
+              className="!text-md text-[--secondary-color] cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}

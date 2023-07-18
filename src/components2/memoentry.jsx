@@ -11,6 +11,7 @@ import {
   Button,
   notification,
   Drawer,
+  Skeleton,
 } from "antd";
 import axios from "axios";
 import { get } from "lodash";
@@ -20,7 +21,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
-
+import { Link } from "react-router-dom";
 
 function Memo() {
   const [Memo, setMemo] = useState([]);
@@ -29,17 +30,27 @@ function Memo() {
   const [updateId, setUpdateId] = useState("");
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
+  const [vehicle, setVehicle] = useState([]);
   const componentRef = useRef();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [loading,setLoading]=useState(false)
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memo?search=${searched}`
       );
       setMemo(get(result, "data.message"));
+      const result2 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/vehicle`
+      );
+
+      setVehicle(get(result2, "data.message"));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -57,6 +68,7 @@ function Memo() {
           message: "memo Added successfully",
         });
         setOpen(false);
+        form.setFieldValue([]);
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -84,10 +96,13 @@ function Memo() {
   };
 
   const handleEdit = (value) => {
-    form.setFieldsValue(value);
-    setUpdateId(value._id);
-    setOpen(true);
+    // form.setFieldsValue(value);
+    // setUpdateId(value._id);
+    // setOpen(true);
+    navigate(`/editmemo/${value._id}`);
   };
+
+
 
   const handleDelete = async (value) => {
     try {
@@ -189,7 +204,12 @@ function Memo() {
             </div>
           </div>
           <div>
-            <PrintIcon className="!text-md text-[--secondary-color] cursor-pointer" onClick={()=>{navigate("/vehicleBill")}} />            
+            <PrintIcon
+              className="!text-md text-[--secondary-color] cursor-pointer"
+              onClick={() => {
+                navigate("/vehicleBill");
+              }}
+            />
           </div>
         </div>
       ),
@@ -232,12 +252,15 @@ function Memo() {
             </Button>
           </div>
         </div>
+        <Skeleton loading={loading}>
         <Table
           columns={columns}
           dataSource={Memo}
           ref={tableRef}
           pagination={{ pageSize: 5 }}
         />
+        </Skeleton>
+      
       </div>
       <Drawer
         open={open}
@@ -285,7 +308,7 @@ function Memo() {
             <Input type="date" size="large" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
             name="vehicleno"
             rules={[
@@ -296,6 +319,21 @@ function Memo() {
             ]}
           >
             <Input type="text" size="large" />
+          </Form.Item> */}
+
+          <Form.Item
+            name="vehicleno"
+            label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
+          >
+            <Select placeholder="Select vehicle no" size="large">
+              {vehicle.map((res, i) => {
+                return (
+                  <Select.Option value={res.vehicleno} key={i}>
+                    {res.vehicleno}
+                  </Select.Option>
+                );
+              })}
+            </Select>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold"> Driver Name</p>}
