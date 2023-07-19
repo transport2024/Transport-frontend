@@ -91,7 +91,7 @@ function AddMemoDetails() {
   }, [memoDetails,datas]);
   
 
-    
+console.log(filterData,"poirhtbrjtb")    
   
   
   const columns = [
