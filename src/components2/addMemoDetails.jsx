@@ -76,6 +76,7 @@ function AddMemoDetails() {
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0])
+    console.log(location.pathname.split("/").slice(-1)[0],"poooo")
     setFilterData(
       memoDetails.filter((res) => {
         return res._id === id;
@@ -235,9 +236,7 @@ function AddMemoDetails() {
     },
   ];
 
-    
-
-
+  
   return (
     <div className="pt-24 pl-[5vw] w-[80vw]">
       <Skeleton loading={loading}>
