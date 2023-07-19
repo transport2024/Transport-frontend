@@ -83,6 +83,10 @@ function AddMemoDetails() {
       })
     );
 
+    console.log( memoDetails.filter((res) => {
+      return res._id === id;
+    }),"filter")
+
     setDataSources( datas.filter((res) => {
     return res.memoId===id
   }))
