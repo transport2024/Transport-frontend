@@ -33,12 +33,13 @@ function AddMemoDetails() {
   }, []);
 
   useEffect(() => {
-    setId(location.pathname.split("/")[2]);
+    setId(location.pathname.split("/").slice(-1));
     setFilterData(
       memoDetails.filter((res) => {
         return res._id === id;
       })
     );
+    console.log("hello")
 
     form.setFieldsValue(filterData[0]);
   }, [id, memoDetails]);
