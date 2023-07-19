@@ -177,7 +177,7 @@ function Dashboard() {
               <div className="w-[80vw] m-auto">
               <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last Five Consignees</h1>
               <Skeleton loading={loading}>
-             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} />
+             <Table columns={columns} dataSource={consignee.slice(-5)} pagination={false} />
                  </Skeleton>
               </div>
           </div>
