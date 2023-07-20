@@ -37,6 +37,7 @@ function AddMemoDetails() {
     }
   };
 
+  
 
   useEffect(() => {
     fetchData();
@@ -60,6 +61,7 @@ function AddMemoDetails() {
         pressmark: val.pressmark,
         memoId:id
       }
+
       await axios.post(`${process.env.REACT_APP_URL}/api/memodetails`, formData);
       notification.success({
         message: "memodetails Added successfully",
@@ -93,10 +95,11 @@ function AddMemoDetails() {
     
     form.setFieldsValue(filterData[0]);
   }, [memoDetails,datas]);
-  
 
+  
 console.log(filterData,"poirhtbrjtb")    
   
+ 
   
   const columns = [
     {
@@ -533,13 +536,13 @@ console.log(filterData,"poirhtbrjtb")
           </Form.Item>
 
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Lorry Foeight</p>}
+            label={<p className="!text-[16px] font-semibold">Lorry Freight</p>}
             name="lorryfoeight "
            
             rules={[
               {
                 required: true,
-                message: "Please input your lorry foeight",
+                message: "Please input your lorry freight",
               },
             ]}
           >
@@ -566,8 +569,8 @@ console.log(filterData,"poirhtbrjtb")
             <Input type="text" size="large" />
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Account Point</p>}
-            name="accountpoint"
+            label={<p className="!text-[16px] font-semibold">Account Print</p>}
+            name="accountprint"
       
             rules={[
               {
