@@ -1,10 +1,20 @@
-import { Button, Drawer, Form, Input, Select, Skeleton,Table, notification } from "antd";
+import {
+  Button,
+  Drawer,
+  Form,
+  Input,
+  Select,
+  Skeleton,
+  Table,
+  notification,
+} from "antd";
 import axios from "axios";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
 
 function AddMemoDetails() {
   const [form] = Form.useForm();
@@ -13,23 +23,40 @@ function AddMemoDetails() {
   const location = useLocation();
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false)
-  const [datas,setDatas]=useState([])
-  const [dataSource,setDataSources]=useState([])
+  const [open, setOpen] = useState(false);
+  const [datas, setDatas] = useState([]);
+  const [dataSource, setDataSources] = useState([]);
+  const [locationData,setLocation]=useState([])
+  const [consignor,setConsignor]=useState([])
+  const [consignee, setConsignee] = useState([])
+  const [broker,setBroker]=useState([])
+  const [searched,setSearch]=useState([])
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo`
-      );
-      const result2=await axios.get(
+      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
+      const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
-
-
+      const result3 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/location?search=${searched}`
+      );
+      const result4 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
+      );
+      const result5 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
+      );
+      const result6 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
+      );
+      setBroker(get(result6,"data.message"))
+      setConsignor(get(result5, "data.message"));
+      setConsignee(get(result4, "data.message"));
       setMemoDetails(get(result, "data.message"));
       setDatas(get(result2, "data.message"));
+      setLocation(get(result3, "data.message"));
     } catch (err) {
       console.log(err);
     } finally {
@@ -37,13 +64,11 @@ function AddMemoDetails() {
     }
   };
 
-  
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleSubmit = async(val) => {
+  const handleSubmit = async (val) => {
     try {
       const formData = {
         locationfrom: val.locationfrom,
@@ -59,48 +84,48 @@ function AddMemoDetails() {
         valueofgoods: val.valueofgoods,
         quality: val.quality,
         pressmark: val.pressmark,
-        memoId:id
-      }
+        memoId: id,
+      };
 
-      await axios.post(`${process.env.REACT_APP_URL}/api/memodetails`, formData);
+      await axios.post(
+        `${process.env.REACT_APP_URL}/api/memodetails`,
+        formData
+      );
       notification.success({
         message: "memodetails Added successfully",
       });
       setOpen(false);
       fetchData();
-      form.setFieldsValue([])
+      form.setFieldsValue([]);
     } catch (err) {
       notification.error({
         message: "Something went wrong",
       });
     }
-  }
+  };
 
   useEffect(() => {
-    setId(location.pathname.split("/").slice(-1)[0])
-    console.log(location.pathname.split("/").slice(-1)[0],"poooo")
+    setId(location.pathname.split("/").slice(-1)[0]);
+    console.log(location.pathname.split("/").slice(-1)[0], "poooo");
     setFilterData(
       memoDetails.filter((res) => {
         return res._id === id;
       })
     );
 
-    console.log( memoDetails.filter((res) => {
-      return res._id === id;
-    }),"filter")
+    console.log(consignor,consignee,"coooo")
 
-    setDataSources( datas.filter((res) => {
-    return res.memoId===id
-  }))
-    
+    setDataSources(
+      datas.filter((res) => {
+        return res.memoId === id;
+      })
+    );
+
     form.setFieldsValue(filterData[0]);
-  }, [memoDetails,datas]);
+  }, [memoDetails, datas]);
 
-  
-console.log(filterData,"poirhtbrjtb")    
-  
- 
-  
+  console.log(filterData, "poirhtbrjtb");
+
   const columns = [
     {
       title: "Location From",
@@ -135,14 +160,14 @@ console.log(filterData,"poirhtbrjtb")
     {
       title: "PR NO From",
       dataIndex: "prnoform",
-    
+
       key: "prnofrom",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
       title: "PR NO To",
       dataIndex: "prnoto",
-  
+
       key: "prnoto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -167,7 +192,7 @@ console.log(filterData,"poirhtbrjtb")
     {
       title: "Broker Commission",
       dataIndex: "brokerCommission",
-      
+
       key: "brokerCommission",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -216,7 +241,7 @@ console.log(filterData,"poirhtbrjtb")
     {
       title: "Press Mark",
       dataIndex: "pressmark",
-     
+
       key: "PressMark",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -243,7 +268,8 @@ console.log(filterData,"poirhtbrjtb")
     },
   ];
 
-  
+  console.log(locationData,"poijjb")
+
   return (
     <div className="pt-24 pl-[5vw] w-[80vw]">
       <Skeleton loading={loading}>
@@ -289,7 +315,6 @@ console.log(filterData,"poirhtbrjtb")
                   </Select.Option> */}
               {/* );
               })} */}
-              <Select.Option>Hello</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -353,309 +378,348 @@ console.log(filterData,"poirhtbrjtb")
             </Form.Item>
           </div>
         </Form>
-          </Skeleton>
-          <div className="w-[80vw]">
-              <p className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1" onClick={()=>{setOpen(true)}}>Add Memo Details</p>
-        <Table dataSource={dataSource} columns={columns} scroll={{
-            x:2200,
-          }}/>
-          </div>
+      </Skeleton>
+      <div className="w-[80vw]">
+        <p
+          className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Add Memo Details
+        </p>
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          scroll={{
+            x: 2200,
+          }}
+        />
+      </div>
       <div>
-      <Drawer
-        open={open}
-        width={500}
-        onCancel={() => {
-          setOpen(!open);
-          form.setFieldValue([]);
-        
-        }}
-        onClose={() => {
-          setOpen(!open);
-          form.setFieldValue([]);
-          fetchData()
-          
-        }}
+        <Drawer
+          open={open}
+          width={500}
+          onCancel={() => {
+            setOpen(!open);
+            form.setFieldValue([]);
+          }}
+          onClose={() => {
+            setOpen(!open);
+            form.setFieldValue([]);
+            fetchData();
+          }}
           footer={false}
           title={<h1 className="pl-8">Add Memo Details</h1>}
-      >
-        <Form
-          className="flex flex-col gap-1"
-          layout="vertical"
-          onFinish={handleSubmit}
-          form={form}
         >
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location From</p>}
-            name="locationfrom"
-            rules={[
-              {
-                required: true,
-                message: "Please input your from location!",
-              },
-            ]}
+          <Form
+            className="flex flex-col gap-1"
+            layout="vertical"
+            onFinish={handleSubmit}
+            form={form}
           >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Location To</p>}
-            name="locationto"
-            rules={[
-              {
-                required: true,
-                message: "Please input your to location!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Consignor</p>}
-            name="consignor"
-            rules={[
-              {
-                required: true,
-                message: "Please input your consignor!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Consignee</p>}
-            name="consignee"
-            rules={[
-              {
-                required: true,
-                message: "Please input your consignee!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Lot No</p>}
-            name="Lotno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your driver lot no!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">PR No From</p>}
-            name="prnoform"
-            rules={[
-              {
-                required: true,
-                message: "Please input your driver pr no form!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">PR No To</p>}
-            name="Prnoto"
-            rules={[
-              {
-                required: true,
-                message: "Please input your pr no to!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Quantity</p>}
-            name="quantity"
-            rules={[
-              {
-                required: true,
-                message: "Please input your quantity!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">LR Amount</p>}
-            name="lramount"
-            rules={[
-              {
-                required: true,
-                message: "Please input your lr amount",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Broker Name</p>}
-            name="brokername"
-            rules={[
-              {
-                required: true,
-                message: "Please input your broker name",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={
-              <p className="!text-[16px] font-semibold">Broker Commission</p>
-            }
-            name="brokercommission"
-            rules={[
-              {
-                required: true,
-                message: "Please input your broker commission",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Memo Method</p>}
-            name="memomethod"
-            rules={[
-              {
-                required: true,
-                message: "Please select your memo method",
-              },
-              <Select size="large">
-                <Select.Option value="to pay">To Pay</Select.Option>
-                <Select.Option value="tbb">TBB</Select.Option>
-              </Select>,
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
+            <Form.Item
+              label={
+                <p className="!text-[16px] font-semibold">Location From</p>
+              }
+              name="locationfrom"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your from location!",
+                },
+              ]}
+            >
+               <Select placeholder="Select location from" size="large">
+              {locationData.map((res, i) => {
+                return ( 
+               <Select.Option value={res.locationname} key={i}>
+                    {res.locationname}
+                  </Select.Option> 
+              );
+              })}
+            </Select>
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Location To</p>}
+              name="locationto"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your to location!",
+                },
+              ]}
+            >
+              <Select placeholder="Select location to" size="large">
+              {locationData.map((res, i) => {
+                return ( 
+               <Select.Option value={res.locationname} key={i}>
+                    {res.locationname}
+                  </Select.Option> 
+              );
+              })}
+            </Select>
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Consignor</p>}
+              name="consignor"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your consignor!",
+                },
+              ]}
+            >
+              <Select placeholder="Select Consignor" size="large">
+              {consignor.map((res, i) => {
+                return ( 
+               <Select.Option value={res.name} key={i}>
+                    {res.name}
+                  </Select.Option> 
+              );
+              })}
+            </Select>
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Consignee</p>}
+              name="consignee"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your consignee!",
+                },
+              ]}
+            >
+              <Select placeholder="Select Consignee" size="large">
+              {consignee.map((res, i) => {
+                return ( 
+               <Select.Option value={res.name} key={i}>
+                    {res.name}
+                  </Select.Option> 
+              );
+              })}
+            </Select>
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Lot No</p>}
+              name="Lotno"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your driver lot no!",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">PR No From</p>}
+              name="prnoform"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your driver pr no form!",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">PR No To</p>}
+              name="Prnoto"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your pr no to!",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Quantity</p>}
+              name="quantity"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your quantity!",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">LR Amount</p>}
+              name="lramount"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your lr amount",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Broker Name</p>}
+              name="brokername"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your broker name",
+                },
+              ]}
+            >
+              <Select placeholder="Select Broker" size="large">
+                {broker.map((res, i) => {
+                
+                return ( 
+               <Select.Option value={res.brokername} key={i}>
+                    {res.name}
+                  </Select.Option> 
+              );
+              })}
+            </Select>
+            </Form.Item>
+            <Form.Item
+              label={
+                <p className="!text-[16px] font-semibold">Broker Commission</p>
+              }
+              name="brokercommission"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your broker commission",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Memo Method</p>}
+              name="memomethod"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select your memo method",
+                },
+               
+              ]}
+            >
+              <Select size="large" placeholder="Select Memo Method">
+                  <Select.Option value="Yes">Yes</Select.Option>
+                  <Select.Option value="No">No</Select.Option>
+                </Select>,
+            </Form.Item>
 
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Lorry Freight</p>}
-            name="lorryfoeight "
+            <Form.Item
+              label={
+                <p className="!text-[16px] font-semibold">Lorry Freight</p>
+              }
+              name="lorryfoeight "
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your lorry freight",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+
            
-            rules={[
-              {
-                required: true,
-                message: "Please input your lorry freight",
-              },
-            ]}
-          >
-
-            <Input type="text" size="large" />
-          </Form.Item>
-
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Remarks</p>}
-            name="remarks"
-            rules={[
-              {
-                required: true,
-                message: "Please input remarks",
-              },
+            <Form.Item
+              label={
+                <p className="!text-[16px] font-semibold">Account Print</p>
+              }
+              name="accountpaid"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your account point",
+                },
+                
+              ]}
+            >
               <Select size="large">
-                <Select.Option value="party">Party</Select.Option>
-                <Select.Option value="topay">To Pay</Select.Option>
-                <Select.Option value="paid">Paid</Select.Option>
-                <Select.Option value="fixed">Fixed</Select.Option>
-              </Select>,
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Account Print</p>}
-            name="accountprint"
-      
-            rules={[
-              {
-                required: true,
-                message: "Please input your account point",
-              },
-              <Select size="large">
-                <Select.Option value="Yes">Yes</Select.Option>
-                <Select.Option value="no">no</Select.Option>
-              </Select>,
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Invoice No</p>}
-            name="invoiceno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your invoice no",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Value of Goods</p>}
-            name="valueofgoods"
-            rules={[
-              {
-                required: true,
-                message: "Please input your value of goods",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Quality</p>}
-            name="quality"
-            rules={[
-              {
-                required: true,
-                message: "Please input your quality",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <Form.Item
-            label={<p className="!text-[16px] font-semibold">Press Mark</p>}
-            name="pressmark"
-            rules={[
-              {
-                required: true,
-                message: "Please input your press mark",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item>
-          <div className="flex items-end gap-2 justify-end">
-           
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
-              
-             >
-               Clear
-             </Button>
-           </Form.Item>
-           <Form.Item >
-             <Button
-               htmlType="submit"
-               className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
-             >
-             Save
-             </Button>
-           </Form.Item>
-         </div>
-        </Form>
-      </Drawer>
-         </div>
+                  <Select.Option value="Party">Party</Select.Option>
+                  <Select.Option value="To pay">To pay</Select.Option>
+                  <Select.Option value="paid">paid</Select.Option>
+                  <Select.Option value="fixed">fixed</Select.Option>
+                </Select>,
+             
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Invoice No</p>}
+              name="invoiceno"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your invoice no",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={
+                <p className="!text-[16px] font-semibold">Value of Goods</p>
+              }
+              name="valueofgoods"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your value of goods",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Quality</p>}
+              name="quality"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your quality",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <Form.Item
+              label={<p className="!text-[16px] font-semibold">Press Mark</p>}
+              name="pressmark"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your press mark",
+                },
+              ]}
+            >
+              <Input type="text" size="large" />
+            </Form.Item>
+            <div className="flex items-end gap-2 justify-end">
+              <Form.Item>
+                <Button
+                  htmlType="submit"
+                  className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+                >
+                  Clear
+                </Button>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  htmlType="submit"
+                  className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
+                >
+                  Save
+                </Button>
+              </Form.Item>
+            </div>
+          </Form>
+        </Drawer>
+      </div>
     </div>
   );
 }
