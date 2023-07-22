@@ -31,9 +31,9 @@ function LoginAndRegistration() {
       login ? notification.success({ message: "Lets Continue" }) :
         notification.success({ message: "Registered successfully lets login" })
       
-        if (!isEmpty(Cookies.get("token"))) {
-          navigate("/");
-        }
+      if (result) {
+         navigate('/')
+       }
     } catch (err) {
       console.log(err);
       notification.error({message:err.response.data})
