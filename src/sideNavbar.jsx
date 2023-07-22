@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "lodash";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 
 function SideNavbar() {
@@ -13,10 +14,10 @@ function SideNavbar() {
   const [current, setCurrent] = useState(0);
 
   const handleLogout = () => {
-    localStorage.removeItem("name");
-    if (isEmpty(localStorage.getItem("name"))) {
-      navigate("/admin");
-    }
+    Cookies.remove("token")
+    if (isEmpty(Cookies.get("token"))){
+      navigate("/admin")
+   }
   };
 
   const onClick = (e) => {

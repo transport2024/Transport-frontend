@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import PrintIcon from "@mui/icons-material/Print";
 
 
 function AddMemoDetails() {
@@ -69,6 +70,7 @@ function AddMemoDetails() {
   }, []);
 
   const handleSubmit = async (val) => {
+    console.log(val)
     try {
       const formData = {
         locationfrom: val.locationfrom,
@@ -77,11 +79,16 @@ function AddMemoDetails() {
         consignee: val.consignee,
         quantity: val.quantity,
         lramount: val.lramount,
+        lotno: val.lotno,
+        prnoform:val.prnoform,
         brokername: val.brokername,
         brokercommission: val.brokercommission,
         memomethod: val.memomethod,
-        remarks: val.remarks,
         valueofgoods: val.valueofgoods,
+        invoiceno: val.invoiceno,
+        Prnoto: val.Prnoto,
+        lorryfreight: val.lorryfreight,
+        accountpaid:val.accountpaid,
         quality: val.quality,
         pressmark: val.pressmark,
         memoId: id,
@@ -124,7 +131,21 @@ function AddMemoDetails() {
     form.setFieldsValue(filterData[0]);
   }, [memoDetails, datas]);
 
-  console.log(filterData, "poirhtbrjtb");
+
+  const handleDelete = async(value) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_URL}/api/memodetails/${value._id}`);
+      fetchData();
+      notification.success({
+        message: "Deleted Successfully",
+      });
+    } catch (err) {
+      notification.error({
+        message: "Something Went Wrong",
+      });
+    }
+  
+  }
 
   const columns = [
     {
@@ -153,7 +174,7 @@ function AddMemoDetails() {
     },
     {
       title: "Lot No",
-      dataIndex: "Lotno",
+      dataIndex: "lotno",
       key: "lotno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
@@ -166,7 +187,7 @@ function AddMemoDetails() {
     },
     {
       title: "PR NO To",
-      dataIndex: "prnoto",
+      dataIndex: "Prnoto",
 
       key: "prnoto",
       render: (text) => <div className="!text-[16px]">{text}</div>,
@@ -191,7 +212,7 @@ function AddMemoDetails() {
     },
     {
       title: "Broker Commission",
-      dataIndex: "brokerCommission",
+      dataIndex: "brokercommission",
 
       key: "brokerCommission",
       render: (text) => <div className="!text-[16px]">{text}</div>,
@@ -204,16 +225,11 @@ function AddMemoDetails() {
     },
     {
       title: "Lorry Foeight",
-      dataIndex: "lorryfoeight",
-      key: "lorryfoeight",
+      dataIndex: "lorryfreight",
+      key: "lorryfreight",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-    {
-      title: "Remarks",
-      dataIndex: "remarks",
-      key: "remarks",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
-    },
+   
     {
       title: "Account Paid",
       dataIndex: "accountpaid",
@@ -251,17 +267,20 @@ function AddMemoDetails() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md text-[--secondary-color] cursor-pointer"
               // onClick={() => handleEdit(text)}
             />
           </div>
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer "
-              // onClick={() => {
-              //   handleDelete(text);
-              // }}
+              className="!text-md text-[--secondary-color] cursor-pointer "
+              onClick={() => {
+                handleDelete(text);
+              }}
             />
+          </div>
+          <div>
+            <PrintIcon  className="!text-md text-[--secondary-color] cursor-pointer "/>
           </div>
         </div>
       ),
@@ -502,7 +521,7 @@ function AddMemoDetails() {
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Lot No</p>}
-              name="Lotno"
+              name="lotno"
               rules={[
                 {
                   required: true,
@@ -609,14 +628,14 @@ function AddMemoDetails() {
               <Select size="large" placeholder="Select Memo Method">
                   <Select.Option value="Yes">Yes</Select.Option>
                   <Select.Option value="No">No</Select.Option>
-                </Select>,
+                </Select>
             </Form.Item>
 
             <Form.Item
               label={
                 <p className="!text-[16px] font-semibold">Lorry Freight</p>
               }
-              name="lorryfoeight "
+              name="lorryfreight"
               rules={[
                 {
                   required: true,
@@ -641,12 +660,12 @@ function AddMemoDetails() {
                 
               ]}
             >
-              <Select size="large">
+              <Select size="large" placeholder="Select account print">
                   <Select.Option value="Party">Party</Select.Option>
                   <Select.Option value="To pay">To pay</Select.Option>
                   <Select.Option value="paid">paid</Select.Option>
                   <Select.Option value="fixed">fixed</Select.Option>
-                </Select>,
+                </Select>
              
             </Form.Item>
             <Form.Item

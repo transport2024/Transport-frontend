@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -14,7 +14,7 @@ import {
   Skeleton,
 } from "antd";
 import axios from "axios";
-import { get } from "lodash";
+import { get, flatten } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -33,11 +33,12 @@ function Memo() {
   const [vehicle, setVehicle] = useState([]);
   const componentRef = useRef();
   const navigate = useNavigate();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [memoDetails, setMemoDetails] = useState([]);
 
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memo?search=${searched}`
       );
@@ -46,11 +47,16 @@ function Memo() {
         `${process.env.REACT_APP_URL}/api/vehicle`
       );
 
+      const result3 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/memodetails`
+      );
+
+      setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -59,7 +65,6 @@ function Memo() {
   }, [searched]);
 
   const handleSubmit = async (value) => {
-    console.log(value, "erhu");
     if (updateId === "") {
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, value);
@@ -97,12 +102,10 @@ function Memo() {
 
   const handleEdit = (value) => {
     // form.setFieldsValue(value);
-    // setUpdateId(value._id);
+    setUpdateId(value._id);
     // setOpen(true);
     navigate(`/editmemo/${value._id}`);
   };
-
-
 
   const handleDelete = async (value) => {
     try {
@@ -203,7 +206,14 @@ function Memo() {
               />
             </div>
           </div>
-          <div>
+          <div
+            className={`${
+              memoDetails&&memoDetails.filter((res) => {
+                return get(res,"memoId")===get(text,"_id")
+                })[0]?.memoId!==undefined? "hidden" : "block"
+            }`}
+          >
+             
             <PrintIcon
               className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => {
@@ -253,14 +263,13 @@ function Memo() {
           </div>
         </div>
         <Skeleton loading={loading}>
-        <Table
-          columns={columns}
-          dataSource={Memo}
-          ref={tableRef}
-          pagination={{ pageSize: 5 }}
-        />
+          <Table
+            columns={columns}
+            dataSource={Memo}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
         </Skeleton>
-      
       </div>
       <Drawer
         open={open}
