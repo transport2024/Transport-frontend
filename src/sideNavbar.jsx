@@ -15,7 +15,7 @@ function SideNavbar() {
 
   const handleLogout = () => {
     Cookies.remove("token")
-    if (isEmpty(Cookies.get("token"))){
+    if (isEmpty(Cookies.get("token"))||isEmpty(localStorage.getItem("token"))){
       navigate("/admin")
    }
   };
@@ -34,7 +34,7 @@ function SideNavbar() {
 
   // Save the selected key to localStorage when it changes
   useEffect(() => {
-    localStorage.setItem("selectedKey", current);
+    isEmpty(localStorage.getItem("token"))&&navigate("/admin")
   }, [current]);
 
   return (

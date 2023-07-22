@@ -18,6 +18,7 @@ import Report from "./components3/report";
 import Dashboard from "./Dashboard";
 import VehicleBills from "./Bills/VehicleBills";
 import AddMemoDetails from "./components2/addMemoDetails";
+import Ccv from "./allBills/ccv";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,7 +35,8 @@ const router = createBrowserRouter(
       <Route path="report" element={<Report />} />
       <Route path="admin" element={<LoginAndRegistration />} />
     </Route>
-     <Route path="vehicleBill" element={<VehicleBills />} />
+      <Route path="vehicleBill" element={<VehicleBills />} />
+      <Route path="ccv" element={<Ccv />} />
     </>
   )
 );

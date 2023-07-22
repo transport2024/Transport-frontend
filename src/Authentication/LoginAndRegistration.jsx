@@ -32,7 +32,8 @@ function LoginAndRegistration() {
         notification.success({ message: "Registered successfully lets login" })
       
       if (result) {
-         navigate('/')
+        navigate('/')
+        localStorage.setItem("token","login")
        }
     } catch (err) {
       console.log(err);

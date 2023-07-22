@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
@@ -31,7 +31,8 @@ function AddMemoDetails() {
   const [consignor,setConsignor]=useState([])
   const [consignee, setConsignee] = useState([])
   const [broker,setBroker]=useState([])
-  const [searched,setSearch]=useState([])
+  const [searched, setSearch] = useState([])
+  const navigate=useNavigate()
 
   const fetchData = async () => {
     try {
@@ -70,7 +71,7 @@ function AddMemoDetails() {
   }, []);
 
   const handleSubmit = async (val) => {
-    console.log(val)
+  
     try {
       const formData = {
         locationfrom: val.locationfrom,
@@ -280,7 +281,9 @@ function AddMemoDetails() {
             />
           </div>
           <div>
-            <PrintIcon  className="!text-md text-[--secondary-color] cursor-pointer "/>
+            <PrintIcon className="!text-md text-[--secondary-color] cursor-pointer " onClick={() => {
+              navigate("/ccv")
+            }}/>
           </div>
         </div>
       ),
