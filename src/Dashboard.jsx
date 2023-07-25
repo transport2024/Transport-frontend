@@ -7,6 +7,11 @@ import { Statistic, Table,Skeleton } from "antd";
 import CountUp from "react-countup";
 import axios from "axios"
 import { get } from "lodash";
+import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined';
+import Person3OutlinedIcon from '@mui/icons-material/Person3Outlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
+
 
 function Dashboard() {
     const formatter = (value) => <CountUp end={value} separator="," />;
@@ -101,7 +106,8 @@ function Dashboard() {
     <div className="pt-[15vh] ">
       <div className="!flex gap-10 pl-5   w-[85vw] flex-wrap">
         <div className="bg-[#a2de97] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
-          <img src={myimage1} />
+          {/* <img src={myimage1} /> */}
+          <PeopleOutlineOutlinedIcon style={{fontSize:"50px",color:"white"}}/>
 
           <Statistic
             title={
@@ -119,7 +125,8 @@ function Dashboard() {
         </div>
 
         <div className="bg-[#e56a93] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
-          <img src={myimage2} />
+          {/* <img src={myimage2} /> */}
+          <Person3OutlinedIcon style={{fontSize:"50px",color:"white"}}/>
           <Statistic
             title={
               <h1 className="text-white font-semibold xl:text-[20px]">
@@ -136,7 +143,8 @@ function Dashboard() {
         </div>
 
         <div className="bg-[#c3b951] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
-          <img src={myimage4} />
+          {/* <img src={myimage4} /> */}
+          <LocalShippingOutlinedIcon style={{fontSize:"50px",color:"white"}}/>
           <Statistic
             title={
               <h1 className="text-white font-semibold xl:text-[20px]">
@@ -153,7 +161,8 @@ function Dashboard() {
         </div>
 
         <div className="bg-[#74d3d3] h-[140px] w-[280px] flex flex-col items-center justify-center rounded-md">
-          <img src={myimage3} />
+          {/* <img src={myimage3} /> */}
+          <ContactPageOutlinedIcon style={{fontSize:"50px",color:"white"}}/>
           <Statistic
             title={
               <h1 className="text-white font-semibold xl:text-[20px]">Broker</h1>

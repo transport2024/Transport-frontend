@@ -9,7 +9,7 @@ function Ccv() {
   useEffect(() => {
     setTimeout(() => {
       window.print()
-   },2000)
+   },4000)
   })
   return (
     <div>

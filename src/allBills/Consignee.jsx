@@ -3,8 +3,8 @@ import Bill from "../assets/bill.jpg"
 
 const Consignee = () => {
   return (
-    <div className='w-[100vw]'>
-    <img src={Bill} className='!w-[100vw] !h-[100vh]' alt='bill' /> 
+    <div className='w-[100vw] flex items-center justify-center'>
+    <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
     </div>
   )
 }

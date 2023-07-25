@@ -84,10 +84,18 @@ body {
 
 :root {
   --primary-color: rgb(250, 250, 250);
-  --secondary-color: rgb(12, 16, 147);
-  --third-color: #13041f;
+  --secondary-color: rgb(19, 16, 174);
+  --third-color: #9215f9;
 }
 
 .ant-modal-content {
   background-color: var(--primary-color) !important;
+}
+
+.ant-btn-primary {
+  background-color: blue !important;
+}
+
+.ant-btn-primary:hover{
+  background-color: rgb(127, 127, 222) !important;
 }

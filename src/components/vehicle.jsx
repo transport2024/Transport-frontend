@@ -257,6 +257,7 @@ function Vehicle() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
+        title={<h1 className="text-lg ">Vehicle</h1>}
         footer={false}
         className="!bg-[--primary-color] !text-white"
       >

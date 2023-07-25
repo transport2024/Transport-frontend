@@ -244,6 +244,7 @@ function Consignee() {
           setUpdateId("");
         }}
         className="!bg-[--primary-color] !text-white"
+        title={<h1 className="text-lg">Consignee</h1>}
       >
         <Form
           className="flex flex-col gap-1"
