@@ -121,7 +121,7 @@ function AddMemoDetails() {
       })
     );
 
-    console.log(consignor,consignee,"coooo")
+    
 
     setDataSources(
       datas.filter((res) => {
@@ -282,7 +282,7 @@ function AddMemoDetails() {
           </div>
           <div>
             <PrintIcon className="!text-md text-[--secondary-color] cursor-pointer " onClick={() => {
-              navigate("/ccv")
+              navigate(`/ccv/${text._id}`)
             }}/>
           </div>
         </div>
@@ -290,7 +290,7 @@ function AddMemoDetails() {
     },
   ];
 
-  console.log(locationData,"poijjb")
+  
 
   return (
     <div className="pt-24 pl-[5vw] w-[80vw]">
