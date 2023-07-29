@@ -230,7 +230,8 @@ function Memo() {
             <PrintIcon
               className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => {
-                navigate("/vehicleBill");
+                console.log(text._id)
+                navigate(`/vehicleBill/${text._id}`);
               }}
             />
           </div>
