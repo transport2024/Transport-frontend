@@ -618,17 +618,17 @@ function AddMemoDetails() {
               <Input type="text" size="large" />
             </Form.Item>
             <Form.Item
-              label={<p className="!text-[16px] font-semibold">Memo Method</p>}
-              name="memomethod"
+              label={<p className="!text-[16px] font-semibold" >Account Copy </p>}
+              name="accountcopy"
               rules={[
                 {
                   required: true,
-                  message: "Please select your memo method",
+                  message: "Please select your account copy",
                 },
                
               ]}
             >
-              <Select size="large" placeholder="Select Memo Method">
+              <Select size="large" placeholder="Account Copy">
                   <Select.Option value="Yes">Yes</Select.Option>
                   <Select.Option value="No">No</Select.Option>
                 </Select>
