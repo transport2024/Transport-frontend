@@ -3,7 +3,7 @@ import Bill from "../assets/bill.jpg"
 const Driver = () => {
   return (
     <div className='w-[100vw] flex items-center justify-center'>
-    <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
+    <img src={Bill} className='!w-[74vw] !h-[65vw]' alt='bill' /> 
     </div>
   )
 }

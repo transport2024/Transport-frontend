@@ -3,7 +3,7 @@ import Bill from "../assets/bill.jpg"
 function VehicleCopy() {
   return (
     <div className='w-[100vw] flex justify-center items-center'>
-    <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
+    <img src={Bill} className='!w-[74vw] !h-[65vw]' alt='bill' /> 
     </div>
   )
 }
