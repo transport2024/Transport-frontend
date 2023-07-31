@@ -71,4 +71,4 @@ function VehicleBills() {
   )
 }
 
-export default VehicleBills
+export default VehicleBills;
