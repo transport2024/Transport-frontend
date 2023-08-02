@@ -412,13 +412,15 @@ function AddMemoDetails() {
         >
           Add Memo Details
         </p>
-        <Table
+       <Skeleton loading={loading}>
+       <Table
           dataSource={dataSource}
           columns={columns}
           scroll={{
             x: 2200,
           }}
         />
+       </Skeleton>
       </div>
       <div>
         <Drawer
