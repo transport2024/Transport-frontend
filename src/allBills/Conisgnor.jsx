@@ -49,28 +49,29 @@ function Conisgnor() {
   console.log(filterDatas, "pooo");
 
   return (
-<<<<<<< HEAD
-    <div className='w-[100vw] flex items-center justify-center'>
-    <img src={Bill} className='!w-[74vw] !h-[65vw]' alt='bill' /> 
-=======
-    <div className="w-[100vw] flex items-center justify-center relative">
-      <img src={Bill} className="!w-[90vw] !h-[100vh]" alt="bill" />
-      <div className="absolute flex flex-col top-[26.5vh] right-[13.5vw]">
-        <input type="text" className="!outline-none text-[12px]" name="y" />
+    <div className='w-[100vw] flex items-center justify-center relative'>
+    <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
+   
+     
+      <div className="absolute flex  flex-col top-[26.5vh] left-[77vw]">
+        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={"ejnrj"} />
         <input
           type="text"
-          className="!placeholder:hidden outline-none mt-[-5px] text-[12px]"
+          className="!placeholder:hidden bg-transparent w-[27vw] text-black font-semibold outline-none mt-[-5px] text-[12px]"
           name="gcno"
+          defaultValue={"ppppp"}
         />
       </div>
       <div className="absolute top-[29.9vh] left-[21vw] flex flex-col">
         <input
           type="text"
+          defaultValue={"lorryno"}
           className="!outline-none bg-transparent w-[27vw] text-black font-semibold text-[12px]"
         />
         <input
           type="text"
           className="outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
+          defaultValue={"karur"}
         />
         <input
           type="text"
@@ -84,7 +85,7 @@ function Conisgnor() {
         />
       </div>
 
-      <div className="absolute top-[32.5vh] right-[25vw] flex flex-col">
+      <div className="absolute top-[32.5vh] right-[22vw] flex flex-col">
         <input
           type="text"
           className="!outline-none bg-transparent text-black font-semibold  text-[12px]"
@@ -97,6 +98,7 @@ function Conisgnor() {
         />
         <input
           type="text"
+          defaultValue={"gstin"}
           className="outline-none bg-transparent text-black font-semibold   text-[12px]"
         />
       </div>
@@ -139,15 +141,15 @@ function Conisgnor() {
         />
       </div>
 
-      <div className="absolute flex gap-[2px] top-[50vh] right-[3vw]">
-        <input type="text" className="!outline-none text-[12px] bg-transparent" defaultValue={"jhbevhr"}/>
+      <div className="absolute flex  top-[50vh] gap-[20px] !left-[66vw]">
+        <input type="text" className="!outline-none w-[105px] text-[12px] bg-transparent" defaultValue={"jhbevhr"}/>
         <input
           type="text"
-          className="!placeholder:hidden bg-transparent outline-none !pr-[34px] text-[12px]"
+          className="!placeholder:hidden bg-transparent outline-none  text-[12px]"
           defaultValue={"lerhvhjerh"}
         />
       </div>
->>>>>>> 0dd14992e15016e40ef9e75c2a4d9da176a885a0
+    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[48vw] text-gray-500">This is computer generated bill</p>
     </div>
   );
 }

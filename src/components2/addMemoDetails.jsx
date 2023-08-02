@@ -130,7 +130,9 @@ function AddMemoDetails() {
     );
 
     form.setFieldsValue(filterData[0]);
-  }, [memoDetails, datas]);
+  }, [memoDetails, datas,filterData[0]]);
+
+ 
 
 
   const handleDelete = async(value) => {
