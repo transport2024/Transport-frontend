@@ -4,22 +4,38 @@ import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
 
+
 function Consignee() {
   const [datas, setDatas] = useState([]);
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
+  const [memo,setMemo]=useState([])
+  const [filterMemo,setFilterMemo]=useState([])
+  const [consignor,setConsignor]=useState([])
+  const [filterConsignor,setfilterConsignor]=useState([])
 
   const fetchData = async () => {
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
+      const result2 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/memo`
+      );
+
+      const result3 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/consignee`
+      );
+     
+     setConsignor(get(result3, "data.message"));
       setDatas(get(result, "data.message"));
+      setMemo(get(result2, "data.message"));
     } catch (e) {
       console.log(e);
     }
   };
+
 
   useEffect(() => {
     fetchData();
@@ -32,6 +48,15 @@ function Consignee() {
       })[0]
     );
 
+setFilterMemo(
+  memo.filter((res)=>{
+    return res._id===filterDatas?.memoId
+   })[0]
+)
+setfilterConsignor(consignor.filter((res)=>{
+  return res.name===filterDatas?.consignee
+})[0])
+
     setInputs({
       consignor: filterDatas?.consignor,
       consignee: filterDatas?.consignee,
@@ -43,34 +68,39 @@ function Consignee() {
       invoice: filterDatas?.invoiceno,
       lotno: filterDatas?.lotno,
       prno: filterDatas?.prnoform,
+      gcno:filterMemo?.gcno,
+      date:filterMemo?.date,
+      lorryno:filterMemo?.vehicleno,
+      gctin:filterConsignor?.gstno
     });
-  }, [datas, filterDatas]);
+  }, [datas, filterDatas,memo,consignor]);
  
+//  console.log(filterMemo,"ll")
+//  console.log(filterDatas,"pp")
+console.log(filterConsignor)
 
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
     <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
-   
-     
       <div className="absolute flex  flex-col top-[26.5vh] left-[77vw]">
-        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={"ejnrj"} />
+        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={inputs.date} />
         <input
           type="text"
           className="!placeholder:hidden bg-transparent w-[27vw] text-black font-semibold outline-none mt-[-5px] text-[12px]"
           name="gcno"
-          defaultValue={"ppppp"}
+          defaultValue={inputs.gcno}
         />
       </div>
       <div className="absolute top-[29.9vh] left-[21vw] flex flex-col">
         <input
           type="text"
-          defaultValue={"lorryno"}
+          defaultValue={inputs.lorryno}
           className="!outline-none bg-transparent w-[27vw] text-black font-semibold text-[12px]"
         />
         <input
           type="text"
           className="outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
-          defaultValue={"karur"}
+          defaultValue={inputs.from}
         />
         <input
           type="text"
@@ -93,11 +123,11 @@ function Consignee() {
         <input
           type="text"
           className="outline-none bg-transparent  text-black font-semibold   text-[12px]"
-          defaultValue={"lhugytdzsd"}
+          defaultValue={inputs.gctin}
         />
         <input
           type="text"
-          defaultValue={"gstin"}
+          defaultValue={inputs.gctin}
           className="outline-none bg-transparent text-black font-semibold   text-[12px]"
         />
       </div>
@@ -148,9 +178,9 @@ function Consignee() {
           defaultValue={"lerhvhjerh"}
         />
       </div>
-    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[48vw] text-gray-500">This is computer generated bill</p>
+    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
     </div>
   );
 }
 
-export default Consignee;
+export default Consignee

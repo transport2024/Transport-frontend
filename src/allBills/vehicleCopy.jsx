@@ -45,8 +45,7 @@ function VechicleCopy() {
       prno: filterDatas?.prnoform,
     });
   }, [datas, filterDatas]);
-  console.log(inputs, "jbhv");
-  console.log(filterDatas, "pooo");
+
 
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
@@ -71,7 +70,7 @@ function VechicleCopy() {
         <input
           type="text"
           className="outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
-          defaultValue={"karur"}
+          defaultValue={inputs.from}
         />
         <input
           type="text"
@@ -149,7 +148,7 @@ function VechicleCopy() {
           defaultValue={"lerhvhjerh"}
         />
       </div>
-    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[48vw] text-gray-500">This is computer generated bill</p>
+    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
     </div>
   );
 }

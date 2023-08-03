@@ -45,9 +45,7 @@ function Driver() {
       prno: filterDatas?.prnoform,
     });
   }, [datas, filterDatas]);
-  console.log(inputs, "jbhv");
-  console.log(filterDatas, "pooo");
-
+  
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
     <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
@@ -149,7 +147,7 @@ function Driver() {
           defaultValue={"lerhvhjerh"}
         />
       </div>
-    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[48vw] text-gray-500">This is computer generated bill</p>
+    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
     </div>
   );
 }
