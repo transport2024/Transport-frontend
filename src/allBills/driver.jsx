@@ -9,13 +9,24 @@ function Driver() {
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
+  const [memo,setMemo]=useState([])
+  const [filterMemo,setFilterMemo]=useState([])
+ 
 
   const fetchData = async () => {
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
+      const result2 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/memo`
+      );
+
+
+     
+    
       setDatas(get(result, "data.message"));
+      setMemo(get(result2, "data.message"));
     } catch (e) {
       console.log(e);
     }
@@ -32,6 +43,13 @@ function Driver() {
       })[0]
     );
 
+setFilterMemo(
+  memo.filter((res)=>{
+    return res._id===filterDatas?.memoId
+   })[0]
+)
+
+
     setInputs({
       consignor: filterDatas?.consignor,
       consignee: filterDatas?.consignee,
@@ -43,33 +61,39 @@ function Driver() {
       invoice: filterDatas?.invoiceno,
       lotno: filterDatas?.lotno,
       prno: filterDatas?.prnoform,
+      gcno:filterMemo?.gcno,
+      date:filterMemo?.date,
+      lorryno:filterMemo?.vehicleno,
+    
     });
-  }, [datas, filterDatas]);
-  
+  }, [datas, filterDatas,memo]);
+ 
+//  console.log(filterMemo,"ll")
+//  console.log(filterDatas,"pp")
+
+
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
     <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
-   
-     
       <div className="absolute flex  flex-col top-[26.5vh] left-[77vw]">
-        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={"ejnrj"} />
+        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={inputs.date} />
         <input
           type="text"
           className="!placeholder:hidden bg-transparent w-[27vw] text-black font-semibold outline-none mt-[-5px] text-[12px]"
           name="gcno"
-          defaultValue={"ppppp"}
+          defaultValue={inputs.gcno}
         />
       </div>
       <div className="absolute top-[29.9vh] left-[21vw] flex flex-col">
         <input
           type="text"
-          defaultValue={"lorryno"}
+          defaultValue={inputs.lorryno}
           className="!outline-none bg-transparent w-[27vw] text-black font-semibold text-[12px]"
         />
         <input
           type="text"
           className="outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
-          defaultValue={"karur"}
+          defaultValue={inputs.from}
         />
         <input
           type="text"
@@ -92,11 +116,11 @@ function Driver() {
         <input
           type="text"
           className="outline-none bg-transparent  text-black font-semibold   text-[12px]"
-          defaultValue={"lhugytdzsd"}
+         
         />
         <input
           type="text"
-          defaultValue={"gstin"}
+
           className="outline-none bg-transparent text-black font-semibold   text-[12px]"
         />
       </div>

@@ -34,12 +34,15 @@ function SideNavbar() {
     if (selectedKey) {
       setCurrent(selectedKey);
     }
+
+    localStorage.setItem("selectedKey",current)
   }, []);
 
+  console.log(current,"kjri")
   // Save the selected key to localStorage when it changes
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/admin");
-  }, [current]);
+  }, []);
 
   return (
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
