@@ -4,41 +4,16 @@ import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
 
-function Conisgnor() {
-  const [datas, setDatas] = useState([]);
+function Conisgnor(props) {
+  const {memo,datas,consignor}=props;
+  console.log(memo,datas,consignor,"pova")
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
-  const [memo,setMemo]=useState([])
   const [filterMemo,setFilterMemo]=useState([])
-  const [consignor,setConsignor]=useState([])
   const [filterConsignor,setfilterConsignor]=useState([])
 
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
-      );
-      const result2 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo`
-      );
-
-      const result3 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignor`
-      );
-     
-     setConsignor(get(result3, "data.message"));
-      setDatas(get(result, "data.message"));
-      setMemo(get(result2, "data.message"));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  
   useEffect(() => {
     setFilterDatas(
       datas.filter((res) => {

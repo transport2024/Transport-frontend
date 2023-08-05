@@ -1,40 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Bill from "../assets/bill.jpg";
-import axios from "axios";
-import { get } from "lodash";
 import { useLocation } from "react-router";
 
-function VehicleCopy() {
-  const [datas, setDatas] = useState([]);
+function VehicleCopy(props) {
+const {memo,datas}=props
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
-  const [memo,setMemo]=useState([])
   const [filterMemo,setFilterMemo]=useState([])
- 
 
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
-      );
-      const result2 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo`
-      );
-
-
-     
-    
-      setDatas(get(result, "data.message"));
-      setMemo(get(result2, "data.message"));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   useEffect(() => {
     setFilterDatas(

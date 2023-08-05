@@ -5,42 +5,16 @@ import { get } from "lodash";
 import { useLocation } from "react-router";
 
 
-function Consignee() {
-  const [datas, setDatas] = useState([]);
+function Consignee(props) {
+  const {memo,datas,consignee}=props
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
-  const [memo,setMemo]=useState([])
+ 
   const [filterMemo,setFilterMemo]=useState([])
-  const [consignor,setConsignor]=useState([])
-  const [filterConsignor,setfilterConsignor]=useState([])
+  const [filterConsignee,setfilterConsignee]=useState([])
 
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
-      );
-      const result2 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo`
-      );
-
-      const result3 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignee`
-      );
-     
-     setConsignor(get(result3, "data.message"));
-      setDatas(get(result, "data.message"));
-      setMemo(get(result2, "data.message"));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  
   useEffect(() => {
     setFilterDatas(
       datas.filter((res) => {
@@ -53,12 +27,12 @@ setFilterMemo(
     return res._id===filterDatas?.memoId
    })[0]
 )
-setfilterConsignor(consignor.filter((res)=>{
+setfilterConsignee(consignee.filter((res)=>{
   return res.name===filterDatas?.consignee
 })[0])
 
     setInputs({
-      consignor: filterDatas?.consignor,
+      consignee: filterDatas?.consignee,
       consignee: filterDatas?.consignee,
       quality: filterDatas?.quality,
       pmark: filterDatas?.pressmark,
@@ -71,13 +45,13 @@ setfilterConsignor(consignor.filter((res)=>{
       gcno:filterMemo?.gcno,
       date:filterMemo?.date,
       lorryno:filterMemo?.vehicleno,
-      gctin:filterConsignor?.gstno
+      gctin:filterConsignee?.gstno
     });
-  }, [datas, filterDatas,memo,consignor]);
+  }, [datas, filterDatas,memo,consignee]);
  
 //  console.log(filterMemo,"ll")
 //  console.log(filterDatas,"pp")
-console.log(filterConsignor)
+
 
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
@@ -105,7 +79,7 @@ console.log(filterConsignor)
         <input
           type="text"
           className="outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
-          defaultValue={inputs.consignor}
+          defaultValue={inputs.consignee}
         />
         <input
           type="text"
