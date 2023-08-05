@@ -45,7 +45,7 @@ setfilterConsignee(consignee.filter((res)=>{
       gcno:filterMemo?.gcno,
       date:filterMemo?.date,
       lorryno:filterMemo?.vehicleno,
-      gctin:filterConsignee?.gstno
+      gctin:filterConsignee?.gstno, accountpaid: filterDatas?.accountpaid,
     });
   }, [datas, filterDatas,memo,consignee]);
  
@@ -151,6 +151,19 @@ setfilterConsignee(consignee.filter((res)=>{
           className="!placeholder:hidden bg-transparent outline-none  text-[12px]"
           defaultValue={"lerhvhjerh"}
         />
+      </div>
+      <div
+        className={`absolute top-[63.3vh] text-[11px] font-semibold ${
+          inputs.accountpaid === "To pay" || inputs.accountpaid === "paid"? "right-[10vw]" : "right-[36vw]"
+        } leading-[15px] tracking-wider`}
+      >
+        {inputs.accountpaid === "To pay" || inputs.accountpaid === "paid"?  <p className="w-[30vw]">
+          please pay lorry freight in amount favour of jaibalaji roadways
+          account
+        </p>
+        :<p>{inputs.accountpaid}</p>}
+      
+        {/* <input type="text"  className="!placeholder:hidden w-[20vw] bg-transparent outline-none  text-[12px]"/> */}
       </div>
     <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
     </div>

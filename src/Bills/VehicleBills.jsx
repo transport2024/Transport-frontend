@@ -61,7 +61,7 @@ function VehicleBills() {
         if (printRef.current) {
           window.print();
         }
-      }, 3000);
+      }, 1000);
     }
     return () => {
       printRef.current = false;

@@ -5,15 +5,14 @@ import { get } from "lodash";
 import { useLocation } from "react-router";
 
 function Conisgnor(props) {
-  const {memo,datas,consignor}=props;
-  console.log(memo,datas,consignor,"pova")
+  const { memo, datas, consignor } = props;
+  console.log(memo, datas, consignor, "pova");
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
-  const [filterMemo,setFilterMemo]=useState([])
-  const [filterConsignor,setfilterConsignor]=useState([])
+  const [filterMemo, setFilterMemo] = useState([]);
+  const [filterConsignor, setfilterConsignor] = useState([]);
 
-  
   useEffect(() => {
     setFilterDatas(
       datas.filter((res) => {
@@ -21,14 +20,16 @@ function Conisgnor(props) {
       })[0]
     );
 
-setFilterMemo(
-  memo.filter((res)=>{
-    return res._id===filterDatas?.memoId
-   })[0]
-)
-setfilterConsignor(consignor.filter((res)=>{
-  return res.name===filterDatas?.consignor
-})[0])
+    setFilterMemo(
+      memo.filter((res) => {
+        return res._id === filterDatas?.memoId;
+      })[0]
+    );
+    setfilterConsignor(
+      consignor.filter((res) => {
+        return res.name === filterDatas?.consignor;
+      })[0]
+    );
 
     setInputs({
       consignor: filterDatas?.consignor,
@@ -41,22 +42,27 @@ setfilterConsignor(consignor.filter((res)=>{
       invoice: filterDatas?.invoiceno,
       lotno: filterDatas?.lotno,
       prno: filterDatas?.prnoform,
-      gcno:filterMemo?.gcno,
-      date:filterMemo?.date,
-      lorryno:filterMemo?.vehicleno,
-      gctin:filterConsignor?.gstno
+      gcno: filterMemo?.gcno,
+      date: filterMemo?.date,
+      lorryno: filterMemo?.vehicleno,
+      gctin: filterConsignor?.gstno,
+      accountpaid: filterDatas?.accountpaid,
     });
-  }, [datas, filterDatas,memo,consignor]);
- 
-//  console.log(filterMemo,"ll")
-//  console.log(filterDatas,"pp")
-console.log(filterConsignor)
+  }, [datas, filterDatas, memo, consignor]);
+
+  console.log(filterDatas, "ll");
+  //  console.log(filterDatas,"pp")
+  console.log(inputs.accountpaid, "ejrier");
 
   return (
-    <div className='w-[100vw] flex items-center justify-center relative'>
-    <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' /> 
+    <div className="w-[100vw] flex items-center justify-center relative">
+      <img src={Bill} className="!w-[90vw] !h-[100vh]" alt="bill" />
       <div className="absolute flex  flex-col top-[26.5vh] left-[77vw]">
-        <input type="text" className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]" defaultValue={inputs.date} />
+        <input
+          type="text"
+          className="!outline-none bg-transparent w-[27vw] text-black font-semibold  text-[12px]"
+          defaultValue={inputs.date}
+        />
         <input
           type="text"
           className="!placeholder:hidden bg-transparent w-[27vw] text-black font-semibold outline-none mt-[-5px] text-[12px]"
@@ -144,14 +150,33 @@ console.log(filterConsignor)
       </div>
 
       <div className="absolute flex  top-[50vh] gap-[20px] !left-[66vw]">
-        <input type="text" className="!outline-none w-[105px] text-[12px] bg-transparent" defaultValue={"jhbevhr"}/>
+        <input
+          type="text"
+          className="!outline-none w-[105px] text-[12px] bg-transparent"
+          defaultValue={"jhbevhr"}
+        />
         <input
           type="text"
           className="!placeholder:hidden bg-transparent outline-none  text-[12px]"
           defaultValue={"lerhvhjerh"}
         />
       </div>
-    <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
+      <div
+        className={`absolute  text-[11px] font-semibold ${
+          inputs.accountpaid === "To pay" || inputs.accountpaid === "paid"? "right-[10vw] top-[63.3vh]" : "right-[36.4vw] top-[63.6vh]"
+        } leading-[15px] tracking-wider`}
+      >
+        {inputs.accountpaid === "To pay" || inputs.accountpaid === "paid"?  <p className="w-[30vw]">
+          please pay lorry freight in amount favour of jaibalaji roadways
+          account
+        </p>
+        :<p>{inputs.accountpaid}</p>}
+      
+        {/* <input type="text"  className="!placeholder:hidden w-[20vw] bg-transparent outline-none  text-[12px]"/> */}
+      </div>
+      <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">
+        This is computer generated bill
+      </p>
     </div>
   );
 }
