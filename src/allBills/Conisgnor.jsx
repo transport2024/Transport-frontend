@@ -188,6 +188,7 @@ function Conisgnor(props) {
         fontFamily: "highgate-variable",
         zIndex: 999,
         padding: "10px",
+        color:"black"
       }}
     >
       <div className="flex w-[100%]  justify-end" style={{ gap: "20vw" }}>
@@ -276,7 +277,7 @@ function Conisgnor(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.from}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -287,7 +288,7 @@ function Conisgnor(props) {
               type="text"
               defaultValue={inputs.consignor}
               style={{ width: "35vw", borderColor: "red" }}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -299,7 +300,7 @@ function Conisgnor(props) {
               type="text"
               defaultValue={inputs.consignee}
               style={{ width: "35vw", borderColor: "red" }}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
         </form>
@@ -312,7 +313,7 @@ function Conisgnor(props) {
               type="text"
               style={{ width: "35vw", borderColor: "red" }}
               defaultValue={inputs.to}
-              className="outline-none ml-2 pl-10  border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -323,7 +324,7 @@ function Conisgnor(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.gctin}
-              className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+              className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
           <label className="flex">
@@ -335,7 +336,7 @@ function Conisgnor(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.gctin}
-              className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+              className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
         </form>

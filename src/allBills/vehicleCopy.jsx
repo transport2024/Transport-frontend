@@ -163,7 +163,7 @@ setFilterMemo(
     //   </div>
     // <p className="absolute bottom-[8vh] text-[10px] font-bold left-[45vw] text-gray-500">This is computer generated bill</p>
     // </div>
-    <div className="!w-[97vw] !h-[100vh]" style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,padding:"10px"}}>
+    <div className="!w-[97vw] !h-[100vh]" style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,padding:"10px",color:"black"}}>
     <div className="flex w-[100%]  justify-end" style={{gap:"20vw"}}>
       <div className="uppercase underline  tracking-wider text-red-500 font-semibold" style={{fontSize:"15px"}}>
         subject to <span className="text-black">namakkal</span> jurisdication
@@ -234,7 +234,7 @@ setFilterMemo(
           style={{width:"35vw",borderColor:"red"}}
             type="text"
             defaultValue={inputs.from}
-            className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+            className="outline-none ml-2 !bg-transparent pl-10 border-b-2 border-dashed "
           />
         </label>
         <label className="flex">
@@ -243,7 +243,7 @@ setFilterMemo(
             type="text"
             defaultValue={inputs.consignor}
             style={{width:"35vw",borderColor:"red"}}
-            className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+            className="outline-none ml-2 !bg-transparent pl-10 border-b-2 border-dashed "
           />
         </label>
         <label className="flex">
@@ -252,7 +252,7 @@ setFilterMemo(
             type="text"
 defaultValue={inputs.consignee}
             style={{width:"35vw",borderColor:"red"}}
-            className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+            className="outline-none ml-2 !bg-transparent pl-10 border-b-2 border-dashed "
           />
         </label>
       </form>
@@ -263,7 +263,7 @@ defaultValue={inputs.consignee}
             type="text"
             style={{width:"35vw",borderColor:"red"}}
             defaultValue={inputs.to}
-            className="outline-none ml-2 pl-10  border-b-2 border-dashed "
+            className="outline-none ml-2 !bg-transparent pl-10  border-b-2 border-dashed "
           />
         </label>
         <label className="flex">
@@ -272,7 +272,7 @@ defaultValue={inputs.consignee}
           style={{width:"35vw",borderColor:"red"}}
             type="text"
            
-            className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+            className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
           />
         </label>
         <label className="flex">
@@ -281,7 +281,7 @@ defaultValue={inputs.consignee}
           style={{width:"35vw",borderColor:"red"}}
             type="text"
            
-            className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+            className="outline-none border-b-2 pl-10 !bg-transparent ml-2 border-dashed"
           />
         </label>
       </form>

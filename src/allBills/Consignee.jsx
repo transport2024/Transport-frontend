@@ -64,6 +64,7 @@ function Consignee(props) {
         fontFamily: "highgate-variable",
         zIndex: 999,
         padding: "10px",
+        color:"black"
       }}
     >
       <div className="flex w-[100%]  justify-end" style={{ gap: "20vw" }}>
@@ -152,7 +153,7 @@ function Consignee(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.from}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 !bg-transparent pl-10 border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -163,7 +164,7 @@ function Consignee(props) {
               type="text"
               defaultValue={inputs.consignor}
               style={{ width: "35vw", borderColor: "red" }}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -175,7 +176,7 @@ function Consignee(props) {
               type="text"
               defaultValue={inputs.consignee}
               style={{ width: "35vw", borderColor: "red" }}
-              className="outline-none ml-2 pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
         </form>
@@ -188,7 +189,7 @@ function Consignee(props) {
               type="text"
               style={{ width: "35vw", borderColor: "red" }}
               defaultValue={inputs.to}
-              className="outline-none ml-2 pl-10  border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -199,19 +200,19 @@ function Consignee(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.gctin}
-              className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+              className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
           <label className="flex">
             <span className="text-red-500 ml-2 font-bold">
-              {" "}
+             
               GSTIN&nbsp;&nbsp;&nbsp;&nbsp;:
             </span>
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.gctin}
-              className="outline-none border-b-2 pl-10 ml-2 border-dashed"
+              className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
         </form>
@@ -220,7 +221,7 @@ function Consignee(props) {
         <table className="border-2" style={{ width: "95vw", fontSize: "13px" }}>
           <thead>
             <tr className="border-b-2  border-slate-200 font-bold">
-              <td className="border-r-2 w-[40vw] text-center border-slate-200 text-red-500">
+              <td className="border-r-2 w-[40vw]  text-center border-slate-200 text-red-500">
                 Description of Goods
               </td>
               <td className="border-r-2 w-[10vw] text-center border-slate-200 text-red-500">
