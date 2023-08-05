@@ -92,7 +92,7 @@ function VehicleBills() {
     //   </div>
     // </div>
     <div className="!w-[97vw] !h-[100vh] " style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,color:"black"}}>
-    <div className="flex w-[100%]  justify-end" style={{gap:"28vw"}}>
+    <div className="flex w-[100%]  justify-end" style={{gap:"20vw"}}>
       <div className="uppercase underline  tracking-wider text-red-500 font-semibold" style={{fontSize:"15px"}}>
         subject to <span className="text-black">namakkal</span> jurisdication
       </div>

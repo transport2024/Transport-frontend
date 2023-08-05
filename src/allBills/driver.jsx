@@ -42,8 +42,6 @@ function Driver(props) {
     });
   }, [datas, filterDatas, memo, filterMemo]);
 
- 
-  
 
   return (
     // <div className='w-[100vw] flex items-center justify-center relative'>
@@ -351,7 +349,7 @@ function Driver(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-                {filterDatas.memomethod === "No"
+                {filterDatas?.memomethod === "No"
                   ? "As per contract"
                   : inputs.bales * "500"}
               </td>
@@ -359,7 +357,7 @@ function Driver(props) {
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
                 rowSpan={3}
               >
-                {filterDatas.memomethod === "No"
+                {filterDatas?.memomethod === "No"
                   ? "As per contract"
                   : inputs.bales * 500}
               </td>

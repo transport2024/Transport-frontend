@@ -317,13 +317,17 @@ defaultValue={inputs.consignee}
               className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
               rowSpan={3}
             >
-             {inputs.bales}*500
+             {filterDatas?.memomethod === "No"
+                  ? "As per contract"
+                  : inputs.bales * "500"}
             </td>
             <td
               className="!w-[10vw] text-center  border-slate-200 border-b-2"
               rowSpan={3}
             >
-              {inputs.bales*500}
+               {filterDatas?.memomethod === "No"
+                  ? "As per contract"
+                  : inputs.bales * 500}
             </td>
           </tr>
           <tr>
