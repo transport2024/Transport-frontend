@@ -43,7 +43,7 @@ function Driver(props) {
   }, [datas, filterDatas, memo, filterMemo]);
 
  
-  console.log(filterDatas, "pp");
+  
 
   return (
     // <div className='w-[100vw] flex items-center justify-center relative'>
