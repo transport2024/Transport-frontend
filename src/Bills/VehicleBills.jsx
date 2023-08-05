@@ -61,11 +61,13 @@ function VehicleBills() {
         if (printRef.current) {
           window.print();
         }
-      });
+      }, 3000);
     }
+    return () => {
+      printRef.current = false;
+    };
   }, [loading]);
 
-  
 
   return (
     <div className='w-[100vw] flex items-center justify-center relative'>
