@@ -102,7 +102,7 @@ function VehicleBills() {
     </div>
     <div className="pl-5 flex gap-10 items-center" style={{marginTop:"-20px"}}>
       <img src={image} width={90} height={50} />
-      <h1 className="uppercase text-5xl tracking-wider text-green-700 pt-6">
+      <h1 className="uppercase text-5xl font-extrabold text-green-700 pt-6">
         jai balaji transport service
       </h1>
     </div>
