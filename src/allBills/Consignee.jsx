@@ -49,7 +49,7 @@ setfilterConsignee(consignee.filter((res)=>{
       gctin:filterConsignee?.gstno, 
       accountpaid: filterDatas?.accountpaid,
     });
-  }, [datas, filterDatas,memo,consignee]);
+  }, [datas, filterDatas,memo,consignee,filterConsignee,filterMemo]);
  
 //  console.log(filterMemo,"ll")
 //  console.log(filterDatas,"pp")

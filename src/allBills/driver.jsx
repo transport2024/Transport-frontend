@@ -39,7 +39,7 @@ function Driver(props) {
       lorryno: filterMemo?.vehicleno,
       accountpaid: filterDatas?.accountpaid,
     });
-  }, [datas, filterDatas, memo]);
+  }, [datas, filterDatas, memo,filterMemo]);
 
   //  console.log(filterMemo,"ll")
   //  console.log(filterDatas,"pp")

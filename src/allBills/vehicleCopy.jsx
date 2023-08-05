@@ -42,7 +42,7 @@ setFilterMemo(
       accountpaid: filterDatas?.accountpaid,
     
     });
-  }, [datas, filterDatas,memo]);
+  }, [datas, filterDatas,memo,filterMemo]);
  
 //  console.log(filterMemo,"ll")
 //  console.log(filterDatas,"pp")
