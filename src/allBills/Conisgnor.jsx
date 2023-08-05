@@ -48,7 +48,7 @@ function Conisgnor(props) {
       gctin: filterConsignor?.gstno,
       accountpaid: filterDatas?.accountpaid,
     });
-  }, [datas, filterDatas, memo, consignor]);
+  }, [datas, filterDatas, memo, consignor,filterConsignor,filterMemo]);
 
   console.log(filterDatas, "ll");
   //  console.log(filterDatas,"pp")
