@@ -365,7 +365,7 @@ function Consignee(props) {
         >
           <p>Sign Of owner or lorry driver</p>
           <p className="flex flex-col" style={{ color: "gray" }}>
-            <span className="pl-10 ">it is Computer generated bill</span>
+            <span className="pl-10 ">This is Computer Generated No Signature Required </span>
             <span>power by R&J MERN-Developer's Cell-9944088629</span>
           </p>
           <p>
