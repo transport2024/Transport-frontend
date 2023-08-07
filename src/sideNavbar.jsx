@@ -24,24 +24,31 @@ function SideNavbar() {
     }
   };
 
+
   const onClick = (e) => {
     setCurrent(e.key);
   };
 
-  // Load the selected key from localStorage when the component mounts
+  
+
   useEffect(() => {
     const selectedKey = localStorage.getItem("selectedKey");
-    if (selectedKey) {
+    if (selectedKey !== null) {
       setCurrent(selectedKey);
     }
-
-    localStorage.setItem("selectedKey",current)
+    
   }, []);
 
-  console.log(current,"kjri")
+ 
+  useEffect(() => {
+      localStorage.setItem("selectedKey",current);
+  }, [current,location,localStorage.getItem("selectedKey")]);
+
+ 
   // Save the selected key to localStorage when it changes
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/admin");
+    
   }, []);
 
   return (

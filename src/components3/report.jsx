@@ -43,6 +43,7 @@ function Report() {
       const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
+      console.log(result,"pooo")
       setReport(get(result, "data.message"));
       setMemoDetails(get(result2, "data.message"));
     } catch (err) {
