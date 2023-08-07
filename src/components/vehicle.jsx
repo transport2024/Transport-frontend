@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState,useRef } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -14,7 +14,7 @@ import {
   Skeleton,
 } from "antd";
 import axios from "axios";
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -25,15 +25,15 @@ function Vehicle() {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [updateId, setUpdateId] = useState("");
-	const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
-  const [loading,setLoading]=useState(false)
-  
-
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
       );
@@ -41,23 +41,55 @@ function Vehicle() {
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [searched]);
+  console.log(status);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
-        await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, value);
-        fetchData();
-        notification.success({
-          message: "Vehicle Added successfully",
-        });
-        setOpen(false);
+        setData(value);
+        if (
+          Vehicle.filter((res) => {
+            return res.pan === value.pan;
+          }).length >= 10
+        ) {
+          Modal.warning({
+            title: `You use this pan no already 10 times...this is ${
+              Vehicle.filter((res) => {
+                return res.pan === value.pan;
+              }).length + 1
+            }th time...`,
+            content: "if you really wanna use this",
+            footer: [
+              <div className="flex !gap-10 items-end justify-end">
+                <Button
+                  key="confirm"
+                  type="primary"
+                  onClick={() => Modal.destroyAll()}
+                >
+                  no
+                </Button>
+                <Button
+                  key="confirm"
+                  type="primary"
+                  onClick={handleClickButton}
+                >
+                  Yes
+                </Button>
+              </div>,
+            ],
+          });
+        } else {
+          await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, data);
+          fetchData();
+          notification.success({
+            message: "Vehicle Added successfully",
+          });
+          setOpen(false);
+        }
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -65,7 +97,10 @@ function Vehicle() {
       }
     } else {
       try {
-        await axios.put(`${process.env.REACT_APP_URL}/api/vehicle/${updateId}`, value);
+        await axios.put(
+          `${process.env.REACT_APP_URL}/api/vehicle/${updateId}`,
+          value
+        );
         fetchData();
         notification.success({
           message: "Vehicle updated successfully",
@@ -81,6 +116,27 @@ function Vehicle() {
     }
   };
 
+  const handleClickButton = async () => {
+    try {
+      await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, data);
+      fetchData();
+      notification.success({
+        message: "Vehicle Added successfully",
+      });
+      setOpen(false);
+      Modal.destroyAll()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    if (status === true) {
+      handleSubmit();
+    }
+  }, [searched]);
+
   const handleEdit = (value) => {
     form.setFieldsValue(value);
     setUpdateId(value._id);
@@ -89,7 +145,9 @@ function Vehicle() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_URL}/api/vehicle/${value._id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_URL}/api/vehicle/${value._id}`
+      );
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -116,13 +174,12 @@ function Vehicle() {
       );
     });
 
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: "Web Users",
+    sheet: "Web Users",
+  });
 
-	const { onDownload } = useDownloadExcel({
-		currentTableRef: tableRef.current,
-		filename: "Web Users",
-		sheet: "Web Users",
-	  });
-	
   const columns = [
     {
       title: "DocEntry",
@@ -240,9 +297,13 @@ function Vehicle() {
           </div>
         </div>
         <Skeleton loading={loading}>
-        <Table columns={columns} dataSource={Vehicle} ref={tableRef} pagination={{pageSize:5}} />
+          <Table
+            columns={columns}
+            dataSource={Vehicle}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
         </Skeleton>
-       
       </div>
       <Drawer
         open={open}
@@ -353,8 +414,8 @@ function Vehicle() {
           >
             <Input type="text" size="large" />
           </Form.Item>
-          <div className="flex items-end gap-2 justify-end">       
-            <Form.Item >
+          <div className="flex items-end gap-2 justify-end">
+            <Form.Item>
               <Button
                 htmlType="submit"
                 className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
@@ -363,7 +424,7 @@ function Vehicle() {
                 Clear
               </Button>
             </Form.Item>
-            <Form.Item >
+            <Form.Item>
               <Button
                 htmlType="submit"
                 className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
