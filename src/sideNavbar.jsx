@@ -51,6 +51,8 @@ function SideNavbar() {
     
   }, []);
 
+ 
+
   return (
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
       <div className="w-[14vw] h-screen shadow  fixed bg-[--primary-color]">
