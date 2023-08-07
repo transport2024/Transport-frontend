@@ -255,10 +255,10 @@ defaultValue={inputs.consignee}
             </td>
             <td colSpan={3} rowSpan={3} className="border-b-2">
               <p className="text-green-700">Our Bank details Given below:</p>
-              <p className="text-green-700">Bank Name:Tamil Nadu Mercanitle bank</p>
-              <p className="text-green-700">Branch:Namakkal</p>
-              <p className="text-green-700">A/C. No:129700050900245</p>
-              <p className="text-green-700">Ifsc Code:TMBL0000129</p>
+              <p className="text-green-700">Bank Name:TamilNad Mercanitle bank</p>
+              <p className="text-green-700">Branch:Koolipatti</p>
+              <p className="text-green-700">A/C. No:265539152525000</p>
+              <p className="text-green-700">Ifsc Code:TMBL0000265</p>
             </td>
           </tr>
           <tr>
@@ -275,7 +275,8 @@ defaultValue={inputs.consignee}
             <td className="!w-[40vw] border-r-2 text-red-500   border-slate-200">
               <span className="text-red-500 ">Note :G.C.Note to Subject to Condition Overleaf</span>
             </td>
-            <td className="text-red-500 !w-[40vw] flex flex-col"><p>PAN No:BJTPS6814B</p><p>Eway Bill reg No:33BJTPS6814B1Z1</p></td>
+            <td className="text-red-500 !w-[40vw] flex flex-col"><p>PAN No: FWKPS0210P </p>
+            <p>Eway Bill reg No:33FWKPS0210P2Z8</p></td>
           </tr>
         </tbody>
       </table>
@@ -283,7 +284,7 @@ defaultValue={inputs.consignee}
      <div style={{paddingTop:"5px"}}>
      <div className="flex gap-[20vw] w-[97vw] items-end justify-end pr-20">
       <p className="text-red-500 font-bold">Consignor Should be ensure their goods</p>
-      <p className="text-black font-bold"> For Jai Balaji RoadWays</p>
+      <p className="text-black font-bold"> For Jai Balaji Transport Service </p>
     </div>
     <div className="flex w-[97vw] justify-between font-bold text-red-500" style={{paddingTop:"25px"}}>
       <p>Sign Of owner or lorry driver</p>
