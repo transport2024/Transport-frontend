@@ -111,7 +111,7 @@ function Conisgnor(props) {
           <span className="text-red-500">B.O.&nbsp;</span>
           :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed
           road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
-          <span className="text-red-500">cell&nbsp;9152527000</span>
+          <span className="text-red-500"> Cell&nbsp;9152527000 </span>
         </div>
       </div>
       <div className="font-bold flex justify-center " style={{ gap: "20vw" }}>

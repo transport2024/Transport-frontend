@@ -82,13 +82,13 @@ setFilterMemo(
         <span className="pl-9">
           &nbsp;ranga reddy
           dist.-509325,&nbsp;hyderabad,&nbsp;telangana.&nbsp;
-          <span>cell&nbsp;9152526000</span>{" "}
+          <span>Cell&nbsp;9152526000</span>{" "}
         </span>
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>
         :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
-        <span className="text-red-500">cell&nbsp;9152527000</span>
+        <span className="text-red-500">Cell&nbsp;9152527000</span>
       </div>
     </div>
     <div className="font-bold flex justify-center " style={{gap:"20vw"}}>
