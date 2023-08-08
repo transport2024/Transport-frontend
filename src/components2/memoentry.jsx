@@ -110,29 +110,31 @@ function Memo() {
   };
 
   const handleDelete = async (value) => {
-    try {
-      if (memoDetails.filter((res) => {
-        console.log("triggeger");
-        return res.memoId===value._id
-      })[0].memoId === value._id) {
-        Modal.warning({
-          title: "This Memo entry Link With Memo Details",
-          content: "if you really wanna delete this.. delete Memo details first",
+
+    if (memoDetails.filter((res) => {
+      return res?.memoId===value._id
+    })[0]?.memoId === value._id) {
+      Modal.warning({
+        title: "This Memo entry Link With Memo Details",
+        content: "if you really wanna delete this.. delete Memo details first",
+      });
+    }else{
+      try {
+     
+        await axios.delete(`${process.env.REACT_APP_URL}/api/memo/${value._id}`);
+        fetchData();
+        notification.success({
+          message: "Deleted Successfully",
         });
-      } else  {
-        console.log("trifere")
-      await axios.delete(`${process.env.REACT_APP_URL}/api/memo/${value._id}`);
-      fetchData();
-      notification.success({
-        message: "Deleted Successfully",
-      });
+        
+      } catch (err) {
+        notification.error({
+          message: "Something Went Wrong",
+        });
       }
-    } catch (err) {
-      notification.error({
-        message: "Something Went Wrong",
-      });
+    };
     }
-  };
+   
 
   const handleClear = () => {
     form.setFieldsValue([]);

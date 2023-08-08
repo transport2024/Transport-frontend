@@ -75,7 +75,7 @@ function Consignee(props) {
           subject to <span className="text-black">namakkal</span> jurisdication
         </div>
         <div className="uppercase underline tracking-wider text-red-500 font-semibold">
-          consignor copy
+          Consignee copy
         </div>
       </div>
       <div
@@ -250,13 +250,13 @@ function Consignee(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-             {inputs.bales}*500
+          {filterDatas?.lramount/inputs.bales}*{inputs.bales}
               </td>
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
                 rowSpan={3}
               >
-               {inputs.bales*500}
+              {filterDatas?.lramount/inputs?.bales*inputs?.bales}
               </td>
             </tr>
             <tr>

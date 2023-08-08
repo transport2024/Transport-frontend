@@ -56,7 +56,7 @@ setFilterMemo(
         subject to <span className="text-black">namakkal</span> jurisdication
       </div>
       <div className="uppercase underline tracking-wider text-red-500 font-semibold">
-        consignor copy
+        Account copy
       </div>
     </div>
     <div
@@ -226,17 +226,17 @@ setFilterMemo(
               className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
               rowSpan={3}
             >
-              {filterDatas?.memomethod === "No"
-                ? "As per contract"
-                : inputs.bales * "500"}
+               {filterDatas?.memomethod === "No"
+                  ? "As per contract"
+                  :   filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
             </td>
             <td
               className="!w-[10vw] text-center  border-slate-200 border-b-2"
               rowSpan={3}
             >
               {filterDatas?.memomethod === "No"
-                ? "As per contract"
-                : inputs.bales * 500}
+                  ? "As per contract"
+                  : filterDatas?.lramount/inputs?.bales*inputs?.bales}
             </td>
           </tr>
           <tr>

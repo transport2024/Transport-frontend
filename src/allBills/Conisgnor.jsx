@@ -76,7 +76,7 @@ function Conisgnor(props) {
           subject to <span className="text-black">namakkal</span> jurisdication
         </div>
         <div className="uppercase underline tracking-wider text-red-500 font-semibold">
-          consignor copy
+          Consignor copy
         </div>
       </div>
       <div
@@ -170,7 +170,7 @@ function Conisgnor(props) {
           </label>
           <label className="flex">
             <span className="text-red-500 font-bold ">
-              {" "}
+              
               Consignee&nbsp;&nbsp;:
             </span>
             <input

@@ -38,14 +38,11 @@ function Report() {
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo`
-      );
-      const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
-      console.log(result,"pooo")
+     
       setReport(get(result, "data.message"));
-      setMemoDetails(get(result2, "data.message"));
+      
     } catch (err) {
       console.log(err);
     }
@@ -128,8 +125,8 @@ useEffect(()=>{
     },
     {
       title: "Pan No",
-      dataIndex: "panno",
-      key: "panno",
+      dataIndex: "pan",
+      key: "pan",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
@@ -170,8 +167,8 @@ useEffect(()=>{
     },
     {
       title: "Lr No",
-      dataIndex: "lrno",
-      key: "lrno",
+      dataIndex: "gcno",
+      key: "gcno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {

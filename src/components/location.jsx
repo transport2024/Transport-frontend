@@ -46,6 +46,8 @@ function Location() {
     fetchData();
   }, [searched]);
 
+  console.log(process.env.REACT_APP_URL)
+
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {

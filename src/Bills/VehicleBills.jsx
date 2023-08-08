@@ -114,7 +114,7 @@ function VehicleBills() {
         002.[T.N].&nbsp;
         <span className="text-red-500">cell&nbsp;9152528000</span>{" "}
       </div>
-      <div className="capitalize  pl-5 font-semibold text-[14px] tracking-wider pl-">
+      <div className="capitalize  pl-5 font semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>:&nbsp;shop no
         1,:&nbsp;h.No:&nbsp;5-29/2,&nbsp;near railway bridge,&nbsp;NH-44
         thondupally[V],&nbsp;shamshabad[m],
@@ -127,8 +127,8 @@ function VehicleBills() {
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>
-        :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
-        <span className="text-red-500">cell&nbsp;9152527000</span>
+        :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010.
+        <span className="text-red-500">&nbsp;Cell&nbsp;9152527000</span>
       </div>
     </div>
     <div className="font-bold flex justify-center " style={{gap:"20vw"}}>
@@ -137,10 +137,10 @@ function VehicleBills() {
         </div>
         <div className="flex flex-col pt-8">
           <div>
-            <span className="text-red-500">Date &nbsp;&nbsp;:</span>{date}
+            <span className="text-red-500">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</span>{date}
           </div>
           <div>
-            <span className="text-red-500">GC No &nbsp;&nbsp;:</span>
+            <span className="text-red-500">GC No &nbsp;&nbsp;:&nbsp;&nbsp;</span>
            {gcNo}
           </div>
         </div>
@@ -239,13 +239,13 @@ function VehicleBills() {
               className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
               rowSpan={3}
             >
-              903*12
+             
             </td>
             <td
               className="!w-[10vw] text-center  border-slate-200 border-b-2"
               rowSpan={3}
             >
-              98388
+             
             </td>
           </tr>
           <tr>
@@ -311,10 +311,11 @@ function VehicleBills() {
     </div>
     <div className="flex w-[97vw] justify-between font-bold text-red-500" style={{paddingTop:"25px"}}>
       <p>Sign Of owner or lorry driver</p>
-      <p className="flex flex-col" style={{color:"gray"}}>
-        <span className="pl-10 ">it is Computer generated bill</span><span >power by R&J MERN-Developer's Cell-9944088629</span></p>
-      <p>
-        <span>Authorised Signature</span>
+      <p className="flex flex-col" >
+       <span >power by R&J MERN-Developer's Cell-9944088629</span></p>
+      <p className="flex flex-col">
+      <span style={{color:"gray"}}>It is Computer generated bill</span>
+        <span >Authorised Signature</span>
       </p>
     </div>
      </div>

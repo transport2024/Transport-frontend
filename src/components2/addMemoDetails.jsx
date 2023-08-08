@@ -31,7 +31,8 @@ function AddMemoDetails() {
   const [consignee, setConsignee] = useState([]);
   const [broker, setBroker] = useState([]);
   const [searched, setSearch] = useState([]);
-  const [updateId, setUpdateId] = useState([]);
+  const [updateId, setUpdateId] = useState("");
+  const [vehicle,setVehicle]=useState([])
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -53,12 +54,18 @@ function AddMemoDetails() {
       const result6 = await axios.get(
         `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
       );
+
+      const result7 = await axios.get(
+        `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
+      );
+      
       setBroker(get(result6, "data.message"));
       setConsignor(get(result5, "data.message"));
       setConsignee(get(result4, "data.message"));
       setMemoDetails(get(result, "data.message"));
       setDatas(get(result2, "data.message"));
       setLocation(get(result3, "data.message"));
+      setVehicle(get(result7,"data.message"));
     } catch (err) {
       console.log(err);
     } finally {
@@ -75,6 +82,11 @@ function AddMemoDetails() {
     setOpen(true);
     form.setFieldsValue(id);
   };
+  
+
+  console.log(vehicle.filter(res=>{
+    return memoDetails[0].vehicleno===res.vehicleno
+    })[0]?.rcname)
 
   const handleFinish = async (val) => {
     if (updateId ==="") {
@@ -99,6 +111,20 @@ function AddMemoDetails() {
           quality: val.quality,
           pressmark: val.pressmark,
           memoId: id,
+          date:memoDetails[0]?.date,
+          drivername:memoDetails[0]?.drivername,
+          driverphone:memoDetails[0]?.driverphone,
+          driverwhatsappno:memoDetails[0]?.driverwhatsappno,
+          gcno:memoDetails[0]?.gcno,
+          vehicleno:memoDetails[0]?.vehicleno,
+          pan:vehicle.filter(res=>{
+            return memoDetails[0].vehicleno===res.vehicleno
+            })[0]?.pan,
+            rcname:vehicle.filter(res=>{
+              return memoDetails[0].vehicleno===res.vehicleno
+              })[0]?.rcname
+
+
         };
 
         await axios.post(
@@ -138,6 +164,18 @@ function AddMemoDetails() {
           quality: val.quality,
           pressmark: val.pressmark,
           memoId: id,
+          date:memoDetails[0]?.date,
+          drivername:memoDetails[0]?.drivername,
+          driverphone:memoDetails[0]?.driverphone,
+          driverwhatsappno:memoDetails[0]?.driverwhatsappno,
+          gcno:memoDetails[0]?.gcno,
+          vehicleno:memoDetails[0]?.vehicleno,
+          pan:vehicle.filter(res=>{
+            return memoDetails[0].vehicleno===res.vehicleno
+            })[0]?.pan,
+            rcname:vehicle.filter(res=>{
+              return memoDetails[0].vehicleno===res.vehicleno
+              })[0]?.rcname
         };
         await axios.put(`${process.env.REACT_APP_URL}/api/memodetails/${updateId}`, formData);
         setUpdateId("")
@@ -155,6 +193,8 @@ function AddMemoDetails() {
     }
     console.log("click")
   };
+
+  console.log(datas,"llll")
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0]);
@@ -785,7 +825,7 @@ function AddMemoDetails() {
                   htmlType="submit"
                   className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
                 >
-                  {updateId!==""?"Update":"Save"}
+                  {updateId===""?"Save":"Update"}
                 </Button>
               </Form.Item>
             </div>

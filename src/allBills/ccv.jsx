@@ -57,8 +57,9 @@ function Ccv() {
     <div>
       <Conisgnor memo={memo} consignor={consignor} datas={datas} />
       <Consignee memo={memo} consignee={consignee} datas={datas} />
-      <VehicleCopy memo={memo} datas={datas} />
       <Driver memo={memo} datas={datas} />
+      <VehicleCopy memo={memo} datas={datas} />
+     
     </div>
   );
 }
