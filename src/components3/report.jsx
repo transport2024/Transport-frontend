@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState,useRef } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
   Space,
@@ -13,7 +13,7 @@ import {
   Drawer,
 } from "antd";
 import axios from "axios";
-import { get, isEmpty,flattenDeep } from "lodash";
+import { get, isEmpty, flattenDeep } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -25,24 +25,22 @@ function Report() {
   const [report, setReport] = useState([]);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-	const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
-  const {RangePicker}=DatePicker;
-  const dateFormat = 'YYYY-MM-DD';
-  const [userDates,setUserDate]=useState("")
-  const [filteredDatas,setFilterDatas]=useState([])
-  const [memoDetails,setMemoDetails]=useState([]);
-  const [data,setData]=useState([])
-
+  const { RangePicker } = DatePicker;
+  const dateFormat = "YYYY-MM-DD";
+  const [userDates, setUserDate] = useState("");
+  const [filteredDatas, setFilterDatas] = useState([]);
+  const [memoDetails, setMemoDetails] = useState([]);
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
-     
+
       setReport(get(result, "data.message"));
-      
     } catch (err) {
       console.log(err);
     }
@@ -52,63 +50,60 @@ function Report() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setData(
+      report.map((data) => {
+        return memoDetails.filter((res) => {
+          return data._id === res.memoId;
+        });
+      })
+    );
 
-useEffect(()=>{
+    setFilterDatas(
+      report.filter((res) => {
+        return (
+          searched.includes(res.consignor) ||
+          searched.includes(res.consignee) ||
+          searched.includes(res.vehicleno)
+        );
+      })
+    );
+  }, [report, userDates,searched]);
 
-  setData(report.map(data=>{
-    return memoDetails.filter(res=>{
-     return data._id===res.memoId
-   })
- }))
- 
-  setFilterDatas(report.filter(res=>{
-    return userDates.includes(res.date)
-  }))
- 
-},[report,userDates])
-
-
-  const searchers = [];
-
-  filteredDatas &&
-    filteredDatas.map((data) => {
-      return searchers.push(
-        { value: data.vehicleno }
+  console.log(
+    report.filter((res) => {
+      return (
+        searched.includes(res.consignor) ||
+        searched.includes(res.consignee) ||
+        searched.includes(res.vehicleno)
       );
-    });
+    })
+  );
+  const handleDate = (date) => {
+    const startDate = moment(
+      `${date[0]?.$y} - ${date[0]?.$M + 1} - ${date[0]?.$D}`,
+      "YYYY-MM-DD"
+    );
+    const endDate = moment(
+      `${date[1]?.$y} - ${date[1]?.$M + 1} - ${date[1]?.$D}`,
+      "YYYY-MM-DD"
+    );
 
-   
+    const dates = [];
+    let currentDate = startDate;
 
-    const handleDate=(date)=>{
-      
-      const startDate = moment(
-        `${date[0]?.$y} - ${date[0]?.$M + 1} - ${date[0]?.$D}`,
-        "YYYY-MM-DD"
-      );
-      const endDate = moment(
-        `${date[1]?.$y} - ${date[1]?.$M + 1} - ${date[1]?.$D}`,
-        "YYYY-MM-DD"
-      );
-  
-      const dates = [];
-      let currentDate = startDate;
-  
-      while (currentDate <= endDate) {
-        dates.push(currentDate.format("YYYY-MM-DD"));
-        setUserDate(dates);
-        currentDate = currentDate.clone().add(1, "days");
-      }
+    while (currentDate <= endDate) {
+      dates.push(currentDate.format("YYYY-MM-DD"));
+      setUserDate(dates);
+      currentDate = currentDate.clone().add(1, "days");
     }
+  };
 
-   
-   
-
-	const { onDownload } = useDownloadExcel({
-		currentTableRef: tableRef.current,
-		filename: "Web Users",
-		sheet: "Web Users",
-	  });
-	
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: "Web Users",
+    sheet: "Web Users",
+  });
 
   const columns = [
     {
@@ -179,24 +174,39 @@ useEffect(()=>{
     },
   ];
 
+  const searchers = [];
+  console.log(searched.length)
+
+  report &&
+    report.map((data) => {
+      return searchers.push(
+        { value: data.consignor },
+        { value: data.consignee },
+        { value: data.vehicleno }
+      );
+    });
   return (
     <div className="flex pt-[12vh] pl-4">
       <div className="w-[83vw] flex flex-col gap-8">
         <div className="flex items-center justify-between px-10">
-          <RangePicker format={dateFormat} onChange={handleDate}/>
+          <RangePicker format={dateFormat} size="large" onChange={handleDate} />
+          <div className="flex w-[30vw]">
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Reportentry"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[30%]  py-3"
+            className="w-[30vw]  py-3"
             size="large"
             showArrow={false}
+            // disabled={searched.length===1?true:false}
+            // open={searched.length===1?false:true}
+           
           />
-
+          </div>
 
           <div>
             <Button
@@ -207,10 +217,14 @@ useEffect(()=>{
             </Button>
           </div>
         </div>
-        
-        <Table columns={columns} dataSource={filteredDatas} ref={tableRef} pagination={{pageSize:5}} />
+
+        <Table
+          columns={columns}
+          dataSource={filteredDatas}
+          ref={tableRef}
+          pagination={{ pageSize: 5 }}
+        />
       </div>
-     
     </div>
   );
 }

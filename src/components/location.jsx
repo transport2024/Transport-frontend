@@ -108,8 +108,9 @@ function Location() {
 
   Location &&
     Location.map((data) => {
+      console.log(data)
       return searchers.push(
-        { value: data.name }
+        { value: data.locationname }
      );
     });
 
@@ -160,7 +161,7 @@ function Location() {
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Location"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
@@ -168,6 +169,7 @@ function Location() {
             className="w-[50%] !m-auto py-3"
             size="large"
             showArrow={false}
+            // open={searched.length===1?false:true}
           />
         </div>
         <div className="w-full flex gap-5 items-end justify-end">

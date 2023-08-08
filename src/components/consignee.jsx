@@ -190,7 +190,7 @@ function Consignee() {
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Consignee"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
@@ -198,6 +198,7 @@ function Consignee() {
             className="w-[50%] !m-auto py-3"
             size="large"
             showArrow={false}
+            // open={searched.length===1?false:true}
           />
         </div>
         <div className="w-full flex gap-5 items-end justify-end">

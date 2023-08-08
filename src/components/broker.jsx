@@ -106,8 +106,9 @@ function Broker() {
 
   Broker &&
     Broker.map((data) => {
+      console.log(data)
       return searchers.push(
-        { value: data.name }
+        { value: data.brokername }
      );
     });
 
@@ -159,7 +160,7 @@ function Broker() {
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Broker"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
@@ -167,6 +168,7 @@ function Broker() {
             className="w-[50%] !m-auto py-3"
             size="large"
             showArrow={false}
+            // open={searched.length===1?false:true}
           />
         </div>
         <div className="w-full flex gap-5 items-end justify-end">

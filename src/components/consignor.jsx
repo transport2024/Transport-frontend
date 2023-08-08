@@ -190,7 +190,7 @@ function Consignor() {
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Consginer"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
@@ -198,6 +198,7 @@ function Consignor() {
             className="w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
+            // open={searched.length===1?false:true}
           />
         </div>
         <div className="w-full flex justify-end items-end gap-5">

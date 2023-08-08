@@ -249,7 +249,7 @@ function Memo() {
           <Select
             mode="tags"
             showSearch
-            placeholder="Type here for Category"
+            placeholder="Type here for Memoentry"
             options={searchers}
             onChange={(data) => {
               setSearched(data);
