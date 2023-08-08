@@ -16,7 +16,6 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
 
-
 function AddMemoDetails() {
   const [form] = Form.useForm();
   const [memoDetails, setMemoDetails] = useState([]);
@@ -27,12 +26,13 @@ function AddMemoDetails() {
   const [open, setOpen] = useState(false);
   const [datas, setDatas] = useState([]);
   const [dataSource, setDataSources] = useState([]);
-  const [locationData,setLocation]=useState([])
-  const [consignor,setConsignor]=useState([])
-  const [consignee, setConsignee] = useState([])
-  const [broker,setBroker]=useState([])
-  const [searched, setSearch] = useState([])
-  const navigate=useNavigate()
+  const [locationData, setLocation] = useState([]);
+  const [consignor, setConsignor] = useState([]);
+  const [consignee, setConsignee] = useState([]);
+  const [broker, setBroker] = useState([]);
+  const [searched, setSearch] = useState([]);
+  const [updateId, setUpdateId] = useState([]);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -53,7 +53,7 @@ function AddMemoDetails() {
       const result6 = await axios.get(
         `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
       );
-      setBroker(get(result6,"data.message"))
+      setBroker(get(result6, "data.message"));
       setConsignor(get(result5, "data.message"));
       setConsignee(get(result4, "data.message"));
       setMemoDetails(get(result, "data.message"));
@@ -70,58 +70,100 @@ function AddMemoDetails() {
     fetchData();
   }, []);
 
-  const handleSubmit = async (val) => {
-  
-    try {
-      const formData = {
-        locationfrom: val.locationfrom,
-        locationto: val.locationto,
-        consignor: val.consignor,
-        consignee: val.consignee,
-        quantity: val.quantity,
-        lramount: val.lramount,
-        lotno: val.lotno,
-        prnoform:val.prnoform,
-        brokername: val.brokername,
-        brokercommission: val.brokercommission,
-        memomethod: val.memomethod,
-        valueofgoods: val.valueofgoods,
-        invoiceno: val.invoiceno,
-        Prnoto: val.Prnoto,
-        lorryfreight: val.lorryfreight,
-        accountpaid:val.accountpaid,
-        quality: val.quality,
-        pressmark: val.pressmark,
-        memoId: id,
-      };
+  const handleEdit = (id) => {
+    setUpdateId(id._id);
+    setOpen(true);
+    form.setFieldsValue(id);
+  };
 
-      await axios.post(
-        `${process.env.REACT_APP_URL}/api/memodetails`,
-        formData
-      );
-      notification.success({
-        message: "memodetails Added successfully",
-      });
-      setOpen(false);
-      fetchData();
-      form.setFieldsValue([]);
-    } catch (err) {
-      notification.error({
-        message: "Something went wrong",
-      });
+  const handleFinish = async (val) => {
+    if (updateId ==="") {
+      try {
+        const formData = {
+          locationfrom: val.locationfrom,
+          locationto: val.locationto,
+          consignor: val.consignor,
+          consignee: val.consignee,
+          quantity: val.quantity,
+          lramount: val.lramount,
+          lotno: val.lotno,
+          prnoform: val.prnoform,
+          brokername: val.brokername,
+          brokercommission: val.brokercommission,
+          memomethod: val.memomethod,
+          valueofgoods: val.valueofgoods,
+          invoiceno: val.invoiceno,
+          Prnoto: val.Prnoto,
+          lorryfreight: val.lorryfreight,
+          accountpaid: val.accountpaid,
+          quality: val.quality,
+          pressmark: val.pressmark,
+          memoId: id,
+        };
+
+        await axios.post(
+          `${process.env.REACT_APP_URL}/api/memodetails`,
+          formData
+        );
+        notification.success({
+          message: "memodetails Added successfully",
+        });
+        setOpen(false);
+        fetchData();
+        form.setFieldsValue([]);
+      } catch (err) {
+        notification.error({
+          message: "Something went wrong",
+        });
+      }
+    } else {
+      try {
+        const formData = {
+          locationfrom: val.locationfrom,
+          locationto: val.locationto,
+          consignor: val.consignor,
+          consignee: val.consignee,
+          quantity: val.quantity,
+          lramount: val.lramount,
+          lotno: val.lotno,
+          prnoform: val.prnoform,
+          brokername: val.brokername,
+          brokercommission: val.brokercommission,
+          memomethod: val.memomethod,
+          valueofgoods: val.valueofgoods,
+          invoiceno: val.invoiceno,
+          Prnoto: val.Prnoto,
+          lorryfreight: val.lorryfreight,
+          accountpaid: val.accountpaid,
+          quality: val.quality,
+          pressmark: val.pressmark,
+          memoId: id,
+        };
+        await axios.put(`${process.env.REACT_APP_URL}/api/memodetails/${updateId}`, formData);
+        setUpdateId("")
+        setOpen(false)
+        fetchData()
+        notification.success({
+          message: "memodetails Updated successfully",
+        });
+      } catch (err) {
+        console.log(err);
+        notification.success({
+          message: "Something Went wrong",
+        });
+      }
     }
+    console.log("click")
   };
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0]);
-    console.log(location.pathname.split("/").slice(-1)[0], "poooo");
+
     setFilterData(
       memoDetails.filter((res) => {
         return res._id === id;
       })
     );
-
-    
 
     setDataSources(
       datas.filter((res) => {
@@ -130,14 +172,13 @@ function AddMemoDetails() {
     );
 
     form.setFieldsValue(filterData[0]);
-  }, [memoDetails, datas,filterData[0]]);
+  }, [memoDetails, datas, filterData[0]]);
 
- 
-
-
-  const handleDelete = async(value) => {
+  const handleDelete = async (value) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_URL}/api/memodetails/${value._id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_URL}/api/memodetails/${value._id}`
+      );
       fetchData();
       notification.success({
         message: "Deleted Successfully",
@@ -147,8 +188,7 @@ function AddMemoDetails() {
         message: "Something Went Wrong",
       });
     }
-  
-  }
+  };
 
   const columns = [
     {
@@ -221,7 +261,7 @@ function AddMemoDetails() {
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Memo Method",
+      title: "Account Copy",
       dataIndex: "memomethod",
       key: "memomethod",
       render: (text) => <div className="!text-[16px]">{text}</div>,
@@ -232,7 +272,7 @@ function AddMemoDetails() {
       key: "lorryfreight",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-   
+
     {
       title: "Account Paid",
       dataIndex: "accountpaid",
@@ -271,7 +311,7 @@ function AddMemoDetails() {
           <div>
             <EditNoteOutlinedIcon
               className="!text-md text-[--secondary-color] cursor-pointer"
-              // onClick={() => handleEdit(text)}
+              onClick={() => handleEdit(text)}
             />
           </div>
           <div>
@@ -283,16 +323,17 @@ function AddMemoDetails() {
             />
           </div>
           <div>
-            <PrintIcon className="!text-md text-[--secondary-color] cursor-pointer " onClick={() => {
-              navigate(`/ccv/${text._id}`)
-            }}/>
+            <PrintIcon
+              className="!text-md text-[--secondary-color] cursor-pointer "
+              onClick={() => {
+                navigate(`/ccv/${text._id}`);
+              }}
+            />
           </div>
         </div>
       ),
     },
   ];
-
-  
 
   return (
     <div className="pt-24 pl-[5vw] w-[80vw]">
@@ -404,24 +445,29 @@ function AddMemoDetails() {
         </Form>
       </Skeleton>
       <div className="w-[80vw]">
-        <p
-          className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          Add Memo Details
-        </p>
-       <Skeleton loading={loading}>
-       <Table
-          dataSource={dataSource}
-          columns={columns}
-          scroll={{
-            x: 2200,
-          }}
-        />
-       </Skeleton>
+        {dataSource.length === 1 ? (
+          ""
+        ) : (
+          <p
+            className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            Add Memo Details
+          </p>
+        )}
+        <Skeleton loading={loading}>
+          <Table
+            dataSource={dataSource}
+            columns={columns}
+            scroll={{
+              x: 2200,
+            }}
+          />
+        </Skeleton>
       </div>
+
       <div>
         <Drawer
           open={open}
@@ -441,7 +487,7 @@ function AddMemoDetails() {
           <Form
             className="flex flex-col gap-1"
             layout="vertical"
-            onFinish={handleSubmit}
+            onFinish={handleFinish}
             form={form}
           >
             <Form.Item
@@ -456,15 +502,15 @@ function AddMemoDetails() {
                 },
               ]}
             >
-               <Select placeholder="Select location from" size="large">
-              {locationData.map((res, i) => {
-                return ( 
-               <Select.Option value={res.locationname} key={i}>
-                    {res.locationname}
-                  </Select.Option> 
-              );
-              })}
-            </Select>
+              <Select placeholder="Select location from" size="large">
+                {locationData.map((res, i) => {
+                  return (
+                    <Select.Option value={res.locationname} key={i}>
+                      {res.locationname}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Location To</p>}
@@ -477,14 +523,14 @@ function AddMemoDetails() {
               ]}
             >
               <Select placeholder="Select location to" size="large">
-              {locationData.map((res, i) => {
-                return ( 
-               <Select.Option value={res.locationname} key={i}>
-                    {res.locationname}
-                  </Select.Option> 
-              );
-              })}
-            </Select>
+                {locationData.map((res, i) => {
+                  return (
+                    <Select.Option value={res.locationname} key={i}>
+                      {res.locationname}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Consignor</p>}
@@ -497,14 +543,14 @@ function AddMemoDetails() {
               ]}
             >
               <Select placeholder="Select Consignor" size="large">
-              {consignor.map((res, i) => {
-                return ( 
-               <Select.Option value={res.name} key={i}>
-                    {res.name}
-                  </Select.Option> 
-              );
-              })}
-            </Select>
+                {consignor.map((res, i) => {
+                  return (
+                    <Select.Option value={res.name} key={i}>
+                      {res.name}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Consignee</p>}
@@ -517,14 +563,14 @@ function AddMemoDetails() {
               ]}
             >
               <Select placeholder="Select Consignee" size="large">
-              {consignee.map((res, i) => {
-                return ( 
-               <Select.Option value={res.name} key={i}>
-                    {res.name}
-                  </Select.Option> 
-              );
-              })}
-            </Select>
+                {consignee.map((res, i) => {
+                  return (
+                    <Select.Option value={res.name} key={i}>
+                      {res.name}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Lot No</p>}
@@ -598,14 +644,13 @@ function AddMemoDetails() {
             >
               <Select placeholder="Select Broker" size="large">
                 {broker.map((res, i) => {
-                
-                return ( 
-               <Select.Option value={res.brokername} key={i}>
-                    {res.name}
-                  </Select.Option> 
-              );
-              })}
-            </Select>
+                  return (
+                    <Select.Option value={res.brokername} key={i}>
+                      {res.name}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label={
@@ -622,20 +667,21 @@ function AddMemoDetails() {
               <Input type="text" size="large" />
             </Form.Item>
             <Form.Item
-              label={<p className="!text-[16px] font-semibold" >Account Copy </p>}
-              name="accountcopy"
+              label={
+                <p className="!text-[16px] font-semibold">Account Copy </p>
+              }
+              name="memomethod"
               rules={[
                 {
                   required: true,
                   message: "Please select your account copy",
                 },
-               
               ]}
             >
               <Select size="large" placeholder="Account Copy">
-                  <Select.Option value="Yes">Yes</Select.Option>
-                  <Select.Option value="No">No</Select.Option>
-                </Select>
+                <Select.Option value="Yes">Yes</Select.Option>
+                <Select.Option value="No">No</Select.Option>
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -653,7 +699,6 @@ function AddMemoDetails() {
               <Input type="text" size="large" />
             </Form.Item>
 
-           
             <Form.Item
               label={
                 <p className="!text-[16px] font-semibold">Account Print</p>
@@ -664,16 +709,14 @@ function AddMemoDetails() {
                   required: true,
                   message: "Please input your account point",
                 },
-                
               ]}
             >
               <Select size="large" placeholder="Select account print">
-                  <Select.Option value="Party">Party</Select.Option>
-                  <Select.Option value="To pay">To pay</Select.Option>
-                  <Select.Option value="paid">paid</Select.Option>
-                  <Select.Option value="fixed">fixed</Select.Option>
-                </Select>
-             
+                <Select.Option value="Party">Party</Select.Option>
+                <Select.Option value="To pay">To pay</Select.Option>
+                <Select.Option value="paid">paid</Select.Option>
+                <Select.Option value="fixed">fixed</Select.Option>
+              </Select>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Invoice No</p>}
@@ -728,10 +771,13 @@ function AddMemoDetails() {
             <div className="flex items-end gap-2 justify-end">
               <Form.Item>
                 <Button
-                  htmlType="submit"
+                 
+                  onClick={()=>{
+                    setOpen(false)
+                  }}
                   className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
                 >
-                  Clear
+                  Cancel
                 </Button>
               </Form.Item>
               <Form.Item>
@@ -739,7 +785,7 @@ function AddMemoDetails() {
                   htmlType="submit"
                   className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
                 >
-                  Save
+                  {updateId!==""?"Update":"Save"}
                 </Button>
               </Form.Item>
             </div>

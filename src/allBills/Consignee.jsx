@@ -118,12 +118,12 @@ function Consignee(props) {
         <div className="flex flex-col pt-8">
           <div>
             <span className="text-red-500">
-              Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+              Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
             </span>
             {inputs.date}
           </div>
           <div>
-            <span className="text-red-500">GC No &nbsp;&nbsp;:</span>
+            <span className="text-red-500">GC No &nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
             {inputs.gcno}
           </div>
         </div>
@@ -153,7 +153,7 @@ function Consignee(props) {
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
               defaultValue={inputs.from}
-              className="outline-none ml-2 !bg-transparent pl-10 border-b-2 border-dashed "
+              className="outline-none ml-2 pl-10 !bg-transparent border-b-2 border-dashed "
             />
           </label>
           <label className="flex">
@@ -169,7 +169,7 @@ function Consignee(props) {
           </label>
           <label className="flex">
             <span className="text-red-500 font-bold ">
-             
+              {" "}
               Consignee&nbsp;&nbsp;:
             </span>
             <input
@@ -205,7 +205,7 @@ function Consignee(props) {
           </label>
           <label className="flex">
             <span className="text-red-500 ml-2 font-bold">
-             
+              {" "}
               GSTIN&nbsp;&nbsp;&nbsp;&nbsp;:
             </span>
             <input
@@ -221,7 +221,7 @@ function Consignee(props) {
         <table className="border-2" style={{ width: "95vw", fontSize: "13px" }}>
           <thead>
             <tr className="border-b-2  border-slate-200 font-bold">
-              <td className="border-r-2 w-[40vw]  text-center border-slate-200 text-red-500">
+              <td className="border-r-2 w-[40vw] text-center border-slate-200 text-red-500">
                 Description of Goods
               </td>
               <td className="border-r-2 w-[10vw] text-center border-slate-200 text-red-500">
@@ -237,7 +237,7 @@ function Consignee(props) {
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
-                  No. of Bales:&nbsp;&nbsp;&nbsp;{inputs.bales}
+                  No. of Bales:&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.bales}</span>
                 </span>
               </td>
               <td
@@ -250,33 +250,33 @@ function Consignee(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-               {inputs.bales}*500
+             {inputs.bales}*500
               </td>
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
                 rowSpan={3}
               >
-                {inputs.bales*500}
+               {inputs.bales*500}
               </td>
             </tr>
             <tr>
               <td className="!w-[40vw] border-r-2  border-slate-200">
                 <span className="text-red-500 pl-2">
-                  Lot No. :&nbsp;&nbsp;&nbsp;{inputs.lotno}
+                  Lot No. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.lotno}</span>
                 </span>
               </td>
             </tr>
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
-                  P.R.NO. :&nbsp;&nbsp;&nbsp;{inputs.prno}
+                  P.R.NO. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.prno}</span>
                 </span>
               </td>
             </tr>
             <tr>
               <td className="!w-[40vw] border-r-2  border-slate-200">
                 <span className="text-red-500 pl-2">
-                  Inv. No. :&nbsp;&nbsp;&nbsp;{inputs.invoice}
+                  Inv. No. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.invoice}</span>
                 </span>
               </td>
               <td
@@ -286,14 +286,14 @@ function Consignee(props) {
               >
                 <div className="flex">
                   Remarks&nbsp;:
-                  <span style={{ fontSize: "15px" }}>
-                    {" "}
+                  <span style={{ fontSize: "15px" }} className="text-black">
+                  
                     {inputs.accountpaid === "To pay" ||
                     inputs.accountpaid === "paid" ? (
-                      <p className="w-[30vw]">
+                      <span className="w-[30vw] text-balck">
                         please pay lorry freight in amount favour of
                         <br /> jaibalaji roadways account
-                      </p>
+                      </span>
                     ) : (
                       <p>{inputs.accountpaid}</p>
                     )}
@@ -304,14 +304,14 @@ function Consignee(props) {
             <tr>
               <td className="!w-[40vw] border-r-2  border-slate-200">
                 <span className="text-red-500 pl-2">
-                  Value of Goods. :&nbsp;&nbsp;&nbsp;{inputs.value}
+                  Value of Goods. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.value}</span>
                 </span>
               </td>
             </tr>
             <tr>
               <td className="!w-[40vw] border-r-2   border-slate-200">
                 <span className="text-red-500 pl-2">
-                  Quality:&nbsp;&nbsp;&nbsp;{inputs.quality}
+                  Quality:&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.quality}</span>
                 </span>
               </td>
               <td colSpan={3} rowSpan={3} className="border-b-2">
@@ -327,7 +327,7 @@ function Consignee(props) {
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
-                  P Marks:&nbsp;&nbsp;&nbsp;{inputs.pmark}
+                  P Marks:&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.pmark}</span>
                 </span>
               </td>
             </tr>
@@ -345,8 +345,8 @@ function Consignee(props) {
                 </span>
               </td>
               <td className="text-red-500 !w-[40vw] flex flex-col">
-                <p>PAN No:FWKPS0210P</p>
-                <p>Eway Bill reg No:33FWKPS0210P2Z8</p>
+                <p>PAN No : FWKPS0210P</p>
+                <p>Eway Bill reg No : 33FWKPS0210P2Z8</p>
               </td>
             </tr>
           </tbody>
@@ -365,7 +365,7 @@ function Consignee(props) {
         >
           <p>Sign Of owner or lorry driver</p>
           <p className="flex flex-col" style={{ color: "gray" }}>
-            <span className="pl-10 ">This is Computer Generated No Signature Required </span>
+            <span className="pl-12">This is Computer Generated No Signature Required </span>
             <span>power by R&J MERN-Developer's Cell-9944088629</span>
           </p>
           <p>
