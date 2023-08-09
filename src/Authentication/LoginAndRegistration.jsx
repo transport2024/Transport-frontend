@@ -63,6 +63,7 @@ function LoginAndRegistration() {
             rules={[
               {
                 required: true,
+                message: "Please input your username!",
               },
             ]}
           >
