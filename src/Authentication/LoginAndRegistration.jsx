@@ -47,12 +47,12 @@ function LoginAndRegistration() {
 
   return (
     <div
-      className="flex items-center justify-center w-screen h-screen bg-center bg-cover bg-no-repeat"
-      style={{
-        backgroundImage: `url(${myimage})`,
-      }}
+      className="flex items-center justify-center bg-gray-100 w-screen h-screen bg-center bg-cover bg-no-repeat"
+      // style={{
+      //   backgroundImage: `url(${myimage})`,
+      // }}
     >
-      <div className="xl:w-[25vw] xsm:w-[80vw] py-5 bg-white/70 backdrop-blur-sm rounded-md  flex items-center justify-center">
+      <div className="xl:w-[25vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">
         <Form className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
           <h1 className="text-3xl text-blue-500 font-medium pb-2 text-center">
             Admin Login
