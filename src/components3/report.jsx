@@ -30,9 +30,9 @@ function Report() {
   const { RangePicker } = DatePicker;
   const dateFormat = "YYYY-MM-DD";
   const [userDates, setUserDate] = useState("");
-  const [filteredDatas, setFilterDatas] = useState([]);
+  const [filteredDatas, setFilterDatas] = useState("");
   const [memoDetails, setMemoDetails] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState("");
 
   const fetchData = async () => {
     try {
@@ -51,16 +51,16 @@ function Report() {
   }, []);
 
  
-    const datesdata=flattenDeep(userDates &&
+    
+  
+
+  useEffect(() => {
+    setData(flattenDeep(userDates &&
       userDates?.map((res) => {
         return report?.filter(data=>{
           return data.date===res
         });
-      }))
-  
-
-  useEffect(() => {
-
+      })))
     setFilterDatas(
       report.filter((res) => {
         return (
@@ -75,6 +75,11 @@ function Report() {
  
 
   const handleDate = (date) => {
+    
+    if (!date || !date.length) {
+      date = [];
+    }
+
     const startDate = moment(
       `${date[0]?.$y} - ${date[0]?.$M + 1} - ${date[0]?.$D}`,
       "YYYY-MM-DD"
@@ -179,6 +184,10 @@ function Report() {
         { value: data.vehicleno }
       );
     });
+
+    
+    
+
   return (
     <div className="flex pt-[12vh] pl-4">
       <div className="w-[83vw] flex flex-col gap-8">
@@ -196,7 +205,8 @@ function Report() {
               className="w-[30vw]  py-3"
               size="large"
               showArrow={false}
-              allowClear
+              onClear={()=>{setData("")}}
+              allowClear={true}
               // disabled={searched.length===1?true:false}
               // open={searched.length===1?false:true}
             />
@@ -212,12 +222,17 @@ function Report() {
           </div>
         </div>
 
-        <Table
+        {data==""?<Table
           columns={columns}
-          dataSource={datesdata?datesdata:filteredDatas}
+          dataSource={filteredDatas}
           ref={tableRef}
           pagination={{ pageSize: 5 }}
-        />
+        />:<Table
+        columns={columns}
+        dataSource={data}
+        ref={tableRef}
+        pagination={{ pageSize: 5 }}
+      />}
       </div>
     </div>
   );

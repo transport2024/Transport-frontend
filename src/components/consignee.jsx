@@ -56,6 +56,7 @@ function Consignee() {
         fetchData();
         notification.success({ message: "Consignee Added successfully" });
         setOpen(false);
+        form.setFieldsValue([])
       } catch (err) {
         notification.error({ message: "Something went wrong" });
       }
@@ -246,6 +247,7 @@ function Consignee() {
         }}
         className="!bg-[--primary-color] !text-white"
         title={<h1 className="text-lg">Consignee</h1>}
+        destroyOnClose
       >
         <Form
           className="flex flex-col gap-1"

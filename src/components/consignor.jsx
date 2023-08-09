@@ -60,6 +60,7 @@ function Consignor() {
         fetchData();
         notification.success({ message: "Consignor Added successfully" });
         setOpen(false);
+        form.setFieldValue([]);
       } catch (err) {
         notification.error({ message: "Something went wrong" });
       }
@@ -234,6 +235,7 @@ function Consignor() {
       <Drawer
         open={open}
         width={500}
+        destroyOnClose
         onCancel={() => {
           setOpen(!open);
           form.setFieldValue([]);

@@ -288,6 +288,7 @@ function Memo() {
         </Skeleton>
       </div>
       <Drawer
+      destroyOnClose
         open={open}
         width={500}
         onCancel={() => {

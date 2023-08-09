@@ -57,6 +57,7 @@ function Location() {
           message: "Location Added successfully",
         });
         setOpen(false);
+        form.setFieldValue([]);
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -198,6 +199,7 @@ function Location() {
       </div>
       <Modal
         open={open}
+        destroyOnClose
         width={500}
         onCancel={() => {
           setOpen(!open);

@@ -55,6 +55,7 @@ function Broker() {
           message: "Broker Added successfully",
         });
         setOpen(false);
+        form.setFieldsValue([])
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -204,6 +205,7 @@ function Broker() {
           setUpdateId("");
         }}
         footer={false}
+        destroyOnClose
       >
         <Form
           className="flex flex-col gap-4"

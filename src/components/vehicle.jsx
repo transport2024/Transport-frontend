@@ -125,6 +125,7 @@ function Vehicle() {
       });
       setOpen(false);
       Modal.destroyAll()
+      form.setFieldsValue([])
     } catch (err) {
       console.log(err);
     }
@@ -308,6 +309,7 @@ function Vehicle() {
           form.setFieldValue([]);
           setUpdateId("");
         }}
+        destroyOnClose
         title={<h1 className="text-lg ">Vehicle</h1>}
         footer={false}
         className="!bg-[--primary-color] !text-white"
