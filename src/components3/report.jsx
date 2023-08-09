@@ -51,9 +51,6 @@ function Report() {
   }, []);
 
  
-    
-  
-
   useEffect(() => {
     setData(flattenDeep(userDates &&
       userDates?.map((res) => {
@@ -77,6 +74,7 @@ function Report() {
   const handleDate = (date) => {
     
     if (!date || !date.length) {
+      setUserDate([]);
       date = [];
     }
 
@@ -205,7 +203,7 @@ function Report() {
               className="w-[30vw]  py-3"
               size="large"
               showArrow={false}
-              onClear={()=>{setData("")}}
+              
               allowClear={true}
               // disabled={searched.length===1?true:false}
               // open={searched.length===1?false:true}

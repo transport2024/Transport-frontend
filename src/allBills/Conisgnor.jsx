@@ -252,7 +252,7 @@ function Conisgnor(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-           {inputs.accountpaid==="fixed"?"Fixed": filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
+          {filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
               </td> 
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
@@ -271,7 +271,7 @@ function Conisgnor(props) {
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
-                  P.R.NO. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.prnofrom}&{inputs.prnoto}</span>
+                  P.R.NO. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.prnofrom}&nbsp;to&nbsp;{inputs.prnoto}</span>
                 </span>
               </td>
             </tr>
@@ -367,11 +367,12 @@ function Conisgnor(props) {
         >
           <p>Sign Of owner or lorry driver</p>
           <p className="flex flex-col" style={{ color: "gray" }}>
-            <span className="pl-10"> This is Computer Generated No Signature Required </span>
+           
             <span>power by R&J MERN-Developer's Cell-9944088629</span>
           </p>
-          <p>
-            <span>Authorised Signature</span>
+          <p className="flex flex-col">
+          <span style={{color:"gray"}}> This is Computer Generated No Signature Required </span>
+        <span >Authorised Signature</span>
           </p>
         </div>
       </div>
