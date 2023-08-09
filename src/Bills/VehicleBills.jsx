@@ -71,26 +71,7 @@ function VehicleBills() {
 
 
   return (
-    // <div className='w-[100vw] flex items-center justify-center relative'>
-    //   <img src={Bill} className='!w-[90vw] !h-[100vh]' alt='bill' />
-    //   <input
-    //     type='text'
-    //     className='absolute left-[24vw] top-[29vh] bg-transparent text-black font-semibold outline-none'
-    //     defaultValue={vehicleno}
-    //   />
-    //   <div className='absolute right-[8vw] top-[26.5vh] flex flex-col'>
-    //     <input
-    //       type='date'
-    //       className='bg-transparent text-black font-semibold outline-none !text-[11px]'
-    //       defaultValue={date}
-    //     />
-    //     <input
-    //       type='text'
-    //       className='placeholder:hidden bg-transparent text-black font-semibold outline-none !text-[11px] !mt-[-5px]'
-    //       defaultValue={gcNo}
-    //     />
-    //   </div>
-    // </div>
+  
     <div className="!w-[97vw] !h-[100vh] " style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,color:"black"}}>
     <div className="flex w-[100%]  justify-end" style={{gap:"20vw"}}>
       <div className="uppercase underline  tracking-wider text-red-500 font-semibold" style={{fontSize:"15px"}}>
@@ -122,7 +103,7 @@ function VehicleBills() {
         <span className="pl-9">
           &nbsp;ranga reddy
           dist.-509325,&nbsp;hyderabad,&nbsp;telangana.&nbsp;
-          <span>cell&nbsp;9152526000</span>
+          <span className="text-red-500" >Cell&nbsp;9152526000</span>
         </span>
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
@@ -279,10 +260,10 @@ function VehicleBills() {
             </td>
             <td colSpan={3} rowSpan={3} className="border-b-2">
               <p className="text-green-700">Our Bank details Given below:</p>
-              <p className="text-green-700">Bank Name:Tamil Nadu Mercanitle bank</p>
-              <p className="text-green-700">Branch:Namakkal</p>
-              <p className="text-green-700">A/C. No:129700050900245</p>
-              <p className="text-green-700">Ifsc Code:TMBL0000129</p>
+              <p className="text-green-700">Bank Name:TamilNad Mercanitle bank</p>
+              <p className="text-green-700">Branch:Koolipatti</p>
+                <p className="text-green-700">A/C. No:265539152525000</p>
+                <p className="text-green-700">Ifsc Code:TMBL0000265</p>
             </td>
           </tr>
           <tr>
@@ -299,7 +280,10 @@ function VehicleBills() {
             <td className="!w-[40vw] border-r-2 text-red-500   border-slate-200">
               <span className="text-red-500 ">Note :G.C.Note to Subject to Condition Overleaf</span>
             </td>
-            <td className="text-red-500 !w-[40vw] flex flex-col"><p>PAN No:BJTPS6814B</p><p>Eway Bill reg No:33BJTPS6814B1Z1</p></td>
+            <td className="text-red-500 !w-[40vw] flex flex-col">
+            <p>PAN No : FWKPS0210P</p>
+                <p>Eway Bill reg No : 33FWKPS0210P2Z8</p>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -307,14 +291,14 @@ function VehicleBills() {
      <div style={{paddingTop:"5px"}}>
      <div className="flex gap-[20vw] w-[97vw] items-end justify-end pr-20">
       <p className="text-red-500 font-bold">Consignor Should be ensure their goods</p>
-      <p className="text-black font-bold"> For Jai Balaji RoadWays</p>
+      <p className="text-black font-bold"> For Jai Balaji Transport Service </p>
     </div>
     <div className="flex w-[97vw] justify-between font-bold text-red-500" style={{paddingTop:"25px"}}>
       <p>Sign Of owner or lorry driver</p>
       <p className="flex flex-col" >
        <span >power by R&J MERN-Developer's Cell-9944088629</span></p>
       <p className="flex flex-col">
-      <span style={{color:"gray"}}>It is Computer generated bill</span>
+      <span style={{color:"gray"}}> This is Computer Generated No Signature Required </span>
         <span >Authorised Signature</span>
       </p>
     </div>

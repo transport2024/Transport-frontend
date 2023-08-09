@@ -104,7 +104,7 @@ function Conisgnor(props) {
           <span className="pl-9">
             &nbsp;ranga reddy
             dist.-509325,&nbsp;hyderabad,&nbsp;telangana.&nbsp;
-            <span>cell&nbsp;9152526000</span>{" "}
+            <span className="text-red-500">Cell&nbsp;9152526000</span>{" "}
           </span>
         </div>
         <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
@@ -251,7 +251,7 @@ function Conisgnor(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-             {filterDatas?.lramount/inputs.bales}*{inputs.bales}
+            {filterDatas?.lramount/inputs.bales}*{inputs.bales}
               </td>
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
@@ -289,11 +289,11 @@ function Conisgnor(props) {
                   Remarks&nbsp;:
                   <span style={{ fontSize: "15px" }} className="text-black">
                   
-                    {inputs.accountpaid === "To pay" ||
-                    inputs.accountpaid === "paid" ? (
+                    {inputs.accountpaid === "Party" ||
+                    inputs.accountpaid === "fixed" ? (
                       <span className="w-[30vw] text-balck">
                         please pay lorry freight in amount favour of
-                        <br /> jaibalaji roadways account
+                        <br /> jaibalaji transport service account
                       </span>
                     ) : (
                       <p>{inputs.accountpaid}</p>

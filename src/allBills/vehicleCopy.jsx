@@ -84,13 +84,13 @@ setFilterMemo(
         <span className="pl-9">
           &nbsp;ranga reddy
           dist.-509325,&nbsp;hyderabad,&nbsp;telangana.&nbsp;
-          <span>Cell&nbsp;9152526000</span>{" "}
+          <span className="text-red-500">Cell&nbsp;9152526000</span>{" "}
         </span>
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>
         :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
-        <span className="text-red-500">cell&nbsp;9152527000</span>
+        <span className="text-red-500">Cell&nbsp;9152527000</span>
       </div>
     </div>
     <div className="font-bold flex justify-center " style={{ gap: "20vw" }}>
@@ -268,11 +268,11 @@ setFilterMemo(
                 Remarks&nbsp;:
                 <span style={{ fontSize: "15px" }}>
                 
-                  {inputs.accountpaid === "To pay" ||
-                  inputs.accountpaid === "paid" ? (
+                  {inputs.accountpaid === "Party" ||
+                  inputs.accountpaid === "fixed" ? (
                     <span className="w-[30vw] text-black">
                       please pay lorry freight in amount favour of
-                      <br /> jaibalaji roadways account
+                      <br /> jaibalaji transport service account
                     </span>
                   ) : (
                     <p className="text-black">{inputs.accountpaid}</p>
@@ -296,10 +296,10 @@ setFilterMemo(
             </td>
             <td colSpan={3} rowSpan={3} className="border-b-2">
               <p className="text-green-700">Our Bank details Given below:</p>
-              <p className="text-green-700">Bank Name:Tamil Nadu Mercanitle bank</p>
-              <p className="text-green-700">Branch:Namakkal</p>
-              <p className="text-green-700">A/C. No:129700050900245</p>
-              <p className="text-green-700">Ifsc Code:TMBL0000129</p>
+              <p className="text-green-700">Bank Name:TamilNad Mercanitle bank</p>
+              <p className="text-green-700">Branch:Koolipatti</p>
+                <p className="text-green-700">A/C. No:265539152525000</p>
+                <p className="text-green-700">Ifsc Code:TMBL0000265</p>
             </td>
           </tr>
           <tr>
@@ -323,10 +323,9 @@ setFilterMemo(
               </span>
             </td>
             <td className="text-red-500 !w-[40vw] flex flex-col">
-              <p>PAN No : BJTPS6814B</p>
-              <p>Eway Bill reg No : 33BJTPS6814B1Z1</p>
+            <p>PAN No : FWKPS0210P</p>
+                <p>Eway Bill reg No : 33FWKPS0210P2Z8</p>
             </td>
-            <td className="text-red-500 !w-[40vw] flex flex-col"><p>PAN No:BJTPS6814B</p><p>Eway Bill reg No:33BJTPS6814B1Z1</p></td>
           </tr>
         </tbody>
       </table>
@@ -334,12 +333,12 @@ setFilterMemo(
      <div style={{paddingTop:"5px"}}>
      <div className="flex gap-[20vw] w-[97vw] items-end justify-end pr-20">
       <p className="text-red-500 font-bold">Consignor Should be ensure their goods</p>
-      <p className="text-black font-bold"> For Jai Balaji RoadWays</p>
+      <p className="text-black font-bold"> For Jai Balaji Transport Service </p>
     </div>
     <div className="flex w-[97vw] justify-between font-bold text-red-500" style={{paddingTop:"25px"}}>
       <p>Sign Of owner or lorry driver</p>
       <p className="flex flex-col" style={{color:"gray"}}>
-        <span className="pl-10 ">it is Computer generated bill</span><span >power by R&J MERN-Developer's Cell-9944088629</span></p>
+        <span className="pl-10 ">This is Computer Generated No Signature Required </span><span >power by R&J MERN-Developer's Cell-9944088629</span></p>
       <p>
         <span>Authorised Signature</span>
       </p>
