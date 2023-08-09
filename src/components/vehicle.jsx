@@ -89,6 +89,7 @@ function Vehicle() {
             message: "Vehicle Added successfully",
           });
           setOpen(false);
+          form.setFieldsValue([])
         }
       } catch (err) {
         notification.error({
