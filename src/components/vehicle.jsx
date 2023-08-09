@@ -83,7 +83,7 @@ function Vehicle() {
             ],
           });
         } else {
-          await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, data);
+          await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, value);
           fetchData();
           notification.success({
             message: "Vehicle Added successfully",
@@ -224,18 +224,7 @@ function Vehicle() {
       key: "rcname",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
-    {
-      title: "Account no",
-      dataIndex: "accno",
-      key: "accno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
-    },
-    {
-      title: "IFC Code",
-      dataIndex: "ifsccode",
-      key: "ifsccode",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
-    },
+    
     {
       title: "Actions",
       render: (text) => (

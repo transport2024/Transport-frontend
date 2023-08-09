@@ -50,14 +50,16 @@ function Report() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setData(
-      report.map((data) => {
-        return memoDetails.filter((res) => {
-          return data._id === res.memoId;
+ 
+    const datesdata=flattenDeep(userDates &&
+      userDates?.map((res) => {
+        return report?.filter(data=>{
+          return data.date===res
         });
-      })
-    );
+      }))
+  
+
+  useEffect(() => {
 
     setFilterDatas(
       report.filter((res) => {
@@ -68,17 +70,10 @@ function Report() {
         );
       })
     );
-  }, [report, userDates,searched]);
+  }, [report, userDates, searched]);
 
-  console.log(
-    report.filter((res) => {
-      return (
-        searched.includes(res.consignor) ||
-        searched.includes(res.consignee) ||
-        searched.includes(res.vehicleno)
-      );
-    })
-  );
+ 
+
   const handleDate = (date) => {
     const startDate = moment(
       `${date[0]?.$y} - ${date[0]?.$M + 1} - ${date[0]?.$D}`,
@@ -175,7 +170,6 @@ function Report() {
   ];
 
   const searchers = [];
-  console.log(searched.length)
 
   report &&
     report.map((data) => {
@@ -191,21 +185,21 @@ function Report() {
         <div className="flex items-center justify-between px-10">
           <RangePicker format={dateFormat} size="large" onChange={handleDate} />
           <div className="flex w-[30vw]">
-          <Select
-            mode="tags"
-            showSearch
-            placeholder="Type here for Reportentry"
-            options={searchers}
-            onChange={(data) => {
-              setSearched(data);
-            }}
-            className="w-[30vw]  py-3"
-            size="large"
-            showArrow={false}
-            // disabled={searched.length===1?true:false}
-            // open={searched.length===1?false:true}
-           
-          />
+            <Select
+              mode="tags"
+              showSearch
+              placeholder="Type here for Reportentry"
+              options={searchers}
+              onChange={(data) => {
+                setSearched(data);
+              }}
+              className="w-[30vw]  py-3"
+              size="large"
+              showArrow={false}
+              allowClear
+              // disabled={searched.length===1?true:false}
+              // open={searched.length===1?false:true}
+            />
           </div>
 
           <div>
@@ -220,7 +214,7 @@ function Report() {
 
         <Table
           columns={columns}
-          dataSource={filteredDatas}
+          dataSource={datesdata?datesdata:filteredDatas}
           ref={tableRef}
           pagination={{ pageSize: 5 }}
         />

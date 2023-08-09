@@ -41,7 +41,8 @@ function Conisgnor(props) {
       value: filterDatas?.valueofgoods,
       invoice: filterDatas?.invoiceno,
       lotno: filterDatas?.lotno,
-      prno: filterDatas?.prnoform,
+      prnoto:filterDatas?.Prnoto,
+      prnofrom: filterDatas?.prnoform,
       gcno: filterMemo?.gcno,
       date: filterMemo?.date,
       lorryno: filterMemo?.vehicleno,
@@ -251,8 +252,8 @@ function Conisgnor(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-            {filterDatas?.lramount/inputs.bales}*{inputs.bales}
-              </td>
+           {inputs.accountpaid==="fixed"?"Fixed": filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
+              </td> 
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
                 rowSpan={3}
@@ -270,7 +271,7 @@ function Conisgnor(props) {
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
-                  P.R.NO. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.prno}</span>
+                  P.R.NO. :&nbsp;&nbsp;&nbsp;<span className="text-black">{inputs.prnofrom}&{inputs.prnoto}</span>
                 </span>
               </td>
             </tr>

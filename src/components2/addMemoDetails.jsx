@@ -32,7 +32,7 @@ function AddMemoDetails() {
   const [broker, setBroker] = useState([]);
   const [searched, setSearch] = useState([]);
   const [updateId, setUpdateId] = useState("");
-  const [vehicle,setVehicle]=useState([])
+  const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -58,14 +58,14 @@ function AddMemoDetails() {
       const result7 = await axios.get(
         `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
       );
-      
+
       setBroker(get(result6, "data.message"));
       setConsignor(get(result5, "data.message"));
       setConsignee(get(result4, "data.message"));
       setMemoDetails(get(result, "data.message"));
       setDatas(get(result2, "data.message"));
       setLocation(get(result3, "data.message"));
-      setVehicle(get(result7,"data.message"));
+      setVehicle(get(result7, "data.message"));
     } catch (err) {
       console.log(err);
     } finally {
@@ -82,14 +82,16 @@ function AddMemoDetails() {
     setOpen(true);
     form.setFieldsValue(id);
   };
-  
 
-  console.log(vehicle.filter(res=>{
-    return memoDetails[0].vehicleno===res.vehicleno
-    })[0]?.rcname)
+  console.log(memoDetails.filter((res)=>{
+    return res._id===id
+  })[0]?.date)
 
   const handleFinish = async (val) => {
-    if (updateId ==="") {
+    console.log(id,"lll")
+
+  
+    if (updateId === "") {
       try {
         const formData = {
           locationfrom: val.locationfrom,
@@ -111,20 +113,21 @@ function AddMemoDetails() {
           quality: val.quality,
           pressmark: val.pressmark,
           memoId: id,
-          date:memoDetails[0]?.date,
-          drivername:memoDetails[0]?.drivername,
-          driverphone:memoDetails[0]?.driverphone,
-          driverwhatsappno:memoDetails[0]?.driverwhatsappno,
-          gcno:memoDetails[0]?.gcno,
-          vehicleno:memoDetails[0]?.vehicleno,
-          pan:vehicle.filter(res=>{
-            return memoDetails[0].vehicleno===res.vehicleno
-            })[0]?.pan,
-            rcname:vehicle.filter(res=>{
-              return memoDetails[0].vehicleno===res.vehicleno
-              })[0]?.rcname
-
-
+          date: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].date,
+          gcno: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].gcno,
+          vehicleno: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].vehicleno,
+          pan: vehicle.filter((res) => {
+            return memoDetails[0].vehicleno === res.vehicleno;
+          })[0]?.pan,
+          rcname: vehicle.filter((res) => {
+            return memoDetails[0].vehicleno === res.vehicleno;
+          })[0]?.rcname,
         };
 
         await axios.post(
@@ -136,7 +139,7 @@ function AddMemoDetails() {
         });
         setOpen(false);
         fetchData();
-        form.setFieldsValue([]);
+        // form.setFieldsValue([]);
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -144,6 +147,7 @@ function AddMemoDetails() {
       }
     } else {
       try {
+        console.log(val.memoId)
         const formData = {
           locationfrom: val.locationfrom,
           locationto: val.locationto,
@@ -164,23 +168,33 @@ function AddMemoDetails() {
           quality: val.quality,
           pressmark: val.pressmark,
           memoId: id,
-          date:memoDetails[0]?.date,
-          drivername:memoDetails[0]?.drivername,
-          driverphone:memoDetails[0]?.driverphone,
-          driverwhatsappno:memoDetails[0]?.driverwhatsappno,
-          gcno:memoDetails[0]?.gcno,
-          vehicleno:memoDetails[0]?.vehicleno,
-          pan:vehicle.filter(res=>{
-            return memoDetails[0].vehicleno===res.vehicleno
-            })[0]?.pan,
-            rcname:vehicle.filter(res=>{
-              return memoDetails[0].vehicleno===res.vehicleno
-              })[0]?.rcname
+          date: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].date,
+          gcno: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].gcno,
+          vehicleno: memoDetails.filter((res)=>{
+            return res._id===id
+          })[0].vehicleno,
+          pan: vehicle.filter((res) => {
+            return memoDetails.filter((res)=>{
+              return res._id===id
+            })[0].vehicleno === res.vehicleno;
+          })[0]?.pan,
+          rcname: vehicle.filter((res) => {
+            return memoDetails.filter((res)=>{
+              return res._id===id
+            })[0].vehicleno === res.vehicleno;
+          })[0]?.rcname,
         };
-        await axios.put(`${process.env.REACT_APP_URL}/api/memodetails/${updateId}`, formData);
-        setUpdateId("")
-        setOpen(false)
-        fetchData()
+        await axios.put(
+          `${process.env.REACT_APP_URL}/api/memodetails/${updateId}`,
+          formData
+        );
+        setUpdateId("");
+        setOpen(false);
+        fetchData();
         notification.success({
           message: "memodetails Updated successfully",
         });
@@ -191,10 +205,10 @@ function AddMemoDetails() {
         });
       }
     }
-    console.log("click")
+    console.log("click");
   };
 
-  console.log(datas,"llll")
+  console.log(datas, "llll");
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0]);
@@ -811,9 +825,8 @@ function AddMemoDetails() {
             <div className="flex items-end gap-2 justify-end">
               <Form.Item>
                 <Button
-                 
-                  onClick={()=>{
-                    setOpen(false)
+                  onClick={() => {
+                    setOpen(false);
                   }}
                   className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
                 >
@@ -825,7 +838,7 @@ function AddMemoDetails() {
                   htmlType="submit"
                   className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
                 >
-                  {updateId===""?"Save":"Update"}
+                  {updateId === "" ? "Save" : "Update"}
                 </Button>
               </Form.Item>
             </div>
