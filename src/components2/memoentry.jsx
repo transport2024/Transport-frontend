@@ -179,7 +179,7 @@ function Memo() {
       title: "GC No",
       dataIndex: "serialNumber",
       key: "serialNumber",
-      render: (text, record, index) => index + 1,
+      render: (text, record, index) => index + 121,
     },
 
     {
