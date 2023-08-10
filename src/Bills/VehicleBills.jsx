@@ -75,7 +75,7 @@ function VehicleBills() {
     <div className="!w-[97vw] !h-[100vh] " style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,color:"black"}}>
     <div className="flex w-[100%]  justify-end" style={{gap:"20vw"}}>
       <div className="uppercase underline  tracking-wider text-red-500 font-semibold" style={{fontSize:"15px"}}>
-        subject to <span className="text-black">namakkal</span> jurisdication
+        subject to <span className="text-black">namakkal</span> jurisdiction
       </div>
       <div className="uppercase underline tracking-wider text-red-500 font-semibold">
         consignor copy
@@ -245,8 +245,10 @@ function VehicleBills() {
               <span className="text-red-500 pl-2">Inv. No. :</span>
             </td>
             <td colSpan={3} rowSpan={2} className="text-red-500 border-b-2 border-slate-200 pl-2">
-              Remarks&nbsp;:<span style={{fontSize:"15px"}}>please pay lorry freight amount in favour of <br/>jai balaji
-              roadyways account</span>
+              Remarks&nbsp;:<span style={{fontSize:"15px"}}>
+              Please Pay Lorry Freight Amount In Favour Of
+                        <br /> Jai Balaji Transport Service Account
+                        </span>
             </td>
           </tr>
           <tr>
@@ -260,7 +262,7 @@ function VehicleBills() {
             </td>
             <td colSpan={3} rowSpan={3} className="border-b-2">
               <p className="text-green-700">Our Bank details Given below:</p>
-              <p className="text-green-700">Bank Name:TamilNad Mercanitle bank</p>
+              <p className="text-green-700">Bank Name:TamilNad Mercantile bank</p>
               <p className="text-green-700">Branch:Koolipatti</p>
                 <p className="text-green-700">A/C. No:265539152525000</p>
                 <p className="text-green-700">Ifsc Code:TMBL0000265</p>

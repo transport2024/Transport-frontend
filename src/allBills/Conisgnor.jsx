@@ -82,7 +82,7 @@ function Conisgnor(props) {
           className="uppercase underline  tracking-wider text-red-500 font-semibold"
           style={{ fontSize: "15px" }}
         >
-          subject to <span className="text-black">namakkal</span> jurisdication
+          subject to <span className="text-black">namakkal</span> jurisdiction
         </div>
         <div className="uppercase underline tracking-wider text-red-500 font-semibold">
           Consignor copy
@@ -118,7 +118,7 @@ function Conisgnor(props) {
         </div>
         <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
           <span className="text-red-500">B.O.&nbsp;</span>
-          :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed
+          :&nbsp;opp.Shivsudha&nbsp;Milk dairy,&nbsp;adgaon phata,&nbsp;beed
           road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
           <span className="text-red-500"> Cell&nbsp;9152527000 </span>
         </div>
@@ -301,8 +301,8 @@ function Conisgnor(props) {
                     {inputs.accountpaid === "Party" ||
                     inputs.accountpaid === "fixed" ? (
                       <span className="w-[30vw] text-balck">
-                        please pay lorry freight in amount favour of
-                        <br /> jaibalaji transport service account
+                   Please Pay Lorry Freight Amount In Favour Of
+                        <br /> Jai Balaji Transport Service Account
                       </span>
                     ) : (
                       <p>{inputs.accountpaid}</p>
@@ -327,7 +327,7 @@ function Conisgnor(props) {
               <td colSpan={3} rowSpan={3} className="border-b-2">
                 <p className="text-green-700">Our Bank details Given below:</p>
                 <p className="text-green-700">
-                  Bank Name:TamilNad Mercanitle bank
+                  Bank Name:TamilNad Mercantile bank
                 </p>
                 <p className="text-green-700">Branch:Koolipatti</p>
                 <p className="text-green-700">A/C. No:265539152525000</p>

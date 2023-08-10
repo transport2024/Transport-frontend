@@ -70,7 +70,7 @@ setFilterConsignee(
     <div className="!w-[97vw] !h-[100vh]" style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,padding:"10px",color:"black"}}>
     <div className="flex w-[100%]  justify-end" style={{gap:"20vw"}}>
       <div className="uppercase underline  tracking-wider text-red-500 font-semibold" style={{fontSize:"15px"}}>
-        subject to <span className="text-black">namakkal</span> jurisdication
+        subject to <span className="text-black">namakkal</span> jurisdiction
       </div>
       <div className="uppercase underline tracking-wider text-red-500 font-semibold">
         Account copy
@@ -106,7 +106,7 @@ setFilterConsignee(
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>
-        :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
+        :&nbsp;opp.Shivsudha&nbsp;Milk dairy,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010
         <span className="text-red-500">Cell&nbsp;9152527000</span>
       </div>
     </div>
@@ -290,8 +290,8 @@ setFilterConsignee(
                   {inputs.accountpaid === "Party" ||
                   inputs.accountpaid === "fixed" ? (
                     <span className="w-[30vw] text-black">
-                      please pay lorry freight in amount favour of
-                      <br /> jaibalaji transport service account
+                     Please Pay Lorry Freight Amount In Favour Of
+                        <br /> Jai Balaji Transport Service Account
                     </span>
                   ) : (
                     <p className="text-black">{inputs.accountpaid}</p>
@@ -315,7 +315,7 @@ setFilterConsignee(
             </td>
             <td colSpan={3} rowSpan={3} className="border-b-2">
               <p className="text-green-700">Our Bank details Given below:</p>
-              <p className="text-green-700">Bank Name:TamilNad Mercanitle bank</p>
+              <p className="text-green-700">Bank Name:TamilNad Mercantile bank</p>
               <p className="text-green-700">Branch:Koolipatti</p>
                 <p className="text-green-700">A/C. No:265539152525000</p>
                 <p className="text-green-700">Ifsc Code:TMBL0000265</p>
