@@ -13,7 +13,7 @@ import {
   Drawer,
 } from "antd";
 import axios from "axios";
-import { get, isEmpty, flattenDeep } from "lodash";
+import { get, isEmpty, flattenDeep,uniq } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -45,8 +45,6 @@ function Report() {
     }
   };
 
-console.log(filteredDatas)
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -59,7 +57,7 @@ console.log(filteredDatas)
           return data.date===res
         });
       })))
-
+console.log(searched,report,"rlerekrji")
     setFilterDatas(
       report.filter((res) => {
         return (
@@ -174,18 +172,14 @@ console.log(filteredDatas)
     },
   ];
 
-  const searchers = [];
-
-  report&&report.map((data,i) => {
+const searchers = [];
+ report.map((data) => {
     return searchers.push(
-      { value: data.consignor,key:i },
-      { value: data.consignee,key:i },
-      { value: data.vehicleno,key:i }
-    );
-  });
-
-
-    
+      { label: data.consignor, value: data.consignor },
+      { label: data.consignee, value: data.consignee },
+      { label: data.vehicleno, value: data.vehicleno },
+    )
+  }).flat();
 
   return (
     <div className="flex pt-[12vh] pl-4">

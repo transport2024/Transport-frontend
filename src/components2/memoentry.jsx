@@ -165,9 +165,9 @@ function Memo() {
   const columns = [
     {
       title: "GC No",
-      dataIndex: "gcno",
-      key: "gcno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) => index + 1,
     },
 
     {
@@ -232,7 +232,7 @@ function Memo() {
             <PrintIcon
               className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => {
-                console.log(text._id)
+                
                 navigate(`/vehicleBill/${text._id}`);
               }}
             />
@@ -309,7 +309,7 @@ function Memo() {
           onFinish={handleSubmit}
           form={form}
         >
-          <Form.Item
+          {/* <Form.Item
             label={<p className="!text-[16px] font-semibold">Memo/GC No</p>}
             name="gcno"
             rules={[
@@ -320,7 +320,7 @@ function Memo() {
             ]}
           >
             <Input type="number" size="large" />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Date</p>}
             name="date"
