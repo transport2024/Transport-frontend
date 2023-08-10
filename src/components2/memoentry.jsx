@@ -71,7 +71,7 @@ function Memo() {
     if (updateId === "") {
       try {
         const formData = {
-          gcno: result.length+1,
+          gcno: memo.length+1,
           drivername: value.drivername,
           date: value.date,
           vehicleno: value.vehicleno,
