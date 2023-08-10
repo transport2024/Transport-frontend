@@ -45,7 +45,7 @@ function Report() {
     }
   };
 
-  console.log(report,"lohj")
+console.log(filteredDatas)
 
   useEffect(() => {
     fetchData();
@@ -69,7 +69,7 @@ function Report() {
         );
       })
     );
-  }, [report, userDates, searched]);
+  }, [report, userDates]);
 
  
 
@@ -176,16 +176,15 @@ function Report() {
 
   const searchers = [];
 
-  report &&
-    report.map((data) => {
-      return searchers.push(
-        { value: data.consignor },
-        { value: data.consignee },
-        { value: data.vehicleno }
-      );
-    });
+  data&&data.map((data,i) => {
+    return searchers.push(
+      { value: data.consignor,key:i },
+      { value: data.consignee,key:i },
+      { value: data.vehicleno,key:i }
+    );
+  });
 
-    console.log(searchers,"poihgio")
+
     
 
   return (

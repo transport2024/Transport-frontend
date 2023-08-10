@@ -19,6 +19,11 @@ import Dashboard from "./Dashboard";
 import VehicleBills from "./Bills/VehicleBills";
 import AddMemoDetails from "./components2/addMemoDetails";
 import Ccv from "./allBills/ccv";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Modal } from "antd";
+import SignalCellularConnectedNoInternet0BarIcon from '@mui/icons-material/SignalCellularConnectedNoInternet0Bar';
+import SignalCellularConnectedNoInternet4BarIcon from '@mui/icons-material/SignalCellularConnectedNoInternet4Bar';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,8 +48,45 @@ const router = createBrowserRouter(
 
 
 function App() {
+const [open,setOpen]=useState(false)
+
+  const fetchData = async () => {
+    try {
+      
+      const result = await axios.get(
+        `${process.env.REACT_APP_URL}/api/consignor`
+      );
+      
+    } catch (err) {
+      console.log(err.request.statusText);
+      if(err.request.statusText==="Internal Server Error"){
+        setOpen(true)
+      }
+    } 
+  };
+
+useEffect(()=>{
+fetchData()
+},[])
+
   return (
-      <RouterProvider router={router} />   
+    <div>
+ <RouterProvider router={router} />  
+ <Modal open={open} footer={false} closable={false} width={400}>
+  <div className="text-md">
+  <p className="font-bold flex items-center gap-1">No Internet<SignalCellularConnectedNoInternet4BarIcon fontSize="14px" className="text-yellow-500"/></p>
+<div className="pl-10">
+<span className="font-bold">Try:</span>
+  <ul className="list-disc">
+    <li>Check Your internet Connection</li>
+    <li>Reconnet your Wifi</li>
+    <button className="bg-blue-500 px-3 rounded-md py-1 text-white text-[12px] ml-[15vw]" onClick={()=>{window.location.reload()}}>Refresh</button>
+  </ul>
+</div>
+  </div>
+ </Modal>
+    </div>
+      
   );
 }
 

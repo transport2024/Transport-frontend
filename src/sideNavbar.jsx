@@ -57,7 +57,7 @@ function SideNavbar() {
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
       <div className="w-[14vw] h-screen shadow  fixed bg-[--primary-color]">
         <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
-          <h1>Logo</h1>
+          <h1>JBTS</h1>
           <div>
             {location.pathname.split("/")[1]
               ? location.pathname.split("/")[1]

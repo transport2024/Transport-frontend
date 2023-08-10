@@ -83,12 +83,10 @@ function AddMemoDetails() {
     form.setFieldsValue(id);
   };
 
-  console.log(memoDetails.filter((res)=>{
-    return res._id===id
-  })[0]?.date)
+
 
   const handleFinish = async (val) => {
-    console.log(id,"lll")
+  
 
   
     if (updateId === "") {
@@ -147,7 +145,7 @@ function AddMemoDetails() {
       }
     } else {
       try {
-        console.log(val.memoId)
+      
         const formData = {
           locationfrom: val.locationfrom,
           locationto: val.locationto,
@@ -205,10 +203,10 @@ function AddMemoDetails() {
         });
       }
     }
-    console.log("click");
+   
   };
 
-  console.log(datas, "llll");
+  
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0]);
