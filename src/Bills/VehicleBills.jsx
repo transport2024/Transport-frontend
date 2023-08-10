@@ -108,13 +108,13 @@ function VehicleBills() {
       </div>
       <div className="capitalize pl-5 font-semibold text-[14px] tracking-wider pl-">
         <span className="text-red-500">B.O.&nbsp;</span>
-        :&nbsp;opp.Shivsudha&nbsp;Milk diary,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010.
+        :&nbsp;opp.Shivsudha&nbsp;Milk dairy,&nbsp;adgaon phata,&nbsp;beed road&nbsp;AURANGABAD[M.S]&nbsp;-&nbsp;431 010.
         <span className="text-red-500">&nbsp;Cell&nbsp;9152527000</span>
       </div>
     </div>
     <div className="font-bold flex justify-center " style={{gap:"20vw"}}>
         <div className="text-red-500 ">
-          Email:jbtsnkl@gmail.comwbehb
+          Email:jbtsnkl@gmail.com
         </div>
         <div className="flex flex-col pt-8">
           <div>

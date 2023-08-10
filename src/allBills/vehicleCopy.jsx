@@ -111,7 +111,7 @@ setFilterConsignee(
       </div>
     </div>
     <div className="font-bold flex justify-center " style={{ gap: "20vw" }}>
-      <div className="text-red-500 ">Email:jbtsnkl@gmail.comwbehb</div>
+      <div className="text-red-500 ">Email:jbtsnkl@gmail.com</div>
       <div className="flex flex-col pt-8">
         <div>
           <span className="text-red-500">
