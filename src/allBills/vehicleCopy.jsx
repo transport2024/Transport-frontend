@@ -4,11 +4,13 @@ import { useLocation } from "react-router";
 import image from "../assets/balaji.png";
 
 function VehicleCopy(props) {
-const {memo,datas}=props
+  const { memo, datas, consignor,consignee } = props;
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
   const [filterMemo,setFilterMemo]=useState([])
+  const [filterConsignor, setfilterConsignor] = useState([]);
+  const [filterConsignee,setFilterConsignee]=useState([])
 
 
   useEffect(() => {
@@ -22,6 +24,18 @@ setFilterMemo(
   memo.filter((res)=>{
     return res._id===filterDatas?.memoId
    })[0]
+)
+
+setfilterConsignor(
+  consignor.filter((res) => {
+    return res.name === filterDatas?.consignor;
+  })[0]
+);
+
+setFilterConsignee(
+  consignee.filter((res) => {
+    return res.name === filterDatas?.consignee;
+  })[0]
 )
 
 
@@ -38,13 +52,15 @@ setFilterMemo(
       prnoto:filterDatas?.Prnoto,
       prnofrom: filterDatas?.prnoform,
       gcno:filterMemo?.gcno,
+      gctin1: filterConsignor?.gstno,
+      gctin2:filterConsignee?.gstno,
       date:filterMemo?.date,
       lorryno:filterMemo?.vehicleno,
       bales:filterDatas?.quantity,
       accountpaid: filterDatas?.accountpaid,
     
     });
-  }, [datas, filterDatas,memo,filterMemo]);
+  }, [datas, filterDatas,memo,filterMemo,consignee,consignor]);
  
 //  console.log(filterMemo,"ll")
 //  console.log(filterDatas,"pp")
@@ -178,6 +194,7 @@ setFilterMemo(
           <input
             style={{ width: "35vw", borderColor: "red" }}
             type="text"
+            defaultValue={inputs.gctin1}
             className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
           />
         </label>
@@ -189,6 +206,7 @@ setFilterMemo(
           <input
             style={{ width: "35vw", borderColor: "red" }}
             type="text"
+            defaultValue={inputs.gctin2}
             className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
           />
         </label>

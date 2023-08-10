@@ -4,11 +4,13 @@ import { useLocation } from "react-router";
 import image from "../assets/balaji.png";
 
 function Driver(props) {
-  const { memo, datas } = props;
+  const { memo, datas,consignee,consignor } = props;
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
   const [filterMemo, setFilterMemo] = useState([]);
+  const [filterConsignor, setfilterConsignor] = useState([]);
+  const [filterConsignee,setFilterConsignee]=useState([])
 
   useEffect(() => {
     setFilterDatas(
@@ -23,6 +25,20 @@ function Driver(props) {
       })[0]
     );
 
+    setfilterConsignor(
+      consignor.filter((res) => {
+        return res.name === filterDatas?.consignor;
+      })[0]
+    );
+
+    setFilterConsignee(
+      consignee.filter((res) => {
+        return res.name === filterDatas?.consignee;
+      })[0]
+    )
+
+
+
     setInputs({
       consignor: filterDatas?.consignor,
       consignee: filterDatas?.consignee,
@@ -36,12 +52,14 @@ function Driver(props) {
       prnoto:filterDatas?.Prnoto,
       prnofrom: filterDatas?.prnoform,
       gcno: filterMemo?.gcno,
+      gctin1: filterConsignor?.gstno,
+      gctin2:filterConsignee?.gstno,
       date: filterMemo?.date,
       lorryno: filterMemo?.vehicleno,
       accountpaid: filterDatas?.accountpaid,
       bales: filterDatas?.quantity,
     });
-  }, [datas, filterDatas, memo, filterMemo]);
+  }, [datas, filterDatas, memo, filterMemo,consignee,consignee]);
 
 
   return (
@@ -187,6 +205,7 @@ function Driver(props) {
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
+              defaultValue={inputs.gctin1}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
@@ -198,6 +217,7 @@ function Driver(props) {
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
+              defaultValue={inputs.gctin2}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>

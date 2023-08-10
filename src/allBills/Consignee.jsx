@@ -6,12 +6,13 @@ import { useLocation } from "react-router";
 import image from "../assets/balaji.png";
 
 function Consignee(props) {
-  const { memo, datas, consignee } = props;
+  const { memo, datas, consignee,consignor } = props;
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
   const [filterMemo, setFilterMemo] = useState([]);
   const [filterConsignee, setfilterConsignee] = useState([]);
+  const [filterConsignor, setfilterConsignor] = useState([]);
 
   useEffect(() => {
     setFilterDatas(
@@ -31,6 +32,12 @@ function Consignee(props) {
       })[0]
     );
 
+    setfilterConsignor(
+      consignor.filter((res) => {
+        return res.name === filterDatas?.consignor;
+      })[0]
+    )
+
     setInputs({
       consignor: filterDatas?.consignor,
       consignee: filterDatas?.consignee,
@@ -46,14 +53,13 @@ function Consignee(props) {
       gcno: filterMemo?.gcno,
       date: filterMemo?.date,
       lorryno: filterMemo?.vehicleno,
-      gctin: filterConsignee?.gstno,
+      gctin1: filterConsignor?.gstno,
+      gctin2:filterConsignee?.gstno,
       accountpaid: filterDatas?.accountpaid,
       bales:filterDatas?.quantity
     });
-  }, [datas, filterDatas, memo, consignee, filterConsignee, filterMemo]);
+  }, [datas, filterDatas, memo, consignee, filterConsignee, filterMemo,consignor]);
 
-  //  console.log(filterMemo,"ll")
-  console.log(filterDatas, "pp");
 
   return (
     <div
@@ -200,19 +206,19 @@ function Consignee(props) {
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
-              defaultValue={inputs.gctin}
+              defaultValue={inputs.gctin1}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
           <label className="flex">
             <span className="text-red-500 ml-2 font-bold">
-              {" "}
+            
               GSTIN&nbsp;&nbsp;&nbsp;&nbsp;:
             </span>
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
-              defaultValue={inputs.gctin}
+              defaultValue={inputs.gctin2}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>

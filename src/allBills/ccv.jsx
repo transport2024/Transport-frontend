@@ -55,10 +55,10 @@ function Ccv() {
 
   return (
     <div>
-      <Conisgnor memo={memo} consignor={consignor} datas={datas} />
-      <Consignee memo={memo} consignee={consignee} datas={datas} />
-      <Driver memo={memo} datas={datas} />
-      <VehicleCopy memo={memo} datas={datas} />
+      <Conisgnor memo={memo} consignor={consignor} consignee={consignee} datas={datas} />
+      <Consignee memo={memo} consignee={consignee} consignor={consignor} datas={datas} />
+      <Driver memo={memo} datas={datas} consignee={consignee} consignor={consignor}/>
+      <VehicleCopy memo={memo} datas={datas} consignee={consignee} consignor={consignor}/>
      
     </div>
   );

@@ -5,13 +5,14 @@ import { get } from "lodash";
 import { useLocation } from "react-router";
 
 function Conisgnor(props) {
-  const { memo, datas, consignor } = props;
+  const { memo, datas, consignor,consignee } = props;
   console.log(memo, datas, consignor, "pova");
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);
   const [filterMemo, setFilterMemo] = useState([]);
   const [filterConsignor, setfilterConsignor] = useState([]);
+  const [filterConsignee,setFilterConsignee]=useState([])
 
   useEffect(() => {
     setFilterDatas(
@@ -31,6 +32,12 @@ function Conisgnor(props) {
       })[0]
     );
 
+    setFilterConsignee(
+      consignee.filter((res) => {
+        return res.name === filterDatas?.consignee;
+      })[0]
+    )
+
     setInputs({
       consignor: filterDatas?.consignor,
       consignee: filterDatas?.consignee,
@@ -46,14 +53,15 @@ function Conisgnor(props) {
       gcno: filterMemo?.gcno,
       date: filterMemo?.date,
       lorryno: filterMemo?.vehicleno,
-      gctin: filterConsignor?.gstno,
+      gctin1: filterConsignor?.gstno,
+      gctin2:filterConsignee?.gstno,
       accountpaid: filterDatas?.accountpaid,
       bales:filterDatas?.quantity
        });
-  }, [datas, filterDatas, memo, consignor, filterConsignor, filterMemo]);
+  }, [datas, filterDatas, memo, consignor, filterConsignor, filterMemo,consignee]);
 
  
-   console.log(filterDatas,"pp")
+   console.log(filterConsignee,"pp")
 ;
 
   return (
@@ -148,7 +156,7 @@ function Conisgnor(props) {
           </label>
           <label>
             <span className="text-red-500 font-bold w-[20vw]">
-              {" "}
+             
               From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
             </span>
             <input
@@ -201,7 +209,7 @@ function Conisgnor(props) {
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
-              defaultValue={inputs.gctin}
+              defaultValue={inputs.gctin1}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
@@ -213,7 +221,7 @@ function Conisgnor(props) {
             <input
               style={{ width: "35vw", borderColor: "red" }}
               type="text"
-              defaultValue={inputs.gctin}
+              defaultValue={inputs.gctin2}
               className="outline-none border-b-2 !bg-transparent pl-10 ml-2 border-dashed"
             />
           </label>
