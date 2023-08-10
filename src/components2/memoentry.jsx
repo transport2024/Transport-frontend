@@ -79,7 +79,7 @@ function Memo() {
           driverwhatsappno: value.driverwhatsappno,
         };
 
-        await axios.post(`${process.env.REACT_APP_URL}/api/memo`, value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
         fetchData();
         notification.success({
           message: "memo Added successfully",
