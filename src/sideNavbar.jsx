@@ -29,8 +29,6 @@ function SideNavbar() {
     setCurrent(e.key);
   };
 
-  
-
   useEffect(() => {
     const selectedKey = localStorage.getItem("selectedKey");
     if (selectedKey !== null) {

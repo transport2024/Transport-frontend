@@ -27,8 +27,6 @@ function Consignor() {
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
 
-
-
   const fetchData = async () => {
     try {
       setLoading(true)
@@ -48,6 +46,9 @@ function Consignor() {
   useEffect(() => {
     fetchData();
   }, [searched]);
+
+
+  console.log(searched)
 
   const handleClear = () => {
     form.setFieldsValue([]);
@@ -97,17 +98,17 @@ function Consignor() {
     }
   };
 
-  console.log(consignors, "rfk");
+ 
   const searchers = [];
 
   consignors &&
     consignors.map((data) => {
       return searchers.push(
-        { value: data.name },
-        { value: data.phone },
-        { value: data.place }
+        {label: data.name, value: data.name },
+        { label: data.phone,value: data.phone },
+        { label: data.place,value: data.place }
       );
-    });
+    }).flat();
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
