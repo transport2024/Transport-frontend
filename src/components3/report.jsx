@@ -39,12 +39,13 @@ function Report() {
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
-
       setReport(get(result, "data.message"));
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log(report,"lohj")
 
   useEffect(() => {
     fetchData();
@@ -58,6 +59,7 @@ function Report() {
           return data.date===res
         });
       })))
+
     setFilterDatas(
       report.filter((res) => {
         return (
@@ -183,7 +185,7 @@ function Report() {
       );
     });
 
-    
+    console.log(searchers,"poihgio")
     
 
   return (
@@ -205,8 +207,7 @@ function Report() {
               showArrow={false}
               
               allowClear={true}
-              // disabled={searched.length===1?true:false}
-              // open={searched.length===1?false:true}
+             
             />
           </div>
 

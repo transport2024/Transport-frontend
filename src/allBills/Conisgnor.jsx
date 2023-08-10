@@ -260,7 +260,7 @@ function Conisgnor(props) {
                 className="!w-[10vw] text-center border-r-2 border-slate-200 border-b-2"
                 rowSpan={3}
               >
-          {filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
+          {inputs.accountpaid==="fixed"?"Fixed": filterDatas?.lramount/inputs.bales+"*"+inputs.bales}
               </td> 
               <td
                 className="!w-[10vw] text-center  border-slate-200 border-b-2"
