@@ -65,13 +65,13 @@ function Memo() {
     fetchData();
   }, [searched]);
 
-  // console.log(memoDetails,"kejbrhkn",Memo,"pppp")
+  console.log(memoDetails.length)
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
         const formData = {
-          gcno: memoDetails.length+1,
+          gcno: result.length+1,
           drivername: value.drivername,
           date: value.date,
           vehicleno: value.vehicleno,
@@ -79,7 +79,9 @@ function Memo() {
           driverwhatsappno: value.driverwhatsappno,
         };
 
-        await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
+        console.log(formData,"ewnjekbhb")
+
+        // await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
         fetchData();
         notification.success({
           message: "memo Added successfully",
