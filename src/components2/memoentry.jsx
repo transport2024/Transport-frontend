@@ -23,6 +23,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
+
 function Memo() {
   const [Memo, setMemo] = useState([]);
   const [open, setOpen] = useState(false);
@@ -69,6 +70,15 @@ function Memo() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
+        const formData = {
+          gcno: memoDetails.length+1,
+          drivername: value.drivername,
+          date: value.date,
+          vehicleno: value.vehicleno,
+          driverphone: value.driverphone,
+          driverwhatsappno: value.driverwhatsappno,
+        };
+
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, value);
         fetchData();
         notification.success({
@@ -110,31 +120,31 @@ function Memo() {
   };
 
   const handleDelete = async (value) => {
-
-    if (memoDetails.filter((res) => {
-      return res?.memoId===value._id
-    })[0]?.memoId === value._id) {
+    if (
+      memoDetails.filter((res) => {
+        return res?.memoId === value._id;
+      })[0]?.memoId === value._id
+    ) {
       Modal.warning({
         title: "This Memo entry Link With Memo Details",
         content: "if you really wanna delete this.. delete Memo details first",
       });
-    }else{
+    } else {
       try {
-     
-        await axios.delete(`${process.env.REACT_APP_URL}/api/memo/${value._id}`);
+        await axios.delete(
+          `${process.env.REACT_APP_URL}/api/memo/${value._id}`
+        );
         fetchData();
         notification.success({
           message: "Deleted Successfully",
         });
-        
       } catch (err) {
         notification.error({
           message: "Something Went Wrong",
         });
       }
-    };
     }
-   
+  };
 
   const handleClear = () => {
     form.setFieldsValue([]);
@@ -223,16 +233,17 @@ function Memo() {
           </div>
           <div
             className={`${
-              memoDetails&&memoDetails.filter((res) => {
-                return get(res,"memoId")===get(text,"_id")
-                })[0]?.memoId!==undefined? "hidden" : "block"
+              memoDetails &&
+              memoDetails.filter((res) => {
+                return get(res, "memoId") === get(text, "_id");
+              })[0]?.memoId !== undefined
+                ? "hidden"
+                : "block"
             }`}
           >
-             
             <PrintIcon
               className="!text-md text-[--secondary-color] cursor-pointer"
               onClick={() => {
-                
                 navigate(`/vehicleBill/${text._id}`);
               }}
             />
@@ -288,7 +299,7 @@ function Memo() {
         </Skeleton>
       </div>
       <Drawer
-      destroyOnClose
+        destroyOnClose
         open={open}
         width={500}
         onCancel={() => {
