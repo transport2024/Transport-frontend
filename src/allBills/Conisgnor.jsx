@@ -6,7 +6,6 @@ import { useLocation } from "react-router";
 
 function Conisgnor(props) {
   const { memo, datas, consignor,consignee } = props;
-  console.log(memo, datas, consignor, "pova");
   const [filterDatas, setFilterDatas] = useState([]);
   const location = useLocation();
   const [inputs, setInputs] = useState([]);

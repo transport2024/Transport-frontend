@@ -22,7 +22,7 @@ import { useDownloadExcel } from "react-export-table-to-excel";
 import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
+import moment from "moment" 
 
 function Memo() {
   const [Memo, setMemo] = useState([]);
@@ -67,19 +67,20 @@ function Memo() {
 
   console.log(memoDetails.length)
 
+ 
+
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
         const formData = {
           gcno: Memo.length+121,
           drivername: value.drivername,
-          date: value.date,
+          date: moment(value.date).format('DD-MM-YYYY'),
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
           driverwhatsappno: value.driverwhatsappno,
         };
 
-        console.log(formData,"ewnjekbhb")
 
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
         fetchData();
@@ -343,6 +344,7 @@ function Memo() {
                 message: "Please input your date!",
               },
             ]}
+            
           >
             <Input type="date" size="large" />
           </Form.Item>
