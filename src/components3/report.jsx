@@ -176,7 +176,7 @@ console.log(filteredDatas)
 
   const searchers = [];
 
-  data&&data.map((data,i) => {
+  report&&report.map((data,i) => {
     return searchers.push(
       { value: data.consignor,key:i },
       { value: data.consignee,key:i },
