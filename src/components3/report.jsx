@@ -13,7 +13,7 @@ import {
   Drawer,
 } from "antd";
 import axios from "axios";
-import { get, isEmpty, flattenDeep,uniq } from "lodash";
+import { get, isEmpty, flattenDeep, uniq } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -33,6 +33,7 @@ function Report() {
   const [filteredDatas, setFilterDatas] = useState("");
   const [memoDetails, setMemoDetails] = useState([]);
   const [data, setData] = useState("");
+  const [dateFilters, setDateFilters] = useState("");
 
   const fetchData = async () => {
     try {
@@ -49,15 +50,19 @@ function Report() {
     fetchData();
   }, []);
 
- 
+  console.log(searched);
+
   useEffect(() => {
-    setData(flattenDeep(userDates &&
-      userDates?.map((res) => {
-        return report?.filter(data=>{
-          return data.date===res
-        });
-      })))
-console.log(searched,report,"rlerekrji")
+    setData(
+      flattenDeep(
+        userDates &&
+          userDates?.map((res) => {
+            return report?.filter((data) => {
+              return data.date === res;
+            });
+          })
+      )
+    );
     setFilterDatas(
       report.filter((res) => {
         return (
@@ -67,12 +72,19 @@ console.log(searched,report,"rlerekrji")
         );
       })
     );
-  }, [report, userDates]);
 
- 
+    setDateFilters(
+      data&&data.filter((res) => {
+        return (
+          searched.includes(res.consignor) ||
+          searched.includes(res.consignee) ||
+          searched.includes(res.vehicleno)
+        );
+      })
+    );
+  }, [report, userDates, searched]);
 
   const handleDate = (date) => {
-    
     if (!date || !date.length) {
       setUserDate([]);
       date = [];
@@ -172,14 +184,16 @@ console.log(searched,report,"rlerekrji")
     },
   ];
 
-const searchers = [];
- report.map((data) => {
-    return searchers.push(
-      { label: data.consignor, value: data.consignor },
-      { label: data.consignee, value: data.consignee },
-      { label: data.vehicleno, value: data.vehicleno },
-    )
-  }).flat();
+  const searchers = [];
+  data&&data
+    .map((res) => {
+      return searchers.push(
+        { label: res.consignor, value: res.consignor },
+        { label: res.consignee, value: res.consignee },
+        { label: res.vehicleno, value: res.vehicleno }
+      );
+    })
+    .flat();
 
   return (
     <div className="flex pt-[12vh] pl-4">
@@ -198,9 +212,7 @@ const searchers = [];
               className="w-[30vw]  py-3"
               size="large"
               showArrow={false}
-              
               allowClear={true}
-             
             />
           </div>
 
@@ -213,18 +225,38 @@ const searchers = [];
             </Button>
           </div>
         </div>
+{/* 
+        {data !== "" && filteredDatas !== "" ? (
+          <Table
+            columns={columns}
+            dataSource={dateFilters}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
+        ) : data == "" ? (
+          <Table
+            columns={columns}
+            dataSource={filteredDatas}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
+        ) : ( */}
 
-        {data==""?<Table
-          columns={columns}
-          dataSource={filteredDatas}
-          ref={tableRef}
-          pagination={{ pageSize: 5 }}
-        />:<Table
-        columns={columns}
-        dataSource={data}
-        ref={tableRef}
-        pagination={{ pageSize: 5 }}
-      />}
+{console.log(!isEmpty(dateFilters),"ijhgv")}
+{!isEmpty(dateFilters)?<Table
+            columns={columns}
+            dataSource={dateFilters}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
+        :
+          <Table
+            columns={columns}
+            dataSource={data}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+          />
+        }
       </div>
     </div>
   );
