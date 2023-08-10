@@ -47,9 +47,10 @@ function LoginAndRegistration() {
 
   return (
     <div
-      className="flex items-center justify-center bg-gray-100 w-screen h-screen bg-center bg-cover bg-no-repeat"
+      className="flex items-center justify-center bg-gradient-to-r from-blue-200 via-slate-300 to-white-200  w-screen h-screen bg-center bg-cover bg-no-repeat"
       // style={{
       //   backgroundImage: `url(${myimage})`,
+      //   backdropFilter:"blur(20%)",
       // }}
     >
       <div className="xl:w-[25vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">

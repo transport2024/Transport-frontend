@@ -83,7 +83,7 @@ function SideNavbar() {
               </Avatar>
             </div>
             <div
-              className={`absolute   h-[4.5vh] w-[6vw] top-4 left-[91.5vw]  border-b bg-white rounded-md text-[--secondary-color] flex items-center justify-center ${
+              className={`absolute   h-[4.5vh] w-[6vw] top-4 left-[91vw]  border-b bg-white rounded-md text-[--secondary-color] flex items-center justify-center ${
                 open ? "flex" : "hidden"
               }`}
             >
