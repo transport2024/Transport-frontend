@@ -20,6 +20,7 @@ function Dashboard() {
     const [vehicle,setVehicle]=useState([])
   const [broker, setBroker] = useState([])
   const [loading,setLoading]=useState(false)
+  const [memo,setMemo]=useState([])
     
 
   const fetchData = async () => {
@@ -37,10 +38,14 @@ function Dashboard() {
           const result4 = await axios.get(
             `${process.env.REACT_APP_URL}/api/broker`
           );
+          const result5 = await axios.get(
+            `${process.env.REACT_APP_URL}/api/memo`
+          );
             setConsignor(get(result1, "data.message"));
             setConsignee(get(result2, "data.message"));
             setVehicle(get(result3, "data.message"));
             setBroker(get(result4, "data.message"));
+            setMemo(get(result5, "data.message"));
         } catch (err) {
           console.log(err);
         } finally {
@@ -51,56 +56,96 @@ function Dashboard() {
     useEffect(() => {
         fetchData();
     }, [])
-    
-    console.log(consignor,"jijih")
 
+    console.log(memo,"jberjhehj")
+
+
+    const columns = [
+      {
+        title: "GC No",
+        dataIndex: "gcno",
+        key: "gcno",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+  
+      {
+        title: "Date",
+        dataIndex: "date",
+        key: "date",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+      {
+        title: "Vehicle No",
+        dataIndex: "vehicleno",
+        key: "vehicleno",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+      {
+        title: "Driver Name",
+        dataIndex: "drivername",
+        key: "drivername",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+      {
+        title: "DriverPhone",
+        dataIndex: "driverphone",
+        key: "driverphone",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+      {
+        title: "Driver WhatsappNo",
+        dataIndex: "driverwhatsappno",
+        key: "driverwhatsappno",
+        render: (text) => <div className="!text-[16px]">{text}</div>,
+      },
+    ];
   
       
-      const columns = [
-        {
-          title: "Name",
-          dataIndex: "name",
-          key: "name",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
+      // const columns = [
+      //   {
+      //     title: "Name",
+      //     dataIndex: "name",
+      //     key: "name",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
     
-        {
-          title: "Address",
-          dataIndex: "address",
-          key: "address",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-        {
-          title: "Place",
-          dataIndex: "place",
-          key: "place",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-        {
-          title: "Contact Person",
-          dataIndex: "contactPerson",
-          key: "contactPerson",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-        {
-          title: "Phone",
-          dataIndex: "phone",
-          key: "phone",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-        {
-          title: "GST NO",
-          dataIndex: "gstno",
-          key: "gstno",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-        {
-          title: "Mail ID",
-          dataIndex: "mail",
-          key: "mail",
-          render: (text) => <div className="!text-[16px]">{text}</div>,
-        },
-      ];
+      //   {
+      //     title: "Address",
+      //     dataIndex: "address",
+      //     key: "address",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      //   {
+      //     title: "Place",
+      //     dataIndex: "place",
+      //     key: "place",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      //   {
+      //     title: "Contact Person",
+      //     dataIndex: "contactPerson",
+      //     key: "contactPerson",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      //   {
+      //     title: "Phone",
+      //     dataIndex: "phone",
+      //     key: "phone",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      //   {
+      //     title: "GST NO",
+      //     dataIndex: "gstno",
+      //     key: "gstno",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      //   {
+      //     title: "Mail ID",
+      //     dataIndex: "mail",
+      //     key: "mail",
+      //     render: (text) => <div className="!text-[16px]">{text}</div>,
+      //   },
+      // ];
 
   return (
     <div className="pt-[15vh] ">
@@ -178,17 +223,12 @@ function Dashboard() {
           </div>
           <div className="flex flex-col pt-[8vh] pl-5 gap-10">
               <div className="w-[80vw] m-auto">
-                  <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last Five Consignors</h1>
+                  <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last 10 Entry</h1>
           <Skeleton loading={loading}>
-             <Table columns={columns} dataSource={consignor.slice(-5)} pagination={false} className="!z-0"/>
+             <Table columns={columns} dataSource={memo.slice(-10).reverse()} pagination={false} className="!z-0"/>
                  </Skeleton>
              </div>
-              <div className="w-[80vw] m-auto">
-              <h1 className="!text-[--secondary-color] text-2xl font-semibold">Last Five Consignees</h1>
-              <Skeleton loading={loading}>
-             <Table columns={columns} dataSource={consignee.slice(-5)} pagination={false} />
-                 </Skeleton>
-              </div>
+             
           </div>
     </div>
   );

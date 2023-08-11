@@ -28,7 +28,7 @@ function Report() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const { RangePicker } = DatePicker;
-  const dateFormat = "YYYY-MM-DD";
+  const dateFormat = "DD-MM-YYYY";
   const [userDates, setUserDate] = useState("");
   const [filteredDatas, setFilterDatas] = useState("");
   const [memoDetails, setMemoDetails] = useState([]);
@@ -91,23 +91,25 @@ function Report() {
     }
 
     const startDate = moment(
-      `${date[0]?.$y} - ${date[0]?.$M + 1} - ${date[0]?.$D}`,
-      "YYYY-MM-DD"
+      `${date[0]?.$D} - ${date[0]?.$M + 1} - ${date[0]?.$y} -`,
+      "DD-MM-YYYY"
     );
     const endDate = moment(
-      `${date[1]?.$y} - ${date[1]?.$M + 1} - ${date[1]?.$D}`,
-      "YYYY-MM-DD"
+      `${date[1]?.$D} - ${date[1]?.$M + 1} - ${date[1]?.$y} -`,
+      "DD-MM-YYYY"
     );
 
     const dates = [];
     let currentDate = startDate;
 
     while (currentDate <= endDate) {
-      dates.push(currentDate.format("YYYY-MM-DD"));
+      dates.push(currentDate.format("DD-MM-YYYY"));
       setUserDate(dates);
       currentDate = currentDate.clone().add(1, "days");
     }
   };
+
+  console.log(userDates)
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
