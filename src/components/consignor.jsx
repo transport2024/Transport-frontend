@@ -118,51 +118,51 @@ function Consignor() {
 
   const columns = [
     {
-      title: <h1 className="!text-[18px]">Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Name</h1>,
       dataIndex: "name",
       key: "name",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: <h1 className="!text-[18px]">Address</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Address</h1>,
       dataIndex: "address",
       key: "address",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[18px]">Place</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Place</h1>,
       dataIndex: "place",
       key: "place",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[18px] !w-[10vw]">Contact Person</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px] !w-[10vw]">Contact Person</h1>,
       dataIndex: "contactPerson",
       key: "contactPerson",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[18px]">Phone</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[18px]">GST NO</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[18px]">Mail ID</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: <h1 className="text-[18px]">Actions</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -186,8 +186,8 @@ function Consignor() {
   ];
 
   return (
-    <div className="flex pt-[12vh] pl-4">
-      <div className="w-[82vw] flex flex-col gap-8">
+    <div className="flex pt-[12vh] lg:pl-4">
+      <div className="w-[82vw] flex flex-col gap-4 lg:gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -197,7 +197,7 @@ function Consignor() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-1/2 !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
@@ -221,7 +221,9 @@ function Consignor() {
             </Button>
           </div>
         </div>
-        <Skeleton loading={loading}>
+
+        <div className="overflow-x-scroll">
+        <Skeleton loading={loading} >
           <Table
             columns={columns}
             dataSource={consignors}
@@ -232,6 +234,8 @@ function Consignor() {
          
           />
         </Skeleton>
+        </div>
+     
       </div>
       <Drawer
         open={open}

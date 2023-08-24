@@ -51,9 +51,9 @@ function Memo() {
       const result3 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
-
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
+      
     } catch (err) {
       console.log(err);
     } finally {
@@ -65,10 +65,7 @@ function Memo() {
     fetchData();
   }, [searched]);
 
-  console.log(memoDetails.length)
-
- 
-
+  
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
