@@ -50,7 +50,7 @@ function SideNavbar() {
 
   return (
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
-      <div className="w-[14vw] h-screen  lg:shadow fixed bg-[--primary-color]">
+      <div className="w-[14vw] h-screen  lg:border-r lg:border-slate-200 fixed bg-[--primary-color]">
         <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
             <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12"/>
