@@ -17,6 +17,8 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Consignor() {
   const [consignors, setConsignors] = useState([]);
@@ -26,6 +28,7 @@ function Consignor() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -35,7 +38,9 @@ function Consignor() {
       );
       setConsignors(get(result, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false)
     }

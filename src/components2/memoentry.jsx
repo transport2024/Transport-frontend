@@ -23,6 +23,8 @@ import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import moment from "moment" 
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Memo() {
   const [Memo, setMemo] = useState([]);
@@ -36,6 +38,7 @@ function Memo() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [memoDetails, setMemoDetails] = useState([]);
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -55,7 +58,9 @@ function Memo() {
       setVehicle(get(result2, "data.message"));
       
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false);
     }
@@ -174,44 +179,44 @@ function Memo() {
 
   const columns = [
     {
-      title: "GC No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">GC No</h1>,
       dataIndex: "serialNumber",
       key: "serialNumber",
       render: (text, record, index) => index + 121,
     },
 
     {
-      title: "Date",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Date</h1>,
       dataIndex: "date",
       key: "date",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Vehicle No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Vehicle No</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
       render: (text) => <div className="!text-[16px]">{text}</div>,
     },
     {
-      title: "Driver Name",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Driver Name</h1>,
       dataIndex: "drivername",
       key: "drivername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "DriverPhone",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">DriverPhone</h1>,
       dataIndex: "driverphone",
       key: "driverphone",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Driver WhatsappNo",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Driver WhatsappNo</h1>,
       dataIndex: "driverwhatsappno",
       key: "driverwhatsappno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Actions",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-1">
@@ -265,7 +270,7 @@ function Memo() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[50%] !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
           />
@@ -295,6 +300,7 @@ function Memo() {
             dataSource={Memo}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
+            className="!overflow-x-scroll"
           />
         </Skeleton>
       </div>

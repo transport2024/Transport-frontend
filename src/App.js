@@ -22,6 +22,8 @@ import Ccv from "./allBills/ccv";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
+import {hideOpen,showOpen} from "./Redux/NetworkSlice"
+import {useDispatch,useSelector} from "react-redux"
 import SignalCellularConnectedNoInternet0BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet0Bar";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
 
@@ -47,24 +49,9 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [open, setOpen] = useState(false);
-
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignor`
-      );
-    } catch (err) {
-      console.log(err.request.statusText);
-      if (err.request.statusText === "Internal Server Error") {
-        setOpen(true);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const dispatch=useDispatch()
+  const open=useSelector((state) => state.network.isOpen)
+  console.log(open,"rbruh")
 
   return (
     <div>

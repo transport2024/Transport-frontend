@@ -20,6 +20,8 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import { DatePicker } from "antd";
 import moment from "moment";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Report() {
   const [report, setReport] = useState([]);
@@ -34,6 +36,7 @@ function Report() {
   const [memoDetails, setMemoDetails] = useState([]);
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -42,7 +45,9 @@ function Report() {
       );
       setReport(get(result, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     }
   };
 
@@ -74,13 +79,14 @@ function Report() {
     );
 
     setDateFilters(
-      data&&data.filter((res) => {
-        return (
-          searched.includes(res.consignor) ||
-          searched.includes(res.consignee) ||
-          searched.includes(res.vehicleno)
-        );
-      })
+      data &&
+        data.filter((res) => {
+          return (
+            searched.includes(res.consignor) ||
+            searched.includes(res.consignee) ||
+            searched.includes(res.vehicleno)
+          );
+        })
     );
   }, [report, userDates, searched]);
 
@@ -109,7 +115,7 @@ function Report() {
     }
   };
 
-  console.log(userDates)
+  console.log(userDates);
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
@@ -119,90 +125,113 @@ function Report() {
 
   const columns = [
     {
-      title: "Date",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Date</h1>,
       dataIndex: "date",
       key: "date",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Vehicle No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Vehicle No</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Pan No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Pan No</h1>,
       dataIndex: "pan",
       key: "pan",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "RC Name",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">RC Name</h1>,
       dataIndex: "rcname",
       key: "rcname",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Location From",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Location From</h1>,
       dataIndex: "locationfrom",
       key: "locationfrom",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Location To",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Location To</h1>,
       dataIndex: "locationto",
       key: "location",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Consignor",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignor</h1>,
       dataIndex: "consignor",
       key: "consignor",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Consignee",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignee</h1>,
       dataIndex: "consignee",
       key: "consignee",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Broker Name",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Name</h1>,
       dataIndex: "brokername",
       key: "brokername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Lr No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Lr No</h1>,
       dataIndex: "gcno",
       key: "gcno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: "Lr Amount",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Lr Amount</h1>,
       dataIndex: "lramount",
       key: "lramount",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
   ];
 
   const searchers = [];
-  data&&data
-    .map((res) => {
-      return searchers.push(
-        { label: res.consignor, value: res.consignor },
-        { label: res.consignee, value: res.consignee },
-        { label: res.vehicleno, value: res.vehicleno }
-      );
-    })
-    .flat();
+  data &&
+    data
+      .map((res) => {
+        return searchers.push(
+          { label: res.consignor, value: res.consignor },
+          { label: res.consignee, value: res.consignee },
+          { label: res.vehicleno, value: res.vehicleno }
+        );
+      })
+      .flat();
 
   return (
-    <div className="flex pt-[12vh] pl-4">
+    <div className="flex pt-[15vh] lg:pl-4">
       <div className="w-[83vw] flex flex-col gap-8">
-        <div className="flex items-center justify-between px-10">
-          <RangePicker format={dateFormat} size="large" onChange={handleDate} />
-          <div className="flex w-[30vw]">
+        <div className="flex flex-col lg:flex-row items-center justify-between px-10">
+          <RangePicker format={dateFormat} size="large" onChange={handleDate} className="w-[80vw] lg:w-[20vw]"/>
+          <div className="flex items-center justify-center w-[90vw] pl-3 lg:pl-0">
             <Select
               mode="tags"
               showSearch
@@ -211,54 +240,39 @@ function Report() {
               onChange={(data) => {
                 setSearched(data);
               }}
-              className="w-[30vw]  py-3"
+              className="!w-[50vw] lg:!w-1/2 !m-auto py-3"
               size="large"
               showArrow={false}
               allowClear={true}
             />
-          </div>
 
-          <div>
-            <Button
-              onClick={onDownload}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
-            >
-              Export Exel
-            </Button>
+            <div className="pr-5">
+              <Button
+                onClick={onDownload}
+                className="w-[90px] lg:w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              >
+                Export Exel
+              </Button>
+            </div>
           </div>
         </div>
-{/* 
-        {data !== "" && filteredDatas !== "" ? (
-          <Table
-            columns={columns}
-            dataSource={dateFilters}
-            ref={tableRef}
-            pagination={{ pageSize: 5 }}
-          />
-        ) : data == "" ? (
-          <Table
-            columns={columns}
-            dataSource={filteredDatas}
-            ref={tableRef}
-            pagination={{ pageSize: 5 }}
-          />
-        ) : ( */}
 
-{console.log(!isEmpty(dateFilters),"ijhgv")}
-{!isEmpty(dateFilters)?<Table
+        {!isEmpty(dateFilters) ? (
+          <Table
             columns={columns}
             dataSource={dateFilters}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
           />
-        :
+        ) : (
           <Table
             columns={columns}
             dataSource={data}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
+            className="!overflow-x-scroll"
           />
-        }
+        )}
       </div>
     </div>
   );

@@ -19,6 +19,8 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Vehicle() {
   const [Vehicle, setVehicle] = useState([]);
@@ -30,6 +32,7 @@ function Vehicle() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(false);
   const [data, setData] = useState([]);
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -39,7 +42,9 @@ function Vehicle() {
       );
       setVehicle(get(result, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false);
     }
@@ -184,51 +189,51 @@ function Vehicle() {
 
   const columns = [
     {
-      title: "DocEntry",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">DocEntry</h1>,
       dataIndex: "docentry",
       key: "docentry",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: "VehicleNo",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">VehicleNo</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "DriverName",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">DriverName</h1>,
       dataIndex: "drivername",
       key: "drivername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "DriverPhone",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">DriverPhone</h1>,
       dataIndex: "driverphone",
       key: "driverphone",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "WhatsappNo",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">WhatsappNo</h1>,
       dataIndex: "whatsappno",
       key: "whatsappno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "PAN",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">PAN</h1>,
       dataIndex: "pan",
       key: "pan",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "RCName",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">RCName</h1>,
       dataIndex: "rcname",
       key: "rcname",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     
     {
-      title: "Actions",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -263,7 +268,7 @@ function Vehicle() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[50%] !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
@@ -294,6 +299,7 @@ function Vehicle() {
             dataSource={Vehicle}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
+            className="!overflow-x-scroll"
           />
         </Skeleton>
       </div>

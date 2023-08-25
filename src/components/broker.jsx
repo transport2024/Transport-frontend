@@ -18,6 +18,8 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Broker() {
   const [Broker, setBroker] = useState([]);
@@ -27,6 +29,7 @@ function Broker() {
 	const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -123,14 +126,14 @@ function Broker() {
 
   const columns = [
     {
-      title: "Broker Name",
+      title: <p className="text-[12px] lg:text-[18px]">Broker Name</p>,
       dataIndex: "brokername",
       key: "brokername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[12px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Actions",
+      title:<p className="text-[12px] lg:text-[18px]">Actions</p> ,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -166,7 +169,7 @@ function Broker() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[50%] !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
@@ -226,21 +229,21 @@ function Broker() {
             <Input type="text" size="large" />
           </Form.Item>
 
-          <div className="flex  justify-end items-end">
+          <div className="flex pl-20 lg:pl-0 lg:justify-end lg:items-end">
             
             <Form.Item className="w-[10vw]">
               <Button
                 htmlType="submit"
-                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-red-500 lg:w-[130px] float-left text-white font-bold tracking-wider"
                 onClick={handleClear}
               >
                 Clear
               </Button>
             </Form.Item>
-            <Form.Item className="w-[10vw]">
+            <Form.Item className="w-[10vw] pl-10 lg:pl-0">
               <Button
                 htmlType="submit"
-                className="bg-green-500 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-green-500  lg:w-[130px] float-left text-white font-bold tracking-wider"
               >
                 {updateId === "" ? "Save" : "Update"}{" "}
               </Button>

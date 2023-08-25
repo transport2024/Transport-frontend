@@ -15,6 +15,8 @@ import { Navigate, useLocation, useNavigate } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function AddMemoDetails() {
   const [form] = Form.useForm();
@@ -34,6 +36,7 @@ function AddMemoDetails() {
   const [updateId, setUpdateId] = useState("");
   const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -67,7 +70,9 @@ function AddMemoDetails() {
       setLocation(get(result3, "data.message"));
       setVehicle(get(result7, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false);
     }
@@ -244,120 +249,120 @@ function AddMemoDetails() {
 
   const columns = [
     {
-      title: "Location From",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Location From</h1>,
       dataIndex: "locationfrom",
       key: "locationfrom",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Location To",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Location To</h1>,
       dataIndex: "locationto",
       key: "locationto",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Consignor",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignor</h1>,
       dataIndex: "consignor",
       key: "consignor",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Consignee",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignee</h1>,
       dataIndex: "consignee",
       key: "consignee",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Lot No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Lot No</h1>,
       dataIndex: "lotno",
       key: "lotno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "PR NO From",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">PR NO From</h1>,
       dataIndex: "prnoform",
 
-      key: "prnofrom",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      key: <h1 className="!text-[12px] lg:!text-[18px]">prnofrom</h1>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "PR NO To",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">PR NO To</h1>,
       dataIndex: "Prnoto",
 
       key: "prnoto",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Quantity",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Quantity</h1>,
       dataIndex: "quantity",
       key: "quantity",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "LR Amount",
+      title:<h1 className="!text-[12px] lg:!text-[18px]">LR Amount</h1>,
       dataIndex: "lramount",
       key: "lramount",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Broker Name",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Name</h1>,
       dataIndex: "brokername",
       key: "brokername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Broker Commission",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Commission</h1>,
       dataIndex: "brokercommission",
 
       key: "brokerCommission",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Account Copy",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Account Copy</h1>,
       dataIndex: "memomethod",
       key: "memomethod",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Lorry Foeight",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Lorry Foeight</h1>,
       dataIndex: "lorryfreight",
       key: "lorryfreight",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Account Paid",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Account Paid</h1>,
       dataIndex: "accountpaid",
       key: "accountpaid",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Invoive No",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Invoive No</h1>,
       dataIndex: "invoiceno",
       key: "invoiceno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Value of Goods",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Value of Goods</h1>,
       dataIndex: "valueofgoods",
       key: "valueofgoods",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Quality",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Quality</h1>,
       dataIndex: "quality",
       key: "quality",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Press Mark",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Press Mark</h1>,
       dataIndex: "pressmark",
 
-      key: "PressMark",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      key: <h1 className="!text-[12px] lg:!text-[18px]">PressMark</h1>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Actions",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -391,7 +396,7 @@ function AddMemoDetails() {
     <div className="pt-24 pl-[5vw] w-[80vw]">
       <Skeleton loading={loading}>
         <Form
-          className="grid grid-cols-3 gap-x-[5vw]"
+          className="lg:grid  lg:grid-cols-3 gap-x-[5vw] flex flex-col"
           layout="vertical"
           form={form}
         >
@@ -480,7 +485,7 @@ function AddMemoDetails() {
             <Form.Item>
               <Button
                 htmlType="submit"
-                className="bg-red-500 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-red-500 lg:w-[130px] float-left text-white font-bold tracking-wider"
               >
                 Clear
               </Button>
@@ -488,7 +493,7 @@ function AddMemoDetails() {
             <Form.Item>
               <Button
                 htmlType="submit"
-                className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
+                className="bg-green-600 lg:w-[130px] float-left text-white font-bold tracking-wider"
               >
                 Save
               </Button>

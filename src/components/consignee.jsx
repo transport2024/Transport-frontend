@@ -19,6 +19,8 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 
 function Consignee() {
   const [Consignee, setConsignee] = useState([]);
@@ -28,6 +30,7 @@ function Consignee() {
   const tableRef = useRef(null);
   const [searched, setSearched] = useState([]);
   const [loading,setLoading]=useState(false)
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     try {
@@ -37,7 +40,9 @@ function Consignee() {
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false)
     }
@@ -118,50 +123,50 @@ function Consignee() {
 
   const columns = [
     {
-      title: "Name",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Name</h1>,
       dataIndex: "name",
       key: "name",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Address",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Address</h1>,
       dataIndex: "address",
       key: "address",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Place",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Place</h1>,
       dataIndex: "place",
       key: "place",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Contact Person",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Contact Person</h1>,
       dataIndex: "contactPerson",
       key: "contactPerson",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Phone",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "GST NO",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Mail ID",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Actions",
+      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -185,7 +190,7 @@ function Consignee() {
   ];
 
   return (
-    <div className="flex pt-[12vh] pl-4">
+    <div className="flex pt-[12vh] lg:pl-4">
       <div className="w-[80vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
@@ -196,7 +201,7 @@ function Consignee() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[50%] !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-3"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
@@ -227,6 +232,7 @@ function Consignee() {
           dataSource={Consignee}
           ref={tableRef}
           pagination={{ pageSize : 5 }}
+          className="!overflow-x-scroll"
         />
         </Skeleton>
        

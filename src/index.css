@@ -14,9 +14,9 @@ body {
 
 }
 
-/* ::-webkit-scrollbar{
+::-webkit-scrollbar{
   display: none !important;
-} */
+}
 
 .ant-menu-item-selected {
   background-color: transparent !important;

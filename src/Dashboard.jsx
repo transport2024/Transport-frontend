@@ -11,6 +11,8 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
+import {useDispatch} from "react-redux"
+import {showOpen,hideOpen} from "./Redux/NetworkSlice"
 
 
 function Dashboard() {
@@ -21,6 +23,7 @@ function Dashboard() {
   const [broker, setBroker] = useState([]);
   const [loading, setLoading] = useState(false);
   const [memo, setMemo] = useState([]);
+  const dispatch=useDispatch()
 
   const fetchData = async () => {
     setLoading(true);
@@ -44,7 +47,9 @@ function Dashboard() {
       setBroker(get(result4, "data.message"));
       setMemo(get(result5, "data.message"));
     } catch (err) {
-      console.log(err);
+      if (err.request.statusText === "Internal Server Error") {
+        dispatch(showOpen())
+      }
     } finally {
       setLoading(false);
     }
@@ -58,89 +63,44 @@ function Dashboard() {
 
   const columns = [
     {
-      title: "GC No",
+      title: <p className="!text-[12px] lg:text-[18px]">GC No</p>,
       dataIndex: "gcno",
       key: "gcno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: "Date",
+      title: <p className="!text-[12px] lg:text-[18px]">Date</p>,
       dataIndex: "date",
       key: "date",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Vehicle No",
+      title: <p className="!text-[12px] lg:text-[18px]">Vehicle No</p>,
       dataIndex: "vehicleno",
       key: "vehicleno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Driver Name",
+      title: <p className="!text-[12px] lg:text-[18px]">Driver Name</p>,
       dataIndex: "drivername",
       key: "drivername",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "DriverPhone",
+      title: <p className="!text-[12px] lg:text-[18px]">DriverPhone</p>,
       dataIndex: "driverphone",
       key: "driverphone",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: "Driver WhatsappNo",
+      title: <p className="!text-[12px] lg:text-[18px]">Driver Whatsappno</p>,
       dataIndex: "driverwhatsappno",
       key: "driverwhatsappno",
-      render: (text) => <div className="!text-[16px]">{text}</div>,
+      render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
     },
   ];
 
-  // const columns = [
-  //   {
-  //     title: "Name",
-  //     dataIndex: "name",
-  //     key: "name",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-
-  //   {
-  //     title: "Address",
-  //     dataIndex: "address",
-  //     key: "address",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  //   {
-  //     title: "Place",
-  //     dataIndex: "place",
-  //     key: "place",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  //   {
-  //     title: "Contact Person",
-  //     dataIndex: "contactPerson",
-  //     key: "contactPerson",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  //   {
-  //     title: "Phone",
-  //     dataIndex: "phone",
-  //     key: "phone",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  //   {
-  //     title: "GST NO",
-  //     dataIndex: "gstno",
-  //     key: "gstno",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  //   {
-  //     title: "Mail ID",
-  //     dataIndex: "mail",
-  //     key: "mail",
-  //     render: (text) => <div className="!text-[16px]">{text}</div>,
-  //   },
-  // ];
 
   return (
     <div className="pt-[15vh] ">
@@ -224,9 +184,9 @@ function Dashboard() {
           />
         </div>
       </div>
-      <div className="flex flex-col pt-[8vh] pl-5 gap-10 overflow-scroll">
+      <div className="flex flex-col pt-5 lg:pt-[8vh] lg:pl-5 gap-10 ">
         <div className="w-[80vw] m-auto">
-          <h1 className="!text-[--secondary-color] text-2xl font-semibold">
+          <h1 className="!text-[--secondary-color] lg:text-2xl font-semibold">
             Last 10 Entry
           </h1>
           <Skeleton loading={loading}>
@@ -234,7 +194,7 @@ function Dashboard() {
               columns={columns}
               dataSource={memo.slice(-10).reverse()}
               pagination={false}
-              className="!z-0"
+              className="!z-0 !overflow-scroll"
             />
           </Skeleton>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Avatar, Drawer, Menu, Modal } from "antd";
+import { Avatar, Drawer, Image, Menu, Modal } from "antd";
 import { items } from "./helper/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "lodash";
@@ -7,6 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import logo from "./assets/logo.png";
 
 function SideNavbar() {
   const location = useLocation();
@@ -51,7 +52,9 @@ function SideNavbar() {
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
       <div className="w-[14vw] h-screen   fixed bg-[--primary-color]">
         <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
-          <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0">JBTS</h1>
+          <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
+            <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12"/>
+          </h1>
           <div className="hidden lg:block">
             {location.pathname.split("/")[1]
               ? location.pathname.split("/")[1]
@@ -151,6 +154,7 @@ function SideNavbar() {
           onClose={() => {
             setMenu(false);
           }}
+          className="absolute top-[9vh]"
         >
           <Menu
             items={items}
