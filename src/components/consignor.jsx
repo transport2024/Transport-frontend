@@ -110,7 +110,6 @@ function Consignor() {
     consignors.map((data) => {
       return searchers.push(
         {label: data.name, value: data.name },
-        { label: data.phone,value: data.phone },
         { label: data.place,value: data.place }
       );
     }).flat();

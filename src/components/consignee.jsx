@@ -106,7 +106,6 @@ function Consignee() {
     Consignee.map((data) => {
       return searchers.push(
         { value: data.name },
-        { value: data.phone },
         { value: data.place }
       );
     });

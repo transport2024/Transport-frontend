@@ -93,12 +93,12 @@ function SideNavbar() {
               </Avatar>
             </div>
             <div
-              className={`absolute   h-[4.5vh] w-[6vw] top-4 left-[91vw]  border-b bg-white rounded-md text-[--secondary-color] flex items-center justify-center ${
+              className={`absolute h-[2vh] w-[10vw] lg:h-[4.5vh] lg:w-[6vw] top-12 left-[85vw] lg:top-4 lg:left-[91vw]  border-b bg-white rounded-md text-[--secondary-color] flex items-center justify-center ${
                 open ? "flex" : "hidden"
               }`}
             >
               <button
-                className="text-[16px] "
+                className="text-[8px] lg:text-[16px] "
                 onClick={() => {
                   setModal(!modal);
                 }}
@@ -121,7 +121,7 @@ function SideNavbar() {
           <div className="flex gap-2 items-end justify-end  pt-2">
             <button
               onClick={handleLogout}
-              className="bg-[--secondary-color] flex items-center justify-center text-white w-[4vw] h-[4vh] rounded-md "
+              className="bg-[--secondary-color] flex items-center justify-center px-2 text-white lg:w-[4vw] lg:px-0 lg:h-[4vh] rounded-md "
             >
               Yes
             </button>
@@ -129,7 +129,7 @@ function SideNavbar() {
               onClick={() => {
                 setModal(!modal);
               }}
-              className="bg-[--secondary-color] flex items-center justify-center text-white w-[3vw] h-[4vh] rounded-md "
+              className="bg-[--secondary-color] flex items-center justify-center text-white px-2 lg:px-0 lg:w-[3vw] lg:h-[4vh] rounded-md "
             >
               no
             </button>
