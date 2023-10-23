@@ -39,6 +39,7 @@ function Memo() {
   const [loading, setLoading] = useState(false);
   const [memoDetails, setMemoDetails] = useState([]);
   const dispatch=useDispatch()
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchData = async () => {
     try {
@@ -182,7 +183,11 @@ function Memo() {
       title: <h1 className="!text-[12px] lg:!text-[18px]">GC No</h1>,
       dataIndex: "serialNumber",
       key: "serialNumber",
-      render: (text, record, index) => index + 121,
+      render: (text, record, index) => {
+        // Calculate the GC No based on the current page and index
+        const gcNo = (currentPage - 1) * 5 + index + 121;
+        return gcNo;
+      },
     },
 
     {
@@ -299,7 +304,14 @@ function Memo() {
             columns={columns}
             dataSource={Memo}
             ref={tableRef}
-            pagination={{ pageSize: 5 }}
+            pagination={{
+              pageSize: 5,
+              current: currentPage, // Set the current page from the state
+              onChange: (page) => {
+                // Update the currentPage when changing the page
+                setCurrentPage(page);
+              },
+            }}
             className="!overflow-x-scroll"
           />
         </Skeleton>
