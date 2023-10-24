@@ -20,12 +20,11 @@ body {
 
 .ant-menu-item-selected {
   background-color: transparent !important;
-  color: rgb(12, 16, 147) !important;
+  color: red !important;
   font-weight: 700 !important;
 }
 
 .ant-select-selector{
-  
   padding-left: 0;
 }
 
@@ -37,9 +36,12 @@ body {
   border-radius: 0px !important;
 }
 
-.ant-menu-sub.ant-menu-inline {
-  background: rgb(250, 250, 250) !important;
- 
+.ant-menu-sub .ant-menu-inline {
+  background: rgb(19, 16, 174)  !important;
+}
+
+.ant-menu-submenu{
+  background: rgb(19, 16, 174)  !important;
 }
 
 .ant-pagination-item a {
@@ -62,26 +64,47 @@ body {
 }
 
 .ant-menu-item {
-  height: 50px !important;
+  height: 40px !important;
+}
+
+@media(max-width:1180px){
+  .ant-menu-item {
+    height: 30px !important;
+  }
+  
 }
 
 .ant-menu-submenu-selected > .ant-menu-submenu-title {
   font-weight: 700 !important;
-  color: rgb(12, 16, 147) !important;
+  color: rgb(19, 16, 174) !important;
+  background: white !important;
+}
+
+.ant-menu-submenu-title{
+  background: rgb(19, 16, 174) !important;
+  color: white !important;
+}
+
+.active{
+  color: red !important;
+  font-weight: 900 !important;
 }
 
 .ant-menu-light {
-  background-color: rgb(250, 250, 250) !important;
-  color: black;
+  background-color: rgb(19, 16, 174) !important;
+  color: white !important;
 }
 
 .ant-form-item-label > label {
   color: black !important;
+  background: rgb(19, 16, 174) !important;
 }
 
 .ant-menu-submenu-arrow {
-  padding-top: 10px !important;
+  padding-top: 4px !important;
 }
+
+
 
 :root {
   --primary-color: rgb(250, 250, 250);
@@ -99,6 +122,10 @@ body {
 
 .ant-btn-primary:hover{
   background-color: rgb(127, 127, 222) !important;
+}
+
+.ant-menu-inline{
+  background-color: rgb(19, 16, 174) !important;
 }
 
 /* input::-webkit-calendar-picker-indicator{

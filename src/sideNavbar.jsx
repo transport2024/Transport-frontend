@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Avatar, Drawer, Image, Menu, Modal } from "antd";
+import { Avatar, Button, Drawer, Image, Menu, Modal } from "antd";
 import { items } from "./helper/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "lodash";
@@ -28,32 +28,36 @@ function SideNavbar() {
   };
 
   const onClick = (e) => {
+    console.log(e.key, "llll");
+    localStorage.setItem("selectedKey", e.key);
+    setMenu(false);
     setCurrent(e.key);
-    setMenu(false)
   };
 
-  useEffect(() => {
-    const selectedKey = localStorage.getItem("selectedKey");
-    if (selectedKey !== null) {
-      setCurrent(selectedKey);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const selectedKey = localStorage.getItem("selectedKey");
+  //   if (selectedKey !== null) {
+  //     setCurrent(selectedKey);
+  //   }
+  // }, [localStorage.getItem("selectedKey")]);
 
-  useEffect(() => {
-    localStorage.setItem("selectedKey", current);
-  }, [current, location, localStorage.getItem("selectedKey")]);
+  // useEffect(() => {
+  //   localStorage.setItem("selectedKey", current);
+  // }, [current, location, localStorage.getItem("selectedKey")]);
 
   // Save the selected key to localStorage when it changes
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/admin");
   }, []);
 
+  console.log(localStorage.getItem("selectedKey"));
+
   return (
     <div className="w-[14vw] h-screen !z-50 bg-[--secondary-color] ">
       <div className="w-[14vw] h-screen  lg:border-r lg:border-slate-200 fixed bg-[--primary-color]">
         <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
-            <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12"/>
+            <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12" />
           </h1>
           <div className="hidden lg:block">
             {location.pathname.split("/")[1]
@@ -92,20 +96,6 @@ function SideNavbar() {
                 T
               </Avatar>
             </div>
-            <div
-              className={`absolute h-[2vh] w-[10vw] lg:h-[4.5vh] lg:w-[6vw] top-12 left-[85vw] lg:top-4 lg:left-[91vw]  border-b bg-white rounded-md text-[--secondary-color] flex items-center justify-center ${
-                open ? "flex" : "hidden"
-              }`}
-            >
-              <button
-                className="text-[8px] lg:text-[16px] "
-                onClick={() => {
-                  setModal(!modal);
-                }}
-              >
-                Logout
-              </button>
-            </div>
           </div>
         </div>
         <Modal
@@ -140,7 +130,6 @@ function SideNavbar() {
           onClick={() => {
             setMenu(true);
           }}
-          
         >
           <MenuOpenIcon />
         </p>
@@ -159,20 +148,33 @@ function SideNavbar() {
           <Menu
             items={items}
             defaultSelectedKeys={[localStorage.getItem("selectedKey")]}
-            defaultOpenKeys={["sub1", "sub2", "sub3"]}
             mode="inline"
             onClick={onClick}
             className="absolute left-0 top-0"
           ></Menu>
         </Drawer>
-        <Menu
-          items={items}
-          defaultSelectedKeys={[localStorage.getItem("selectedKey")]}
-          defaultOpenKeys={["sub1", "sub2", "sub3"]}
-          mode="inline"
-          onClick={onClick}
-          className="hidden lg:flex lg:flex-col"
-        ></Menu>
+        <div className="h-screen bg-[--secondary-color] flex flex-col items-center">
+          <Menu
+            items={items}
+            defaultSelectedKeys={[current]}
+            mode="inline"
+            onClick={onClick}
+            defaultOpenKeys={["sub1","sub2","sub3"]}
+            className="hidden lg:flex lg:flex-col"
+          ></Menu>
+
+          <p
+            className="absolute   font-semibold bottom-8 border-t w-[100%] border-slate-200 pt-3 text-center cursor-pointer"
+            onClick={() => {
+              setModal(!modal);
+            }}
+          >
+            <Button className="text-white hover:scale-110 hover:bg-white hover:text-black duration-1000">
+              <LogoutIcon className="!text-[18px] text-center" />
+              Logout
+            </Button>
+          </p>
+        </div>
       </div>
     </div>
   );
