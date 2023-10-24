@@ -143,24 +143,36 @@ function SideNavbar() {
           onClose={() => {
             setMenu(false);
           }}
-          className="absolute top-[9vh]"
+          className="absolute top-[9vh] !bg-[--secondary-color]"
         >
-          <Menu
-            items={items}
-            defaultSelectedKeys={[localStorage.getItem("selectedKey")]}
-            mode="inline"
-            onClick={onClick}
-            className="absolute left-0 top-0"
-          ></Menu>
-        </Drawer>
-        <div className="h-screen bg-[--secondary-color] flex flex-col items-center">
           <Menu
             items={items}
             defaultSelectedKeys={[current]}
             mode="inline"
             onClick={onClick}
-            defaultOpenKeys={["sub1","sub2","sub3"]}
-            className="hidden lg:flex lg:flex-col"
+            defaultOpenKeys={["sub1", "sub2", "sub3"]}
+            className="absolute left-0 top-0"
+          ></Menu>
+
+          <p
+            className="absolute   font-semibold bottom-16 pl-6 border-slate-200 pt-3 text-center cursor-pointer"
+            onClick={() => {
+              setModal(!modal);
+            }}
+          >
+            <Button className="text-white hover:scale-110 hover:bg-white hover:text-black duration-1000">
+              <LogoutIcon className="!text-[18px] text-center" />
+              Logout
+            </Button>
+          </p>
+        </Drawer>
+        <div className="h-screen hidden bg-[--secondary-color] lg:flex flex-col items-center">
+          <Menu
+            items={items}
+            defaultSelectedKeys={[current]}
+            mode="inline"
+            onClick={onClick}
+            defaultOpenKeys={["sub1", "sub2", "sub3"]}
           ></Menu>
 
           <p
