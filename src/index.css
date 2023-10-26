@@ -97,7 +97,7 @@ body {
 
 .ant-form-item-label > label {
   color: black !important;
-  background: rgb(19, 16, 174) !important;
+  /* background: rgb(19, 16, 174) !important; */
 }
 
 .ant-menu-submenu-arrow {
