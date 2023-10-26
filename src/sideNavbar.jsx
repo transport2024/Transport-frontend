@@ -155,12 +155,12 @@ function SideNavbar() {
           ></Menu>
 
           <p
-            className="absolute font-semibold bottom-28 pl-6 border-slate-200 pt-3 text-center cursor-pointer"
+            className="absolute font-semibold left-0 bottom-28 border-t-2 w-[100%] border-slate-200 pt-3 text-center cursor-pointer"
             onClick={() => {
               setModal(!modal);
             }}
           >
-            <Button className="text-white hover:scale-110 hover:bg-white hover:text-black duration-1000">
+            <Button className="text-white hover:scale-110 hover:bg-white  hover:text-black duration-1000">
               <LogoutIcon className="!text-[18px] text-center" />
               Logout
             </Button>
