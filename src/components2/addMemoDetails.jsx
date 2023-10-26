@@ -249,120 +249,120 @@ function AddMemoDetails() {
 
   const columns = [
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Location From</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Location From</h1>,
       dataIndex: "locationfrom",
       key: "locationfrom",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Location To</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Location To</h1>,
       dataIndex: "locationto",
       key: "locationto",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignor</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Consignor</h1>,
       dataIndex: "consignor",
       key: "consignor",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignee</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Consignee</h1>,
       dataIndex: "consignee",
       key: "consignee",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Lot No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Lot No</h1>,
       dataIndex: "lotno",
       key: "lotno",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">PR NO From</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">PR NO From</h1>,
       dataIndex: "prnoform",
 
-      key: <h1 className="!text-[12px] lg:!text-[18px]">prnofrom</h1>,
+      key: <h1 className="!text-[12px] lg:!text-[16px]">prnofrom</h1>,
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">PR NO To</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">PR NO To</h1>,
       dataIndex: "Prnoto",
 
       key: "prnoto",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Quantity</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Quantity</h1>,
       dataIndex: "quantity",
       key: "quantity",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title:<h1 className="!text-[12px] lg:!text-[18px]">LR Amount</h1>,
+      title:<h1 className="!text-[12px] lg:!text-[16px]">LR Amount</h1>,
       dataIndex: "lramount",
       key: "lramount",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Broker Name</h1>,
       dataIndex: "brokername",
       key: "brokername",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Commission</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Broker Commission</h1>,
       dataIndex: "brokercommission",
 
       key: "brokerCommission",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Account Copy</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Account Copy</h1>,
       dataIndex: "memomethod",
       key: "memomethod",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Lorry Foeight</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Lorry Foeight</h1>,
       dataIndex: "lorryfreight",
       key: "lorryfreight",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
 
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Account Paid</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Account Paid</h1>,
       dataIndex: "accountpaid",
       key: "accountpaid",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Invoive No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Invoive No</h1>,
       dataIndex: "invoiceno",
       key: "invoiceno",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Value of Goods</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Value of Goods</h1>,
       dataIndex: "valueofgoods",
       key: "valueofgoods",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Quality</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Quality</h1>,
       dataIndex: "quality",
       key: "quality",
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Press Mark</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Press Mark</h1>,
       dataIndex: "pressmark",
 
-      key: <h1 className="!text-[12px] lg:!text-[18px]">PressMark</h1>,
+      key: <h1 className="!text-[12px] lg:!text-[16px]">PressMark</h1>,
       render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
