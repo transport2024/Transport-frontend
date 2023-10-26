@@ -396,12 +396,12 @@ function AddMemoDetails() {
     <div className="pt-24 pl-[5vw] w-[80vw]">
       <Skeleton loading={loading}>
         <Form
-          className="lg:grid  lg:grid-cols-3 gap-x-[5vw] flex flex-col"
+          className="lg:grid  lg:grid-cols-3 lg:gap-x-[5vw] flex flex-col gap-0"
           layout="vertical"
           form={form}
         >
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Memo/GC No</p>}
+            label={<p className="text-[12px] lg:!text-[16px] font-semibold">Memo/GC No</p>}
             name="gcno"
             rules={[
               {
@@ -413,7 +413,7 @@ function AddMemoDetails() {
             <Input type="number" size="large" />
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">Date</p>}
+            label={<p className="text-[12px] lg:!text-[16px] font-semibold">Date</p>}
             name="date"
             rules={[
               {
@@ -427,7 +427,7 @@ function AddMemoDetails() {
 
           <Form.Item
             name="vehicleno"
-            label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
+            label={<p className="text-[12px] lg:!text-[16px] font-semibold">Vehicle No</p>}
           >
             <Select placeholder="Select vehicle no" size="large">
               {/* {vehicle.map((res, i) => {
@@ -440,7 +440,7 @@ function AddMemoDetails() {
             </Select>
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold"> Driver Name</p>}
+            label={<p className="text-[12px] lg:!text-[16px] font-semibold"> Driver Name</p>}
             name="drivername"
             rules={[
               {
@@ -452,7 +452,7 @@ function AddMemoDetails() {
             <Input type="text" size="large" />
           </Form.Item>
           <Form.Item
-            label={<p className="!text-[16px] font-semibold">DriverPhone</p>}
+            label={<p className="text-[12px] lg:!text-[16px] font-semibold">DriverPhone</p>}
             name="driverphone"
             rules={[
               {
@@ -466,7 +466,7 @@ function AddMemoDetails() {
 
           <Form.Item
             label={
-              <p className="!text-[16px] font-semibold">
+              <p className="text-[12px] lg:!text-[16px] font-semibold">
                 Driver Whatsapp Number
               </p>
             }
