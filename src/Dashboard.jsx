@@ -103,12 +103,12 @@ function Dashboard() {
 
 
   return (
-    <div className="pt-[15vh] ">
-      <div className="!flex xsm:gap-6 lg:gap-10 lg:pl-5   w-[85vw] flex-wrap">
-        <div className="bg-[#a2de97] xsm:h-[140px] w-[240px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
+    <div className="pt-[15vh] w-[85vw] m-auto">
+      <div className="grid grid-cols-2 lg:!flex xsm:gap-6 lg:gap-10 lg:pl-5 flex-wrap">
+        <div className="bg-[#a2de97] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
          
           <PeopleOutlineOutlinedIcon
-            style={{ fontSize: "50px", color: "white" }}
+            className="text-white lg:font-[50px]"
           />
 
           <Statistic
@@ -126,9 +126,9 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#e56a93] xsm:h-[140px] w-[240px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#e56a93] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
           {/* <img src={myimage2} /> */}
-          <Person3OutlinedIcon style={{ fontSize: "50px", color: "white" }} />
+          <Person3OutlinedIcon className="text-white lg:font-[50px]"/>
           <Statistic
             title={
               <h1 className="text-white font-semibold xl:text-[20px]">
@@ -144,10 +144,10 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#c3b951] xsm:h-[140px] w-[240px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#c3b951] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
        
           <LocalShippingOutlinedIcon
-            style={{ fontSize: "50px", color: "white" }}
+            className="text-white lg:font-[50px]"
           />
           <Statistic
             title={
@@ -164,10 +164,10 @@ function Dashboard() {
           />
         </div>
 
-        <div className="bg-[#74d3d3] xsm:h-[140px] w-[240px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
+        <div className="bg-[#74d3d3] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
          
           <ContactPageOutlinedIcon
-            style={{ fontSize: "50px", color: "white" }}
+           className="text-white lg:font-[50px]"
           />
           <Statistic
             title={
