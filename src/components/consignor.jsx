@@ -122,16 +122,28 @@ function Consignor() {
   //   sheet: "Web Users",
   // });
 
-  const exportToExcel = (data) => {
-    if (!exporting) { // Check if we are already exporting
-      setExporting(true); // Set the exporting flag
-      const ws = XLSX.utils.json_to_sheet(data);
+  const exportToExcel = () => {
+    if (!exporting) {
+      const dataForExport = consignors.map((consignor) => ({
+        name: consignor.name,
+        address: consignor.address,
+        contactPerson: consignor.contactPerson,
+        gstno: consignor.gstno,
+        mail: consignor.mail,
+        phone: consignor.phone,
+        place: consignor.place,
+     
+      }));
+  
+      const ws = XLSX.utils.json_to_sheet(dataForExport);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
       XLSX.writeFile(wb, 'exported_data.xlsx');
-      setExporting(false); // Reset the exporting flag after export is complete
+      setExporting(false);
     }
   };
+
+  
 
   const columns = [
     {

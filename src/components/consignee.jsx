@@ -21,6 +21,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import {useDispatch} from "react-redux"
 import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
+import * as XLSX from 'xlsx';
 
 function Consignee() {
   const [Consignee, setConsignee] = useState([]);
@@ -31,6 +32,7 @@ function Consignee() {
   const [searched, setSearched] = useState([]);
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
+  const [exporting,setExporting]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -110,12 +112,28 @@ function Consignee() {
       );
     });
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Web Users",
-    sheet: "Web Users",
-  });
-
+   
+    const exportToExcel = () => {
+      if (!exporting) {
+        const dataForExport = Consignee.map((consignee) => ({
+          name: consignee.name,
+          address: consignee.address,
+          contactPerson: consignee.contactPerson,
+          gstno: consignee.gstno,
+          mail: consignee.mail,
+          phone: consignee.phone,
+          place: consignee.place,
+       
+        }));
+    
+        const ws = XLSX.utils.json_to_sheet(dataForExport);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+        setExporting(false);
+      }
+    };
+    
   const handleClear = () => {
     form.setFieldsValue([]);
   };
@@ -218,7 +236,7 @@ function Consignee() {
           </div>
           <div>
             <Button
-              onClick={onDownload}
+              onClick={()=>{exportToExcel(Consignee)}}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel

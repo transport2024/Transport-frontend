@@ -20,6 +20,8 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import {useDispatch} from "react-redux"
 import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
+import * as XLSX from 'xlsx';
+
 
 function Broker() {
   const [Broker, setBroker] = useState([]);
@@ -30,6 +32,7 @@ function Broker() {
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
+  const [exporting,setExporting]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -116,12 +119,19 @@ function Broker() {
      );
     });
 
-
-	const { onDownload } = useDownloadExcel({
-		currentTableRef: tableRef.current,
-		filename: "Web Users",
-		sheet: "Web Users",
-	  });
+    const exportToExcel = () => {
+      if (!exporting) {
+        const dataForExport = Broker.map((broker) => ({
+          brokername: broker.brokername, 
+        }));
+    
+        const ws = XLSX.utils.json_to_sheet(dataForExport);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+        setExporting(false);
+      }
+    };
 	
 
   const columns = [
@@ -187,7 +197,7 @@ function Broker() {
           </div>
           <div>
             <Button
-              onClick={onDownload}
+              onClick={()=>{exportToExcel(Broker)}}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel

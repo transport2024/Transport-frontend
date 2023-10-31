@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import moment from "moment" 
 import {useDispatch} from "react-redux"
 import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
+import * as XLSX from 'xlsx';
 
 function Memo() {
   const [memo, setMemo] = useState([]);
@@ -40,6 +41,7 @@ function Memo() {
   const [memoDetails, setMemoDetails] = useState([]);
   const dispatch=useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
+  const [exporting,setExporting]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -134,6 +136,8 @@ function Memo() {
     navigate(`/editmemo/${value._id}`);
   };
 
+  
+
   const handleDelete = async (value) => {
     if (
       memoDetails.filter((res) => {
@@ -185,13 +189,27 @@ function Memo() {
       );
     });
 
-  
+  console.log(memo)
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Web Users",
-    sheet: "Web Users",
-  });
+    const exportToExcel = () => {
+      if (!exporting) {
+        const dataForExport = memo.map((memo) => ({
+          gcno: memo.gcno,
+          date: memo.date,
+          drivername: memo.drivername,
+          driverphone: memo.driverphone,
+          driverwhatsappno: memo.driverwhatsappno,
+          vehicleno: memo.vehicleno,
+       
+        }));
+    
+        const ws = XLSX.utils.json_to_sheet(dataForExport);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+        setExporting(false);
+      }
+    };
 
   const columns = [
     {
@@ -307,7 +325,7 @@ function Memo() {
           </div>
           <div>
             <Button
-              onClick={onDownload}
+              onClick={()=>{exportToExcel(memo)}}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel

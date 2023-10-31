@@ -22,7 +22,7 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import {useDispatch} from "react-redux"
 import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
-
+import * as XLSX from 'xlsx';
 function Report() {
   const [report, setReport] = useState([]);
   const [open, setOpen] = useState(false);
@@ -37,6 +37,7 @@ function Report() {
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
   const dispatch=useDispatch()
+  const [exporting,setExporting]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -55,7 +56,7 @@ function Report() {
     fetchData();
   }, []);
 
-  console.log(searched);
+
 
   useEffect(() => {
     setData(
@@ -115,13 +116,33 @@ function Report() {
     }
   };
 
-  console.log(userDates);
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Web Users",
-    sheet: "Web Users",
-  });
+
+ 
+  const exportToExcel = () => {
+    if (!exporting) {
+      const dataForExport = !data?dateFilters:data.map((report) => ({
+        date: report.date,
+        vehicleno: report.vehicleno,
+        pan: report.pan,
+        rcname: report.rcname,
+        locationfrom: report.locationfrom,
+        locationto: report.locationto,
+        consignor: report.consignor,
+        consignee: report.consignee,
+        brokername: report.brokername,
+        lrno: report.gcno,
+        lramount: report.lramount,  
+     
+      }));
+  
+      const ws = XLSX.utils.json_to_sheet(dataForExport);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, 'exported_data.xlsx');
+      setExporting(false);
+    }
+  };
 
   const columns = [
     {
@@ -248,7 +269,7 @@ function Report() {
 
             <div className="pr-5">
               <Button
-                onClick={onDownload}
+                onClick={()=>{exportToExcel(data)}}
                 className="w-[90px] lg:w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
               >
                 Export Exel
