@@ -19,6 +19,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import {useDispatch} from "react-redux"
 import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
+import * as XLSX from 'xlsx';
 
 function Consignor() {
   const [consignors, setConsignors] = useState([]);
@@ -29,6 +30,7 @@ function Consignor() {
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
+  const [exporting, setExporting] = useState(false); 
 
   const fetchData = async () => {
     try {
@@ -114,11 +116,22 @@ function Consignor() {
       );
     }).flat();
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Web Users",
-    sheet: "Web Users",
-  });
+  // const { onDownload } = useDownloadExcel({
+  //   currentTableRef: tableRef.current,
+  //   filename: "Web Users",
+  //   sheet: "Web Users",
+  // });
+
+  const exportToExcel = (data) => {
+    if (!exporting) { // Check if we are already exporting
+      setExporting(true); // Set the exporting flag
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, 'exported_data.xlsx');
+      setExporting(false); // Reset the exporting flag after export is complete
+    }
+  };
 
   const columns = [
     {
@@ -218,7 +231,7 @@ function Consignor() {
           </div>
           <div>
             <Button
-              onClick={onDownload}
+              onClick={()=>{exportToExcel(consignors)}}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
