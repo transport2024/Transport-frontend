@@ -43,6 +43,9 @@ function VehicleBills() {
     setGcNo(filterDatas?.gcno);
   }, [datas, filterDatas, location]);
 
+
+  console.log(gcNo,"webwh")
+
   useEffect(() => {
     const handleCancelPrint = () => {
       printRef.current = false;

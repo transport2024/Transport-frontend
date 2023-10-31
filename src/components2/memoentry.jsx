@@ -71,12 +71,12 @@ function Memo() {
     fetchData();
   }, []);
 
-  
+  console.log(memo.length+120,"Web")
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
         const formData = {
-          gcno: Memo.length+121,
+          gcno: memo.length+121,
           drivername: value.drivername,
           date: moment(value.date).format('DD-MM-YYYY'),
           vehicleno: value.vehicleno,
@@ -99,9 +99,18 @@ function Memo() {
       }
     } else {
       try {
+
+        const formData = {
+          gcno: memo.length+121,
+          drivername: value.drivername,
+          date: moment(value.date).format('DD-MM-YYYY'),
+          vehicleno: value.vehicleno,
+          driverphone: value.driverphone,
+          driverwhatsappno: value.driverwhatsappno,
+        };
         await axios.put(
           `${process.env.REACT_APP_URL}/api/memo/${updateId}`,
-          value
+          formData
         );
         fetchData();
         notification.success({
@@ -156,8 +165,6 @@ function Memo() {
     form.setFieldsValue([]);
   };
   const searchers = [];
-
- console.log(memo,"trigger")
 
   memo &&
     memo.map((data) => {
