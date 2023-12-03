@@ -54,6 +54,8 @@ function Memo() {
         `${process.env.REACT_APP_URL}/api/vehicle`
       );
 
+      
+
       const result3 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
@@ -71,9 +73,9 @@ function Memo() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searched]);
 
-  console.log(memo.length+120,"Web")
+ 
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
@@ -175,21 +177,13 @@ function Memo() {
       
       return searchers.push(
         {
-          label:data.drivername,
-          value: data.drivername,
-        },
-        {
-          label: data.driverphone,
-          value: data.driverphone,
-        },
-        {
           label: data.vehicleno,
           value: data.vehicleno,
         }
       );
     });
 
-  console.log(memo)
+ 
 
     const exportToExcel = () => {
       if (!exporting) {
@@ -214,7 +208,7 @@ function Memo() {
   const columns = [
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">GC No</h1>,
-      dataIndex: "serialNumber",
+      dataIndex: "serialNumber", 
       key: "serialNumber",
       render: (text, record, index) => {
         // Calculate the GC No based on the current page and index

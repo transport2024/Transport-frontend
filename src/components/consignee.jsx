@@ -54,7 +54,7 @@ function Consignee() {
     fetchData();
   }, [searched]);
 
-  console.log(Consignee, "hb");
+ 
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -102,7 +102,7 @@ function Consignee() {
 
   const searchers = [];
 
-  console.log(Consignee, "Erkhuubj");
+  
 
   Consignee &&
     Consignee.map((data) => {

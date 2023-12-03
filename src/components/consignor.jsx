@@ -55,7 +55,7 @@ function Consignor() {
   }, [searched]);
 
 
-  console.log(searched)
+
 
   const handleClear = () => {
     form.setFieldsValue([]);

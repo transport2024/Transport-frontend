@@ -52,7 +52,7 @@ function Vehicle() {
     }
   };
 
-  console.log(status);
+
 
   const handleSubmit = async (value) => {
     if (updateId === "") {

@@ -54,7 +54,7 @@ function Location() {
     fetchData();
   }, [searched]);
 
-  console.log(process.env.REACT_APP_URL)
+ 
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -117,7 +117,7 @@ function Location() {
 
   Location &&
     Location.map((data) => {
-      console.log(data)
+   
       return searchers.push(
         { value: data.locationname }
      );

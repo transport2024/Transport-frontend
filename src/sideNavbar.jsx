@@ -28,33 +28,21 @@ function SideNavbar() {
   };
 
   const onClick = (e) => {
-    console.log(e.key, "llll");
     localStorage.setItem("selectedKey", e.key);
     setMenu(false);
     setCurrent(e.key);
   };
 
-  // useEffect(() => {
-  //   const selectedKey = localStorage.getItem("selectedKey");
-  //   if (selectedKey !== null) {
-  //     setCurrent(selectedKey);
-  //   }
-  // }, [localStorage.getItem("selectedKey")]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("selectedKey", current);
-  // }, [current, location, localStorage.getItem("selectedKey")]);
-
-  // Save the selected key to localStorage when it changes
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/admin");
   }, []);
 
-  console.log(localStorage.getItem("selectedKey"));
+ 
 
   return (
-    <div className="md:w-[14vw] md:h-screen  !z-50 bg-[--secondary-color] ">
-      <div className="md:w-[14vw] md:h-screen  lg:border-r lg:border-slate-200 fixed bg-[--primary-color]">
+    <div className="md:w-[18vw] md:h-screen  !z-50 bg-[--secondary-color] ">
+      <div className="md:w-[18vw] md:h-screen  lg:border-r lg:border-slate-200 fixed bg-[--primary-color]">
         <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
             <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12" />

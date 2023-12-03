@@ -113,7 +113,7 @@ function Broker() {
 
   Broker &&
     Broker.map((data) => {
-      console.log(data)
+      
       return searchers.push(
         { value: data.brokername }
      );
