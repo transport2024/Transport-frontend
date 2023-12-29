@@ -19,9 +19,9 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDownloadExcel } from "react-export-table-to-excel";
-import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
-import * as XLSX from 'xlsx';
+import { useDispatch } from "react-redux";
+import { showOpen, hideOpen } from "../Redux/NetworkSlice.js";
+import * as XLSX from "xlsx";
 
 function Vehicle() {
   const [Vehicle, setVehicle] = useState([]);
@@ -33,8 +33,9 @@ function Vehicle() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(false);
   const [data, setData] = useState([]);
-  const dispatch=useDispatch()  
-  const [exporting,setExporting]=useState(false)
+  const dispatch = useDispatch();
+  const [exporting, setExporting] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -45,14 +46,12 @@ function Vehicle() {
       setVehicle(get(result, "data.message"));
     } catch (err) {
       if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
+        dispatch(showOpen());
       }
     } finally {
       setLoading(false);
     }
   };
-
-
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -90,21 +89,25 @@ function Vehicle() {
             ],
           });
         } else {
+          setLoadingBtn(true);
           await axios.post(`${process.env.REACT_APP_URL}/api/vehicle`, value);
           fetchData();
           notification.success({
             message: "Vehicle Added successfully",
           });
           setOpen(false);
-          form.setFieldsValue([])
+          form.setFieldsValue([]);
         }
       } catch (err) {
         notification.error({
           message: "Something went wrong",
         });
+      } finally {
+        setLoadingBtn(false);
       }
     } else {
       try {
+        setLoadingBtn(true);
         await axios.put(
           `${process.env.REACT_APP_URL}/api/vehicle/${updateId}`,
           value
@@ -120,6 +123,8 @@ function Vehicle() {
         notification.error({
           message: "Something went wrong",
         });
+      } finally {
+        setLoadingBtn(false);
       }
     }
   };
@@ -132,8 +137,8 @@ function Vehicle() {
         message: "Vehicle Added successfully",
       });
       setOpen(false);
-      Modal.destroyAll()
-      form.setFieldsValue([])
+      Modal.destroyAll();
+      form.setFieldsValue([]);
     } catch (err) {
       console.log(err);
     }
@@ -182,76 +187,86 @@ function Vehicle() {
         { value: data.vehicleno }
       );
     });
-    
 
-    const exportToExcel = () => {
-      if (!exporting) {
-        const dataForExport = Vehicle.map((vehicle) => ({
-          docentry: vehicle.docentry,
-          vehicleno: vehicle.vehicleno,
-          drivername: vehicle.drivername,
-          driverphone: vehicle.driverphone,
-          whatsappno: vehicle.whatsappno,
-          pan: vehicle.pan,
-          rcname: vehicle.rcname,
-       
-        }));
-    
-        const ws = XLSX.utils.json_to_sheet(dataForExport);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, 'exported_data.xlsx');
-        setExporting(false);
-      }
-    };
-    
-    
+  const exportToExcel = () => {
+    if (!exporting) {
+      const dataForExport = Vehicle.map((vehicle) => ({
+        docentry: vehicle.docentry,
+        vehicleno: vehicle.vehicleno,
+        drivername: vehicle.drivername,
+        driverphone: vehicle.driverphone,
+        whatsappno: vehicle.whatsappno,
+        pan: vehicle.pan,
+        rcname: vehicle.rcname,
+      }));
+
+      const ws = XLSX.utils.json_to_sheet(dataForExport);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "exported_data.xlsx");
+      setExporting(false);
+    }
+  };
 
   const columns = [
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">DocEntry</h1>,
       dataIndex: "docentry",
       key: "docentry",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
 
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">VehicleNo</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">DriverName</h1>,
       dataIndex: "drivername",
       key: "drivername",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">DriverPhone</h1>,
       dataIndex: "driverphone",
       key: "driverphone",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">WhatsappNo</h1>,
       dataIndex: "whatsappno",
       key: "whatsappno",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">PAN</h1>,
       dataIndex: "pan",
       key: "pan",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">RCName</h1>,
       dataIndex: "rcname",
       key: "rcname",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
-    
+
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
       render: (text) => (
@@ -306,7 +321,9 @@ function Vehicle() {
           </div>
           <div>
             <Button
-              onClick={()=>{exportToExcel(Vehicle)}}
+              onClick={() => {
+                exportToExcel(Vehicle);
+              }}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
@@ -357,7 +374,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter docentry" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">VehicleNo</p>}
@@ -369,7 +386,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter vehicleno" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">DriverName</p>}
@@ -381,7 +398,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter drivername" />
           </Form.Item>
 
           <Form.Item
@@ -394,7 +411,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter phone" />
           </Form.Item>
 
           <Form.Item
@@ -407,7 +424,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter whatsapp" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">PAN</p>}
@@ -419,7 +436,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter pan" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">RCName</p>}
@@ -431,7 +448,7 @@ function Vehicle() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter rcname" />
           </Form.Item>
           <div className="flex items-end gap-2 justify-end">
             <Form.Item>
@@ -445,6 +462,7 @@ function Vehicle() {
             </Form.Item>
             <Form.Item>
               <Button
+                loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
               >

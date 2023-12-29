@@ -33,6 +33,7 @@ function Consignee() {
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
+  const [loadingBtn,setLoadingBtn]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -58,6 +59,7 @@ function Consignee() {
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
+      setLoadingBtn(true)
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/consignee`, value);
         fetchData();
@@ -66,8 +68,11 @@ function Consignee() {
         form.setFieldsValue([])
       } catch (err) {
         notification.error({ message: "Something went wrong" });
+      }finally{
+        setLoadingBtn(false)
       }
     } else {
+      setLoadingBtn(true)
       try {
         await axios.put(
           `${process.env.REACT_APP_URL}/api/consignee/${updateId}`,
@@ -80,6 +85,8 @@ function Consignee() {
         setUpdateId("");
       } catch (err) {
         notification.error({ message: "Something went wrong" });
+      }finally{
+        setLoadingBtn(false)
       }
     }
   };
@@ -288,7 +295,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter name"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Address</p>}
@@ -300,7 +307,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter address"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Place</p>}
@@ -312,7 +319,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter place"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Phone</p>}
@@ -324,7 +331,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter phone"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Contact Person</p>}
@@ -336,7 +343,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter contact person"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">GST NO</p>}
@@ -348,7 +355,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter gstno"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Mail</p>}
@@ -360,7 +367,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="mail" size="large" />
+            <Input type="mail" size="large" placeholder="Enter mail"/>
           </Form.Item>
 
           <div className="flex gap-4 items-end justify-end">
@@ -376,6 +383,7 @@ function Consignee() {
 
             <Form.Item>
               <Button
+              loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
               >

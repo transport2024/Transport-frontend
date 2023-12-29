@@ -50,13 +50,13 @@ const router = createBrowserRouter(
 
 function App() {
   const dispatch=useDispatch()
-  const open=useSelector((state) => state.network.isOpen)
-  console.log(open,"rbruh")
+  // const open=useSelector((state) => state.network.isOpen)
+  // console.log(open,"rbruh")
 
   return (
     <div>
       <RouterProvider router={router} />
-      <Modal open={open} footer={false} closable={false} width={400}>
+      {/* <Modal open={open} footer={false} closable={false} width={400}>
         <div className="text-md">
           <p className="font-bold flex items-center gap-1">
             No Internet
@@ -81,7 +81,7 @@ function App() {
             </ul>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

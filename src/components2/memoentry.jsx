@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useRef, useState } from "react";
 import SideNavbar from "../sideNavbar.jsx";
 import {
@@ -14,7 +15,7 @@ import {
   Skeleton,
 } from "antd";
 import axios from "axios";
-import { get, flatten } from "lodash";
+import { get, flatten, isEmpty } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -22,10 +23,10 @@ import { useDownloadExcel } from "react-export-table-to-excel";
 import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import moment from "moment" 
-import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
-import * as XLSX from 'xlsx';
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { showOpen, hideOpen } from "../Redux/NetworkSlice.js";
+import * as XLSX from "xlsx";
 
 function Memo() {
   const [memo, setMemo] = useState([]);
@@ -35,36 +36,34 @@ function Memo() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [vehicle, setVehicle] = useState([]);
-  const componentRef = useRef();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [memoDetails, setMemoDetails] = useState([]);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [exporting,setExporting]=useState(false)
+  const [exporting, setExporting] = useState(false);
+  const [filteredVehicle, setFilteredVehicle] = useState([]);
+  const [loadingBtn, setLoadingBtn] = useState(false)
 
   const fetchData = async () => {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/memo?search`
       );
       setMemo(get(result, "data.message"));
       const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/vehicle`
       );
 
-      
-
       const result3 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
-      
     } catch (err) {
       if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
+        dispatch(showOpen());
       }
     } finally {
       setLoading(false);
@@ -75,19 +74,18 @@ function Memo() {
     fetchData();
   }, [searched]);
 
- 
   const handleSubmit = async (value) => {
     if (updateId === "") {
+      setLoadingBtn(true)
       try {
         const formData = {
-          gcno: memo.length+121,
+          gcno: memo.length + 121,
           drivername: value.drivername,
-          date: moment(value.date).format('DD-MM-YYYY'),
+          date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
           driverwhatsappno: value.driverwhatsappno,
         };
-
 
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
         fetchData();
@@ -100,14 +98,16 @@ function Memo() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoadingBtn(false)
       }
     } else {
       try {
-
+        setLoadingBtn(true)
         const formData = {
-          gcno: memo.length+121,
+          gcno: memo.length + 121,
           drivername: value.drivername,
-          date: moment(value.date).format('DD-MM-YYYY'),
+          date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
           driverwhatsappno: value.driverwhatsappno,
@@ -127,6 +127,8 @@ function Memo() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoadingBtn(false)
       }
     }
   };
@@ -138,7 +140,13 @@ function Memo() {
     navigate(`/editmemo/${value._id}`);
   };
 
-  
+  useEffect(() => {
+    setFilteredVehicle(
+      memo.filter((res) => {
+        return res.vehicleno === searched[0];
+      })
+    );
+  }, [memo]);
 
   const handleDelete = async (value) => {
     if (
@@ -170,45 +178,40 @@ function Memo() {
   const handleClear = () => {
     form.setFieldsValue([]);
   };
+
   const searchers = [];
 
   memo &&
     memo.map((data) => {
-      
-      return searchers.push(
-        {
-          label: data.vehicleno,
-          value: data.vehicleno,
-        }
-      );
+      return searchers.push({
+        label: data.vehicleno,
+        value: data.vehicleno,
+      });
     });
 
- 
+  const exportToExcel = () => {
+    if (!exporting) {
+      const dataForExport = memo.map((memo) => ({
+        gcno: memo.gcno,
+        date: memo.date,
+        drivername: memo.drivername,
+        driverphone: memo.driverphone,
+        driverwhatsappno: memo.driverwhatsappno,
+        vehicleno: memo.vehicleno,
+      }));
 
-    const exportToExcel = () => {
-      if (!exporting) {
-        const dataForExport = memo.map((memo) => ({
-          gcno: memo.gcno,
-          date: memo.date,
-          drivername: memo.drivername,
-          driverphone: memo.driverphone,
-          driverwhatsappno: memo.driverwhatsappno,
-          vehicleno: memo.vehicleno,
-       
-        }));
-    
-        const ws = XLSX.utils.json_to_sheet(dataForExport);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, 'exported_data.xlsx');
-        setExporting(false);
-      }
-    };
+      const ws = XLSX.utils.json_to_sheet(dataForExport);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "exported_data.xlsx");
+      setExporting(false);
+    }
+  };
 
   const columns = [
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">GC No</h1>,
-      dataIndex: "serialNumber", 
+      dataIndex: "serialNumber",
       key: "serialNumber",
       render: (text, record, index) => {
         // Calculate the GC No based on the current page and index
@@ -221,31 +224,43 @@ function Memo() {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Date</h1>,
       dataIndex: "date",
       key: "date",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Vehicle No</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
-      render: (text) => <div className="text-[10px]  lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px]  lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Driver Name</h1>,
       dataIndex: "drivername",
       key: "drivername",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">DriverPhone</h1>,
       dataIndex: "driverphone",
       key: "driverphone",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Driver WhatsappNo</h1>,
+      title: (
+        <h1 className="!text-[12px] lg:!text-[18px]">Driver WhatsappNo</h1>
+      ),
       dataIndex: "driverwhatsappno",
       key: "driverwhatsappno",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
@@ -290,6 +305,8 @@ function Memo() {
     },
   ];
 
+  console.log(searched, "searched");
+
   return (
     <div className="flex pt-[12vh] pl-4">
       <div className="w-[75vw] flex flex-col gap-8">
@@ -319,7 +336,9 @@ function Memo() {
           </div>
           <div>
             <Button
-              onClick={()=>{exportToExcel(memo)}}
+              onClick={() => {
+                exportToExcel(memo);
+              }}
               className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
@@ -329,13 +348,13 @@ function Memo() {
         <Skeleton loading={loading}>
           <Table
             columns={columns}
-            dataSource={memo}
+            dataSource={isEmpty(filteredVehicle)?memo:filteredVehicle}
             ref={tableRef}
             pagination={{
               pageSize: 5,
-              current: currentPage, // Set the current page from the state
+              current: currentPage, 
               onChange: (page) => {
-                // Update the currentPage when changing the page
+               
                 setCurrentPage(page);
               },
             }}
@@ -365,18 +384,6 @@ function Memo() {
           onFinish={handleSubmit}
           form={form}
         >
-          {/* <Form.Item
-            label={<p className="!text-[16px] font-semibold">Memo/GC No</p>}
-            name="gcno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your memogc!",
-              },
-            ]}
-          >
-            <Input type="number" size="large" />
-          </Form.Item> */}
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Date</p>}
             name="date"
@@ -386,23 +393,11 @@ function Memo() {
                 message: "Please input your date!",
               },
             ]}
-            
           >
             <Input type="date" size="large" />
           </Form.Item>
 
-          {/* <Form.Item
-            label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
-            name="vehicleno"
-            rules={[
-              {
-                required: true,
-                message: "Please input your vehicle no!",
-              },
-            ]}
-          >
-            <Input type="text" size="large" />
-          </Form.Item> */}
+         
 
           <Form.Item
             name="vehicleno"
@@ -428,7 +423,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Driver name"/>
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">DriverPhone</p>}
@@ -440,7 +435,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Driver phone"/>
           </Form.Item>
 
           <Form.Item
@@ -457,7 +452,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Driver whatsapp number"/>
           </Form.Item>
 
           <div className="flex items-end gap-2 justify-end">
@@ -472,6 +467,7 @@ function Memo() {
             </Form.Item>
             <Form.Item>
               <Button
+              loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
               >

@@ -33,6 +33,7 @@ function Location() {
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
+  const [loadingBtn,setLoadingBtn]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -59,6 +60,7 @@ function Location() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       try {
+        setLoadingBtn(true)
         await axios.post(`${process.env.REACT_APP_URL}/api/location`, value);
         fetchData();
         notification.success({
@@ -70,9 +72,12 @@ function Location() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoadingBtn(false)
       }
     } else {
       try {
+        setLoadingBtn(true)
         await axios.put(`${process.env.REACT_APP_URL}/api/location/${updateId}`, value);
         fetchData();
         notification.success({
@@ -85,6 +90,8 @@ function Location() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoadingBtn(false)
       }
     }
   };
@@ -241,13 +248,14 @@ function Location() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter location"/>
           </Form.Item>
 
           <div className="flex pl-20 lg:pl-0 lg:justify-end lg:items-end">
             
             <Form.Item className="w-[10vw]">
               <Button
+              loading={loadingBtn}
                 htmlType="submit"
                 className="bg-red-500 lg:w-[130px]  text-white font-bold tracking-wider"
                 onClick={handleClear}

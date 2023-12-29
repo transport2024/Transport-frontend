@@ -33,6 +33,7 @@ function Broker() {
   const [loading,setLoading]=useState(false)
   const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
+  const [loadingBtn,setLoadingBtn]=useState(false)
 
   const fetchData = async () => {
     try {
@@ -54,6 +55,7 @@ function Broker() {
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
+      setLoadingBtn(true)
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/broker`, value);
         fetchData();
@@ -66,9 +68,12 @@ function Broker() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoadingBtn(false)
       }
     } else {
       try {
+        setLoadingBtn(true)
         await axios.put(`${process.env.REACT_APP_URL}/api/broker/${updateId}`, value);
         fetchData();
         notification.success({
@@ -81,6 +86,8 @@ function Broker() {
         notification.error({
           message: "Something went wrong",
         });
+      }finally{
+        setLoading(false)
       }
     }
   };
@@ -236,7 +243,7 @@ function Broker() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Enter broker"/>
           </Form.Item>
 
           <div className="flex pl-20 lg:pl-0 lg:justify-end lg:items-end">
@@ -252,6 +259,7 @@ function Broker() {
             </Form.Item>
             <Form.Item className="w-[10vw] pl-10 lg:pl-0">
               <Button
+              loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-500  lg:w-[130px] float-left text-white font-bold tracking-wider"
               >

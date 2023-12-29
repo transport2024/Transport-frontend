@@ -42,6 +42,7 @@ function AddMemoDetails() {
     try {
       setLoading(true);
       const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
+      console.log(result)
       const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
@@ -81,6 +82,8 @@ function AddMemoDetails() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log(memoDetails,"adbhs")
 
   const handleEdit = (id) => {
     setUpdateId(id._id);
@@ -211,6 +214,7 @@ function AddMemoDetails() {
    
   };
 
+  console.log(datas,"wdkjnej")
   
 
   useEffect(() => {
@@ -410,7 +414,7 @@ function AddMemoDetails() {
               },
             ]}
           >
-            <Input type="number" size="large" />
+            <Input type="number" size="large" placeholder="Enter memo gc..."/>
           </Form.Item>
           <Form.Item
             label={<p className="text-[12px] lg:!text-[16px] font-semibold">Date</p>}
@@ -449,7 +453,7 @@ function AddMemoDetails() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Add driver name..."/>
           </Form.Item>
           <Form.Item
             label={<p className="text-[12px] lg:!text-[16px] font-semibold">DriverPhone</p>}
@@ -461,7 +465,7 @@ function AddMemoDetails() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Add driver phone..."/>
           </Form.Item>
 
           <Form.Item
@@ -478,7 +482,7 @@ function AddMemoDetails() {
               },
             ]}
           >
-            <Input type="text" size="large" />
+            <Input type="text" size="large" placeholder="Add whatsapp number..."/>
           </Form.Item>
 
           <div className="flex items-end gap-2 justify-end">
@@ -639,7 +643,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter lot no..."/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">PR No From</p>}
@@ -651,7 +655,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter prno from"/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">PR No To</p>}
@@ -663,7 +667,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter pr no..."/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Quantity</p>}
@@ -675,7 +679,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter quantity"/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">LR Amount</p>}
@@ -721,7 +725,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter broker commission"/>
             </Form.Item>
             <Form.Item
               label={
@@ -753,7 +757,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter lorry freight"/>
             </Form.Item>
 
             <Form.Item
@@ -785,7 +789,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter invoice no"/>
             </Form.Item>
             <Form.Item
               label={
@@ -799,7 +803,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter value of goods"/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Quality</p>}
@@ -811,7 +815,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter quality"/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Press Mark</p>}
@@ -823,7 +827,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter press mark"/>
             </Form.Item>
             <div className="flex items-end gap-2 justify-end">
               <Form.Item>
