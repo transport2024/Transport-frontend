@@ -490,7 +490,7 @@ function AddMemoDetails() {
           ""
         ) : (
           <p
-            className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1 mr-4"
+            className="bg-[--secondary-color] cursor-pointer w-40 float-right text-white text-center rounded-md  h-8 pt-1 mr-4"
             onClick={() => {
               setOpen(true);
             }}
