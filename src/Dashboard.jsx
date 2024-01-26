@@ -8,8 +8,8 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
-import {useDispatch} from "react-redux"
-import {showOpen} from "./Redux/NetworkSlice"
+
+
 
 
 function Dashboard() {
@@ -20,7 +20,7 @@ function Dashboard() {
   const [broker, setBroker] = useState([]);
   const [loading, setLoading] = useState(false);
   const [memo, setMemo] = useState([]);
-  const dispatch=useDispatch()
+
 
   const fetchData = async () => {
     setLoading(true);
@@ -44,9 +44,7 @@ function Dashboard() {
       setBroker(get(result4, "data.message"));
       setMemo(get(result5, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
-      }
+     
     } finally {
       setLoading(false);
     }

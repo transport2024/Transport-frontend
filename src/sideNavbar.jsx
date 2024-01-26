@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Avatar, Button, Drawer, Image, Menu, Modal } from "antd";
 import { items } from "./helper/menu";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isEmpty } from "lodash";
+import { get, isEmpty } from "lodash";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import Cookies from "js-cookie";
@@ -12,8 +13,6 @@ import logo from "./assets/logo.png";
 function SideNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [current, setCurrent] = useState(0);
-  const [open, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
   const [menu, setMenu] = useState(false);
 
@@ -28,9 +27,8 @@ function SideNavbar() {
   };
 
   const onClick = (e) => {
-    localStorage.setItem("selectedKey", e.key);
     setMenu(false);
-    setCurrent(e.key);
+  
   };
 
 
@@ -56,12 +54,7 @@ function SideNavbar() {
             Vehicle Transport Management System
           </div>
           <div
-            onMouseOver={() => {
-              setOpen(true);
-            }}
-            onMouseLeave={() => {
-              setOpen(false);
-            }}
+            
             className="mr-4 cursor-pointer"
           >
             <div className="hidden lg:block">
@@ -135,7 +128,7 @@ function SideNavbar() {
         >
           <Menu
             items={items}
-            defaultSelectedKeys={[current]}
+            defaultSelectedKeys={get(location, "pathname", "/")}
             mode="inline"
             onClick={onClick}
             defaultOpenKeys={["sub1", "sub2", "sub3"]}
@@ -157,7 +150,7 @@ function SideNavbar() {
         <div className="h-screen hidden bg-[--secondary-color] lg:flex flex-col items-center">
           <Menu
             items={items}
-            defaultSelectedKeys={[current]}
+            defaultSelectedKeys={get(location, "pathname", "/")}
             mode="inline"
             onClick={onClick}
             defaultOpenKeys={["sub1", "sub2", "sub3"]}

@@ -1,42 +1,31 @@
-import React, { Component, useEffect, useState, useRef } from "react";
-import SideNavbar from "../sideNavbar.jsx";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, {  useEffect, useState, useRef } from "react";
 import {
-  Space,
+
   Table,
-  Tag,
+ 
   Select,
-  Modal,
+
   Form,
-  Input,
   Button,
-  notification,
-  Drawer,
+
 } from "antd";
 import axios from "axios";
-import { get, isEmpty, flattenDeep, uniq } from "lodash";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDownloadExcel } from "react-export-table-to-excel";
+import { get, isEmpty, flattenDeep } from "lodash";
 import { DatePicker } from "antd";
 import moment from "moment";
-import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 import * as XLSX from 'xlsx';
 function Report() {
   const [report, setReport] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [form] = Form.useForm();
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const { RangePicker } = DatePicker;
   const dateFormat = "DD-MM-YYYY";
   const [userDates, setUserDate] = useState("");
   const [filteredDatas, setFilterDatas] = useState("");
-  const [memoDetails, setMemoDetails] = useState([]);
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
-  const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
 
   const fetchData = async () => {
@@ -46,9 +35,7 @@ function Report() {
       );
       setReport(get(result, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
-      }
+      
     }
   };
 

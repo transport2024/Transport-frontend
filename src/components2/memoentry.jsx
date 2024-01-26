@@ -19,8 +19,6 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import moment from "moment";
-import { useDispatch } from "react-redux";
-import { showOpen } from "../Redux/NetworkSlice.js";
 import * as XLSX from "xlsx";
 
 function Memo() {
@@ -34,7 +32,6 @@ function Memo() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [memoDetails, setMemoDetails] = useState([]);
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [exporting, setExporting] = useState(false);
   const [filteredVehicle, setFilteredVehicle] = useState([]);
@@ -57,9 +54,7 @@ function Memo() {
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen());
-      }
+     
     } finally {
       setLoading(false);
     }

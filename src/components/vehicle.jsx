@@ -18,8 +18,6 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDispatch } from "react-redux";
-import { showOpen } from "../Redux/NetworkSlice.js";
 import * as XLSX from "xlsx";
 
 function Vehicle() {
@@ -30,9 +28,7 @@ function Vehicle() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(false);
- 
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
 
@@ -44,9 +40,7 @@ function Vehicle() {
       );
       setVehicle(get(result, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen());
-      }
+     
     } finally {
       setLoading(false);
     }

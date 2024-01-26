@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from "react";
-import SideNavbar from "../sideNavbar.jsx";
+
 import {
-  Space,
+  
   Table,
-  Tag,
+  
   Select,
-  Modal,
+ 
   Form,
   Input,
   Button,
@@ -18,9 +19,6 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDownloadExcel } from "react-export-table-to-excel";
-import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 import * as XLSX from 'xlsx';
 
 function Consignee() {
@@ -31,7 +29,6 @@ function Consignee() {
   const tableRef = useRef(null);
   const [searched, setSearched] = useState([]);
   const [loading,setLoading]=useState(false)
-  const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
   const [loadingBtn,setLoadingBtn]=useState(false)
 
@@ -43,9 +40,7 @@ function Consignee() {
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
-      }
+     
     } finally {
       setLoading(false)
     }

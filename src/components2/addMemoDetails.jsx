@@ -17,8 +17,6 @@ import {  useLocation, useNavigate } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
-import {useDispatch} from "react-redux"
-import {showOpen} from "../Redux/NetworkSlice.js"
 
 function AddMemoDetails() {
   const [form] = Form.useForm();
@@ -37,7 +35,6 @@ function AddMemoDetails() {
   const [updateId, setUpdateId] = useState("");
   const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
   const [searched, setSearch] = useState([]);
 
   const fetchData = async () => {
@@ -72,9 +69,7 @@ function AddMemoDetails() {
       setLocation(get(result3, "data.message"));
       setVehicle(get(result7, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
-      }
+     
     } finally {
       setLoading(false);
     }

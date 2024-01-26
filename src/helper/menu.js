@@ -1,17 +1,8 @@
 import { NavLink } from "react-router-dom";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import PersonIcon from "@mui/icons-material/Person";
-import Man4Icon from "@mui/icons-material/Man4";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import PlaceIcon from "@mui/icons-material/Place";
-import AttributionIcon from "@mui/icons-material/Attribution";
-import InputIcon from "@mui/icons-material/Input";
-import MemoryIcon from "@mui/icons-material/Memory";
 import PatternRoundedIcon from "@mui/icons-material/PatternRounded";
-import DetailsRoundedIcon from "@mui/icons-material/DetailsRounded";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -37,7 +28,7 @@ export const items = [
       <DashboardCustomizeIcon fontSize="10px" />
       DashBoard
     </NavLink>,
-    "0",
+    "/",
     ""
   ),
   getItem(
@@ -67,7 +58,7 @@ export const items = [
         >
           Consignor
         </NavLink>,
-        "1"
+        "/consignor"
       ),
       getItem(
         <NavLink
@@ -81,7 +72,7 @@ export const items = [
         >
           Consignee
         </NavLink>,
-        "2"
+        "/consignee"
       ),
       getItem(
         <NavLink
@@ -95,7 +86,7 @@ export const items = [
         >
           Vehicle
         </NavLink>,
-        "3"
+        "/vehicle"
       ),
       getItem(
         <NavLink
@@ -109,7 +100,7 @@ export const items = [
         >
           Location
         </NavLink>,
-        "4"
+        "/location"
       ),
       getItem(
         <NavLink
@@ -123,7 +114,7 @@ export const items = [
         >
           Broker
         </NavLink>,
-        "5"
+        "/broker"
       ),
     ]
   ),
@@ -154,7 +145,7 @@ export const items = [
         >
           Memo Entry
         </NavLink>,
-        "6"
+        "/memo"
       ),
     ]
   ),
@@ -186,7 +177,7 @@ export const items = [
         >
           Report Entry
         </NavLink>,
-        "7"
+        "/report"
       ),
     ]
   ),

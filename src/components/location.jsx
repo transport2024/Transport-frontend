@@ -1,9 +1,9 @@
-import React, { Component, useEffect, useState,useRef } from "react";
-import SideNavbar from "../sideNavbar.jsx";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {  useEffect, useState,useRef } from "react";
 import {
-  Space,
+  
   Table,
-  Tag,
+ 
   Select,
   Modal,
   Form,
@@ -13,13 +13,10 @@ import {
   Skeleton,
 } from "antd";
 import axios from "axios";
-import { get, set } from "lodash";
+import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDownloadExcel } from "react-export-table-to-excel";
-import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
 import * as XLSX from 'xlsx';
 
 
@@ -31,7 +28,6 @@ function Location() {
 	const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [loading,setLoading]=useState(false)
-  const dispatch=useDispatch()
   const [exporting,setExporting]=useState(false)
   const [loadingBtn,setLoadingBtn]=useState(false)
 
@@ -43,9 +39,7 @@ function Location() {
       );
       setLocation(get(result, "data.message"));
     } catch (err) {
-      if (err.request.statusText === "Internal Server Error") {
-        dispatch(showOpen())
-      }
+     
     } finally {
       setLoading(false)
     }

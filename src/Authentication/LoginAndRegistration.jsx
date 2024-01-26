@@ -36,7 +36,7 @@ function LoginAndRegistration() {
        }
        form.setFieldsValue([])
     } catch (err) {
-      console.log(err);
+    
       notification.error({message:err?.response?.data})
     }
   };
