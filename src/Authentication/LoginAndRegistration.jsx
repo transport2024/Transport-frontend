@@ -34,7 +34,7 @@ function LoginAndRegistration() {
        if(!login){
         setLogin(true)
        }
-       form.setFieldsValue()
+       form.setFieldsValue([])
     } catch (err) {
       console.log(err);
       notification.error({message:err?.response?.data})
@@ -46,10 +46,7 @@ function LoginAndRegistration() {
   return (
     <div
       className="flex items-center  justify-center bg-gradient-to-r from-blue-200 via-slate-300 to-white-200  w-screen h-screen bg-center bg-cover bg-no-repeat"
-      // style={{
-      //   backgroundImage: `url("https://www.continental-tires.com/us/en/b2b/truck/resources/insights/how-to-read-tire-dot-code/_jcr_content/root/container/image_621474868.coreimg.85.1024.gif/1668374769145/header-services-solutions-digital-tire-monitoring-1280x444px.gif")`,
-        
-      // }}
+      
     >
       <div className="xl:w-[22vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">
         <Form form={form} className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
