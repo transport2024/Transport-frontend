@@ -28,7 +28,7 @@ function Ccv() {
       setMemo(get(result2, 'data.message'));
       setConsignee(get(result4, 'data.message'));
     } catch (err) {
-      console.log(err);
+      
     } finally {
       setLoading(false);
     }

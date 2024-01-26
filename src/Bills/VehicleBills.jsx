@@ -21,7 +21,7 @@ function VehicleBills() {
       const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
       setDatas(get(result, 'data.message'));
     } catch (e) {
-      console.log(e);
+      
     } finally {
       setLoading(false);
     }

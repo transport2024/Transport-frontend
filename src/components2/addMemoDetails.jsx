@@ -44,7 +44,7 @@ function AddMemoDetails() {
     try {
       setLoading(true);
       const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
-      console.log(result)
+   
       const result2 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
@@ -206,7 +206,7 @@ function AddMemoDetails() {
           message: "memodetails Updated successfully",
         });
       } catch (err) {
-        console.log(err);
+        
         notification.success({
           message: "Something Went wrong",
         });
@@ -236,7 +236,7 @@ function AddMemoDetails() {
     form.setFieldsValue(filterData[0]);
   }, [memoDetails, datas, filterData[0]]);
 
-  console.log(memoDetails,filterData,id,"daatatat")
+ 
 
   const handleDelete = async (value) => {
     try {

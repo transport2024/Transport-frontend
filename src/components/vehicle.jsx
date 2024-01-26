@@ -139,7 +139,7 @@ function Vehicle() {
       Modal.destroyAll();
       form.setFieldsValue([]);
     } catch (err) {
-      console.log(err);
+  
     }
   };
 

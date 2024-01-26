@@ -299,7 +299,7 @@ function Memo() {
     },
   ];
 
-  console.log(searched, "searched");
+ 
 
   return (
     <div className="flex pt-[12vh] pl-4">

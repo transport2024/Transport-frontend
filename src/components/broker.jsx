@@ -41,7 +41,7 @@ function Broker() {
       );
       setBroker(get(result, "data.message"));
     } catch (err) {
-      console.log(err);
+    
     } finally {
       setLoading(false)
     }
