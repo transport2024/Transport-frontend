@@ -98,7 +98,7 @@ function Dashboard() {
 
 
   return (
-    <div className="pt-[5vh] w-[85vw] m-auto">
+    <div className="pt-[12vh] w-[85vw] m-auto">
       <div className="grid grid-cols-2 lg:!flex xsm:gap-6 lg:gap-10 lg:pl-5 flex-wrap">
         <div className="bg-[#a2de97] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
          
