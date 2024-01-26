@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Drawer,
@@ -11,12 +13,12 @@ import {
 import axios from "axios";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import {  useLocation, useNavigate } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
 import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "../Redux/NetworkSlice.js"
+import {showOpen} from "../Redux/NetworkSlice.js"
 
 function AddMemoDetails() {
   const [form] = Form.useForm();
@@ -32,11 +34,11 @@ function AddMemoDetails() {
   const [consignor, setConsignor] = useState([]);
   const [consignee, setConsignee] = useState([]);
   const [broker, setBroker] = useState([]);
-  const [searched, setSearch] = useState([]);
   const [updateId, setUpdateId] = useState("");
   const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
   const dispatch=useDispatch()
+  const [searched, setSearch] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -62,7 +64,6 @@ function AddMemoDetails() {
       const result7 = await axios.get(
         `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
       );
-
       setBroker(get(result6, "data.message"));
       setConsignor(get(result5, "data.message"));
       setConsignee(get(result4, "data.message"));
@@ -83,7 +84,7 @@ function AddMemoDetails() {
     fetchData();
   }, []);
 
-  console.log(memoDetails,"adbhs")
+
 
   const handleEdit = (id) => {
     setUpdateId(id._id);
@@ -214,7 +215,7 @@ function AddMemoDetails() {
    
   };
 
-  console.log(datas,"wdkjnej")
+  
   
 
   useEffect(() => {
@@ -234,6 +235,8 @@ function AddMemoDetails() {
 
     form.setFieldsValue(filterData[0]);
   }, [memoDetails, datas, filterData[0]]);
+
+  console.log(memoDetails,filterData,id,"daatatat")
 
   const handleDelete = async (value) => {
     try {
@@ -397,7 +400,7 @@ function AddMemoDetails() {
   ];
 
   return (
-    <div className="pt-24 pl-[5vw] w-[80vw]">
+    <div className="pt-24 pl-[3vw] w-[80vw]">
       <Skeleton loading={loading}>
         <Form
           className="lg:grid  lg:grid-cols-3 lg:gap-x-[5vw] flex flex-col gap-0"
@@ -426,7 +429,7 @@ function AddMemoDetails() {
               },
             ]}
           >
-            <Input type="date" size="large" />
+            <Input type="text" size="large" placeholder="Enter date..."/>
           </Form.Item>
 
           <Form.Item
@@ -434,13 +437,7 @@ function AddMemoDetails() {
             label={<p className="text-[12px] lg:!text-[16px] font-semibold">Vehicle No</p>}
           >
             <Select placeholder="Select vehicle no" size="large">
-              {/* {vehicle.map((res, i) => {
-                return ( */}
-              {/* <Select.Option value={res.vehicleno} key={i}>
-                    {res.vehicleno}
-                  </Select.Option> */}
-              {/* );
-              })} */}
+              
             </Select>
           </Form.Item>
           <Form.Item
@@ -485,32 +482,15 @@ function AddMemoDetails() {
             <Input type="text" size="large" placeholder="Add whatsapp number..."/>
           </Form.Item>
 
-          <div className="flex items-end gap-2 justify-end">
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                className="bg-red-500 lg:w-[130px] float-left text-white font-bold tracking-wider"
-              >
-                Clear
-              </Button>
-            </Form.Item>
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                className="bg-green-600 lg:w-[130px] float-left text-white font-bold tracking-wider"
-              >
-                Save
-              </Button>
-            </Form.Item>
-          </div>
+       
         </Form>
       </Skeleton>
-      <div className="w-[80vw]">
+      <div className="w-[78vw]">
         {dataSource.length === 1 ? (
           ""
         ) : (
           <p
-            className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1"
+            className="bg-[--secondary-color] w-40 float-right text-white text-center rounded-md  h-8 pt-1 mr-4"
             onClick={() => {
               setOpen(true);
             }}
@@ -563,7 +543,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Select placeholder="Select location from" size="large">
+              <Select showSearch placeholder="Select location from" size="large">
                 {locationData.map((res, i) => {
                   return (
                     <Select.Option value={res.locationname} key={i}>
@@ -583,7 +563,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Select placeholder="Select location to" size="large">
+              <Select showSearch placeholder="Select location to" size="large">
                 {locationData.map((res, i) => {
                   return (
                     <Select.Option value={res.locationname} key={i}>
@@ -603,7 +583,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Select placeholder="Select Consignor" size="large">
+              <Select showSearch placeholder="Select Consignor" size="large">
                 {consignor.map((res, i) => {
                   return (
                     <Select.Option value={res.name} key={i}>
@@ -623,7 +603,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Select placeholder="Select Consignee" size="large">
+              <Select showSearch placeholder="Select Consignee" size="large">
                 {consignee.map((res, i) => {
                   return (
                     <Select.Option value={res.name} key={i}>
@@ -691,7 +671,7 @@ function AddMemoDetails() {
                 },
               ]}
             >
-              <Input type="text" size="large" />
+              <Input type="text" size="large" placeholder="Enter lr amount..."/>
             </Form.Item>
             <Form.Item
               label={<p className="!text-[16px] font-semibold">Broker Name</p>}

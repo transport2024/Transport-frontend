@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Bill from '../assets/bill.jpg';
 import image from "../assets/balaji.png"
 import axios from 'axios';
 import { get } from 'lodash';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 function VehicleBills() {
   const [datas, setDatas] = useState([]);
@@ -12,7 +11,7 @@ function VehicleBills() {
   const [vehicleno, setVehicleNO] = useState('');
   const [gcNo, setGcNo] = useState('');
   const location = useLocation();
-  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const printRef = useRef(false);
 
@@ -85,7 +84,7 @@ function VehicleBills() {
       </div>
     </div>
     <div className="pl-5 flex gap-10 items-center" style={{marginTop:"-20px"}}>
-      <img src={image} width={90} height={50} />
+      <img src={image} alt='' width={90} height={50} />
       <h1 className="uppercase text-5xl font-extrabold text-green-700 pt-6">
         jai balaji transport service
       </h1>

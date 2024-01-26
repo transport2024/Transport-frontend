@@ -1,6 +1,5 @@
 import "./App.css";
 import Consignor from "./components/consignor";
-import SideNavbar from "./sideNavbar";
 import LoginAndRegistration from "./Authentication/LoginAndRegistration";
 import {
   createBrowserRouter,
@@ -19,12 +18,8 @@ import Dashboard from "./Dashboard";
 import VehicleBills from "./Bills/VehicleBills";
 import AddMemoDetails from "./components2/addMemoDetails";
 import Ccv from "./allBills/ccv";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
-import {hideOpen,showOpen} from "./Redux/NetworkSlice"
-import {useDispatch,useSelector} from "react-redux"
-import SignalCellularConnectedNoInternet0BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet0Bar";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
 
 const router = createBrowserRouter(
@@ -49,14 +44,30 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const dispatch=useDispatch()
-  // const open=useSelector((state) => state.network.isOpen)
-  // console.log(open,"rbruh")
+  
+  const [isOfflineModalVisible, setOfflineModalVisible] = useState(false);
+  useEffect(() => {
+    const handleOfflineStatus = () => {
+      if (!navigator.onLine) {
+        setOfflineModalVisible(true);
+      } else {
+        setOfflineModalVisible(false);
+      }
+    };
+
+    window.addEventListener("online", handleOfflineStatus);
+    window.addEventListener("offline", handleOfflineStatus);
+
+    return () => {
+      window.removeEventListener("online", handleOfflineStatus);
+      window.removeEventListener("offline", handleOfflineStatus);
+    };
+  }, []);
 
   return (
     <div>
       <RouterProvider router={router} />
-      {/* <Modal open={open} footer={false} closable={false} width={400}>
+      <Modal open={isOfflineModalVisible} footer={false} closable={false} width={400}>
         <div className="text-md">
           <p className="font-bold flex items-center gap-1">
             No Internet
@@ -81,7 +92,7 @@ function App() {
             </ul>
           </div>
         </div>
-      </Modal> */}
+      </Modal>
     </div>
   );
 }

@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import Bill from "../assets/bill.jpg";
 import { useLocation } from "react-router";
 import image from "../assets/balaji.png";
 
@@ -62,9 +62,6 @@ setFilterConsignee(
     });
   }, [datas, filterDatas,memo,filterMemo,consignee,consignor]);
  
-//  console.log(filterMemo,"ll")
-//  console.log(filterDatas,"pp")
-
 
   return (
     <div className="!w-[97vw] !h-[100vh]" style={{height:"100vh",fontSize:"12.5px",position:"relative",fontFamily:"highgate-variable",zIndex:999,padding:"10px",color:"black"}}>
@@ -80,7 +77,7 @@ setFilterConsignee(
       className="pl-5 flex gap-10 items-center"
       style={{ marginTop: "-20px" }}
     >
-      <img src={image} width={90} height={50} />
+      <img src={image} alt="" width={90} height={50} />
       <h1 className="uppercase text-5xl  font-extrabold text-green-700 pt-6">
         jai balaji transport service
       </h1>

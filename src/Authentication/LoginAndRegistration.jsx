@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Input, InputNumber, notification } from "antd";
-import myimage from "../assets/1.jpg";
+import { Button, Form, Input, notification } from "antd";
 import axios from "axios";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { isEmpty } from "lodash";
-import Cookies from "js-cookie";
 
 function LoginAndRegistration() {
-  const [register, setRegiser] = useState(false);
   const [login, setLogin] = useState(true);
   const [inputs, setInputs] = useState({});
+  const [form] = Form.useForm(); 
 
   const navigate = useNavigate();
 
@@ -31,30 +27,32 @@ function LoginAndRegistration() {
       login ? notification.success({ message: "Lets Continue" }) :
         notification.success({ message: "Registered successfully lets login" })
       
-      if (result) {
+      if (result&&login) {
         navigate('/')
         localStorage.setItem("token","login")
        }
+       if(!login){
+        setLogin(true)
+       }
+       form.setFieldsValue()
     } catch (err) {
       console.log(err);
-      notification.error({message:err.response.data})
+      notification.error({message:err?.response?.data})
     }
-
-   
   };
 
  
 
   return (
     <div
-      className="flex items-center justify-center bg-gradient-to-r from-blue-200 via-slate-300 to-white-200  w-screen h-screen bg-center bg-cover bg-no-repeat"
+      className="flex items-center  justify-center bg-gradient-to-r from-blue-200 via-slate-300 to-white-200  w-screen h-screen bg-center bg-cover bg-no-repeat"
       // style={{
-      //   backgroundImage: `url(${myimage})`,
-      //   backdropFilter:"blur(20%)",
+      //   backgroundImage: `url("https://www.continental-tires.com/us/en/b2b/truck/resources/insights/how-to-read-tire-dot-code/_jcr_content/root/container/image_621474868.coreimg.85.1024.gif/1668374769145/header-services-solutions-digital-tire-monitoring-1280x444px.gif")`,
+        
       // }}
     >
-      <div className="xl:w-[25vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">
-        <Form className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
+      <div className="xl:w-[22vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">
+        <Form form={form} className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
           <h1 className="text-3xl text-blue-500 font-medium pb-2 text-center">
             Admin Login
           </h1>
@@ -73,6 +71,7 @@ function LoginAndRegistration() {
               size="large"
               name="username"
               onChange={handleChange}
+              placeholder="Enter username..."
             />
           </Form.Item>
           <Form.Item
@@ -89,6 +88,7 @@ function LoginAndRegistration() {
               size="large"
               name="password"
               onChange={handleChange}
+              placeholder="Enter password..."
             />
           </Form.Item>
 
@@ -106,7 +106,7 @@ function LoginAndRegistration() {
             <p
               className="text-blue-500 font-medium cursor-pointer text-center"
               onClick={() => {
-                setRegiser(true);
+                
                 setLogin(false);
               }}
             >
@@ -116,7 +116,7 @@ function LoginAndRegistration() {
             <p
               className="text-blue-500 font-medium cursor-pointer text-center"
               onClick={() => {
-                setRegiser(false);
+                
                 setLogin(true);
               }}
             >

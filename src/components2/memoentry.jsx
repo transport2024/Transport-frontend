@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useEffect, useRef, useState } from "react";
-import SideNavbar from "../sideNavbar.jsx";
+import React, {  useEffect, useRef, useState } from "react";
 import {
-  Space,
   Table,
-  Tag,
   Select,
   Modal,
   Form,
@@ -15,17 +12,15 @@ import {
   Skeleton,
 } from "antd";
 import axios from "axios";
-import { get, flatten, isEmpty } from "lodash";
+import { get, isEmpty } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDownloadExcel } from "react-export-table-to-excel";
 import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { showOpen, hideOpen } from "../Redux/NetworkSlice.js";
+import { showOpen } from "../Redux/NetworkSlice.js";
 import * as XLSX from "xlsx";
 
 function Memo() {
@@ -134,9 +129,8 @@ function Memo() {
   };
 
   const handleEdit = (value) => {
-    // form.setFieldsValue(value);
+    
     setUpdateId(value._id);
-    // setOpen(true);
     navigate(`/editmemo/${value._id}`);
   };
 

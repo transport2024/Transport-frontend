@@ -1,8 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import myimage1 from "./assets/dash1.png";
-import myimage2 from "./assets/dash2.png";
-import myimage3 from "./assets/dash3.png";
-import myimage4 from "./assets/dash4.png";
 import { Statistic, Table, Skeleton } from "antd";
 import CountUp from "react-countup";
 import axios from "axios";
@@ -12,7 +9,7 @@ import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import {useDispatch} from "react-redux"
-import {showOpen,hideOpen} from "./Redux/NetworkSlice"
+import {showOpen} from "./Redux/NetworkSlice"
 
 
 function Dashboard() {
@@ -59,7 +56,7 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  console.log(memo, "jberjhehj");
+  
 
   const columns = [
     {
@@ -103,7 +100,7 @@ function Dashboard() {
 
 
   return (
-    <div className="pt-[15vh] w-[85vw] m-auto">
+    <div className="pt-[5vh] w-[85vw] m-auto">
       <div className="grid grid-cols-2 lg:!flex xsm:gap-6 lg:gap-10 lg:pl-5 flex-wrap">
         <div className="bg-[#a2de97] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
          
@@ -127,7 +124,7 @@ function Dashboard() {
         </div>
 
         <div className="bg-[#e56a93] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
-          {/* <img src={myimage2} /> */}
+        
           <Person3OutlinedIcon className="text-white lg:font-[50px]"/>
           <Statistic
             title={

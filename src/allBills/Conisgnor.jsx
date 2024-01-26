@@ -1,7 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import image from "../assets/balaji.png";
-import axios from "axios";
-import { get } from "lodash";
 import { useLocation } from "react-router";
 
 function Conisgnor(props) {
@@ -59,9 +58,7 @@ function Conisgnor(props) {
        });
   }, [datas, filterDatas, memo, consignor, filterConsignor, filterMemo,consignee]);
 
- 
-   console.log(filterConsignee,"pp")
-;
+
 
   return (
     <div
@@ -91,7 +88,7 @@ function Conisgnor(props) {
         className="pl-5 flex gap-10 items-center"
         style={{ marginTop: "-20px" }}
       >
-        <img src={image} width={90} height={50} />
+        <img src={image} width={90} alt="" height={50} />
         <h1 className="uppercase text-5xl  font-extrabold text-green-700 pt-6">
           jai balaji transport service
         </h1>
