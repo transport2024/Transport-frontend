@@ -10,13 +10,13 @@ function LoginAndRegistration() {
   const [form] = Form.useForm();
 
   const navigate = useNavigate();
-
   const handleChange = (event) => {
     event.preventDefault();
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  console.log("hii")
 
   const handleSubmit = async () => {
     try {
