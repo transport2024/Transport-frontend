@@ -48,6 +48,9 @@ function LoginAndRegistration() {
       className="flex items-center  justify-center bg-gradient-to-r from-blue-200 via-slate-300 to-white-200  w-screen h-screen bg-center bg-cover bg-no-repeat"
       
     >
+    <div>
+      
+    </div>
       <div className="xl:w-[22vw] xsm:w-[80vw] py-5 border-2 bg-white/70 backdrop-blur-sm rounded-md shadow-sm flex items-center justify-center">
         <Form form={form} className="xsm:w-[80vw] xl:w-[20vw]    p-4" layout="vertical">
           <h1 className="text-3xl text-blue-500 font-medium pb-2 text-center">
