@@ -20,10 +20,35 @@ const ForgotPassword = () => {
 
     return Promise.resolve();
   };
-  const handleFinish = () => {};
-  const handleOtpSubmit=()=>{
+  const handleFinish = async(value) => {
+    try{
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/api/user/forgot_password`,
+        value
+      );
+     
+      setValidOtp(get(response,"data.data",""))
+      if (get(response, "data.data")) {
+        setOpen(!open);
+      }
+    }catch(err){
+      console.log(err)
+    }
+  };
 
-  }
+
+  const handleOtpSubmit = () => {
+    if (otp===validOtp) {
+      notification.success({message: "Otp verified successfully"})
+      setOpen(false);
+      setOtpError("");
+      navigate("/password_reset")
+      
+    } else {
+      setOtpError("Please enter a valid 6-digit OTP.");
+     
+    }
+  };
   return (
     <div className="flex flex-col items-center w-screen pt-28 bg-blue-900 bg-opacity-70 backdrop-blur-md  h-screen gap-20">
       <div className="flex flex-col gap-5 pt-8">
@@ -90,11 +115,11 @@ const ForgotPassword = () => {
               )}
             />
           </div>
-          {/* {otpError && (
+          {otpError && (
           <div className="text-red-500 text-sm text-center mt-2">
             {otpError}
           </div>
-        )} */}
+        )}
           <div className="flex items-center justify-center mt-4">
             <Button
               type="primary"

@@ -21,6 +21,8 @@ const Register = () => {
     }
   };
 
+  
+
   return (
     <div
       style={{

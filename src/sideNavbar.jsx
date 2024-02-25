@@ -9,15 +9,20 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import logo from "./assets/logo.png";
+import { useDispatch } from "react-redux";
+import { changeUservalues } from "./Redux/userSlice";
 
 function SideNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [menu, setMenu] = useState(false);
+  const dispatch=useDispatch()
 
   const handleLogout = () => {
     Cookies.remove("token");
+    localStorage.removeItem("token")
+    dispatch(changeUservalues(null));
     if (
       isEmpty(Cookies.get("token")) ||
       isEmpty(localStorage.getItem("token"))
@@ -28,7 +33,6 @@ function SideNavbar() {
 
   const onClick = (e) => {
     setMenu(false);
-  
   };
 
 

@@ -5,9 +5,28 @@ import {useNavigate} from "react-router-dom"
 
 
 const PasswordReset = () => {
-    const handleFinish=()=>{
+  const navigate=useNavigate()
 
+  const handleFinish = async (value) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/api/user/password_reset`,
+        value
+      );
+     
+      
+      if (response.status === 200) {
+        notification.success({message:"Password reset successfully"})
+        navigate("/login")
+      }
+    } catch (e) {
+        if(e?.response?.data?.message==="Try a different password"){
+            notification.error({message:"Try a different password"})
+          }
+      
     }
+  };
+
   return (
     <div className="flex items-center justify-center bg-blue-900 w-screen h-[100vh]">
     <div className="flex flex-col gap-5 items-center justify-center bg-white bg-opacity-70 w-[300px] md:w-[400px] rounded-md py-5">

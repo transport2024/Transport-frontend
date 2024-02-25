@@ -1,54 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Image, Input, notification } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowRightAltOutlined } from "@mui/icons-material";
-import {get,isEmpty} from "lodash"
+import { get, isEmpty } from "lodash";
+import { changeUservalues } from "../Redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function LoginAndRegistration() {
   const [login, setLogin] = useState(true);
   const [inputs, setInputs] = useState({});
   const [form] = Form.useForm();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-
   const handleFinish = async (values) => {
-    console.log(values)
+    console.log(values);
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_URL}/api/user/login`,
-        values,
-        { withCredentials: true }
+        values
       );
-           localStorage.setItem("token",result?.data)
-           fetchData()
-      // form.setFieldsValue([]);
+      localStorage.setItem("token", result?.data);
+      fetchData();
+      form.setFieldsValue([]);
+      notification.success({message:"lets continue"})
     } catch (err) {
       // notification.error({ message: err?.response?.data });
-      console.log(err)
+      console.log(err.response.data.message);
+      if (err.response.data.message !== "" || null || undefined) {
+        notification.error({ message: err.response.data.message });
+      }
     }
   };
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
 
-   try{
-    const result=await axios
-    .get(`${process.env.REACT_APP_URL}/validateToken`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    // dispatch(changeUservalues(result.data));
-    if(!isEmpty(result.data)){
-      navigate("/")
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_URL}/api/user/validateToken`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(changeUservalues(result.data));
+      if (!isEmpty(result.data)) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
-   }catch(err){
-    console.log(err)
-   }
-     
   };
+  console.log(user.user, "user");
+  useEffect(() => {
+    if (user.user !== null) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="relative">
@@ -74,7 +87,12 @@ function LoginAndRegistration() {
             </div>
           </div>
           <div className="md:w-[50%] py-5 flex items-center justify-center">
-            <Form  onFinish={handleFinish} form={form} className="p-4" layout="vertical">
+            <Form
+              onFinish={handleFinish}
+              form={form}
+              className="p-4"
+              layout="vertical"
+            >
               <h1 className=" text-xl md:text-2xl text-blue-900 font-medium pb-2 text-center">
                 Rock Fort Login
               </h1>
@@ -115,12 +133,7 @@ function LoginAndRegistration() {
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  htmlType="submit"
-                  className="w-full"
-                  size="large"
-                 
-                >
+                <Button htmlType="submit" className="w-full" size="large">
                   {login ? "Login" : "Register"}
                 </Button>
                 <span

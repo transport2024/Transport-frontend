@@ -25,6 +25,7 @@ import Register from "./Authentication/Register";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import PasswordReset from "./Authentication/PasswordReset";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -50,9 +51,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  
   const [isOfflineModalVisible, setOfflineModalVisible] = useState(false);
+
+
+
   useEffect(() => {
+  
+
     const handleOfflineStatus = () => {
       if (!navigator.onLine) {
         setOfflineModalVisible(true);
@@ -73,7 +78,12 @@ function App() {
   return (
     <div>
       <RouterProvider router={router} />
-      <Modal open={isOfflineModalVisible} footer={false} closable={false} width={400}>
+      <Modal
+        open={isOfflineModalVisible}
+        footer={false}
+        closable={false}
+        width={400}
+      >
         <div className="text-md">
           <p className="font-bold flex items-center gap-1">
             No Internet

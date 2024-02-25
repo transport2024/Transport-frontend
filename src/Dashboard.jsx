@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Statistic, Table, Skeleton } from "antd";
 import CountUp from "react-countup";
 import axios from "axios";
-import { get } from "lodash";
+import { get,isEmpty } from "lodash";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
+import { changeUservalues } from "./Redux/userSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 
 
@@ -20,6 +23,8 @@ function Dashboard() {
   const [broker, setBroker] = useState([]);
   const [loading, setLoading] = useState(false);
   const [memo, setMemo] = useState([]);
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
 
 
   const fetchData = async () => {
@@ -50,8 +55,30 @@ function Dashboard() {
     }
   };
 
+  const fetchDataUser = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_URL}/api/user/validateToken`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(changeUservalues(result.data));
+      if (!isEmpty(result.data)) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchDataUser()
   }, []);
 
   
