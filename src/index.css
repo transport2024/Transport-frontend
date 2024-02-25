@@ -20,7 +20,7 @@ body {
 
 .ant-menu-item-selected {
   background-color: transparent !important;
-  color: red !important;
+  color: #1e3a8a !important;
   font-weight: 700 !important;
 }
 
@@ -37,15 +37,15 @@ body {
 }
 
 .ant-menu-sub .ant-menu-inline {
-  background: red !important;
+  background: #1e3a8a !important;
 }
 
 .ant-menu-submenu{
-  background: red  !important;
+  background: #1e3a8a  !important;
 }
 
 .ant-pagination-item a {
-  color: red !important;
+  color: #1e3a8a !important;
 }
 
 
@@ -76,22 +76,22 @@ body {
 
 .ant-menu-submenu-selected > .ant-menu-submenu-title {
   font-weight: 700 !important;
-  color: red !important;
+  color: #1e3a8a !important;
   background: white !important;
 }
 
 .ant-menu-submenu-title{
-  background: red !important;
+  background: #1e3a8a !important;
   color: white !important;
 }
 
 .active{
-  color: blue !important;
-  font-weight: 900 !important;
+  color: red !important;
 }
 
+
 .ant-menu-light {
-  background-color: red !important;
+  background-color: #1e3a8a !important;
   color: white !important;
 }
 
@@ -108,7 +108,7 @@ body {
 
 :root {
   --primary-color: rgb(250, 250, 250);
-  --secondary-color: red;
+  --secondary-color: #1e3a8a;
   --third-color: #9215f9;
 }
 
@@ -121,11 +121,11 @@ body {
 }
 
 .ant-btn-primary:hover{
-  background-color: red !important;
+  background-color: #1e3a8a !important;
 }
 
 .ant-menu-inline{
-  background-color: red !important;
+  background-color: #1e3a8a !important;
 }
 
 /* input::-webkit-calendar-picker-indicator{

@@ -10,44 +10,53 @@ function LoginAndRegistration() {
   const [form] = Form.useForm();
 
   const navigate = useNavigate();
-  const handleChange = (event) => {
-    event.preventDefault();
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
-  console.log("hii")
+  // const handleChange = (event) => {
+  //   event.preventDefault();
+  //   const name = event.target.name;
+  //   const value = event.target.value;
+  //   setInputs((values) => ({ ...values, [name]: value }));
+  // };
 
-  const handleSubmit = async () => {
+  const handleFinish = async (values) => {
+    console.log(values)
     try {
       const result = await axios.post(
-        `${process.env.REACT_APP_URL}/api/user/${login ? "login" : "register"}`,
-        inputs,
+        `${process.env.REACT_APP_URL}/api/user/login`,
+        values,
         { withCredentials: true }
       );
-      login
-        ? notification.success({ message: "Lets Continue" })
-        : notification.success({
-            message: "Registered successfully lets login",
-          });
-
-      if (result && login) {
-        navigate("/");
-        localStorage.setItem("token", "login");
-      }
-      if (!login) {
-        setLogin(true);
-      }
-      form.setFieldsValue([]);
+           localStorage.setItem("token",result?.data)
+           fetchData()
+      // form.setFieldsValue([]);
     } catch (err) {
-      notification.error({ message: err?.response?.data });
+      // notification.error({ message: err?.response?.data });
+      console.log(err)
     }
+  };
+
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+
+   try{
+    const result=await axios
+    .get(`${process.env.REACT_APP_URL}/validateToken`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    // dispatch(changeUservalues(result.data));
+    if(!isEmpty(result.data)){
+      navigate("/")
+    }
+   }catch(err){
+    console.log(err)
+   }
+     
   };
 
   return (
     <div className="relative">
-    <div className="absolute inset-0 bg-gradient-to-r from-slate-400 via-slate-700 to-white-200 opacity-50 blur-sm">
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/80 to-black/70 opacity-50 blur-sm"></div>
       <div
         className="flex items-center justify-center  w-screen h-screen bg-center bg-cover bg-no-repeat"
         style={{
@@ -56,7 +65,7 @@ function LoginAndRegistration() {
             "url('https://img.freepik.com/premium-photo/transport-logistic-manager-checking-control-logistic-network-distribution-customer_34200-864.jpg?w=1060')",
         }}
       >
-        <div className="h-[55vh] w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[55vw] px-3 flex rounded-tl-[120px] rounded-br-[120px] rounded-tr-[10px] rounded-bl-[10px] items-center justify-center shadow-md bg-white/70 backdrop-blur-sm">
+        <div className="min-h-[53vh]  w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[55vw] px-3 flex rounded-tl-[60px] md:rounded-tl-[120px] rounded-br-[60px] md:rounded-br-[120px] rounded-tr-[10px] rounded-bl-[10px] items-center justify-center shadow-md bg-white/70 backdrop-blur-sm">
           <div className="w-[50%] pt-5 h-[100%] hidden md:flex border-r-2 border-r-[primary-color]  flex-col items-center px-5 gap-5 md:text-2xl lg:text-3xl">
             <Image
               preview={false}
@@ -69,12 +78,8 @@ function LoginAndRegistration() {
             </div>
           </div>
           <div className="md:w-[50%] py-5 flex items-center justify-center">
-            <Form
-              form={form}
-              className="p-4"
-              layout="vertical"
-            >
-              <h1 className="text-2xl text-blue-900 font-medium pb-2 text-center">
+            <Form  onFinish={handleFinish} form={form} className="p-4" layout="vertical">
+              <h1 className=" text-xl md:text-2xl text-blue-900 font-medium pb-2 text-center">
                 Rock Fort Login
               </h1>
               <Form.Item
@@ -91,7 +96,7 @@ function LoginAndRegistration() {
                   type="text"
                   size="large"
                   name="username"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   placeholder="Enter username..."
                 />
               </Form.Item>
@@ -108,7 +113,7 @@ function LoginAndRegistration() {
                 <Input.Password
                   size="large"
                   name="password"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   placeholder="Enter password..."
                 />
               </Form.Item>
@@ -118,23 +123,34 @@ function LoginAndRegistration() {
                   htmlType="submit"
                   className="w-full"
                   size="large"
-                  onClick={handleSubmit}
+                 
                 >
                   {login ? "Login" : "Register"}
                 </Button>
+                <span
+                  className="text-blue-900 font-semibold pt-2"
+                  onClick={() => {
+                    navigate("/forgot_password");
+                  }}
+                >
+                  forgot password?
+                </span>
               </Form.Item>
               {login ? (
                 <p
-                  className="text-blue-500 font-medium cursor-pointer text-center"
+                  className="text-blue-900 font-medium cursor-pointer text-center"
                   onClick={() => {
                     setLogin(false);
                   }}
                 >
-                  New user?<span className="p-1">Register here</span>
+                  New user?
+                  <span className="p-1" onClick={() => navigate("/register")}>
+                    Register here
+                  </span>
                 </p>
               ) : (
                 <p
-                  className="text-blue-500 font-medium cursor-pointer text-center"
+                  className="text-blue-900 font-medium cursor-pointer text-center"
                   onClick={() => {
                     setLogin(true);
                   }}

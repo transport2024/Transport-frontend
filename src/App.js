@@ -1,6 +1,6 @@
 import "./App.css";
 import Consignor from "./components/consignor";
-import LoginAndRegistration from "./Authentication/LoginAndRegistration";
+import Login from "./Authentication/Login";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -21,6 +21,9 @@ import Ccv from "./allBills/ccv";
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
+import Register from "./Authentication/Register";
+import ForgotPassword from "./Authentication/ForgotPassword";
+import PasswordReset from "./Authentication/PasswordReset";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +38,10 @@ const router = createBrowserRouter(
         <Route path="memo" element={<Memo />} />
         <Route path="editmemo/:id" element={<AddMemoDetails />} />
         <Route path="report" element={<Report />} />
-        <Route path="admin" element={<LoginAndRegistration />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="forgot_password" element={<ForgotPassword />} />
+        <Route path="password_reset" element={<PasswordReset />} />
       </Route>
       <Route path="vehicleBill/:id" element={<VehicleBills />} />
       <Route path="ccv/:id" element={<Ccv />} />

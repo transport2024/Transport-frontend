@@ -1,17 +1,21 @@
 import React from "react";
 import SideNavbar from "../sideNavbar";
-import LoginAndRegistration from "../Authentication/LoginAndRegistration";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function Rootlayouts() {
-
-  const locaion=useLocation()
-
+  const locaion = useLocation();
 
   return (
     <div className="flex">
-      {locaion.pathname.split('/')[1].includes("admin")?"":<SideNavbar />}
+      {locaion.pathname.split("/")[1].includes("login") ||
+      locaion.pathname.split("/")[1].includes("register") ||
+      locaion.pathname.split("/")[1].includes("forgot_password") ||
+      locaion.pathname.split("/")[1].includes("password_reset") ? (
+        ""
+      ) : (
+        <SideNavbar />
+      )}
       <Outlet />
     </div>
   );
