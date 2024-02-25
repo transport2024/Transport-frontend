@@ -22,7 +22,7 @@ function SideNavbar() {
       isEmpty(Cookies.get("token")) ||
       isEmpty(localStorage.getItem("token"))
     ) {
-      navigate("/admin");
+      navigate("/login");
     }
   };
 
@@ -33,7 +33,7 @@ function SideNavbar() {
 
 
   useEffect(() => {
-    isEmpty(localStorage.getItem("token")) && navigate("/admin");
+    isEmpty(localStorage.getItem("token")) && navigate("/login");
   }, []);
 
  

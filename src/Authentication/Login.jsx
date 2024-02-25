@@ -11,12 +11,7 @@ function LoginAndRegistration() {
   const [form] = Form.useForm();
 
   const navigate = useNavigate();
-  // const handleChange = (event) => {
-  //   event.preventDefault();
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   setInputs((values) => ({ ...values, [name]: value }));
-  // };
+
 
   const handleFinish = async (values) => {
     console.log(values)
@@ -129,7 +124,7 @@ function LoginAndRegistration() {
                   {login ? "Login" : "Register"}
                 </Button>
                 <span
-                  className="text-blue-900 font-semibold pt-2"
+                  className="text-blue-900 cursor-pointer font-semibold pt-2"
                   onClick={() => {
                     navigate("/forgot_password");
                   }}
