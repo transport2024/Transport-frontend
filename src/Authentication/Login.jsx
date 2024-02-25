@@ -3,6 +3,7 @@ import { Button, Form, Image, Input, notification } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowRightAltOutlined } from "@mui/icons-material";
+import {get,isEmpty} from "lodash"
 
 function LoginAndRegistration() {
   const [login, setLogin] = useState(true);
