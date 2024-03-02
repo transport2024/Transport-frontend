@@ -50,7 +50,7 @@ const ForgotPassword = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center w-screen pt-28 bg-blue-900 bg-opacity-70 backdrop-blur-md  h-screen gap-20">
+    <div id='btn' className="flex flex-col items-center w-screen pt-28  bg-opacity-70 backdrop-blur-md  h-screen gap-20">
       <div className="flex flex-col gap-5 pt-8">
         <h1 className="md:text-4xl text-white text-shadow-md decoration-clone text-center">
           Enter Your Register Email
@@ -74,8 +74,9 @@ const ForgotPassword = () => {
           </Form.Item>
           <Form.Item className="w-[80%]">
             <Button
+             id='btn'
               htmlType="submit"
-              className="w-[100%] bg-blue-900 text-white h-[40px] hover:!text-white hover:scale-105 duration-700"
+              className="w-[100%] border-none text-white h-[40px] hover:!text-white hover:scale-105 duration-700"
             >
               Request Otp
             </Button>

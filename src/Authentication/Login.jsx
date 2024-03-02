@@ -79,9 +79,9 @@ function LoginAndRegistration() {
             <Image
               preview={false}
               width={160}
-              src="https://cdn-icons-png.flaticon.com/512/5087/5087579.png"
+              src="https://www.freeiconspng.com/uploads/user-login-icon-29.png"
             />
-            <div>
+            <div id="text-color">
               <p> Your journey begins with a single step</p>
               <p className="text-lg pt-8 float-right">Login to continue</p>
             </div>
@@ -93,11 +93,11 @@ function LoginAndRegistration() {
               className="p-4"
               layout="vertical"
             >
-              <h1 className=" text-xl md:text-2xl text-blue-900 font-medium pb-2 text-center">
+              <h1 id="text-color" className=" text-xl md:text-2xl font-medium pb-2 text-center">
                 Rock Fort Login
               </h1>
               <Form.Item
-                label="UserName"
+                label={<p id="text-color">Email</p>}
                 name="email"
                 rules={[
                   {
@@ -115,7 +115,7 @@ function LoginAndRegistration() {
                 />
               </Form.Item>
               <Form.Item
-                label="Password"
+                label={<p id="text-color">Password</p>}
                 name="password"
                 rules={[
                   {
@@ -133,11 +133,12 @@ function LoginAndRegistration() {
               </Form.Item>
 
               <Form.Item>
-                <Button htmlType="submit" className="w-full" size="large">
-                  {login ? "Login" : "Register"}
+                <Button  id="text-color" htmlType="submit" className="w-full" size="large">
+                  Login
                 </Button>
                 <span
-                  className="text-blue-900 cursor-pointer font-semibold pt-2"
+                id="text-color"
+                  className=" cursor-pointer font-semibold pt-2"
                   onClick={() => {
                     navigate("/forgot_password");
                   }}
@@ -147,10 +148,11 @@ function LoginAndRegistration() {
               </Form.Item>
               {login ? (
                 <p
-                  className="text-blue-900 font-medium cursor-pointer text-center"
+                  className=" font-medium cursor-pointer text-center"
                   onClick={() => {
                     setLogin(false);
                   }}
+                  id="text-color"
                 >
                   New user?
                   <span className="p-1" onClick={() => navigate("/register")}>
@@ -159,7 +161,8 @@ function LoginAndRegistration() {
                 </p>
               ) : (
                 <p
-                  className="text-blue-900 font-medium cursor-pointer text-center"
+                id="text-color"
+                  className=" font-medium cursor-pointer text-center"
                   onClick={() => {
                     setLogin(true);
                   }}

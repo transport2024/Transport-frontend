@@ -154,14 +154,14 @@ function Location() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer"
+              className="!text-md text-green-500 cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer "
+              className="!text-md text-red-500 cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -173,8 +173,8 @@ function Location() {
   ];
 
   return (
-    <div className="flex pt-[12vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-8">
+    <div className="flex pt-[10vh] pl-4">
+      <div className="w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -192,6 +192,7 @@ function Location() {
         </div>
         <div className="w-full flex gap-5 items-end justify-end">
           <div
+          id="btn"
             className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
@@ -202,8 +203,9 @@ function Location() {
           </div>
           <div>
             <Button
+            id="btn"
               onClick={()=>{exportToExcel(Location)}}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              className="w-[120px] py-1  border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>

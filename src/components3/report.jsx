@@ -1,21 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, {  useEffect, useState, useRef } from "react";
-import {
-
-  Table,
- 
-  Select,
-
-  Form,
-  Button,
-
-} from "antd";
+import React, { useEffect, useState, useRef } from "react";
+import { Table, Select, Form, Button } from "antd";
 import axios from "axios";
 import { get, isEmpty, flattenDeep } from "lodash";
 import { DatePicker } from "antd";
 import moment from "moment";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 function Report() {
   const [report, setReport] = useState([]);
   const [searched, setSearched] = useState([]);
@@ -26,7 +17,7 @@ function Report() {
   const [filteredDatas, setFilterDatas] = useState("");
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
-  const [exporting,setExporting]=useState(false)
+  const [exporting, setExporting] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -34,16 +25,12 @@ function Report() {
         `${process.env.REACT_APP_URL}/api/memodetails`
       );
       setReport(get(result, "data.message"));
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-
 
   useEffect(() => {
     setData(
@@ -103,30 +90,28 @@ function Report() {
     }
   };
 
-
-
- 
   const exportToExcel = () => {
     if (!exporting) {
-      const dataForExport = !data?dateFilters:data.map((report) => ({
-        date: report.date,
-        vehicleno: report.vehicleno,
-        pan: report.pan,
-        rcname: report.rcname,
-        locationfrom: report.locationfrom,
-        locationto: report.locationto,
-        consignor: report.consignor,
-        consignee: report.consignee,
-        brokername: report.brokername,
-        lrno: report.gcno,
-        lramount: report.lramount,  
-     
-      }));
-  
+      const dataForExport = !data
+        ? dateFilters
+        : data.map((report) => ({
+            date: report.date,
+            vehicleno: report.vehicleno,
+            pan: report.pan,
+            rcname: report.rcname,
+            locationfrom: report.locationfrom,
+            locationto: report.locationto,
+            consignor: report.consignor,
+            consignee: report.consignee,
+            brokername: report.brokername,
+            lrno: report.gcno,
+            lramount: report.lramount,
+          }));
+
       const ws = XLSX.utils.json_to_sheet(dataForExport);
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, 'exported_data.xlsx');
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "exported_data.xlsx");
       setExporting(false);
     }
   };
@@ -235,10 +220,15 @@ function Report() {
       .flat();
 
   return (
-    <div className="flex pt-[15vh] lg:pl-4">
-      <div className="w-[83vw] flex flex-col gap-8">
+    <div className="flex pt-[12vh] lg:pl-4">
+      <div className="w-[78vw] flex flex-col gap-8">
         <div className="flex flex-col lg:flex-row items-center justify-between px-10">
-          <RangePicker format={dateFormat} size="large" onChange={handleDate} className="w-[80vw] lg:w-[20vw]"/>
+          <RangePicker
+            format={dateFormat}
+            size="large"
+            onChange={handleDate}
+            className="w-[80vw] lg:w-[25vw]"
+          />
           <div className="flex items-center justify-center w-[90vw] pl-3 lg:pl-0">
             <Select
               mode="tags"
@@ -256,8 +246,11 @@ function Report() {
 
             <div className="pr-5">
               <Button
-                onClick={()=>{exportToExcel(data)}}
-                className="w-[90px] lg:w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+                id="btn"
+                onClick={() => {
+                  exportToExcel(data);
+                }}
+                className="w-[90px] lg:w-[120px] py-1 border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
               >
                 Export Exel
               </Button>

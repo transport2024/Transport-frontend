@@ -2,11 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import {
-  
   Table,
-  
   Select,
- 
   Form,
   Input,
   Button,
@@ -19,7 +16,7 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 
 function Consignee() {
   const [Consignee, setConsignee] = useState([]);
@@ -28,21 +25,20 @@ function Consignee() {
   const [updateId, setUpdateId] = useState("");
   const tableRef = useRef(null);
   const [searched, setSearched] = useState([]);
-  const [loading,setLoading]=useState(false)
-  const [exporting,setExporting]=useState(false)
-  const [loadingBtn,setLoadingBtn]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
-     
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -50,24 +46,22 @@ function Consignee() {
     fetchData();
   }, [searched]);
 
- 
-
   const handleSubmit = async (value) => {
     if (updateId === "") {
-      setLoadingBtn(true)
+      setLoadingBtn(true);
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/consignee`, value);
         fetchData();
         notification.success({ message: "Consignee Added successfully" });
         setOpen(false);
-        form.setFieldsValue([])
+        form.setFieldsValue([]);
       } catch (err) {
         notification.error({ message: "Something went wrong" });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     } else {
-      setLoadingBtn(true)
+      setLoadingBtn(true);
       try {
         await axios.put(
           `${process.env.REACT_APP_URL}/api/consignee/${updateId}`,
@@ -80,8 +74,8 @@ function Consignee() {
         setUpdateId("");
       } catch (err) {
         notification.error({ message: "Something went wrong" });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     }
   };
@@ -94,7 +88,9 @@ function Consignee() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_URL}/api/consignee/${value._id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_URL}/api/consignee/${value._id}`
+      );
       fetchData();
       notification.success({ message: "Deleted Successfully" });
     } catch (err) {
@@ -104,38 +100,31 @@ function Consignee() {
 
   const searchers = [];
 
-  
-
   Consignee &&
     Consignee.map((data) => {
-      return searchers.push(
-        { value: data.name },
-        { value: data.place }
-      );
+      return searchers.push({ value: data.name }, { value: data.place });
     });
 
-   
-    const exportToExcel = () => {
-      if (!exporting) {
-        const dataForExport = Consignee.map((consignee) => ({
-          name: consignee.name,
-          address: consignee.address,
-          contactPerson: consignee.contactPerson,
-          gstno: consignee.gstno,
-          mail: consignee.mail,
-          phone: consignee.phone,
-          place: consignee.place,
-       
-        }));
-    
-        const ws = XLSX.utils.json_to_sheet(dataForExport);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, 'exported_data.xlsx');
-        setExporting(false);
-      }
-    };
-    
+  const exportToExcel = () => {
+    if (!exporting) {
+      const dataForExport = Consignee.map((consignee) => ({
+        name: consignee.name,
+        address: consignee.address,
+        contactPerson: consignee.contactPerson,
+        gstno: consignee.gstno,
+        mail: consignee.mail,
+        phone: consignee.phone,
+        place: consignee.place,
+      }));
+
+      const ws = XLSX.utils.json_to_sheet(dataForExport);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "exported_data.xlsx");
+      setExporting(false);
+    }
+  };
+
   const handleClear = () => {
     form.setFieldsValue([]);
   };
@@ -145,44 +134,58 @@ function Consignee() {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Name</h1>,
       dataIndex: "name",
       key: "name",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
 
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Address</h1>,
       dataIndex: "address",
       key: "address",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Place</h1>,
       dataIndex: "place",
       key: "place",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Contact Person</h1>,
       dataIndex: "contactPerson",
       key: "contactPerson",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
@@ -190,14 +193,14 @@ function Consignee() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer"
+              className="!text-md text-green-500 cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer "
+              className="!text-md text-red-500 cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -209,8 +212,8 @@ function Consignee() {
   ];
 
   return (
-    <div className="flex pt-[12vh] lg:pl-4">
-      <div className="w-[80vw] flex flex-col gap-8">
+    <div className="flex pt-[10vh] lg:pl-4">
+      <div className="w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -228,6 +231,7 @@ function Consignee() {
         </div>
         <div className="w-full flex gap-5 items-end justify-end">
           <div
+            id="btn"
             className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
@@ -238,23 +242,25 @@ function Consignee() {
           </div>
           <div>
             <Button
-              onClick={()=>{exportToExcel(Consignee)}}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              id="btn"
+              onClick={() => {
+                exportToExcel(Consignee);
+              }}
+              className="w-[120px] py-1  border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
           </div>
         </div>
         <Skeleton loading={loading}>
-        <Table
-          columns={columns}
-          dataSource={Consignee}
-          ref={tableRef}
-          pagination={{ pageSize : 5 }}
-          className="!overflow-x-scroll"
-        />
+          <Table
+            columns={columns}
+            dataSource={Consignee}
+            ref={tableRef}
+            pagination={{ pageSize: 5 }}
+            className="!overflow-x-scroll"
+          />
         </Skeleton>
-       
       </div>
       <Drawer
         open={open}
@@ -290,7 +296,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter name"/>
+            <Input type="text" size="large" placeholder="Enter name" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Address</p>}
@@ -302,7 +308,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter address"/>
+            <Input type="text" size="large" placeholder="Enter address" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Place</p>}
@@ -314,7 +320,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter place"/>
+            <Input type="text" size="large" placeholder="Enter place" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Phone</p>}
@@ -326,7 +332,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter phone"/>
+            <Input type="text" size="large" placeholder="Enter phone" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Contact Person</p>}
@@ -338,7 +344,11 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter contact person"/>
+            <Input
+              type="text"
+              size="large"
+              placeholder="Enter contact person"
+            />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">GST NO</p>}
@@ -350,7 +360,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter gstno"/>
+            <Input type="text" size="large" placeholder="Enter gstno" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Mail</p>}
@@ -362,7 +372,7 @@ function Consignee() {
               },
             ]}
           >
-            <Input type="mail" size="large" placeholder="Enter mail"/>
+            <Input type="mail" size="large" placeholder="Enter mail" />
           </Form.Item>
 
           <div className="flex gap-4 items-end justify-end">
@@ -378,7 +388,7 @@ function Consignee() {
 
             <Form.Item>
               <Button
-              loading={loadingBtn}
+                loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
               >

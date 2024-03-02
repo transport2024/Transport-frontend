@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {  useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Table,
   Select,
@@ -35,7 +35,7 @@ function Memo() {
   const [currentPage, setCurrentPage] = useState(1);
   const [exporting, setExporting] = useState(false);
   const [filteredVehicle, setFilteredVehicle] = useState([]);
-  const [loadingBtn, setLoadingBtn] = useState(false)
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -54,7 +54,6 @@ function Memo() {
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
     } catch (err) {
-     
     } finally {
       setLoading(false);
     }
@@ -66,7 +65,7 @@ function Memo() {
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
-      setLoadingBtn(true)
+      setLoadingBtn(true);
       try {
         const formData = {
           gcno: memo.length + 121,
@@ -88,12 +87,12 @@ function Memo() {
         notification.error({
           message: "Something went wrong",
         });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     } else {
       try {
-        setLoadingBtn(true)
+        setLoadingBtn(true);
         const formData = {
           gcno: memo.length + 121,
           drivername: value.drivername,
@@ -117,14 +116,13 @@ function Memo() {
         notification.error({
           message: "Something went wrong",
         });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     }
   };
 
   const handleEdit = (value) => {
-    
     setUpdateId(value._id);
     navigate(`/editmemo/${value._id}`);
   };
@@ -258,14 +256,14 @@ function Memo() {
           <div className="flex gap-1">
             <div>
               <EditNoteOutlinedIcon
-                className="!text-md text-[--secondary-color] cursor-pointer"
+                className="!text-md text-green-500 cursor-pointer"
                 onClick={() => handleEdit(text)}
               />
             </div>
 
             <div>
               <DeleteOutlineOutlinedIcon
-                className="!text-md text-[--secondary-color] cursor-pointer "
+                className="!text-md text-red-500 cursor-pointer "
                 onClick={() => {
                   handleDelete(text);
                 }}
@@ -294,11 +292,9 @@ function Memo() {
     },
   ];
 
- 
-
   return (
-    <div className="flex pt-[12vh] pl-4">
-      <div className="w-[75vw] flex flex-col gap-8">
+    <div className="flex pt-[10vh] pl-4">
+      <div className="w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -315,6 +311,7 @@ function Memo() {
         </div>
         <div className="  w-full flex gap-5 items-end justify-end">
           <div
+            id="btn"
             className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
             onClick={() => {
               setOpen(true);
@@ -325,10 +322,11 @@ function Memo() {
           </div>
           <div>
             <Button
+              id="btn"
               onClick={() => {
                 exportToExcel(memo);
               }}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              className="w-[120px] py-1  rounded-md cursor-pointer  border-none  text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
             >
               Export Exel
             </Button>
@@ -337,13 +335,12 @@ function Memo() {
         <Skeleton loading={loading}>
           <Table
             columns={columns}
-            dataSource={isEmpty(filteredVehicle)?memo:filteredVehicle}
+            dataSource={isEmpty(filteredVehicle) ? memo : filteredVehicle}
             ref={tableRef}
             pagination={{
               pageSize: 5,
-              current: currentPage, 
+              current: currentPage,
               onChange: (page) => {
-               
                 setCurrentPage(page);
               },
             }}
@@ -386,8 +383,6 @@ function Memo() {
             <Input type="date" size="large" />
           </Form.Item>
 
-         
-
           <Form.Item
             name="vehicleno"
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
@@ -412,7 +407,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Driver name"/>
+            <Input type="text" size="large" placeholder="Driver name" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">DriverPhone</p>}
@@ -424,7 +419,7 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Driver phone"/>
+            <Input type="text" size="large" placeholder="Driver phone" />
           </Form.Item>
 
           <Form.Item
@@ -441,7 +436,11 @@ function Memo() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Driver whatsapp number"/>
+            <Input
+              type="text"
+              size="large"
+              placeholder="Driver whatsapp number"
+            />
           </Form.Item>
 
           <div className="flex items-end gap-2 justify-end">
@@ -456,7 +455,7 @@ function Memo() {
             </Form.Item>
             <Form.Item>
               <Button
-              loading={loadingBtn}
+                loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[130px] float-left text-white font-bold tracking-wider"
               >

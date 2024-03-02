@@ -17,11 +17,11 @@ function SideNavbar() {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [menu, setMenu] = useState(false);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     Cookies.remove("token");
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
     dispatch(changeUservalues(null));
     if (
       isEmpty(Cookies.get("token")) ||
@@ -35,17 +35,17 @@ function SideNavbar() {
     setMenu(false);
   };
 
-
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/login");
   }, []);
 
- 
-
   return (
-    <div className="md:w-[18vw] md:h-screen  !z-50 bg-[--secondary-color] ">
-      <div className="md:w-[18vw] md:h-screen  lg:border-r lg:border-slate-200 fixed bg-[--primary-color]">
-        <div className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]   !bg-[--secondary-color] h-[9vh]   w-screen py-3">
+    <div className="md:w-[18vw] md:h-screen  !z-50  ">
+      <div className="md:w-[18vw] md:h-screen  lg:border-r lg:border-slate-200 fixed ">
+        <div
+          id="sidenavbar"
+          className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]    h-[9vh]   w-screen py-3"
+        >
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
             {/* <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12" /> */}
           </h1>
@@ -57,10 +57,7 @@ function SideNavbar() {
           <div className="text-[12px] lg:text-xl">
             Vehicle Transport Management System
           </div>
-          <div
-            
-            className="mr-4 cursor-pointer"
-          >
+          <div className="mr-4 cursor-pointer">
             <div className="hidden lg:block">
               <Avatar
                 style={{
@@ -95,12 +92,14 @@ function SideNavbar() {
           </p>
           <div className="flex gap-2 items-end justify-end  pt-2">
             <button
+              id="btn"
               onClick={handleLogout}
-              className="bg-[--secondary-color] flex items-center justify-center px-2 text-white lg:w-[4vw] lg:px-0 lg:h-[4vh] rounded-md "
+              className=" flex items-center justify-center px-2 text-white lg:w-[4vw] lg:px-0 lg:h-[4vh] rounded-md "
             >
               Yes
             </button>
             <button
+              id="btn"
               onClick={() => {
                 setModal(!modal);
               }}
@@ -151,7 +150,7 @@ function SideNavbar() {
             </Button>
           </p>
         </Drawer>
-        <div className="h-screen hidden bg-[--secondary-color] lg:flex flex-col items-center">
+        <div className="h-screen hidden bg-gradient-to-r from-red-700 via-red-600 to-yellow-700  lg:flex flex-col items-center">
           <Menu
             items={items}
             defaultSelectedKeys={get(location, "pathname", "/")}

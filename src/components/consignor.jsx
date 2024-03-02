@@ -15,7 +15,7 @@ import { get } from "lodash";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
 
 function Consignor() {
   const [consignors, setConsignors] = useState([]);
@@ -24,32 +24,26 @@ function Consignor() {
   const [updateId, setUpdateId] = useState("");
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
-  const [loading,setLoading]=useState(false)
-  const [exporting, setExporting] = useState(false); 
-  const [loadingBtn,setLoadingBtn]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const result = await axios.get(
         `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
       );
       setConsignors(get(result, "data.message"));
     } catch (err) {
-      
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
-
-
 
   useEffect(() => {
     fetchData();
   }, [searched]);
-
-
-
 
   const handleClear = () => {
     form.setFieldsValue([]);
@@ -57,7 +51,7 @@ function Consignor() {
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
-      setLoadingBtn(true)
+      setLoadingBtn(true);
       try {
         await axios.post(`${process.env.REACT_APP_URL}/api/consignor`, value);
         fetchData();
@@ -66,12 +60,12 @@ function Consignor() {
         form.setFieldValue([]);
       } catch (err) {
         notification.error({ message: "Something went wrong" });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     } else {
       try {
-        setLoadingBtn(true)
+        setLoadingBtn(true);
         await axios.put(
           `${process.env.REACT_APP_URL}/api/consignor/${updateId}`,
           value
@@ -83,8 +77,8 @@ function Consignor() {
         setUpdateId("");
       } catch (err) {
         notification.error({ message: "Something went wrong" });
-      }finally{
-        setLoadingBtn(false)
+      } finally {
+        setLoadingBtn(false);
       }
     }
   };
@@ -97,7 +91,9 @@ function Consignor() {
 
   const handleDelete = async (value) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_URL}/api/consignor/${value._id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_URL}/api/consignor/${value._id}`
+      );
       fetchData();
       notification.success({ message: "Deleted Successfully" });
     } catch (err) {
@@ -105,18 +101,17 @@ function Consignor() {
     }
   };
 
- 
   const searchers = [];
 
   consignors &&
-    consignors.map((data) => {
-      return searchers.push(
-        {label: data.name, value: data.name },
-        { label: data.place,value: data.place }
-      );
-    }).flat();
-
- 
+    consignors
+      .map((data) => {
+        return searchers.push(
+          { label: data.name, value: data.name },
+          { label: data.place, value: data.place }
+        );
+      })
+      .flat();
 
   const exportToExcel = () => {
     if (!exporting) {
@@ -128,62 +123,77 @@ function Consignor() {
         mail: consignor.mail,
         phone: consignor.phone,
         place: consignor.place,
-     
       }));
-  
+
       const ws = XLSX.utils.json_to_sheet(dataForExport);
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, 'exported_data.xlsx');
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "exported_data.xlsx");
       setExporting(false);
     }
   };
-
-  
 
   const columns = [
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Name</h1>,
       dataIndex: "name",
       key: "name",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
 
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Address</h1>,
       dataIndex: "address",
       key: "address",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Place</h1>,
       dataIndex: "place",
       key: "place",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px] !w-[10vw]">Contact Person</h1>,
+      title: (
+        <h1 className="!text-[12px] lg:!text-[18px] !w-[10vw]">
+          Contact Person
+        </h1>
+      ),
       dataIndex: "contactPerson",
       key: "contactPerson",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
     {
       title: <h1 className="!text-[12px] lg:!text-[18px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
-      render: (text) => <div className="text-[10px] lg:!text-[16px]">{text}</div>,
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
     },
 
     {
@@ -192,14 +202,14 @@ function Consignor() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md !text-[--secondary-color] cursor-pointer"
+              className="!text-md !text-green-500 cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md !text-[--secondary-color] cursor-pointer "
+              className="!text-md !text-red-500 cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -211,8 +221,8 @@ function Consignor() {
   ];
 
   return (
-    <div className="flex pt-[12vh] lg:pl-4">
-      <div className="w-[82vw] flex flex-col gap-4 lg:gap-8">
+    <div className="flex pt-[10vh] lg:pl-4">
+      <div className="w-[78vw] flex flex-col gap-4 lg:gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -228,9 +238,10 @@ function Consignor() {
             // open={searched.length===1?false:true}
           />
         </div>
-        <div className="w-full flex justify-end items-end gap-5">
+        <div className="w-full flex justify-end items-end gap-5 pr-20">
           <div
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
+            id="btn"
+            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center "
             onClick={() => {
               setOpen(true);
             }}
@@ -239,8 +250,11 @@ function Consignor() {
           </div>
           <div>
             <Button
-              onClick={()=>{exportToExcel(consignors)}}
-              className="w-[120px] py-1  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              id="btn"
+              onClick={() => {
+                exportToExcel(consignors);
+              }}
+              className="w-[120px] py-1  border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-centeryy hover:!text-white"
             >
               Export Exel
             </Button>
@@ -248,19 +262,17 @@ function Consignor() {
         </div>
 
         <div className="overflow-x-scroll">
-        <Skeleton loading={loading} >
-          <Table
-            columns={columns}
-            dataSource={consignors}
-            ref={tableRef}
-            pagination={{
-              pageSize: 5,
-            }}
-         
-          />
-        </Skeleton>
+          <Skeleton loading={loading}>
+            <Table
+              columns={columns}
+              dataSource={consignors}
+              ref={tableRef}
+              pagination={{
+                pageSize: 5,
+              }}
+            />
+          </Skeleton>
         </div>
-     
       </div>
       <Drawer
         open={open}
@@ -295,7 +307,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter name"/>
+            <Input type="text" size="large" placeholder="Enter name" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Address</p>}
@@ -307,7 +319,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter addresss"/>
+            <Input type="text" size="large" placeholder="Enter addresss" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Place</p>}
@@ -319,7 +331,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter place"/>
+            <Input type="text" size="large" placeholder="Enter place" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Phone</p>}
@@ -331,7 +343,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="number" size="large" placeholder="Enter phone"/>
+            <Input type="number" size="large" placeholder="Enter phone" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Contact Person</p>}
@@ -343,7 +355,11 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter contact person"/>
+            <Input
+              type="text"
+              size="large"
+              placeholder="Enter contact person"
+            />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">GST NO</p>}
@@ -355,7 +371,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="text" size="large" placeholder="Enter gstno"/>
+            <Input type="text" size="large" placeholder="Enter gstno" />
           </Form.Item>
           <Form.Item
             label={<p className="!text-[16px] font-semibold">Mail</p>}
@@ -367,7 +383,7 @@ function Consignor() {
               },
             ]}
           >
-            <Input type="mail" size="large" placeholder="Enter mail"/>
+            <Input type="mail" size="large" placeholder="Enter mail" />
           </Form.Item>
 
           <div className="flex gap-4 items-end justify-end">
@@ -383,7 +399,7 @@ function Consignor() {
 
             <Form.Item>
               <Button
-              loading={loadingBtn}
+                loading={loadingBtn}
                 htmlType="submit"
                 className="bg-green-600 w-[120px] float-right text-white font-bold tracking-wider"
               >

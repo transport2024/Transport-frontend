@@ -28,7 +28,7 @@ const PasswordReset = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-blue-900 w-screen h-[100vh]">
+    <div id='btn' className="flex items-center justify-center  w-screen h-[100vh]">
     <div className="flex flex-col gap-5 items-center justify-center bg-white bg-opacity-70 w-[300px] md:w-[400px] rounded-md py-5">
     <div className="rounded-full px-3 bg-white bg-opacity-70 shadow-md">
     <img src={"https://www.freeiconspng.com/uploads/forgot-password-icon-27.png"} className="w-24" alt="forgot"/>
@@ -87,8 +87,9 @@ const PasswordReset = () => {
         </Form.Item>
         <Form.Item>
           <Button
+          id='btn'
             htmlType="submit"
-            className="w-[100%] !bg-blue-900 !text-white h-[40px] "
+            className="w-[100%] border-none !text-white h-[40px] "
           >
             Submit
           </Button>
