@@ -12,8 +12,7 @@ body {
     rgb(228, 106, 40) 0%,
     rgba(253, 29, 29, 1) 50%,
     rgba(252, 176, 69, 1) 100%
-  );
-  color: rgb(9, 227, 9) !important;
+  );  
   user-select: none;
   font-family: "Outfit", sans-serif;
 }
@@ -191,13 +190,13 @@ body {
 
 
 .ant-table-wrapper .ant-spin-container .ant-table .ant-table-cell{
-  background: rgb(177, 18, 18);
+  /* background: rgb(177, 18, 18);
   background: linear-gradient(
     120deg,
     rgb(240, 97, 40) 0%,
     rgba(252, 176, 69, 1) 100%
-  );
-  color: white !important;
+  ); */
+  /* color: white !important; */
 }
 
 
@@ -207,4 +206,8 @@ body {
 
 .ant-table-wrapper .ant-table-tbody>tr >td.ant-table-cell-hover{
   background: red !important;
+}
+
+.custom-table-background {
+  background-color: #f0f2f5 !important; 
 }

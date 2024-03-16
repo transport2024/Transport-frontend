@@ -239,7 +239,7 @@ function Conisgnor(props) {
               <td className="w-[10vw] text-center text-red-500">Rs.</td>
             </tr>
           </thead>
-          <tbody className="font-bold border-2">
+          <tbody className=" border-2">
             <tr>
               <td className="!w-[40vw] border-r-2 border-slate-200">
                 <span className="text-red-500 pl-2">
