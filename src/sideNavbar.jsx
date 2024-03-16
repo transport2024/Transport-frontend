@@ -11,6 +11,7 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import logo from "./assets/logo.png";
 import { useDispatch } from "react-redux";
 import { changeUservalues } from "./Redux/userSlice";
+import axios from "axios";
 
 function SideNavbar() {
   const location = useLocation();
@@ -35,12 +36,36 @@ function SideNavbar() {
     setMenu(false);
   };
 
+  useEffect(()=>{
+    fetchDataUser()
+  },[])
+  const fetchDataUser = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_URL}/api/user/validateToken`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(changeUservalues(result.data));
+      if (!isEmpty(result.data)) {
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     isEmpty(localStorage.getItem("token")) && navigate("/login");
   }, []);
 
   return (
-    <div className="md:w-[18vw] md:h-screen  !z-50  ">
+    <div className="md:w-[18vw] md:h-screen  !z-50">
       <div className="md:w-[18vw] md:h-screen  lg:border-r lg:border-slate-200 fixed ">
         <div
           id="sidenavbar"
@@ -61,11 +86,11 @@ function SideNavbar() {
             <div className="hidden lg:block">
               <Avatar
                 style={{
-                  backgroundColor: "blue",
+                  backgroundColor: "red",
                 }}
                 size="default"
               >
-                T
+                R
               </Avatar>
             </div>
             <div className="lg:hidden">
@@ -75,7 +100,7 @@ function SideNavbar() {
                 }}
                 size="small"
               >
-                T
+               R 
               </Avatar>
             </div>
           </div>

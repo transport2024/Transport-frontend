@@ -20,6 +20,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import { useNavigate } from "react-router";
 import moment from "moment";
 import * as XLSX from "xlsx";
+import { useSelector } from "react-redux";
 
 function Memo() {
   const [memo, setMemo] = useState([]);
@@ -36,16 +37,17 @@ function Memo() {
   const [exporting, setExporting] = useState(false);
   const [filteredVehicle, setFilteredVehicle] = useState([]);
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memo?search`
+        `${process.env.REACT_APP_URL}/api/memo?userId=${userId}`
       );
       setMemo(get(result, "data.message"));
       const result2 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/vehicle`
+        `${process.env.REACT_APP_URL}/api/vehicle?userId=${userId}`
       );
 
       const result3 = await axios.get(
@@ -74,8 +76,8 @@ function Memo() {
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
           driverwhatsappno: value.driverwhatsappno,
+          userId
         };
-
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
         fetchData();
         notification.success({
@@ -169,7 +171,7 @@ function Memo() {
   const searchers = [];
 
   memo &&
-    memo.map((data) => {
+    memo?.map((data) => {
       return searchers.push({
         label: data.vehicleno,
         value: data.vehicleno,
@@ -178,7 +180,7 @@ function Memo() {
 
   const exportToExcel = () => {
     if (!exporting) {
-      const dataForExport = memo.map((memo) => ({
+      const dataForExport = memo?.map((memo) => ({
         gcno: memo.gcno,
         date: memo.date,
         drivername: memo.drivername,
@@ -388,7 +390,7 @@ function Memo() {
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
           >
             <Select placeholder="Select vehicle no" size="large">
-              {vehicle.map((res, i) => {
+              {vehicle?.map((res, i) => {
                 return (
                   <Select.Option value={res.vehicleno} key={i}>
                     {res.vehicleno}

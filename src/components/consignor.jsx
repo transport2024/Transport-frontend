@@ -16,6 +16,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import * as XLSX from "xlsx";
+import { useSelector } from "react-redux";
 
 function Consignor() {
   const [consignors, setConsignors] = useState([]);
@@ -27,12 +28,14 @@ function Consignor() {
   const [loading, setLoading] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const userId=useSelector((state)=>state.user?.user?.userId)
+ 
 
   const fetchData = async () => {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}&userId=${userId}`
       );
       setConsignors(get(result, "data.message"));
     } catch (err) {
@@ -53,7 +56,8 @@ function Consignor() {
     if (updateId === "") {
       setLoadingBtn(true);
       try {
-        await axios.post(`${process.env.REACT_APP_URL}/api/consignor`, value);
+        const dataToSend={...value,userId}
+        await axios.post(`${process.env.REACT_APP_URL}/api/consignor`, dataToSend);
         fetchData();
         notification.success({ message: "Consignor Added successfully" });
         setOpen(false);

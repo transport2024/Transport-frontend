@@ -18,6 +18,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import * as XLSX from 'xlsx';
+import { useSelector } from "react-redux";
 
 
 function Location() {
@@ -30,12 +31,13 @@ function Location() {
   const [loading,setLoading]=useState(false)
   const [exporting,setExporting]=useState(false)
   const [loadingBtn,setLoadingBtn]=useState(false)
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
     try {
       setLoading(true)
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/location?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/location?search=${searched}&userId=${userId}`
       );
       setLocation(get(result, "data.message"));
     } catch (err) {
@@ -55,7 +57,8 @@ function Location() {
     if (updateId === "") {
       try {
         setLoadingBtn(true)
-        await axios.post(`${process.env.REACT_APP_URL}/api/location`, value);
+        const dataToSend={...value,userId}
+        await axios.post(`${process.env.REACT_APP_URL}/api/location`, dataToSend);
         fetchData();
         notification.success({
           message: "Location Added successfully",

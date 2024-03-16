@@ -17,6 +17,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import * as XLSX from "xlsx";
+import { useSelector } from "react-redux";
 
 function Consignee() {
   const [Consignee, setConsignee] = useState([]);
@@ -28,12 +29,13 @@ function Consignee() {
   const [loading, setLoading] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}&userId=${userId}`
       );
       setConsignee(get(result, "data.message"));
     } catch (err) {
@@ -50,7 +52,8 @@ function Consignee() {
     if (updateId === "") {
       setLoadingBtn(true);
       try {
-        await axios.post(`${process.env.REACT_APP_URL}/api/consignee`, value);
+        const dataToSend={...value,userId}
+        await axios.post(`${process.env.REACT_APP_URL}/api/consignee`, dataToSend);
         fetchData();
         notification.success({ message: "Consignee Added successfully" });
         setOpen(false);

@@ -44,7 +44,7 @@ function Report() {
       )
     );
     setFilterDatas(
-      report.filter((res) => {
+      report?.filter((res) => {
         return (
           searched.includes(res.consignor) ||
           searched.includes(res.consignee) ||
@@ -55,7 +55,7 @@ function Report() {
 
     setDateFilters(
       data &&
-        data.filter((res) => {
+        data?.filter((res) => {
           return (
             searched.includes(res.consignor) ||
             searched.includes(res.consignee) ||
@@ -94,7 +94,7 @@ function Report() {
     if (!exporting) {
       const dataForExport = !data
         ? dateFilters
-        : data.map((report) => ({
+        : data?.map((report) => ({
             date: report.date,
             vehicleno: report.vehicleno,
             pan: report.pan,

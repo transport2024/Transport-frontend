@@ -17,6 +17,7 @@ import {  useLocation, useNavigate } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
+import { useSelector } from "react-redux";
 
 function AddMemoDetails() {
   const [form] = Form.useForm();
@@ -36,30 +37,31 @@ function AddMemoDetails() {
   const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
   const [searched, setSearch] = useState([]);
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
+      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo?userId=${userId}`);
    
       const result2 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
+        `${process.env.REACT_APP_URL}/api/memodetails?userId=${userId}`
       );
       const result3 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/location?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/location?search=${searched}&userId=${userId}`
       );
       const result4 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignee?search=${searched}&userId=${userId}`
       );
       const result5 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/consignor?search=${searched}&userId=${userId}`
       );
       const result6 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/broker?search=${searched}&userId=${userId}`
       );
 
       const result7 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/vehicle?search=${searched}&userId=${userId}`
       );
       setBroker(get(result6, "data.message"));
       setConsignor(get(result5, "data.message"));
@@ -130,6 +132,7 @@ function AddMemoDetails() {
           rcname: vehicle.filter((res) => {
             return memoDetails[0].vehicleno === res.vehicleno;
           })[0]?.rcname,
+          userId
         };
 
         await axios.post(

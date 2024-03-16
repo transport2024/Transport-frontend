@@ -17,6 +17,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import * as XLSX from "xlsx";
+import { useSelector } from "react-redux";
 
 function Broker() {
   const [Broker, setBroker] = useState([]);
@@ -26,6 +27,8 @@ function Broker() {
   const [searched, setSearched] = useState([]);
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const userId=useSelector((state)=>state.user?.user?.userId)
+  console.log(userId,"user")
 
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
@@ -34,8 +37,9 @@ function Broker() {
     try {
       setLoading(true);
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/broker?search=${searched}`
+        `${process.env.REACT_APP_URL}/api/broker?search=${searched}&userId=${userId}`
       );
+      
       setBroker(get(result, "data.message"));
     } catch (err) {
     } finally {
@@ -50,8 +54,9 @@ function Broker() {
   const handleSubmit = async (value) => {
     if (updateId === "") {
       setLoadingBtn(true);
+      const dataToSend = { ...value, userId };
       try {
-        await axios.post(`${process.env.REACT_APP_URL}/api/broker`, value);
+        await axios.post(`${process.env.REACT_APP_URL}/api/broker`, dataToSend);
         fetchData();
         notification.success({
           message: "Broker Added successfully",

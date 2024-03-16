@@ -69,8 +69,8 @@ function VehicleBills() {
   }, [loading]);
 
   return (
-    <div className="bg-white w-screen pt-2 h-[120vh]">
-      <div className="w-[99vw] border  border-black !h-[95vh] ">
+    <div className="bg-white w-screen pt-2 h-[100vh]">
+      <div className="w-[98vw] border m-auto border-black !h-[98vh] ">
         <div className="flex  pl-10 pt-10 text-[14px]">
           <div>
             <Image src={image} width={90} alt="logo" />
@@ -210,7 +210,7 @@ function VehicleBills() {
                 <td className="border-r-2" rowSpan={6}>No of bales</td>
                 <td className="border-r-2" rowSpan={6}>No of bales</td>
                 <td rowSpan={7} className="border-l-2">
-                  <div className="-rotate-90 flex flex-wrap w-[20vw] text-[14px]">
+                  <div className="-rotate-90 flex flex-wrap w-[18vw] text-[13px]">
                   <p className="text-red-600 flex items-center justify-center pl-16">Note:</p>
                   <span className="uppercase font-semibold">Do not pay lorry foreight to driver/owner only our transport account</span>
                   </div>
