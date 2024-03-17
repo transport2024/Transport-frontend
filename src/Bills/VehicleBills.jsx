@@ -4,6 +4,7 @@ import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
 import { Divider, Image, Table } from "antd";
+import { useSelector } from "react-redux";
 
 function VehicleBills() {
   const [datas, setDatas] = useState([]);
@@ -12,6 +13,8 @@ function VehicleBills() {
   const [vehicleno, setVehicleNO] = useState("");
   const [gcNo, setGcNo] = useState("");
   const location = useLocation();
+  const userId=useSelector((state)=>state.user?.user?.userId)
+ 
 
   const [loading, setLoading] = useState(true);
   const printRef = useRef(false);
@@ -19,7 +22,7 @@ function VehicleBills() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
+      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memo?userId=${userId}`);
       setDatas(get(result, "data.message"));
     } catch (e) {
     } finally {
@@ -33,7 +36,7 @@ function VehicleBills() {
 
   useEffect(() => {
     setFilterDatas(
-      datas.filter((res) => {
+      datas?.filter((res) => {
         return res._id === location.pathname.split("/").splice(-1)[0];
       })[0]
     );
@@ -41,6 +44,7 @@ function VehicleBills() {
     setDate(filterDatas?.date);
     setGcNo(filterDatas?.gcno);
   }, [datas, filterDatas, location]);
+
 
   useEffect(() => {
     const handleCancelPrint = () => {
@@ -99,19 +103,19 @@ function VehicleBills() {
               <input
                 type="text"
                 style={{ width: "25vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
+                defaultValue={filterDatas?.vehicleno}
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
             </span>
             <span className="border-4 border-red-800 text-red-800 w-[220px] px-3 rounded-md tracking-wider text-[14px] font-bold">
              <pre> CONSIGNOR COPY</pre>
             </span>
-            <span className="pl-5 flex">
+            <span className="!ml-[-35px] flex">
               <span>L.R.No.</span>
               <input
                 type="text"
                 style={{ width: "10vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
+                defaultValue={filterDatas?.gcno}
                 className="outline-none pl-2 !bg-transparent border-non3"
               />
             </span>
@@ -140,7 +144,7 @@ function VehicleBills() {
               <input
                 type="text"
                 style={{ width: "22vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
+                defaultValue={date}
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
             </span>
@@ -204,11 +208,11 @@ function VehicleBills() {
                 <td>Remarks</td>
               </tr>
               <tr className="border-t-2 text-center">
-                <td className="border-r-2" rowSpan={6}>No. of Bales</td>
-                <td className="border-r-2">No of balessds</td>
-                <td className="border-r-2" rowSpan={6}>No. of Bales</td>
-                <td className="border-r-2" rowSpan={6}>No of bales</td>
-                <td className="border-r-2" rowSpan={6}>No of bales</td>
+                <td className="border-r-2" rowSpan={6}></td>
+                <td className="border-r-2"></td>
+                <td className="border-r-2" rowSpan={6}></td>
+                <td className="border-r-2" rowSpan={6}></td>
+                <td className="border-r-2" rowSpan={6}></td>
                 <td rowSpan={7} className="border-l-2">
                   <div className="-rotate-90 flex flex-wrap w-[18vw] text-[13px]">
                   <p className="text-red-600 flex items-center justify-center pl-16">Note:</p>

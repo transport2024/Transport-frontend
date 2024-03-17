@@ -389,7 +389,7 @@ function Memo() {
             name="vehicleno"
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
           >
-            <Select placeholder="Select vehicle no" size="large">
+            <Select placeholder="Select vehicle no" size="large" showSearch>
               {vehicle?.map((res, i) => {
                 return (
                   <Select.Option value={res.vehicleno} key={i}>

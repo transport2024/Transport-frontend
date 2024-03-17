@@ -5,6 +5,7 @@ import VehicleCopy from './vehicleCopy';
 import Driver from './driver';
 import axios from 'axios';
 import { get } from 'lodash';
+import { useSelector } from 'react-redux';
 
 function Ccv() {
   const [datas, setDatas] = useState([]);
@@ -12,16 +13,17 @@ function Ccv() {
   const [consignor, setConsignor] = useState([]);
   const [consignee, setConsignee] = useState([]);
   const [loading, setLoading] = useState([]);
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const printRef = useRef(false);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memodetails`);
-      const result2 = await axios.get(`${process.env.REACT_APP_URL}/api/memo`);
-      const result3 = await axios.get(`${process.env.REACT_APP_URL}/api/consignor`);
-      const result4 = await axios.get(`${process.env.REACT_APP_URL}/api/consignee`);
+      const result = await axios.get(`${process.env.REACT_APP_URL}/api/memodetails?userId=${userId}`);
+      const result2 = await axios.get(`${process.env.REACT_APP_URL}/api/memo?userId=${userId}`);
+      const result3 = await axios.get(`${process.env.REACT_APP_URL}/api/consignor?userId=${userId}`);
+      const result4 = await axios.get(`${process.env.REACT_APP_URL}/api/consignee?userId=${userId}`);
 
       setConsignor(get(result3, 'data.message'));
       setDatas(get(result, 'data.message'));

@@ -28,7 +28,6 @@ function Broker() {
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
-  console.log(userId,"user")
 
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);

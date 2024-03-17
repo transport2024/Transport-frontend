@@ -46,9 +46,9 @@ function Report() {
     setFilterDatas(
       report?.filter((res) => {
         return (
-          searched.includes(res.consignor) ||
-          searched.includes(res.consignee) ||
-          searched.includes(res.vehicleno)
+          searched.includes(res?.consignor) ||
+          searched.includes(res?.consignee) ||
+          searched.includes(res?.vehicleno)
         );
       })
     );
@@ -57,9 +57,9 @@ function Report() {
       data &&
         data?.filter((res) => {
           return (
-            searched.includes(res.consignor) ||
-            searched.includes(res.consignee) ||
-            searched.includes(res.vehicleno)
+            searched.includes(res?.consignor) ||
+            searched.includes(res?.consignee) ||
+            searched.includes(res?.vehicleno)
           );
         })
     );
@@ -212,9 +212,9 @@ function Report() {
     data
       .map((res) => {
         return searchers.push(
-          { label: res.consignor, value: res.consignor },
-          { label: res.consignee, value: res.consignee },
-          { label: res.vehicleno, value: res.vehicleno }
+          { label: res?.consignor, value: res?.consignor },
+          { label: res?.consignee, value: res?.consignee },
+          { label: res?.vehicleno, value: res?.vehicleno }
         );
       })
       .flat();
