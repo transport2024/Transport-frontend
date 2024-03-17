@@ -40,20 +40,20 @@ function Ccv() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   if (loading === false) {
-  //     printRef.current = true;
-  //     setTimeout(() => {
-  //       if (printRef.current) {
-  //         window.print();
-  //       }
-  //     }, 1000);
-  //   }
+  useEffect(() => {
+    if (loading === false) {
+      printRef.current = true;
+      setTimeout(() => {
+        if (printRef.current) {
+          window.print();
+        }
+      }, 1000);
+    }
 
-  //   return () => {
-  //     printRef.current = false;
-  //   };
-  // }, [loading]);
+    return () => {
+      printRef.current = false;
+    };
+  }, [loading]);
 
   return (
     <div>
