@@ -202,8 +202,8 @@ function Dashboard() {
   ];
 
   return (
-    <div className="pt-[12vh] w-[100vw] lg:w-[82vw] z-20">
-     <div className="flex flex-wrap gap-3 pl-10 lg:pl-0">
+    <div className="pt-[12vh] !w-[100vw] lg:w-[82vw] z-20">
+     <div className="flex flex-wrap gap-3 pl-6 lg:pl-0">
   <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
     <PeopleOutlineOutlinedIcon className="text-white lg:text-5xl" />
     <Statistic
@@ -258,9 +258,9 @@ function Dashboard() {
 </div>
 
 
-      <div className="flex flex-wrap pl-5">
+      <div className="flex flex-wrap">
      <div className="flex flex-col items-center justify-center">
-      <h1 className="pl-20 pt-10">Last Five Days Memo Entries</h1>
+      <h1 className="pl-2 pt-10">Last Five Days Memo Entries</h1>
       <BarChart width={350} height={300} data={lastFiveDaysMemoEntriesCount()}>
       <CartesianGrid stroke="blue" strokeDasharray="5 5" />
       <XAxis dataKey="date" />
@@ -271,7 +271,7 @@ function Dashboard() {
     </BarChart>
      </div>
      <div className="flex flex-col items-center justify-center">
-      <h1 className="pl-20 pt-10">Last Five Days Vehicle Entries</h1>
+      <h1 className="pl-2 pt-10">Last Five Days Vehicle Entries</h1>
       <LineChart width={350} height={300} data={lastFiveDaysVehicleEntriesCount()}>
       <CartesianGrid stroke="blue" strokeDasharray="5 5" />
       <XAxis dataKey="date" />
@@ -282,7 +282,7 @@ function Dashboard() {
     </LineChart>
      </div> 
      <div className="flex flex-col pt-10 items-center justify-center">
-      <h1 className="pl-20">Total Consignor&Consignee</h1>
+      <h1 className="pl-2">Total Consignor&Consignee</h1>
      <PieChart width={350} height={350}>
         <Pie
           data={pieChartData}
@@ -300,8 +300,8 @@ function Dashboard() {
         <Legend />
       </PieChart>
      </div>
-        <div className="!w-[100vw] lg:w-[80vw] pt-10 ">
-          <h1 className="pl-20">
+        <div className="!w-[95vw] lg:w-[80vw] pt-10 ">
+          <h1 className="pl-2">
             Last Five Memo Entries
           </h1>
           <Skeleton loading={loading}>
