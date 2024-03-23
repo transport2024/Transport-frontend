@@ -325,7 +325,7 @@ function Memo() {
             <Button
   
               onClick={() => {
-                exportToExcel(Consignee);
+                exportToExcel(memo);
               }}
               className="!text-[10px] h-[30px] lg:!text-[14px] border-none px-3 lg:px-5 bg-[--primary-color] rounded-md cursor-pointer text-white font-bold  flex items-center justify-centeryy hover:!text-white"
             >
