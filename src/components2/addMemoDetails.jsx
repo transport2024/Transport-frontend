@@ -214,7 +214,6 @@ function AddMemoDetails() {
   };
 
   
-  
 
   useEffect(() => {
     setId(location.pathname.split("/").slice(-1)[0]);
