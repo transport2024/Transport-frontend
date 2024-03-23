@@ -73,8 +73,8 @@ function VehicleBills() {
   }, [loading]);
 
   return (
-    <div className="bg-white w-screen pt-2 h-[100vh]">
-      <div className="w-[98vw] border m-auto border-black !h-[98vh] ">
+    <div className="bg-white w-screen pt-2 h-[90vh] lg:h-[100vh]">
+      <div className="w-[98vw] border m-auto border-black !h:[88vh] lg:!h-[98vh] ">
         <div className="flex  pl-10 pt-10 text-[14px]">
           <div>
             <Image src={image} width={90} alt="logo" />
