@@ -69,7 +69,7 @@ function SideNavbar() {
           className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]    h-[9vh]   w-screen py-3"
         >
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
-            {/* <Image src={logo} className="!w-14 !h-8 lg:!w-24 lg:!h-12" /> */}
+            <Image src={logo} className="!w-16 !h-12 lg:!w-29 lg:!h-17" />
           </h1>
           <div className="hidden lg:block">
             {location.pathname.split("/")[1]
