@@ -81,10 +81,7 @@ function Dashboard() {
           },
         }
       );
-      dispatch(changeUservalues(result.data));
-      if (!isEmpty(result.data)) {
-        navigate("/");
-      }
+      dispatch(changeUservalues(result.data))
     } catch (err) {
       console.log(err);
     }

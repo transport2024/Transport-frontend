@@ -51,8 +51,9 @@ function Memo() {
       );
 
       const result3 = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
+        `${process.env.REACT_APP_URL}/api/memodetails?userId=${userId}`
       );
+      console.log(result3,"result3")
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
     } catch (err) {

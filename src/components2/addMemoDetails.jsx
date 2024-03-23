@@ -449,8 +449,18 @@ function AddMemoDetails() {
             name="vehicleno"
             label={<p className="text-[12px] lg:!text-[16px] font-semibold">Vehicle No</p>}
           >
-            <Select placeholder="Select vehicle no" size="large">
-              
+            <Select
+              placeholder="Select vehicle no"
+              size="large"
+              showSearch
+            >
+              {vehicle.map((vehno, index) => {
+                return(
+                  <Select.Option key={index} value={vehno.vehicleno}>
+                  {vehno.vehicleno}
+                </Select.Option>
+                )
+})}
             </Select>
           </Form.Item>
           <Form.Item
@@ -496,7 +506,7 @@ function AddMemoDetails() {
           </Form.Item>
 
        <Form.Item>
-        <Button className="bg-green-500 borer-none outline-none" htmlType="submit">Save</Button>
+        <Button className="bg-green-500  !w-[80px]" htmlType="submit">Save</Button>
        </Form.Item>
         </Form>
       </Skeleton>

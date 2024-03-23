@@ -52,9 +52,6 @@ function SideNavbar() {
         }
       );
       dispatch(changeUservalues(result.data));
-      if (!isEmpty(result.data)) {
-        navigate("/");
-      }
     } catch (err) {
       console.log(err);
     }

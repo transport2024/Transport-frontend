@@ -107,10 +107,10 @@ function VehicleBills() {
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
             </span>
-            <span className="border-4 border-red-800 text-red-800 w-[220px] px-3 rounded-md tracking-wider text-[14px] font-bold">
+            <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
              <pre> CONSIGNOR COPY</pre>
             </span>
-            <span className="!ml-[-35px] flex">
+            <span className="!ml-[-55px] flex">
               <span>L.R.No.</span>
               <input
                 type="text"
@@ -143,7 +143,7 @@ function VehicleBills() {
               <span className="">Date</span>
               <input
                 type="text"
-                style={{ width: "22vw", borderColor: "black" }}
+                style={{ width: "18vw", borderColor: "black" }}
                 defaultValue={date}
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
@@ -154,7 +154,7 @@ function VehicleBills() {
               <span className="">Consignor:</span>
               <input
                 type="text"
-                style={{ width: "85vw", borderColor: "black" }}
+                style={{ width: "80vw", borderColor: "black" }}
                 // defaultValue={inputs.lorryno}
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
@@ -163,7 +163,7 @@ function VehicleBills() {
               <span className="">Consignee:</span>
               <input
                 type="text"
-                style={{ width: "85vw", borderColor: "black" }}
+                style={{ width: "80vw", borderColor: "black" }}
                 // defaultValue={inputs.lorryno}
                 className="outline-none pl-10 !bg-transparent border-b-2"
               />
@@ -181,7 +181,7 @@ function VehicleBills() {
         </div>
 
         <div className="pt-5">
-          <table className="border-t-2 border-b-2 m-auto w-[98vw]">
+          <table className="border-t-2  m-auto w-[98vw]">
             <thead>
               <tr className="w-[98vw] text-center">
                 <td colSpan={3} className="text-[12px] border-r-2 text-red-600 py-1">
@@ -210,7 +210,7 @@ function VehicleBills() {
               <tr className="border-t-2 text-center">
                 <td className="border-r-2" rowSpan={6}></td>
                 <td className="border-r-2"></td>
-                <td className="border-r-2" rowSpan={6}></td>
+                <td className="border-r-2" rowSpan={6}>As per bill</td>
                 <td className="border-r-2" rowSpan={6}></td>
                 <td className="border-r-2" rowSpan={6}></td>
                 <td rowSpan={7} className="border-l-2">
@@ -221,31 +221,30 @@ function VehicleBills() {
                 </td>
                
               </tr>
-              <tr className="border-t-2 text-center">
+              <tr className="text-center h-[3vh]">
               
-                <td className="border-r-2">No of bales</td>
-               
-               
+                <td className="border-r-2"></td>
+              
               </tr>
-              <tr className="border-t-2 text-center">
+              <tr className=" text-center  h-[3vh]">
           
-                <td className="border-r-2">No of bales</td>
+                <td className="border-r-2"></td>
                
                
               </tr>
-              <tr className="border-t-2 text-center">
+              <tr className=" text-center  h-[3vh]">
                
-                <td className="border-r-2">No of bales</td>
+                <td className="border-r-2"></td>
                 
               </tr>
-              <tr className="border-t-2 text-center">
-                <td className="border-r-2">No of bales</td>
+              <tr className=" text-center  h-[3vh]">
+                <td className="border-r-2"></td>
               </tr>
-              <tr className="border-t-2 text-center">
-                <td className="border-r-2">No of bales</td>
+              <tr className="text-center  h-[3vh]">
+                <td className="border-r-2"></td>
               </tr>
         
-              <tr className="border-t-2 text-center">
+              <tr className="border-t-2 text-center  h-[3vh]">
                 <td className="border-r-2" colSpan={3}>
                   <div className="grid grid-cols-2 uppercase text-[14px] font-bold">
                     <p>Goods to be insured by party</p>

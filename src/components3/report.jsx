@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
-import { Table, Select, Form, Button } from "antd";
+import { Table, Select, Form, Button, Input } from "antd";
 import axios from "axios";
 import { get, isEmpty, flattenDeep } from "lodash";
 import { DatePicker } from "antd";
@@ -230,7 +230,7 @@ function Report() {
             className="w-[80vw] lg:w-[25vw]"
           />
           <div className="flex items-center justify-center w-[90vw] pl-3 lg:pl-0">
-            <Select
+            {/* <Select
               mode="tags"
               showSearch
               placeholder="Type here for Reportentry"
@@ -242,8 +242,11 @@ function Report() {
               size="large"
               showArrow={false}
               allowClear={true}
+            /> */}
+            <Input
+              placeholder="No of bales"
+              className="!w-[50vw] pl-2 lg:!w-1/2 !m-auto py-3"
             />
-
             <div className="pr-5">
               <Button
                 id="btn"

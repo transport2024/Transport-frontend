@@ -56,7 +56,6 @@ function LoginAndRegistration() {
       console.log(err);
     }
   };
-  console.log(user.user, "user");
   useEffect(() => {
     if (user.user !== null) {
       navigate("/");
