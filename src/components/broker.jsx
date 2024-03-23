@@ -176,7 +176,7 @@ function Broker() {
 
   return (
     <div className="flex pt-[10vh]">
-      <div className="w-[100vw] w-[78vw] flex flex-col gap-8">
+      <div className="w-[100vw] lg:w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
