@@ -64,8 +64,8 @@ function Driver(props) {
 
 
   return (
-    <div className="bg-white w-screen pt-2 h-[100vh]">
-    <div className="w-[98vw] border m-auto border-black !h-[98vh] ">
+    <div className="bg-white w-screen pt-2 h-[90vh] lg:h-[100vh]">
+    <div className="w-[98vw] border m-auto border-black !h:[88vh] lg:!h-[98vh] ">
       <div className="flex  pl-10 pt-10 text-[14px]">
         <div>
           <Image src={image} width={90} alt="logo" />
@@ -90,7 +90,9 @@ function Driver(props) {
       <div>
         <div className="flex items-center  gap-20">
           <span className="flex pl-8 !mt-[-5px]">
-            <span className=""><pre> Lorry no.</pre></span>
+            <span className="">
+              <pre> Lorry no.</pre>
+            </span>
             <input
               type="text"
               style={{ width: "25vw", borderColor: "black" }}
@@ -98,15 +100,15 @@ function Driver(props) {
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
-          <span className="border-4 border-red-800 text-red-800 w-[220px] px-3 rounded-md tracking-wider text-[14px] font-bold">
-           <pre> CONSIGNOR COPY</pre>
+          <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
+            <pre> DRIVER COPY</pre>
           </span>
-          <span className="!ml-[-35px] flex">
+          <span className="!ml-[-55px] flex">
             <span>L.R.No.</span>
             <input
               type="text"
               style={{ width: "10vw", borderColor: "black" }}
-              defaultValue={filterDatas?.gcno}
+              defaultValue={inputs?.gcno}
               className="outline-none pl-2 !bg-transparent border-non3"
             />
           </span>
@@ -117,7 +119,7 @@ function Driver(props) {
             <input
               type="text"
               style={{ width: "28vw", borderColor: "black" }}
-              defaultValue={inputs.from}
+              defaultValue={inputs?.from}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
@@ -126,7 +128,7 @@ function Driver(props) {
             <input
               type="text"
               style={{ width: "28vw", borderColor: "black" }}
-              defaultValue={inputs.to}
+              defaultValue={inputs?.to}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
@@ -134,8 +136,8 @@ function Driver(props) {
             <span className="">Date</span>
             <input
               type="text"
-              style={{ width: "22vw", borderColor: "black" }}
-              defaultValue={inputs.date}
+              style={{ width: "18vw", borderColor: "black" }}
+              defaultValue={inputs?.date}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
@@ -145,7 +147,7 @@ function Driver(props) {
             <span className="">Consignor:</span>
             <input
               type="text"
-              style={{ width: "85vw", borderColor: "black" }}
+              style={{ width: "80vw", borderColor: "black" }}
               defaultValue={inputs.consignor}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
@@ -154,7 +156,7 @@ function Driver(props) {
             <span className="">Consignee:</span>
             <input
               type="text"
-              style={{ width: "85vw", borderColor: "black" }}
+              style={{ width: "80vw", borderColor: "black" }}
               defaultValue={inputs.consignee}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
@@ -172,10 +174,13 @@ function Driver(props) {
       </div>
 
       <div className="pt-5">
-        <table className="border-t-2 border-b-2 m-auto w-[98vw]">
+        <table className="border-t-2  m-auto w-[98vw]">
           <thead>
             <tr className="w-[98vw] text-center">
-              <td colSpan={3} className="text-[12px] border-r-2 text-red-600 py-1">
+              <td
+                colSpan={3}
+                className="text-[12px] border-r-2 text-red-600 py-1"
+              >
                 INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. A/C No. 7669590442
               </td>
               <td colSpan={3} className="text-[12px] text-red-600 py-1">
@@ -199,44 +204,60 @@ function Driver(props) {
               <td>Remarks</td>
             </tr>
             <tr className="border-t-2 text-center">
-              <td className="border-r-2" rowSpan={6}>No. of Bales</td>
-              <td className="border-r-2">No of balessds</td>
-              <td className="border-r-2" rowSpan={6}>No. of Bales</td>
-              <td className="border-r-2" rowSpan={6}>No of bales</td>
-              <td className="border-r-2" rowSpan={6}>No of bales</td>
+              <td className="border-r-2" rowSpan={6}>
+                {" "}
+                {inputs.bales}
+              </td>
+              <td className="border-r-2"></td>
+              <td className="border-r-2" rowSpan={6}>
+                As per bill
+              </td>
+              <td className="border-r-2" rowSpan={6}> {inputs.accountpaid==="fixed"?"Fixed": filterDatas?.lramount/inputs.bales+"*"+inputs.bales}</td>
+              <td className="border-r-2" rowSpan={6}> {filterDatas?.lramount&&filterDatas?.lramount/inputs?.bales*inputs?.bales}</td>
               <td rowSpan={7} className="border-l-2">
-                <div className="-rotate-90 flex flex-wrap w-[18vw] text-[13px]">
-                <p className="text-red-600 flex items-center justify-center pl-16">Note:</p>
-                <span className="uppercase font-semibold">Do not pay lorry foreight to driver/owner only our transport account</span>
+                <div className="-rotate-90 flex flex-wrap gap-1 w-[18vw] text-[13px]">
+                  <p className="text-red-600 flex items-center justify-center pl-16">
+                    Note:
+                  </p>
+                  <span className="uppercase">
+                    {inputs.accountpaid === "Party" ||
+                    inputs.accountpaid === "fixed" ? (
+                      <span className="w-[30vw] text-balck">
+                        Please Pay Lorry Freight Amount In Favour Of
+                        <br /> Jai Balaji Transport Service Account
+                      </span>
+                    ) : (
+                      <p>{inputs.accountpaid}</p>
+                    )}
+                  </span>
                 </div>
               </td>
-             
             </tr>
-            <tr className="border-t-2 text-center">
-            
-              <td className="border-r-2">No of bales</td>
-             
-             
+            <tr className="text-center h-[3vh]">
+              <td className="border-r-2">{inputs.lotno}</td>
             </tr>
-            <tr className="border-t-2 text-center">
-        
-              <td className="border-r-2">No of bales</td>
-             
-             
+            <tr className=" text-center  h-[3vh]">
+              <td className="border-r-2">{inputs.prnofrom}</td>
             </tr>
-            <tr className="border-t-2 text-center">
-             
-              <td className="border-r-2">No of bales</td>
-              
+            <tr className=" text-center  h-[3vh]">
+              <td className="border-r-2">
+                {inputs.prnofrom}&nbsp;to&nbsp;{inputs.prnoto}
+              </td>
             </tr>
-            <tr className="border-t-2 text-center">
-              <td className="border-r-2">No of bales</td>
+            <tr className=" text-center  h-[3vh]">
+              <td className="border-r-2">{inputs.invoice}</td>
             </tr>
-            <tr className="border-t-2 text-center">
-              <td className="border-r-2">No of bales</td>
+            <tr className="text-center  h-[3vh]">
+              <td className="border-r-2">
+                {inputs.value}
+                <br />
+                {inputs.quality}
+                <br />
+                {inputs.pmark}
+              </td>
             </tr>
-      
-            <tr className="border-t-2 text-center">
+
+            <tr className="border-t-2 text-center  h-[3vh]">
               <td className="border-r-2" colSpan={3}>
                 <div className="grid grid-cols-2 uppercase text-[14px] font-bold">
                   <p>Goods to be insured by party</p>
@@ -246,30 +267,50 @@ function Driver(props) {
                 </div>
               </td>
               <td className="border-r-2">Total</td>
+              <td> {filterDatas?.lramount&&filterDatas?.lramount/inputs?.bales*inputs?.bales}</td>
             </tr>
             <tr className="border-t-2 text-center">
-              <td className="border-r-2" colSpan={1}>PAY NO.:BBQPA7235R</td>
-              <td className="border-r-2" colSpan={3}>E-WAY BILL REG.NO. 33BBQPA7235R1Z5</td>
+              <td className="border-r-2" colSpan={1}>
+                PAY NO.:BBQPA7235R
+              </td>
+              <td className="border-r-2" colSpan={3}>
+                E-WAY BILL REG.NO. 33BBQPA7235R1Z5
+              </td>
               <td colSpan={2} rowSpan={2}>
                 <div className="flex flex-col gap-8">
-                  <p className="text-red-600">For <span className="uppercase font-semibold">Rockport roadways</span></p>
+                  <p className="text-red-600">
+                    For{" "}
+                    <span className="uppercase font-semibold">
+                      Rockport roadways
+                    </span>
+                  </p>
                   <p>Booking Clerk</p>
                 </div>
               </td>
-           
-             
             </tr>
             <tr className="border-t-2 text-center text-[13px]">
-              <td className="border-r-2" colSpan={3}>
+              <td className="border-r-2" colSpan={4}>
                 <div>
-                <p>  NOTE: G.C.Note Subject to conditions overleaf.</p>
-                <p>The consignor has expressly declared that the above particulars furnished by him or his agent are correct.  </p>
-                <p>No prohibited goods or articles are included and that is fully aware or and accepts the conditions of carries given on the back side of the consignment receipt.  <span className="uppercase pl-2 p-2 mt-2 text-red-600 font-bold text-[12px]">Good's booked under owner's risk</span></p>
+                  <p> NOTE: G.C.Note Subject to conditions overleaf.</p>
+                  <p>
+                    The consignor has expressly declared that the above
+                    particulars furnished by him or his agent are correct.{" "}
+                  </p>
+                  <p>
+                    No prohibited goods or articles are included and that is
+                    fully aware or and accepts the conditions of carries given
+                    on the back side of the consignment receipt.{" "}
+                    <span className="uppercase pl-2 p-2 mt-2 text-red-600 font-bold text-[12px]">
+                      Good's booked under owner's risk
+                    </span>
+                  </p>
                 </div>
               </td>
-              <td className="border-r-2" >Total</td>
-             
+              {/* <td className="border-r-2"></td> */}
             </tr>
+            <tr className="border-t-2 text-center">
+<td colSpan={6}>Total Content Here</td>
+</tr>
           </tbody>
         </table>
       </div>

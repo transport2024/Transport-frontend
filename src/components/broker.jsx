@@ -142,7 +142,7 @@ function Broker() {
 
   const columns = [
     {
-      title: <p className="text-[12px] lg:text-[18px]">Broker Name</p>,
+      title: <p className="text-[12px] lg:text-[16px]">Broker Name</p>,
       dataIndex: "brokername",
       key: "brokername",
       render: (text) => (
@@ -151,7 +151,7 @@ function Broker() {
     },
 
     {
-      title: <p className="text-[12px] lg:text-[18px]">Actions</p>,
+      title: <p className="text-[12px] lg:text-[16px]">Actions</p>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
@@ -175,8 +175,8 @@ function Broker() {
   ];
 
   return (
-    <div className="flex pt-[10vh] pl-4">
-      <div className="w-[78vw] flex flex-col gap-8">
+    <div className="flex pt-[10vh]">
+      <div className="w-[100vw] w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -186,35 +186,34 @@ function Broker() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[70vw] lg:w-1/2 !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-2"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
           />
         </div>
-        <div className="w-full flex gap-5 items-end justify-end">
+        <div className="w-[100vw] lg:w-[78vw] flex justify-end items-end gap-5 pr-3   md:pr:10 lg:pr-20">
           <div
-            id="btn"
-            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
+            className=" bg-[--primary-color] h-[30px] !text-[10px] lg:!text-[14px] px-3 lg:px-5 py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center "
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon />
-            Create
+            <AddOutlinedIcon className="!text-[18px] lg:!text-[22px]"/> Create
           </div>
           <div>
             <Button
-              id="btn"
+  
               onClick={() => {
                 exportToExcel(Broker);
               }}
-              className="w-[120px] py-1  border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              className="!text-[10px] h-[30px] lg:!text-[14px] border-none px-3 lg:px-5 bg-[--primary-color] rounded-md cursor-pointer text-white font-bold  flex items-center justify-centeryy hover:!text-white"
             >
               Export Exel
             </Button>
           </div>
         </div>
+
         <Skeleton loading={loading}>
           <Table
             columns={columns}

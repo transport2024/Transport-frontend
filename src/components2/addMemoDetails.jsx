@@ -372,13 +372,13 @@ function AddMemoDetails() {
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer"
+              className="!text-md text-green-500 cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-[--secondary-color] cursor-pointer "
+              className="!text-md text-red-500 cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -413,10 +413,10 @@ function AddMemoDetails() {
   }
 
   return (
-    <div className="pt-24 pl-[3vw] w-[80vw]">
+    <div className="pt-24 w-[100vw] lg:w-[80vw]">
       <Skeleton loading={loading}>
         <Form
-          className="lg:grid  lg:grid-cols-3 lg:gap-x-[5vw] flex flex-col gap-0"
+          className="lg:grid lg:grid-cols-3 lg:gap-x-[5vw] flex flex-col gap-0 p-3 lg:px-0"
           layout="vertical"
           form={form} onFinish={handleEditMemo}
         >
@@ -506,11 +506,11 @@ function AddMemoDetails() {
           </Form.Item>
 
        <Form.Item>
-        <Button className="bg-green-500  !w-[80px]" htmlType="submit">Save</Button>
+        <Button className="bg-green-500  !w-[80px] !text-white" htmlType="submit">Save</Button>
        </Form.Item>
         </Form>
       </Skeleton>
-      <div className="w-[78vw]">
+      <div className="w-[100vw] lg:w-[78vw]">
         {dataSource.length === 1 ? (
           ""
         ) : (

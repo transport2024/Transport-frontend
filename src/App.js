@@ -98,7 +98,7 @@ function App() {
               <li>Check Your internet Connection</li>
               <li>Reconnet your Wifi</li>
               <button
-                className="bg-blue-500 px-3 rounded-md py-1 text-white text-[12px] ml-[15vw]"
+                className="bg-[--primary-color] px-3 rounded-md py-1 text-white text-[12px] ml-[15vw]"
                 onClick={() => {
                   window.location.reload();
                 }}

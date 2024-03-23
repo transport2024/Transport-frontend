@@ -134,7 +134,7 @@ function Consignee() {
 
   const columns = [
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Name</h1>,
       dataIndex: "name",
       key: "name",
       render: (text) => (
@@ -143,7 +143,7 @@ function Consignee() {
     },
 
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Address</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Address</h1>,
       dataIndex: "address",
       key: "address",
       render: (text) => (
@@ -151,7 +151,7 @@ function Consignee() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Place</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Place</h1>,
       dataIndex: "place",
       key: "place",
       render: (text) => (
@@ -159,15 +159,19 @@ function Consignee() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Contact Person</h1>,
+      title: (
+        <h1 className="!text-[12px] lg:!text-[16px] !w-[30vw] md:!w-[10vw]">
+          Contact Person
+        </h1>
+      ),
       dataIndex: "contactPerson",
       key: "contactPerson",
       render: (text) => (
-        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+        <div className="text-[10px] lg:!text-[16px] ">{text}</div>
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Phone</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Phone</h1>,
       dataIndex: "phone",
       key: "phone",
       render: (text) => (
@@ -175,7 +179,7 @@ function Consignee() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">GST NO</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px] w-[15vw]">GST NO</h1>,
       dataIndex: "gstno",
       key: "gstno",
       render: (text) => (
@@ -183,27 +187,28 @@ function Consignee() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Mail ID</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Mail ID</h1>,
       dataIndex: "mail",
       key: "mail",
       render: (text) => (
         <div className="text-[10px] lg:!text-[16px]">{text}</div>
       ),
     },
+
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Actions</h1>,
       render: (text) => (
         <div className="flex gap-1">
           <div>
             <EditNoteOutlinedIcon
-              className="!text-md text-green-500 cursor-pointer"
+              className="!text-md !text-green-500 cursor-pointer"
               onClick={() => handleEdit(text)}
             />
           </div>
 
           <div>
             <DeleteOutlineOutlinedIcon
-              className="!text-md text-red-500 cursor-pointer "
+              className="!text-md !text-red-500 cursor-pointer "
               onClick={() => {
                 handleDelete(text);
               }}
@@ -216,7 +221,7 @@ function Consignee() {
 
   return (
     <div className="flex pt-[10vh] lg:pl-4">
-      <div className="w-[78vw] flex flex-col gap-8">
+      <div className="w-[100vw] lg:w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -226,30 +231,28 @@ function Consignee() {
             onChange={(data) => {
               setSearched(data);
             }}
-            className="w-[70vw] lg:w-1/2 !m-auto py-3"
+            className="w-[70vw] lg:w-1/2 !m-auto py-2"
             size="large"
             showArrow={false}
             // open={searched.length===1?false:true}
           />
         </div>
-        <div className="w-full flex gap-5 items-end justify-end">
+        <div className="w-[100vw] lg:w-[78vw] flex justify-end items-end gap-5 pr-3   md:pr:10 lg:pr-20">
           <div
-            id="btn"
-            className=" w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
+            className=" bg-[--primary-color] h-[30px] !text-[10px] lg:!text-[14px] px-3 lg:px-5 py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center "
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon />
-            Create
+            <AddOutlinedIcon className="!text-[18px] lg:!text-[22px]"/> Create
           </div>
           <div>
             <Button
-              id="btn"
+  
               onClick={() => {
                 exportToExcel(Consignee);
               }}
-              className="w-[120px] py-1  border-none  rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              className="!text-[10px] h-[30px] lg:!text-[14px] border-none px-3 lg:px-5 bg-[--primary-color] rounded-md cursor-pointer text-white font-bold  flex items-center justify-centeryy hover:!text-white"
             >
               Export Exel
             </Button>
@@ -261,7 +264,7 @@ function Consignee() {
             dataSource={Consignee}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
-            className="!overflow-x-scroll"
+            scroll={{x:800}}
           />
         </Skeleton>
       </div>

@@ -65,7 +65,7 @@ function SideNavbar() {
     <div className="md:w-[18vw] md:h-screen  !z-50">
       <div className="md:w-[18vw] md:h-screen  lg:border-r lg:border-slate-200 fixed ">
         <div
-          id="sidenavbar"
+          id="navbar"
           className="text-center !z-50 flex text-xl border-b border-gray-100 font-bold items-center  justify-around  text-[--primary-color]    h-[9vh]   w-screen py-3"
         >
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
@@ -96,6 +96,7 @@ function SideNavbar() {
                   backgroundColor: "red",
                 }}
                 size="small"
+                onClick={()=>{setMenu(!menu)}}
               >
                R 
               </Avatar>
@@ -109,36 +110,27 @@ function SideNavbar() {
           width={400}
           className="!py-40"
         >
-          <p className="text-slate-600 font-bold">
+          <p className="text-white font-bold">
             Are You sure Want to Logout ?
           </p>
           <div className="flex gap-2 items-end justify-end  pt-2">
             <button
-              id="btn"
               onClick={handleLogout}
-              className=" flex items-center justify-center px-2 text-white lg:w-[4vw] lg:px-0 lg:h-[4vh] rounded-md "
+              className=" flex items-center border-2 border-slate-600 shadow-md justify-center px-2 text-white lg:w-[4vw] lg:px-0 lg:h-[4vh] rounded-md "
             >
               Yes
             </button>
             <button
-              id="btn"
               onClick={() => {
                 setModal(!modal);
               }}
-              className="bg-[--secondary-color] flex items-center justify-center text-white px-2 lg:px-0 lg:w-[3vw] lg:h-[4vh] rounded-md "
+              className="bg-[--secondary-color] flex border-2 border-slate-600 shadow-md items-center justify-center text-white px-2 lg:px-0 lg:w-[3vw] lg:h-[4vh] rounded-md "
             >
               no
             </button>
           </div>
         </Modal>
-        <p
-          className="lg:hidden bg-white border-b border-slate-200 w-[100vw] pl-1"
-          onClick={() => {
-            setMenu(true);
-          }}
-        >
-          <MenuOpenIcon />
-        </p>
+       
         <Drawer
           open={menu}
           width={200}
@@ -162,6 +154,7 @@ function SideNavbar() {
 
           <p
             className="absolute font-semibold left-0 bottom-28 border-t-2 w-[100%] border-slate-200 pt-3 text-center cursor-pointer"
+            id="navbar"
             onClick={() => {
               setModal(!modal);
             }}
@@ -172,7 +165,7 @@ function SideNavbar() {
             </Button>
           </p>
         </Drawer>
-        <div className="h-screen hidden bg-gradient-to-r from-red-700 via-red-600 to-yellow-700  lg:flex flex-col items-center">
+        <div className="h-screen hidden  lg:flex flex-col items-center" id="navbar">
           <Menu
             items={items}
             defaultSelectedKeys={get(location, "pathname", "/")}

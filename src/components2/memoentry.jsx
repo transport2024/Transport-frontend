@@ -200,7 +200,7 @@ function Memo() {
 
   const columns = [
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">GC No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">GC No</h1>,
       dataIndex: "serialNumber",
       key: "serialNumber",
       render: (text, record, index) => {
@@ -211,7 +211,7 @@ function Memo() {
     },
 
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Date</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Date</h1>,
       dataIndex: "date",
       key: "date",
       render: (text) => (
@@ -219,7 +219,7 @@ function Memo() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Vehicle No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Vehicle No</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
       render: (text) => (
@@ -227,7 +227,7 @@ function Memo() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Driver Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Driver Name</h1>,
       dataIndex: "drivername",
       key: "drivername",
       render: (text) => (
@@ -235,7 +235,7 @@ function Memo() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">DriverPhone</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">DriverPhone</h1>,
       dataIndex: "driverphone",
       key: "driverphone",
       render: (text) => (
@@ -244,7 +244,7 @@ function Memo() {
     },
     {
       title: (
-        <h1 className="!text-[12px] lg:!text-[18px]">Driver WhatsappNo</h1>
+        <h1 className="!text-[12px] lg:!text-[16px]">Driver WhatsappNo</h1>
       ),
       dataIndex: "driverwhatsappno",
       key: "driverwhatsappno",
@@ -253,7 +253,7 @@ function Memo() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Actions</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Actions</h1>,
       render: (text) => (
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-1">
@@ -296,8 +296,8 @@ function Memo() {
   ];
 
   return (
-    <div className="flex pt-[10vh] pl-4">
-      <div className="w-[78vw] flex flex-col gap-8">
+    <div className="flex pt-[10vh]">
+      <div className="w-[100vw] lg:w-[78vw] flex flex-col gap-8">
         <div className="flex items-center justify-center">
           <Select
             mode="tags"
@@ -312,24 +312,22 @@ function Memo() {
             showArrow={false}
           />
         </div>
-        <div className="  w-full flex gap-5 items-end justify-end">
+        <div className="w-[100vw] lg:w-[78vw] flex justify-end items-end gap-5 pr-3   md:pr:10 lg:pr-20">
           <div
-            id="btn"
-            className="float-right w-[120px] py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center bg-[--secondary-color]"
+            className=" bg-[--primary-color] h-[30px] !text-[10px] lg:!text-[14px] px-3 lg:px-5 py-1 rounded-md cursor-pointer text-white font-bold  flex items-center justify-center "
             onClick={() => {
               setOpen(true);
             }}
           >
-            <AddOutlinedIcon />
-            Create
+            <AddOutlinedIcon className="!text-[18px] lg:!text-[22px]"/> Create
           </div>
           <div>
             <Button
-              id="btn"
+  
               onClick={() => {
-                exportToExcel(memo);
+                exportToExcel(Consignee);
               }}
-              className="w-[120px] py-1  rounded-md cursor-pointer  border-none  text-white font-bold  flex items-center justify-center bg-[--secondary-color] hover:!text-white"
+              className="!text-[10px] h-[30px] lg:!text-[14px] border-none px-3 lg:px-5 bg-[--primary-color] rounded-md cursor-pointer text-white font-bold  flex items-center justify-centeryy hover:!text-white"
             >
               Export Exel
             </Button>
@@ -347,7 +345,7 @@ function Memo() {
                 setCurrentPage(page);
               },
             }}
-            className="!overflow-x-scroll"
+            scroll={{x:800}}
           />
         </Skeleton>
       </div>

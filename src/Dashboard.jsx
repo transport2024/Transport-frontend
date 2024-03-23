@@ -202,92 +202,66 @@ function Dashboard() {
   ];
 
   return (
-    <div className="pt-[12vh] w-[85vw] z-20">
-      <div className="grid grid-cols-2 lg:!flex xsm:gap-6 lg:gap-10 lg:pl-5 flex-wrap">
-        <div className="bg-[#a2de97] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
-         
-          <PeopleOutlineOutlinedIcon
-            className="text-white lg:font-[50px]"
-          />
+    <div className="pt-[12vh] w-[100vw] lg:w-[82vw] z-20">
+     <div className="flex flex-wrap gap-3 pl-10 lg:pl-0">
+  <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <PeopleOutlineOutlinedIcon className="text-white lg:text-5xl" />
+    <Statistic
+      title={<h1 className="text-white font-semibold text-xl">Consigner</h1>}
+      value={consignor?.length}
+      valueStyle={{
+        color: "white",
+        textAlign: "center",
+      }}
+      formatter={formatter}
+    />
+  </div>
 
-          <Statistic
-            title={
-              <h1 className="text-white font-semibold xl:text-[20px]">
-                Consigner
-              </h1>
-            }
-            value={consignor?.length}
-            valueStyle={{
-              color: "white",
-              textAlign: "center",
-            }}
-            formatter={formatter}
-          />
-        </div>
+  <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px]  md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <Person3OutlinedIcon className="text-white lg:text-5xl" />
+    <Statistic
+      title={<h1 className="text-white font-semibold text-xl">Consignee</h1>}
+      value={consignee?.length}
+      valueStyle={{
+        color: "white",
+        textAlign: "center",
+      }}
+      formatter={formatter}
+    />
+  </div>
 
-        <div className="bg-[#e56a93] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
-        
-          <Person3OutlinedIcon className="text-white lg:font-[50px]"/>
-          <Statistic
-            title={
-              <h1 className="text-white font-semibold xl:text-[20px]">
-                Consignee
-              </h1>
-            }
-            value={consignee?.length}
-            valueStyle={{
-              color: "white",
-              textAlign: "center",
-            }}
-            formatter={formatter}
-          />
-        </div>
+  <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <LocalShippingOutlinedIcon className="text-white lg:text-5xl" />
+    <Statistic
+      title={<h1 className="text-white font-semibold text-xl">Vehicle</h1>}
+      value={vehicle?.length}
+      valueStyle={{
+        color: "white",
+        textAlign: "center",
+      }}
+      formatter={formatter}
+    />
+  </div>
 
-        <div className="bg-[#c3b951] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
-       
-          <LocalShippingOutlinedIcon
-            className="text-white lg:font-[50px]"
-          />
-          <Statistic
-            title={
-              <h1 className="text-white font-semibold xl:text-[20px]">
-                Vechicle
-              </h1>
-            }
-            value={vehicle?.length}
-            valueStyle={{
-              color: "white",
-              textAlign: "center",
-            }}
-            formatter={formatter}
-          />
-        </div>
+  <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <ContactPageOutlinedIcon className="text-white lg:text-5xl" />
+    <Statistic
+      title={<h1 className="text-white font-semibold text-xl">Broker</h1>}
+      value={broker?.length}
+      valueStyle={{
+        color: "white",
+        textAlign: "center",
+      }}
+      formatter={formatter}
+    />
+  </div>
+</div>
 
-        <div className="bg-[#74d3d3] xsm:h-[100px] xsm:w-[120px] lg:h-[140px] lg:w-[280px] flex flex-col items-center justify-center rounded-md">
-         
-          <ContactPageOutlinedIcon
-           className="text-white lg:font-[50px]"
-          />
-          <Statistic
-            title={
-              <h1 className="text-white font-semibold xl:text-[20px]">
-                Broker
-              </h1>
-            }
-            value={broker?.length}
-            valueStyle={{
-              color: "white",
-              textAlign: "center",
-            }}
-            formatter={formatter}
-          />
-        </div>
-      </div>
 
-     <div className="flex">
-     <div>
+      <div className="flex flex-wrap pl-5">
+     <div className="flex flex-col items-center justify-center">
       <h1 className="pl-20 pt-10">Last Five Days Memo Entries</h1>
-      <BarChart width={600} height={300} data={lastFiveDaysMemoEntriesCount()}>
+      <BarChart width={350} height={300} data={lastFiveDaysMemoEntriesCount()}>
       <CartesianGrid stroke="blue" strokeDasharray="5 5" />
       <XAxis dataKey="date" />
       <YAxis />
@@ -296,9 +270,9 @@ function Dashboard() {
       <Bar dataKey="count" fill="blue" />
     </BarChart>
      </div>
-     <div>
+     <div className="flex flex-col items-center justify-center">
       <h1 className="pl-20 pt-10">Last Five Days Vehicle Entries</h1>
-      <LineChart width={600} height={300} data={lastFiveDaysVehicleEntriesCount()}>
+      <LineChart width={350} height={300} data={lastFiveDaysVehicleEntriesCount()}>
       <CartesianGrid stroke="blue" strokeDasharray="5 5" />
       <XAxis dataKey="date" />
       <YAxis />
@@ -306,12 +280,10 @@ function Dashboard() {
       <Legend />
       <Line dataKey="count" fill="blue" />
     </LineChart>
-     </div>
-     </div>
-     <div className="flex gap-10">
-     <div >
+     </div> 
+     <div className="flex flex-col pt-10 items-center justify-center">
       <h1 className="pl-20">Total Consignor&Consignee</h1>
-     <PieChart width={400} height={400}>
+     <PieChart width={350} height={350}>
         <Pie
           data={pieChartData}
           dataKey="value"
@@ -328,9 +300,7 @@ function Dashboard() {
         <Legend />
       </PieChart>
      </div>
-     
-     <div className="flex flex-col  gap-10 ">
-        <div className="w-[50vw]">
+        <div className="!w-[100vw] lg:w-[80vw] pt-10 ">
           <h1 className="pl-20">
             Last Five Memo Entries
           </h1>
@@ -343,7 +313,6 @@ function Dashboard() {
             />
           </Skeleton>
         </div>
-      </div>
      </div>
     </div>
   );

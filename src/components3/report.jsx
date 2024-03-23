@@ -7,6 +7,7 @@ import { get, isEmpty, flattenDeep } from "lodash";
 import { DatePicker } from "antd";
 import moment from "moment";
 import * as XLSX from "xlsx";
+import { useSelector } from "react-redux";
 function Report() {
   const [report, setReport] = useState([]);
   const [searched, setSearched] = useState([]);
@@ -18,11 +19,12 @@ function Report() {
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
   const [exporting, setExporting] = useState(false);
+  const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_URL}/api/memodetails`
+        `${process.env.REACT_APP_URL}/api/memodetails?userId=${userId}`
       );
       setReport(get(result, "data.message"));
     } catch (err) {}
@@ -118,7 +120,7 @@ function Report() {
 
   const columns = [
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Date</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Date</h1>,
       dataIndex: "date",
       key: "date",
       render: (text) => (
@@ -126,7 +128,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Vehicle No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Vehicle No</h1>,
       dataIndex: "vehicleno",
       key: "vehicleno",
       render: (text) => (
@@ -134,7 +136,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Pan No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Pan No</h1>,
       dataIndex: "pan",
       key: "pan",
       render: (text) => (
@@ -142,7 +144,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">RC Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">RC Name</h1>,
       dataIndex: "rcname",
       key: "rcname",
       render: (text) => (
@@ -150,7 +152,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Location From</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Location From</h1>,
       dataIndex: "locationfrom",
       key: "locationfrom",
       render: (text) => (
@@ -158,7 +160,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Location To</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Location To</h1>,
       dataIndex: "locationto",
       key: "location",
       render: (text) => (
@@ -166,7 +168,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignor</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Consignor</h1>,
       dataIndex: "consignor",
       key: "consignor",
       render: (text) => (
@@ -174,7 +176,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Consignee</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Consignee</h1>,
       dataIndex: "consignee",
       key: "consignee",
       render: (text) => (
@@ -182,7 +184,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Broker Name</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Broker Name</h1>,
       dataIndex: "brokername",
       key: "brokername",
       render: (text) => (
@@ -190,7 +192,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Lr No</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Lr No</h1>,
       dataIndex: "gcno",
       key: "gcno",
       render: (text) => (
@@ -198,7 +200,7 @@ function Report() {
       ),
     },
     {
-      title: <h1 className="!text-[12px] lg:!text-[18px]">Lr Amount</h1>,
+      title: <h1 className="!text-[12px] lg:!text-[16px]">Lr Amount</h1>,
       dataIndex: "lramount",
       key: "lramount",
       render: (text) => (
@@ -220,8 +222,8 @@ function Report() {
       .flat();
 
   return (
-    <div className="flex pt-[12vh] lg:pl-4">
-      <div className="w-[78vw] flex flex-col gap-8">
+    <div className="flex pt-[12vh]">
+      <div className="w-[100vw] lg:w-[78vw] flex flex-col gap-8">
         <div className="flex flex-col lg:flex-row items-center justify-between px-10">
           <RangePicker
             format={dateFormat}
@@ -229,7 +231,7 @@ function Report() {
             onChange={handleDate}
             className="w-[80vw] lg:w-[25vw]"
           />
-          <div className="flex items-center justify-center w-[90vw] pl-3 lg:pl-0">
+          <div className="flex items-center justify-center pt-5 lg:pt-0 w-[90vw] pl-3 lg:pl-0">
             {/* <Select
               mode="tags"
               showSearch
@@ -245,7 +247,7 @@ function Report() {
             /> */}
             <Input
               placeholder="No of bales"
-              className="!w-[50vw] pl-2 lg:!w-1/2 !m-auto py-3"
+              className="!w-[50vw] pl-2 lg:!w-1/2 !m-auto lg:py-2"
             />
             <div className="pr-5">
               <Button
@@ -267,6 +269,7 @@ function Report() {
             dataSource={dateFilters}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
+            scroll={{x:1600}}
           />
         ) : (
           <Table
@@ -274,7 +277,7 @@ function Report() {
             dataSource={data}
             ref={tableRef}
             pagination={{ pageSize: 5 }}
-            className="!overflow-x-scroll"
+            scroll={{x:1600}}
           />
         )}
       </div>
