@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { get } from "lodash";
 import React, { useEffect, useState } from "react";
-import {  useLocation, useNavigate } from "react-router";
+import {  useLocation, useNavigate, useParams } from "react-router";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import PrintIcon from "@mui/icons-material/Print";
@@ -37,6 +37,7 @@ function AddMemoDetails() {
   const [vehicle, setVehicle] = useState([]);
   const navigate = useNavigate();
   const [searched, setSearch] = useState([]);
+  const params=useParams()
   const userId=useSelector((state)=>state.user?.user?.userId)
 
   const fetchData = async () => {
@@ -396,13 +397,28 @@ function AddMemoDetails() {
     },
   ];
 
+
+  const handleEditMemo=async(val)=>{
+    try{
+      await axios.put(
+        `${process.env.REACT_APP_URL}/api/memo/${params.id}`,
+        val
+      );
+      notification.success({
+        message: "memo updated successfully",
+      });
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div className="pt-24 pl-[3vw] w-[80vw]">
       <Skeleton loading={loading}>
         <Form
           className="lg:grid  lg:grid-cols-3 lg:gap-x-[5vw] flex flex-col gap-0"
           layout="vertical"
-          form={form}
+          form={form} onFinish={handleEditMemo}
         >
           <Form.Item
             label={<p className="text-[12px] lg:!text-[16px] font-semibold">Memo/GC No</p>}
@@ -479,7 +495,9 @@ function AddMemoDetails() {
             <Input type="text" size="large" placeholder="Add whatsapp number..."/>
           </Form.Item>
 
-       
+       <Form.Item>
+        <Button className="bg-green-500 borer-none outline-none" htmlType="submit">Save</Button>
+       </Form.Item>
         </Form>
       </Skeleton>
       <div className="w-[78vw]">
