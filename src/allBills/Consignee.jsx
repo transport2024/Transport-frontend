@@ -63,7 +63,7 @@ function Consignee(props) {
 
 
   return (
-    <div className="bg-white w-screen pt-2 h-[90vh] lg:h-[100vh]">
+    <div className="bg-white w-screen pt-2 h-[90vh] lg:h-[100vh] relative" style={{zIndex:999}}>
     <div className="w-[98vw] border m-auto border-black !h:[88vh] lg:!h-[98vh] ">
       <div className="flex  pl-10 pt-10 text-[14px]">
         <div>
@@ -199,7 +199,7 @@ function Consignee(props) {
                 <span>Kg. Gms</span>
               </td>
               <td className="border-r-2">Rate</td>
-              <td className="border-r-2">Amount</td>
+              <td className="border-r-2 px-4">Amount</td>
               <td>Remarks</td>
             </tr>
             <tr className="border-t-2 text-center">
@@ -211,10 +211,21 @@ function Consignee(props) {
               <td className="border-r-2" rowSpan={6}>
                 As per bill
               </td>
-              <td className="border-r-2" rowSpan={6}> {inputs.accountpaid==="fixed"?"Fixed": filterDatas?.lramount/inputs.bales+"*"+inputs.bales}</td>
-              <td className="border-r-2" rowSpan={6}> {filterDatas?.lramount&&filterDatas?.lramount/inputs?.bales*inputs?.bales}</td>
+              <td className="border-r-2" rowSpan={6}>
+                {" "}
+                {filterDatas && inputs && inputs.bales && inputs.bales !== 0
+                  ? inputs.accountpaid === "fixed"
+                    ? "Fixed"
+                    : filterDatas.lramount / inputs.bales + "*" + inputs.bales
+                  : ""}
+              </td>
+              <td className="border-r-2" rowSpan={6}>
+                {" "}
+                {filterDatas?.lramount &&
+                  (filterDatas?.lramount / inputs?.bales) * inputs?.bales}
+              </td>
               <td rowSpan={7} className="border-l-2">
-                <div className="-rotate-90 flex flex-wrap gap-1 w-[18vw] text-[13px]">
+                <div className="-rotate-90 flex flex-wrap  gap-1 w-[18vw] text-[13px]">
                   <p className="text-red-600 flex items-center justify-center pl-16">
                     Note:
                   </p>
@@ -233,27 +244,53 @@ function Consignee(props) {
                 </div>
               </td>
             </tr>
-            <tr className="text-center h-[3vh]">
-              <td className="border-r-2">{inputs.lotno}</td>
-            </tr>
-            <tr className=" text-center  h-[3vh]">
-              <td className="border-r-2">{inputs.prnofrom}</td>
-            </tr>
-            <tr className=" text-center  h-[3vh]">
+            <tr className=" h-[3vh]">
               <td className="border-r-2">
-                {inputs.prnofrom}&nbsp;to&nbsp;{inputs.prnoto}
+                {" "}
+                <span className="text-red-800 pl-2">
+                  Lot No. :&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">{inputs.lotno}</span>
+                </span>
               </td>
             </tr>
-            <tr className=" text-center  h-[3vh]">
-              <td className="border-r-2">{inputs.invoice}</td>
-            </tr>
-            <tr className="text-center  h-[3vh]">
+            <tr className="h-[3vh]">
               <td className="border-r-2">
-                {inputs.value}
+                <span className="text-red-800 pl-2">
+                  P.R.NO. :&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">
+                    {inputs.prnofrom}&nbsp;{inputs.prnofrom ? "to" : ""}&nbsp;
+                    {inputs.prnoto}
+                  </span>
+                </span>
+              </td>
+            </tr>
+            <tr className="h-[3vh]">
+              <td className="border-r-2">
+                <span className="text-red-800 pl-2">
+                  Inv. No. :&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">{inputs.invoice}</span>
+                </span>
+              </td>
+            </tr>
+            <tr className=" h-[3vh]">
+              <td className="border-r-2">
+                <span className="text-red-800 pl-2">
+                  Value of Goods. :&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">{inputs.value}</span>
+                </span>
+              </td>
+            </tr>
+            <tr className=" h-[3vh]">
+              <td className="border-r-2">
+                <span className="text-red-800 pl-2">
+                  Quality:&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">{inputs.quality}</span>
+                </span>
                 <br />
-                {inputs.quality}
-                <br />
-                {inputs.pmark}
+                <span className="text-red-800 pl-2">
+                  P Marks:&nbsp;&nbsp;&nbsp;
+                  <span className="text-black">{inputs.pmark}</span>
+                </span>
               </td>
             </tr>
 
@@ -267,7 +304,11 @@ function Consignee(props) {
                 </div>
               </td>
               <td className="border-r-2">Total</td>
-              <td> {filterDatas?.lramount&&filterDatas?.lramount/inputs?.bales*inputs?.bales}</td>
+              <td>
+                {" "}
+                {filterDatas?.lramount &&
+                  (filterDatas?.lramount / inputs?.bales) * inputs?.bales}
+              </td>
             </tr>
             <tr className="border-t-2 text-center">
               <td className="border-r-2" colSpan={1}>
@@ -309,11 +350,25 @@ function Consignee(props) {
               {/* <td className="border-r-2"></td> */}
             </tr>
             <tr className="border-t-2 text-center">
-<td colSpan={6}>Total Content Here</td>
-</tr>
+              <td colSpan={6}>Total Content Here</td>
+            </tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div
+      style={{
+        fontSize: "15vw",
+        position: "absolute",
+        top: "38vh",
+        color: "#E0E0E0",
+        fontWeight: 200,
+        zIndex: -1,
+        transform: "rotate(-40deg)",
+      }}
+      className="tracking-wider pl-28"
+    >
+      ORIGINAL
     </div>
   </div>
   );

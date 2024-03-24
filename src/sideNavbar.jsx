@@ -165,13 +165,14 @@ function SideNavbar() {
             </Button>
           </p>
         </Drawer>
-        <div className="h-screen hidden  lg:flex flex-col items-center" id="navbar">
+        <div className="h-screen hidden  lg:flex flex-col items-center overflow-y-scroll" id="navbar">
           <Menu
             items={items}
             defaultSelectedKeys={get(location, "pathname", "/")}
             mode="inline"
             onClick={onClick}
             defaultOpenKeys={["sub1", "sub2", "sub3"]}
+            className="overflow-scroll h-[75vh]"
           ></Menu>
 
           <p

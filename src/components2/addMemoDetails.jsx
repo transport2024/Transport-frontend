@@ -79,8 +79,10 @@ function AddMemoDetails() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if(userId){
+      fetchData();
+    }
+  }, [userId]);
 
 
 

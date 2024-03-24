@@ -13,9 +13,6 @@ body {
 ::-webkit-scrollbar {
   display: none !important;
 }
-.ant-form-item .ant-form-item-label >label,.ant-drawer .ant-drawer-title,.anticon {
-  color: white !important;
-}
 
 .ant-menu-item-selected {
   background-color: transparent !important;

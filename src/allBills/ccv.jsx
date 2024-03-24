@@ -14,6 +14,7 @@ function Ccv() {
   const [consignee, setConsignee] = useState([]);
   const [loading, setLoading] = useState([]);
   const userId=useSelector((state)=>state.user?.user?.userId)
+  
 
   const printRef = useRef(false);
 
@@ -37,8 +38,10 @@ function Ccv() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if(userId){
+      fetchData();
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (loading === false) {

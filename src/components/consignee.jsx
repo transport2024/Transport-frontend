@@ -45,8 +45,10 @@ function Consignee() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [searched]);
+    if(userId){
+      fetchData();
+    }
+  }, [searched,userId]);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {

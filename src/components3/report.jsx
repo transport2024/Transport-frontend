@@ -14,12 +14,13 @@ function Report() {
   const tableRef = useRef(null);
   const { RangePicker } = DatePicker;
   const dateFormat = "DD-MM-YYYY";
-  const [userDates, setUserDate] = useState("");
+  const [userDates, setUserDate] = useState([]);
   const [filteredDatas, setFilterDatas] = useState("");
   const [data, setData] = useState("");
   const [dateFilters, setDateFilters] = useState("");
   const [exporting, setExporting] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
+  console.log(userId,"userId")
 
   const fetchData = async () => {
     try {
@@ -31,9 +32,40 @@ function Report() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if(userId){
+      fetchData();
+    }
+  }, [userId]);
 
+  console.log(report,"report")
+
+ 
+  
+
+  const handleDate = (date) => {
+    console.log("enter into this",date)
+    if (!date || !date.length) {
+      setUserDate([]);
+      return; // Exit the function if no date is provided
+    }
+  
+    const startDate = moment(date[0], dateFormat);
+    const endDate = moment(date[1], dateFormat);
+  
+    const dates = [];
+    let currentDate = startDate.clone(); // Clone the startDate to prevent mutation
+  
+    while (currentDate <= endDate) {
+      dates.push(currentDate.format(dateFormat));
+      currentDate.add(1, "days"); // Use add() to move to the next day
+    }
+  
+    setUserDate(dates);
+  };
+  
+
+
+  
   useEffect(() => {
     setData(
       flattenDeep(
@@ -46,51 +78,27 @@ function Report() {
       )
     );
     setFilterDatas(
-      report?.filter((res) => {
+      report.filter((res) => {
         return (
-          searched.includes(res?.consignor) ||
-          searched.includes(res?.consignee) ||
-          searched.includes(res?.vehicleno)
+          searched.includes(res.consignor) ||
+          searched.includes(res.consignee) ||
+          searched.includes(res.vehicleno)
         );
       })
     );
 
     setDateFilters(
       data &&
-        data?.filter((res) => {
+        data.filter((res) => {
           return (
-            searched.includes(res?.consignor) ||
-            searched.includes(res?.consignee) ||
-            searched.includes(res?.vehicleno)
+            searched.includes(res.consignor) ||
+            searched.includes(res.consignee) ||
+            searched.includes(res.vehicleno)
           );
         })
     );
   }, [report, userDates, searched]);
-
-  const handleDate = (date) => {
-    if (!date || !date.length) {
-      setUserDate([]);
-      date = [];
-    }
-
-    const startDate = moment(
-      `${date[0]?.$D} - ${date[0]?.$M + 1} - ${date[0]?.$y} -`,
-      "DD-MM-YYYY"
-    );
-    const endDate = moment(
-      `${date[1]?.$D} - ${date[1]?.$M + 1} - ${date[1]?.$y} -`,
-      "DD-MM-YYYY"
-    );
-
-    const dates = [];
-    let currentDate = startDate;
-
-    while (currentDate <= endDate) {
-      dates.push(currentDate.format("DD-MM-YYYY"));
-      setUserDate(dates);
-      currentDate = currentDate.clone().add(1, "days");
-    }
-  };
+  
 
   const exportToExcel = () => {
     if (!exporting) {
@@ -108,6 +116,7 @@ function Report() {
             brokername: report.brokername,
             lrno: report.gcno,
             lramount: report.lramount,
+            noofbales:report.quantity
           }));
 
       const ws = XLSX.utils.json_to_sheet(dataForExport);
@@ -207,6 +216,14 @@ function Report() {
         <div className="text-[10px] lg:!text-[16px]">{text}</div>
       ),
     },
+    {
+      title: <h1 className="!text-[12px] lg:!text-[16px]">No of bales</h1>,
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (text) => (
+        <div className="text-[10px] lg:!text-[16px]">{text}</div>
+      ),
+    },
   ];
 
   const searchers = [];
@@ -232,7 +249,7 @@ function Report() {
             className="w-[80vw] lg:w-[25vw]"
           />
           <div className="flex items-center justify-center pt-5 lg:pt-0 w-[90vw] pl-3 lg:pl-0">
-            {/* <Select
+            <Select
               mode="tags"
               showSearch
               placeholder="Type here for Reportentry"
@@ -240,15 +257,12 @@ function Report() {
               onChange={(data) => {
                 setSearched(data);
               }}
-              className="!w-[50vw] lg:!w-1/2 !m-auto py-3"
+              className="!w-[50vw] lg:!w-1/2 !m-auto lg:py-2"
               size="large"
               showArrow={false}
               allowClear={true}
-            /> */}
-            <Input
-              placeholder="No of bales"
-              className="!w-[50vw] pl-2 lg:!w-1/2 !m-auto lg:py-2"
             />
+            
             <div className="pr-5">
               <Button
                 id="btn"

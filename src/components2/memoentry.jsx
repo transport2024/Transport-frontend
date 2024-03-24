@@ -38,6 +38,8 @@ function Memo() {
   const [filteredVehicle, setFilteredVehicle] = useState([]);
   const [loadingBtn, setLoadingBtn] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
+  const [autoFillDetails,setautoFillDetails]=useState([])
+  const [selectVehicleno,setSelectedVehicleno]=useState("")
 
   const fetchData = async () => {
     try {
@@ -63,15 +65,17 @@ function Memo() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [searched]);
+    if(userId){
+      fetchData();
+    }
+  }, [searched,userId]);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
       setLoadingBtn(true);
       try {
         const formData = {
-          gcno: memo.length + 121,
+          gcno: value.gcno,
           drivername: value.drivername,
           date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
@@ -97,7 +101,7 @@ function Memo() {
       try {
         setLoadingBtn(true);
         const formData = {
-          gcno: memo.length + 121,
+          gcno:value.gcno,
           drivername: value.drivername,
           date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
@@ -178,6 +182,8 @@ function Memo() {
         value: data.vehicleno,
       });
     });
+
+    console.log(selectVehicleno,"selectVehicleno")
 
   const exportToExcel = () => {
     if (!exporting) {
@@ -295,6 +301,15 @@ function Memo() {
     },
   ];
 
+  useEffect(()=>{
+const seletedVehicle=vehicle.filter((veh)=>{
+  return veh.vehicleno===selectVehicleno
+})[0]
+
+console.log(seletedVehicle,"seletedVehicle")
+form.setFieldsValue(seletedVehicle)
+  },[selectVehicleno])
+
   return (
     <div className="flex pt-[10vh]">
       <div className="w-[100vw] lg:w-[78vw] flex flex-col gap-8">
@@ -372,6 +387,18 @@ function Memo() {
           form={form}
         >
           <Form.Item
+            label={<p className="!text-[16px] font-semibold">GC NO</p>}
+            name="gcno"
+            rules={[
+              {
+                required: true,
+                message: "Please input your GC no!",
+              },
+            ]}
+          >
+            <Input type="text" size="large" placeholder="GC no" />
+          </Form.Item>
+          <Form.Item
             label={<p className="!text-[16px] font-semibold">Date</p>}
             name="date"
             rules={[
@@ -388,7 +415,7 @@ function Memo() {
             name="vehicleno"
             label={<p className="!text-[16px] font-semibold">Vehicle No</p>}
           >
-            <Select placeholder="Select vehicle no" size="large" showSearch>
+            <Select placeholder="Select vehicle no" size="large" showSearch onChange={(e)=>{setSelectedVehicleno(e)}}>
               {vehicle?.map((res, i) => {
                 return (
                   <Select.Option value={res.vehicleno} key={i}>
@@ -429,7 +456,7 @@ function Memo() {
                 Driver Whatsapp Number
               </p>
             }
-            name="driverwhatsappno"
+            name="whatsappno"
             rules={[
               {
                 required: true,

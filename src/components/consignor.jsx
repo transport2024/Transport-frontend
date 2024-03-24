@@ -29,6 +29,8 @@ function Consignor() {
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
+
+  console.log(userId,"user")
  
 
   const fetchData = async () => {
@@ -45,8 +47,10 @@ function Consignor() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [searched]);
+    if(userId){
+      fetchData();
+    }
+  }, [searched,userId]);
 
   const handleClear = () => {
     form.setFieldsValue([]);

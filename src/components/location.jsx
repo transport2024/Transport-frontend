@@ -48,8 +48,10 @@ function Location() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [searched]);
+    if(userId){
+      fetchData();
+    }
+  }, [searched,userId]);
 
  
 

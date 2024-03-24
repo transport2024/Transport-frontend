@@ -31,6 +31,7 @@ function Vehicle() {
   const [exporting, setExporting] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
+  console.log(userId,"userId")
 
   const fetchData = async () => {
     try {
@@ -44,6 +45,12 @@ function Vehicle() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if(userId){
+      fetchData();
+    }
+  }, [searched,userId]);
 
   const handleSubmit = async (value) => {
     if (updateId === "") {
@@ -135,9 +142,7 @@ function Vehicle() {
     } catch (err) {}
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [searched]);
+
 
   const handleEdit = (value) => {
     form.setFieldsValue(value);
