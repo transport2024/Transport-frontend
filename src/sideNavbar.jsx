@@ -7,7 +7,6 @@ import { get, isEmpty } from "lodash";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import Cookies from "js-cookie";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import logo from "./assets/logo.png";
 import { useDispatch } from "react-redux";
 import { changeUservalues } from "./Redux/userSlice";

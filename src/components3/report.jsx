@@ -20,7 +20,6 @@ function Report() {
   const [dateFilters, setDateFilters] = useState("");
   const [exporting, setExporting] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
-  console.log(userId,"userId")
 
   const fetchData = async () => {
     try {
@@ -37,27 +36,25 @@ function Report() {
     }
   }, [userId]);
 
-  console.log(report,"report")
-
  
   
 
   const handleDate = (date) => {
-    console.log("enter into this",date)
+
     if (!date || !date.length) {
       setUserDate([]);
-      return; // Exit the function if no date is provided
+      return; 
     }
   
     const startDate = moment(date[0], dateFormat);
     const endDate = moment(date[1], dateFormat);
   
     const dates = [];
-    let currentDate = startDate.clone(); // Clone the startDate to prevent mutation
+    let currentDate = startDate.clone(); 
   
     while (currentDate <= endDate) {
       dates.push(currentDate.format(dateFormat));
-      currentDate.add(1, "days"); // Use add() to move to the next day
+      currentDate.add(1, "days");
     }
   
     setUserDate(dates);

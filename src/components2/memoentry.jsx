@@ -38,7 +38,6 @@ function Memo() {
   const [filteredVehicle, setFilteredVehicle] = useState([]);
   const [loadingBtn, setLoadingBtn] = useState(false);
   const userId=useSelector((state)=>state.user?.user?.userId)
-  const [autoFillDetails,setautoFillDetails]=useState([])
   const [selectVehicleno,setSelectedVehicleno]=useState("")
 
   const fetchData = async () => {
@@ -55,7 +54,6 @@ function Memo() {
       const result3 = await axios.get(
         `${process.env.REACT_APP_URL}/api/memodetails?userId=${userId}`
       );
-      console.log(result3,"result3")
       setMemoDetails(get(result3, "data.message"));
       setVehicle(get(result2, "data.message"));
     } catch (err) {
@@ -80,7 +78,7 @@ function Memo() {
           date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
-          driverwhatsappno: value.driverwhatsappno,
+          whatsappno: value.whatsappno,
           userId
         };
         await axios.post(`${process.env.REACT_APP_URL}/api/memo`, formData);
@@ -90,6 +88,7 @@ function Memo() {
         });
         setOpen(false);
         form.setFieldValue([]);
+        setSelectedVehicleno([])
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -106,7 +105,7 @@ function Memo() {
           date: moment(value.date).format("DD-MM-YYYY"),
           vehicleno: value.vehicleno,
           driverphone: value.driverphone,
-          driverwhatsappno: value.driverwhatsappno,
+          whatsappno: value.whatsappno,
         };
         await axios.put(
           `${process.env.REACT_APP_URL}/api/memo/${updateId}`,
@@ -119,6 +118,7 @@ function Memo() {
         setOpen(false);
         form.setFieldValue([]);
         setUpdateId("");
+        setSelectedVehicleno([])
       } catch (err) {
         notification.error({
           message: "Something went wrong",
@@ -183,7 +183,7 @@ function Memo() {
       });
     });
 
-    console.log(selectVehicleno,"selectVehicleno")
+  
 
   const exportToExcel = () => {
     if (!exporting) {
@@ -192,7 +192,7 @@ function Memo() {
         date: memo.date,
         drivername: memo.drivername,
         driverphone: memo.driverphone,
-        driverwhatsappno: memo.driverwhatsappno,
+        whatsappno: memo.whatsappno,
         vehicleno: memo.vehicleno,
       }));
 
@@ -252,8 +252,8 @@ function Memo() {
       title: (
         <h1 className="!text-[12px] lg:!text-[16px]">Driver WhatsappNo</h1>
       ),
-      dataIndex: "driverwhatsappno",
-      key: "driverwhatsappno",
+      dataIndex: "whatsappno",
+      key: "whatsappno",
       render: (text) => (
         <div className="text-[10px] lg:!text-[16px]">{text}</div>
       ),
@@ -306,7 +306,6 @@ const seletedVehicle=vehicle.filter((veh)=>{
   return veh.vehicleno===selectVehicleno
 })[0]
 
-console.log(seletedVehicle,"seletedVehicle")
 form.setFieldsValue(seletedVehicle)
   },[selectVehicleno])
 
@@ -372,11 +371,13 @@ form.setFieldsValue(seletedVehicle)
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
+          setSelectedVehicleno([])
         }}
         onClose={() => {
           setOpen(!open);
           form.setFieldValue([]);
           setUpdateId("");
+          setSelectedVehicleno([])
         }}
         footer={false}
       >
@@ -445,6 +446,10 @@ form.setFieldsValue(seletedVehicle)
                 required: true,
                 message: "Please input your driver phone!",
               },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
+              },
             ]}
           >
             <Input type="text" size="large" placeholder="Driver phone" />
@@ -461,6 +466,10 @@ form.setFieldsValue(seletedVehicle)
               {
                 required: true,
                 message: "Please input your driver whtasapp number!",
+              },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
               },
             ]}
           >

@@ -3,14 +3,13 @@
   import { Statistic, Table, Skeleton } from "antd";
   import CountUp from "react-countup";
   import axios from "axios";
-  import { get,isEmpty, result } from "lodash";
+  import { get } from "lodash";
   import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
   import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
   import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
   import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
   import { changeUservalues } from "./Redux/userSlice";
   import { useDispatch, useSelector } from "react-redux";
-  import { useNavigate } from "react-router";
   import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
   import moment from "moment";
 
@@ -24,9 +23,7 @@
     const [loading, setLoading] = useState(false);
     const [memo, setMemo] = useState([]);
     const dispatch=useDispatch()
-    const navigate=useNavigate()
     const userId=useSelector((state)=>state.user?.user?.userId)
-    console.log(userId,"suerid")
 
 
     const fetchData = async () => {
@@ -37,7 +34,6 @@
             `${process.env.REACT_APP_URL}/api/consignor?search=${""}&userId=${userId}`
           );
 
-          console.log(result1.data.message,"result")
           const result2 = await axios.get(
             `${process.env.REACT_APP_URL}/api/consignee?search=${""}&userId=${userId}`
           );
@@ -47,13 +43,12 @@
           const result4 = await axios.get(
             `${process.env.REACT_APP_URL}/api/broker?search=${""}&userId=${userId}`
           );
-          console.log("enter")
+    
           const result5 = await axios.get(
             `${process.env.REACT_APP_URL}/api/memo?userId=${userId}`
           );
-          console.log("enterrr")
+       
           setConsignor(get(result1, "data.message"));
-          console.log("true enter")
           setConsignee(get(result2, "data.message"));
           setVehicle(get(result3, "data.message"));
           setBroker(get(result4, "data.message"));
@@ -196,8 +191,8 @@
       },
       {
         title: <p className="!text-[12px] lg:text-[18px]">Driver Whatsappno</p>,
-        dataIndex: "driverwhatsappno",
-        key: "driverwhatsappno",
+        dataIndex: "whatsappno",
+        key: "whatsappno",
         render: (text) => <div className="!text-[10px] lg:!text-[16px]">{text}</div>,
       },
     ];
@@ -210,8 +205,6 @@
       { name: "Consignor", value: consignorCount||0 },
       { name: "Consignee", value: consigneeCount||0 },
     ];
-
-    console.log(lastFiveDaysVehicleEntriesCount(),"lastFiveDaysVehicleEntriesCount",vehicle)
 
     return (
       <div className="pt-[12vh] !w-[100vw] lg:!w-[82vw] z-20">
@@ -273,7 +266,7 @@
         <div className="flex flex-wrap">
       <div className="flex flex-col items-center justify-center">
         <h1 className="pl-2 pt-10">Last Five Days Memo Entries</h1>
-        <BarChart width={400} height={300} data={lastFiveDaysMemoEntriesCount()}>
+        <BarChart width={380} height={300} data={lastFiveDaysMemoEntriesCount()}>
         <CartesianGrid stroke="blue"  />
         <XAxis dataKey="date" />
         <YAxis />
@@ -284,7 +277,7 @@
       </div>
       <div className="flex flex-col items-center justify-center">
   <h1 className="pl-2 pt-10">Last Five Days Vehicle Entries</h1>
-  <LineChart width={400} height={300} data={lastFiveDaysVehicleEntriesCount()}>
+  <LineChart width={380} height={300} data={lastFiveDaysVehicleEntriesCount()}>
     <CartesianGrid stroke="blue"  />
     <XAxis dataKey="date" />
     <YAxis />

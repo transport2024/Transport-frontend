@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Image, Input, notification } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ArrowRightAltOutlined } from "@mui/icons-material";
-import { get, isEmpty } from "lodash";
+import {  isEmpty } from "lodash";
 import { changeUservalues } from "../Redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function LoginAndRegistration() {
   const [login, setLogin] = useState(true);
-  const [inputs, setInputs] = useState({});
   const [form] = Form.useForm();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -17,7 +15,7 @@ function LoginAndRegistration() {
   const navigate = useNavigate();
 
   const handleFinish = async (values) => {
-    console.log(values);
+
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_URL}/api/user/login`,
@@ -29,7 +27,6 @@ function LoginAndRegistration() {
       notification.success({message:"lets continue"})
     } catch (err) {
       // notification.error({ message: err?.response?.data });
-      console.log(err.response.data.message);
       if (err.response.data.message !== "" || null || undefined) {
         notification.error({ message: err.response.data.message });
       }

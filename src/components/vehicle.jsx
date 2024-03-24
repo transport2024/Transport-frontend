@@ -403,6 +403,10 @@ function Vehicle() {
                 required: true,
                 message: "Please input your driver phone!",
               },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
+              },
             ]}
           >
             <Input type="text" size="large" placeholder="Enter phone" />
@@ -415,6 +419,10 @@ function Vehicle() {
               {
                 required: true,
                 message: "Please input your whatsapp no!",
+              },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
               },
             ]}
           >

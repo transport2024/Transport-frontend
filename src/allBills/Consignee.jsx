@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Bill from "../assets/bill.jpg";
 import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
-import image from "../assets/balaji.png";
+import image from "../assets/rock.jpeg";
 import { Image } from "antd";
 
 function Consignee(props) {
@@ -350,7 +349,7 @@ function Consignee(props) {
               {/* <td className="border-r-2"></td> */}
             </tr>
             <tr className="border-t-2 text-center">
-              <td colSpan={6}>Total Content Here</td>
+              <td colSpan={6}><span className="text-red-800 text-[10px]">Developed by R&J developers</span></td>
             </tr>
           </tbody>
         </table>

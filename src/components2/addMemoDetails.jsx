@@ -485,6 +485,10 @@ function AddMemoDetails() {
                 required: true,
                 message: "Please input your driver phone!",
               },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
+              },
             ]}
           >
             <Input type="text" size="large" placeholder="Add driver phone..."/>
@@ -496,11 +500,15 @@ function AddMemoDetails() {
                 Driver Whatsapp Number
               </p>
             }
-            name="driverwhatsappno"
+            name="whatsappno"
             rules={[
               {
                 required: true,
                 message: "Please input your driver whtasapp number!",
+              },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
               },
             ]}
           >

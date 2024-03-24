@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import image from "../assets/balaji.png";
+import image from "../assets/rock.jpeg";
 import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
@@ -275,9 +275,12 @@ function VehicleBills() {
                   <p>No prohibited goods or articles are included and that is fully aware or and accepts the conditions of carries given on the back side of the consignment receipt.  <span className="uppercase pl-2 p-2 mt-2 text-red-600 font-bold text-[12px]">Good's booked under owner's risk</span></p>
                   </div>
                 </td>
-                <td className="border-r-2" >Total</td>
+                {/* <td className="border-r-2" >Total</td> */}
                
               </tr>
+              <tr className="border-t-2 text-center">
+              <td colSpan={6}><span className="text-red-800 text-[10px]">Developed by R&J developers</span></td>
+            </tr>
             </tbody>
           </table>
         </div>

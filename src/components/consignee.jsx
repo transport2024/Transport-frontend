@@ -338,6 +338,10 @@ function Consignee() {
                 required: true,
                 message: "Please input your phone!",
               },
+              {
+                pattern: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
+              },
             ]}
           >
             <Input type="text" size="large" placeholder="Enter phone" />
