@@ -207,12 +207,10 @@ function Memo() {
   const columns = [
     {
       title: <h1 className="!text-[12px] lg:!text-[16px]">GC No</h1>,
-      dataIndex: "serialNumber",
-      key: "serialNumber",
+      dataIndex: "gcno",
+      key: "gcno",
       render: (text, record, index) => {
-        // Calculate the GC No based on the current page and index
-        const gcNo = (currentPage - 1) * 5 + index + 121;
-        return <div className="text-[10px] lg:text-[12px]">{gcNo}</div>;
+        return <div className="text-[10px] lg:text-[12px]">{text}</div>;
       },
     },
 

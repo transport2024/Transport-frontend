@@ -156,7 +156,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "38vw", borderColor: "black" }}
-              defaultValue={filterDatas.consignor}
+              defaultValue={filterDatas?.consignor}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
@@ -165,7 +165,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "36vw", borderColor: "black" }}
-              defaultValue={filterDatas.gctin2}
+              defaultValue={filterDatas?.gctin2}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
@@ -177,7 +177,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "38vw", borderColor: "black" }}
-              defaultValue={filterDatas.consignee}
+              defaultValue={filterDatas?.consignee}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
             </span>
@@ -186,7 +186,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "36vw", borderColor: "black" }}
-              defaultValue={filterDatas.gctin2}
+              defaultValue={filterDatas?.gctin2}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
             </span>

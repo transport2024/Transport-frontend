@@ -12,6 +12,7 @@ function Conisgnor(props) {
   const [filterMemo, setFilterMemo] = useState([]);
   const [filterConsignor, setfilterConsignor] = useState([]);
   const [filterConsignee, setFilterConsignee] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     setFilterDatas(
@@ -67,8 +68,21 @@ function Conisgnor(props) {
     consignee,
   ]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // E 
+
   return (
-    <div className="bg-white w-screen pt-2 h-[100vh] relative" style={{zIndex:999}}>
+    <div className={`bg-white w-screen pt-2 h-[100vh] relative" style={{zIndex:999}}`}>
       <div className="w-[98vw] border m-auto border-black h:[88vh] lg:h-[100vh] ">
         <div className="flex  pl-10 pt-10 text-[14px]">
           <div>

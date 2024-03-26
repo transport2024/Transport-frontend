@@ -150,7 +150,7 @@ setFilterConsignee(
             <input
               type="text"
               style={{ width: "38vw", borderColor: "black" }}
-              defaultValue={inputs.consignor}
+              defaultValue={inputs?.consignor}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
