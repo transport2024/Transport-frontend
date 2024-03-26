@@ -210,7 +210,7 @@ function Conisgnor(props) {
                   colSpan={3}
                   className="text-[14px] font-bold border-r-2 text-red-600 py-1"
                 >
-                  INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. A/C No. 7669590442
+                  INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. <br/>A/C No. 7669590442
                 </td>
                 <td colSpan={3} className="text-[14px]  font-bold text-red-600 py-1">
                   IFSC Code: IDIB000P092
@@ -341,10 +341,10 @@ function Conisgnor(props) {
                 </td>
               </tr>
               <tr className="border-t-2 text-center">
-                <td className="border-r-2" colSpan={1}>
+                <td className="border-r-2 text-[13px]" colSpan={1}>
                   PAY NO.:BBQPA7235R
                 </td>
-                <td className="border-r-2" colSpan={3}>
+                <td className="border-r-2 text-[13px]" colSpan={3} >
                   E-WAY BILL REG.NO. 33BBQPA7235R1Z5
                 </td>
                 <td colSpan={2} rowSpan={2}>
