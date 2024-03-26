@@ -93,18 +93,18 @@ function VehicleBills() {
               No.4/181,Plot No. 8,1st Floor Sri Ram Tower,Thuraiyur Road,Anna
               Nagar,NAMAKKAL-637 002
             </p>
-            <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreekl@gmail.com</p>
+            <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreenkl@gmail.com</p>
           </div>
         </div>
         <div>
           <div className="flex items-center  gap-20">
             <span className="flex pl-8 !mt-[-5px]">
-              <span className=""><pre> Lorry no.</pre></span>
+              <span><pre> Lorry no.</pre></span>
               <input
                 type="text"
                 style={{ width: "25vw", borderColor: "black" }}
                 defaultValue={filterDatas?.vehicleno}
-                className="outline-none pl-10 !bg-transparent border-b-2"
+                className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
               />
             </span>
             <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
@@ -150,51 +150,76 @@ function VehicleBills() {
             </span>
           </div>
           <div className="flex flex-col pl-10 justify-center gap-2 pt-2">
-            <span className="flex">
-              <span className="">Consignor:</span>
-              <input
-                type="text"
-                style={{ width: "80vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
-                className="outline-none pl-10 !bg-transparent border-b-2"
-              />
+          <span className="flex gap-2">
+           <span>
+           <span className="">Consignor:</span>
+            <input
+              type="text"
+              style={{ width: "38vw", borderColor: "black" }}
+              defaultValue={filterDatas.consignor}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
+           </span>
+           <span>
+           <span className="">GSTIN:</span>
+            <input
+              type="text"
+              style={{ width: "36vw", borderColor: "black" }}
+              defaultValue={filterDatas.gctin2}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
+           </span>
+           
+          </span>
+          <span className="flex gap-2">
+            <span>
+            <span className="">Consignee:</span>
+            <input
+              type="text"
+              style={{ width: "38vw", borderColor: "black" }}
+              defaultValue={filterDatas.consignee}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
             </span>
-            <span className="flex">
-              <span className="">Consignee:</span>
-              <input
-                type="text"
-                style={{ width: "80vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
-                className="outline-none pl-10 !bg-transparent border-b-2"
-              />
+            <span>
+            <span className="">GSTIN:</span>
+            <input
+              type="text"
+              style={{ width: "36vw", borderColor: "black" }}
+              defaultValue={filterDatas.gctin2}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
             </span>
-            <span className="flex">
-              <span className="">Delivery at:</span>
-              <input
-                type="text"
-                style={{ width: "25vw", borderColor: "black" }}
-                // defaultValue={inputs.lorryno}
-                className="outline-none pl-10 !bg-transparent border-b-2"
-              />
-            </span>
-          </div>
+          </span>
+          <span className="flex">
+           <span>
+           <span className="">Delivery at:</span>
+            <input
+              type="text"
+              style={{ width: "25vw", borderColor: "black" }}
+              // defaultValue={inputs.lorryno}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
+          </span>
+           </span>
+        </div>
         </div>
 
         <div className="pt-5">
           <table className="border-t-2  m-auto w-[98vw]">
             <thead>
               <tr className="w-[98vw] text-center">
-                <td colSpan={3} className="text-[12px] border-r-2 text-red-600 py-1">
+                <td colSpan={3} className="text-[14px] font-bold border-r-2 text-red-600 py-1">
                   INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. A/C No. 7669590442
                 </td>
-                <td colSpan={3} className="text-[12px] text-red-600 py-1">
+                <td colSpan={3} className="text-[12px] font-bold text-red-600 py-1">
                   IFSC Code: IDIB000P092
                 </td>
               </tr>
             </thead>
             <tbody className="border-t-2 w-[98vw]">
               <tr className="text-center">
-                <td className="border-r-2">No. of Articals</td>
+                <td className="border-r-2 w-[10vw]">No. of Articles</td>
                 <td className="border-r-2">
                   <p>Description of Goods</p>
                   <span>(Said to contain as it where is)</span>

@@ -63,8 +63,8 @@ function Driver(props) {
 
 
   return (
-    <div className="bg-white w-screen pt-2 h-[90vh] lg:h-[100vh] relative" style={{zIndex:999}}>
-    <div className="w-[98vw] border m-auto border-black !h:[88vh] lg:!h-[98vh] ">
+    <div className="bg-white w-screen pt-2 h-[100vh] relative" style={{zIndex:999}}>
+    <div className="w-[98vw] border m-auto border-black h:[88vh] lg:h-[100vh] ">
       <div className="flex  pl-10 pt-10 text-[14px]">
         <div>
           <Image src={image} width={90} alt="logo" />
@@ -83,7 +83,7 @@ function Driver(props) {
             No.4/181,Plot No. 8,1st Floor Sri Ram Tower,Thuraiyur Road,Anna
             Nagar,NAMAKKAL-637 002
           </p>
-          <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreekl@gmail.com</p>
+          <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreenkl@gmail.com</p>
         </div>
       </div>
       <div>
@@ -96,13 +96,13 @@ function Driver(props) {
               type="text"
               style={{ width: "25vw", borderColor: "black" }}
               defaultValue={inputs?.lorryno}
-              className="outline-none pl-10 !bg-transparent border-b-2"
+              className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
             />
           </span>
           <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
             <pre> DRIVER COPY</pre>
           </span>
-          <span className="!ml-[-55px] flex">
+          <span className="!ml-[-50px] flex">
             <span>L.R.No.</span>
             <input
               type="text"
@@ -142,26 +142,50 @@ function Driver(props) {
           </span>
         </div>
         <div className="flex flex-col pl-10 justify-center gap-2 pt-2">
-          <span className="flex">
-            <span className="">Consignor:</span>
+          <span className="flex gap-2">
+           <span>
+           <span className="">Consignor:</span>
             <input
               type="text"
-              style={{ width: "80vw", borderColor: "black" }}
+              style={{ width: "38vw", borderColor: "black" }}
               defaultValue={inputs.consignor}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
+           </span>
+           <span>
+           <span className="">GSTIN:</span>
+            <input
+              type="text"
+              style={{ width: "36vw", borderColor: "black" }}
+              defaultValue={inputs.gctin2}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
+           </span>
+           
           </span>
-          <span className="flex">
+          <span className="flex gap-2">
+            <span>
             <span className="">Consignee:</span>
             <input
               type="text"
-              style={{ width: "80vw", borderColor: "black" }}
+              style={{ width: "38vw", borderColor: "black" }}
               defaultValue={inputs.consignee}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
+            </span>
+            <span>
+            <span className="">GSTIN:</span>
+            <input
+              type="text"
+              style={{ width: "36vw", borderColor: "black" }}
+              defaultValue={inputs.gctin2}
+              className="outline-none pl-10 !bg-transparent border-b-2"
+            />
+            </span>
           </span>
           <span className="flex">
-            <span className="">Delivery at:</span>
+           <span>
+           <span className="">Delivery at:</span>
             <input
               type="text"
               style={{ width: "25vw", borderColor: "black" }}
@@ -169,6 +193,7 @@ function Driver(props) {
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
+           </span>
         </div>
       </div>
 
@@ -178,18 +203,18 @@ function Driver(props) {
             <tr className="w-[98vw] text-center">
               <td
                 colSpan={3}
-                className="text-[12px] border-r-2 text-red-600 py-1"
+                className="text-[14px] font-bold border-r-2 text-red-600 py-1"
               >
                 INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. A/C No. 7669590442
               </td>
-              <td colSpan={3} className="text-[12px] text-red-600 py-1">
+              <td colSpan={3} className="text-[14px]  font-bold text-red-600 py-1">
                 IFSC Code: IDIB000P092
               </td>
             </tr>
           </thead>
           <tbody className="border-t-2 w-[98vw]">
             <tr className="text-center">
-              <td className="border-r-2">No. of Articals</td>
+              <td className="border-r-2 w-[10vw]">No. of Articles</td>
               <td className="border-r-2">
                 <p>Description of Goods</p>
                 <span>(Said to contain as it where is)</span>
@@ -235,7 +260,7 @@ function Driver(props) {
                     inputs.accountpaid === "fixed" ? (
                       <span className="w-[30vw] text-balck">
                         Please Pay Lorry Freight Amount In Favour Of
-                        <br /> Jai Balaji Transport Service Account
+                        <br /> Rock Fort Roadways Service Account
                       </span>
                     ) : (
                       <p>{inputs.accountpaid}</p>
@@ -350,7 +375,9 @@ function Driver(props) {
               {/* <td className="border-r-2"></td> */}
             </tr>
             <tr className="border-t-2 text-center">
-              <td colSpan={6}><span className="text-red-800 text-[10px]">Developed by R&J developers</span></td>
+              <td colSpan={6}>
+                <span className="text-red-800 text-[10px]">Developed by R&J developers</span>
+              </td>
             </tr>
           </tbody>
         </table>
