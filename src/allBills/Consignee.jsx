@@ -63,7 +63,7 @@ function Consignee(props) {
 
 
   return (
-    <div className="bg-white w-screen pt-[10px] h-[89vh] relative" style={{zIndex:999}}>
+    <div className="bg-white w-screen pt-[30px] h-[89vh] relative" style={{zIndex:999}}>
       <div className="w-[98vw] border m-auto border-black h:[75vh]">
         <div className="flex  pl-10 pt-3 text-[14px]">
           <div>
