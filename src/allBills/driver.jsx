@@ -65,10 +65,10 @@ function Driver(props) {
 
   return (
     <div
-      className="bg-white w-screen pt-2 h-[95vh] relative"
+      className="bg-white w-screen pt-2 !h-[70vh] relative"
       style={{ zIndex: 999 }}
     >
-      <div className="w-[98vw] border m-auto border-black h:[88vh] ">
+      <div className="w-[98vw] border m-auto border-black h:[70vh] ">
         <div className="flex  pl-10 pt-5 text-[14px]">
           <div>
             <Image src={image} preview={false} width={90} alt="logo" />
@@ -77,7 +77,7 @@ function Driver(props) {
             <p className="border-b-2 border-black">
               SUBJECT TO <strong>NAMAKKAL</strong> JURISDICTION
             </p>
-            <h1 className="text-red-800 text-[36px] font-bold">
+            <h1 className="text-red-800 text-[30px] font-bold">
               ROCK FORT ROADWAYS
             </h1>
             <p>
@@ -336,9 +336,9 @@ function Driver(props) {
                 </td>
                 <td className="border-r-2">Total</td>
                 <td>
-                  {" "}
-                  {filterDatas?.lramount &&
-                    (filterDatas?.lramount / inputs?.bales) * inputs?.bales}
+                {filterDatas?.memomethod === "No"
+                  ? "As per contract"
+                  : filterDatas?.lramount/inputs?.bales*inputs?.bales}
                 </td>
               </tr>
               <tr className="border-t-2 text-center">
