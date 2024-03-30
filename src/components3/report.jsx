@@ -64,7 +64,6 @@ function Report() {
     }
   };
  
-console.log(userDates,"userDatess")
 
   
   useEffect(() => {
@@ -238,8 +237,6 @@ console.log(userDates,"userDatess")
         );
       })
       .flat();
-
-      console.log(dateFilters,"datefilters")
 
   return (
     <div className="flex pt-[12vh]">
