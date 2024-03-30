@@ -73,9 +73,9 @@ function VehicleBills() {
   }, [loading]);
 
   return (
-    <div className="bg-white w-screen pt-2 !h-[80vh] relative" style={{zIndex:999}}>
-    <div className="w-[98vw] border m-auto border-black !h:[80vh]">
-      <div className="flex  pl-10 pt-5 text-[14px]">
+    <div className="bg-white w-screen pt-2 !h-[70vh] relative" style={{zIndex:999}}>
+    <div className="w-[98vw] border m-auto border-black !h:[70vh]">
+      <div className="flex  pl-10 pt-2 text-[14px]">
         <div>
           <Image src={image} preview={false} width={90} alt="logo" />
         </div>
@@ -83,7 +83,7 @@ function VehicleBills() {
           <p className="border-b-2 border-black">
             SUBJECT TO <strong>NAMAKKAL</strong> JURISDICTION
           </p>
-          <h1 className="text-red-800 text-[36px] font-bold">
+          <h1 className="text-red-800 text-[30px] font-bold">
             ROCK FORT ROADWAYS
           </h1>
           <p>
@@ -105,7 +105,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "25vw", borderColor: "black" }}
-              defaultValue={filterDatas?.lorryno}
+              defaultValue={vehicleno}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
@@ -117,7 +117,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "10vw", borderColor: "black" }}
-              defaultValue={filterDatas?.gcno}
+              defaultValue={gcNo}
               className="outline-none pl-2 !bg-transparent border-non3"
             />
           </span>
@@ -144,7 +144,7 @@ function VehicleBills() {
             <input
               type="text"
               style={{ width: "18vw", borderColor: "black" }}
-              defaultValue={filterDatas?.date}
+              defaultValue={date}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
           </span>
@@ -201,7 +201,7 @@ function VehicleBills() {
         </div>
       </div>
 
-      <div className="pt-5">
+      <div className="pt-3">
         <table className="border-t-2  m-auto w-[98vw]">
           <thead>
             <tr className="w-[98vw] text-center">
@@ -357,9 +357,9 @@ function VehicleBills() {
     </div>
     <div
       style={{
-        fontSize: "15vw",
+        fontSize: "12vw",
         position: "absolute",
-        top: "38vh",
+        top: "48vh",
         color: "#E0E0E0",
         fontWeight: 200,
         zIndex: -1,
