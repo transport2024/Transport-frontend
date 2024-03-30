@@ -63,9 +63,9 @@ function Consignee(props) {
 
 
   return (
-    <div className="bg-white w-screen !pt-[40px] h-[100vh] relative" style={{zIndex:999}}>
-      <div className="w-[98vw] border m-auto border-black h:[75vh]">
-        <div className="flex  pl-10 pt-3 text-[14px]">
+    <div className="bg-white w-screen !pt-[2px] h-[100vh] relative" style={{zIndex:999}}>
+      <div className="w-[98vw] border m-auto border-black h:[85vh]">
+        <div className="flex  pl-10 pt-5 text-[14px]">
           <div>
             <Image src={image} preview={false} width={90} alt="logo" />
           </div>
@@ -73,7 +73,7 @@ function Consignee(props) {
             <p className="border-b-2 border-black">
               SUBJECT TO <strong>NAMAKKAL</strong> JURISDICTION
             </p>
-            <h1 className="text-red-800 text-[30px] font-bold">
+            <h1 className="text-red-800 text-[36px] font-bold">
               ROCK FORT ROADWAYS
             </h1>
             <p>
