@@ -70,12 +70,12 @@ function SideNavbar() {
           <h1 className="text-[12px] lg:text-xl xsm:pl-1 lg:pl-0 flex items-center justify-center">
             <Image src={logo} className="!w-16 !h-12 lg:!w-29 lg:!h-17" />
           </h1>
-          <div className="hidden lg:block">
+          <div className="hidden !text-white lg:block font-normal">
             {location.pathname.split("/")[1]
               ? location.pathname.split("/")[1]
               : "Dashboard"}
           </div>
-          <div className="text-[12px] lg:text-xl">
+          <div className="text-[12px] !text-white font-normal lg:text-xl">
             Vehicle Transport Management System
           </div>
           <div className="mr-4 cursor-pointer">

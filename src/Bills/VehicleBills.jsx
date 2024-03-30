@@ -238,7 +238,6 @@ function VehicleBills() {
               </td>
               <td className="border-r-2"></td>
               <td className="border-r-2" rowSpan={6}>
-                As per bill
               </td>
               <td className="border-r-2" rowSpan={6}>
                   
@@ -249,7 +248,6 @@ function VehicleBills() {
               <td rowSpan={7} className="border-l-2">
                 <div className="-rotate-90 flex flex-wrap  gap-1 w-[18vw] text-[13px]">
                   <p className="text-red-600 flex pl-8">
-                    Note:
                   </p>
                   <span className="uppercase">
                    
@@ -261,7 +259,7 @@ function VehicleBills() {
               <td className="border-r-2">
                 {" "}
                 <span className="text-red-800 pl-2">
-                  Lot No. :&nbsp;&nbsp;&nbsp;
+
                   <span className="text-black"></span>
                 </span>
               </td>
@@ -274,7 +272,7 @@ function VehicleBills() {
             <tr className="h-[3vh]">
               <td className="border-r-2">
                 <span className="text-red-800 pl-2">
-                  Inv. No. :&nbsp;&nbsp;&nbsp;
+
                   <span className="text-black"></span>
                 </span>
               </td>
@@ -282,7 +280,6 @@ function VehicleBills() {
             <tr className=" h-[3vh]">
               <td className="border-r-2">
                 <span className="text-red-800 pl-2">
-                  Value of Goods. :&nbsp;&nbsp;&nbsp;
                   <span className="text-black"></span>
                 </span>
               </td>
@@ -290,12 +287,10 @@ function VehicleBills() {
             <tr className=" h-[3vh]">
               <td className="border-r-2">
                 <span className="text-red-800 pl-2">
-                  Quality:&nbsp;&nbsp;&nbsp;
                   <span className="text-black"></span>
                 </span>
                 <br />
                 <span className="text-red-800 pl-2">
-                  P Marks:&nbsp;&nbsp;&nbsp;
                   <span className="text-black"></span>
                 </span>
               </td>
