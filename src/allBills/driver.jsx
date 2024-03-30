@@ -65,7 +65,7 @@ function Driver(props) {
 
   return (
     <div
-      className="bg-white w-screen pt-2 !h-[89vh] relative"
+      className="bg-white w-screen pt-10 !h-[89vh] relative"
       style={{ zIndex: 999 }}
     >
       <div className="w-[98vw] border m-auto border-black h:[75vh] ">
