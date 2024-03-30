@@ -69,7 +69,7 @@ function Driver(props) {
       style={{ zIndex: 999 }}
     >
       <div className="w-[98vw] border m-auto border-black h:[75vh] ">
-        <div className="flex  pl-10 pt-3 text-[14px]">
+        <div className="flex  pl-10 pt-2 text-[14px]">
           <div>
             <Image src={image} preview={false} width={90} alt="logo" />
           </div>
