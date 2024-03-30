@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import image from "../assets/rock.jpeg";
+import sign from "../assets/sign.png";
 import { Image } from "antd";
 
 function VehicleCopy(props) {
@@ -65,11 +66,11 @@ setFilterConsignee(
  
 
   return (
-    <div className="bg-white w-screen pt-2 h-[100vh] relative" style={{zIndex:999}}>
-    <div className="w-[98vw] border m-auto border-black h:[88vh] lg:h-[100vh] ">
-      <div className="flex  pl-10 pt-10 text-[14px]">
+    <div className="bg-white w-screen pt-2 h-[95vh] relative" style={{zIndex:999}}>
+    <div className="w-[98vw] border m-auto border-black h:[88vh]">
+      <div className="flex  pl-10 pt-5 text-[14px]">
         <div>
-          <Image src={image} width={90} alt="logo" />
+          <Image src={image} preview={false} width={90} alt="logo" />
         </div>
         <div className="flex flex-col items-center w-[85%]">
           <p className="border-b-2 border-black">
@@ -104,7 +105,7 @@ setFilterConsignee(
           <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
             <pre> ACCOUNT COPY</pre>
           </span>
-          <span className="!ml-[-50px] flex">
+          <span className="!pl-[5.8vw] flex">
             <span>L.R.No.</span>
             <input
               type="text"
@@ -239,21 +240,21 @@ setFilterConsignee(
                 As per bill
               </td>
               <td className="border-r-2" rowSpan={6}>
-                {" "}
-                {filterDatas && inputs && inputs.bales && inputs.bales !== 0
-                  ? inputs.accountpaid === "fixed"
+                  {filterDatas?.memomethod === "No"
+                    ? "As per contract"
+                    : inputs.accountpaid === "fixed"
                     ? "Fixed"
-                    : filterDatas.lramount / inputs.bales + "*" + inputs.bales
-                  : ""}
-              </td>
-              <td className="border-r-2" rowSpan={6}>
-                {" "}
-                {filterDatas?.lramount &&
-                  (filterDatas?.lramount / inputs?.bales) * inputs?.bales}
-              </td>
+                    : filterDatas?.lramount / inputs.bales + "*" + inputs.bales}
+                </td>
+                <td className="border-r-2" rowSpan={6}>
+
+                      {filterDatas?.memomethod === "No"
+                  ? "As per contract"
+                  : filterDatas?.lramount/inputs?.bales*inputs?.bales}
+                </td>
               <td rowSpan={7} className="border-l-2">
                 <div className="-rotate-90 flex flex-wrap  gap-1 w-[18vw] text-[13px]">
-                  <p className="text-red-600 flex items-center justify-center pl-16">
+                  <p className="text-red-600 flex pl-8">
                     Note:
                   </p>
                   <span className="uppercase">
@@ -339,20 +340,23 @@ setFilterConsignee(
             </tr>
             <tr className="border-t-2 text-center">
               <td className="border-r-2" colSpan={1}>
-                PAY NO.:BBQPA7235R
+                PAN NO.:BBQPA7235R
               </td>
               <td className="border-r-2" colSpan={3}>
                 E-WAY BILL REG.NO. 33BBQPA7235R1Z5
               </td>
               <td colSpan={2} rowSpan={2}>
-                <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-4">
                   <p className="text-red-600">
                     For{" "}
                     <span className="uppercase font-semibold">
                       Rockport roadways
                     </span>
                   </p>
-                  <p>Booking Clerk</p>
+                  <p className="flex flex-col items-center justify-center">
+                  <Image src={sign} preview={false} width={100} className="text-center"/>
+                    <span>Booking Clerk</span>
+                    </p>
                 </div>
               </td>
             </tr>
@@ -375,11 +379,6 @@ setFilterConsignee(
                 </div>
               </td>
               {/* <td className="border-r-2"></td> */}
-            </tr>
-            <tr className="border-t-2 text-center">
-              <td colSpan={6}>
-                <span className="text-red-800 text-[10px]">Developed by R&J developers</span>
-              </td>
             </tr>
           </tbody>
         </table>

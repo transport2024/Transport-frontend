@@ -40,27 +40,31 @@ function Report() {
   
 
   const handleDate = (date) => {
-
     if (!date || !date.length) {
       setUserDate([]);
-      return; 
+      date = [];
     }
-  
-    const startDate = moment(date[0], dateFormat);
-    const endDate = moment(date[1], dateFormat);
-  
-    const dates = [];
-    let currentDate = startDate.clone(); 
-  
-    while (currentDate <= endDate) {
-      dates.push(currentDate.format(dateFormat));
-      currentDate.add(1, "days");
-    }
-  
-    setUserDate(dates);
-  };
-  
 
+    const startDate = moment(
+      `${date[0]?.$D} - ${date[0]?.$M + 1} - ${date[0]?.$y} -`,
+      "DD-MM-YYYY"
+    );
+    const endDate = moment(
+      `${date[1]?.$D} - ${date[1]?.$M + 1} - ${date[1]?.$y} -`,
+      "DD-MM-YYYY"
+    );
+
+    const dates = [];
+    let currentDate = startDate;
+
+    while (currentDate <= endDate) {
+      dates.push(currentDate.format("DD-MM-YYYY"));
+      setUserDate(dates);
+      currentDate = currentDate.clone().add(1, "days");
+    }
+  };
+ 
+console.log(userDates,"userDatess")
 
   
   useEffect(() => {
@@ -234,6 +238,8 @@ function Report() {
         );
       })
       .flat();
+
+      console.log(dateFilters,"datefilters")
 
   return (
     <div className="flex pt-[12vh]">
