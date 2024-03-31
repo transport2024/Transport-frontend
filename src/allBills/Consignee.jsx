@@ -337,7 +337,7 @@ function Consignee(props) {
               </tr>
               <tr className="border-t-2 text-center">
                 <td className="border-r-2" colSpan={1}>
-                  PAY NO.:BBQPA7235R
+                  PAN NO.:BBQPA7235R
                 </td>
                 <td className="border-r-2" colSpan={3}>
                   E-WAY BILL REG.NO. 33BBQPA7235R1Z5
