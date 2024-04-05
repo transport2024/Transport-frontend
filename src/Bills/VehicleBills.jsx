@@ -300,9 +300,8 @@ function VehicleBills() {
               <td className="border-r-2" colSpan={3}>
                 <div className="grid grid-cols-2 uppercase text-[14px] font-bold">
                   <p>Goods to be insured by party</p>
-                  <p>Director/door delivery</p>
-                  <p>GST Payable By &nbsp;&nbsp;&nbsp;&nbsp;consignor</p>
-                  <p>Consignee</p>
+                  <p>Direct/door delivery</p>
+                  <p>GST Payable By &nbsp;&nbsp;&nbsp;&nbsp;consignor/Consignee</p>
                 </div>
               </td>
               <td className="border-r-2">Total</td>
