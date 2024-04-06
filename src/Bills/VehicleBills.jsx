@@ -83,7 +83,7 @@ function VehicleBills() {
           <p className="border-b-2 border-black">
             SUBJECT TO <strong>NAMAKKAL</strong> JURISDICTION
           </p>
-          <h1 className="text-green-800 text-[36px] font-bold">
+          <h1 className="text-blue-800 text-[36px] font-bold">
             JAI BALAJI ROADWAYS
           </h1>
           <p>
@@ -109,7 +109,7 @@ function VehicleBills() {
               className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
             />
           </span>
-          <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
+          <span className="text-blue-800 w-[140px] underline tracking-wider text-[14px] font-bold">
             <pre> ACCOUNT COPY</pre>
           </span>
           <span className="!pl-[5.8vw] flex">
@@ -197,11 +197,11 @@ function VehicleBills() {
             <tr className="w-[98vw] text-center">
               <td
                 colSpan={3}
-                className="text-[14px] font-bold border-r-2 text-red-600 py-1"
+                className="text-[14px] font-bold border-r-2 text-blue-600 py-1"
               >
                  TAMILNADU MERCANTILE BANK, NAMAKKAL BRANCH, NAMAKKAL. A/C No. 127900050900245
               </td>
-              <td colSpan={3} className="text-[14px]  font-bold text-red-600 py-1">
+              <td colSpan={3} className="text-[14px]  font-bold text-blue-600 py-1">
                 IFSC Code:TMBL0000129
               </td>
             </tr>
@@ -237,7 +237,7 @@ function VehicleBills() {
                 </td>
               <td rowSpan={7} className="border-l-2">
                 <div className="-rotate-90 flex flex-wrap  gap-1 w-[18vw] text-[13px]">
-                  <p className="text-red-600 flex pl-8">
+                  <p className="text-blue-600 flex pl-8">
                   </p>
                   <span className="uppercase">
                    
@@ -248,7 +248,7 @@ function VehicleBills() {
             <tr className=" h-[3vh]">
               <td className="border-r-2">
                 {" "}
-                <span className="text-red-800 pl-2">
+                <span className="text-blue-800 pl-2">
 
                   <span className="text-black"></span>
                 </span>
@@ -261,7 +261,7 @@ function VehicleBills() {
             </tr>
             <tr className="h-[3vh]">
               <td className="border-r-2">
-                <span className="text-red-800 pl-2">
+                <span className="text-blue-800 pl-2">
 
                   <span className="text-black"></span>
                 </span>
@@ -269,18 +269,18 @@ function VehicleBills() {
             </tr>
             <tr className=" h-[3vh]">
               <td className="border-r-2">
-                <span className="text-red-800 pl-2">
+                <span className="text-blue-800 pl-2">
                   <span className="text-black"></span>
                 </span>
               </td>
             </tr>
             <tr className=" h-[3vh]">
               <td className="border-r-2">
-                <span className="text-red-800 pl-2">
+                <span className="text-blue-800 pl-2">
                   <span className="text-black"></span>
                 </span>
                 <br />
-                <span className="text-red-800 pl-2">
+                <span className="text-blue-800 pl-2">
                   <span className="text-black"></span>
                 </span>
               </td>
@@ -307,7 +307,7 @@ function VehicleBills() {
               </td>
               <td colSpan={2} rowSpan={2}>
               <div className="flex flex-col gap-4">
-                  <p className="text-red-600">
+                  <p className="text-blue-600">
                     For{" "}
                     <span className="uppercase font-semibold">
                       Jai Balaji Roadways
