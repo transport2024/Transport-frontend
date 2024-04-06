@@ -16,12 +16,12 @@ body {
 
 .ant-menu-item-selected {
   background-color: transparent !important;
-  color: orangered !important;
+  color: rgb(0, 45, 71) !important;
   font-weight: 700 !important;
 }
 
 .active {
-  color: orangered !important;
+  color: rgb(112, 115, 255) !important;
 }
 
 .ant-select-selector {
@@ -30,24 +30,24 @@ body {
 
 
 .ant-menu-sub .ant-menu-inline {
-  background: rgb(177, 18, 18) !important;
+  background: rgb(0, 45, 71) !important;
 }
 
 .ant-menu-submenu {
-  background: rgb(177, 18, 18);
+  background: rgb(0, 45, 71);
 }
 
 .ant-pagination-item a {
-  background: rgb(177, 18, 18);
+  background: rgb(255, 255, 255);
   color: white !important;
   border: none !important;
 }
 
 #navbar {
-  background: rgb(177, 18, 18);
+  background: rgb(0, 45, 71);
 }
 .ant-menu-submenu-title {
-  color: black !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .ant-menu-inline {
@@ -68,24 +68,24 @@ body {
 
 .ant-menu-submenu-selected > .ant-menu-submenu-title {
   font-weight: 700 !important;
-  color: orangered !important;
+  color: rgb(0, 45, 71) !important;
   background: white !important;
 }
 
 .ant-menu-submenu-title {
-  background: rgb(177, 18, 18);
-  color: white !important;
+  background: rgb(0, 45, 71);
+  color: rgb(255, 255, 255) !important;
 }
 
 
 
 .ant-menu-light {
-  background: rgb(177, 18, 18);
+  background: rgb(0, 45, 71);
   color: white !important;
 }
 
 .ant-form-item-label > label {
-  color: black !important;
+  color: rgb(0, 45, 71) !important;
   /* background: rgb(19, 16, 174) !important; */
 }
 
@@ -94,8 +94,8 @@ body {
 }
 
 :root {
-  --primary-color: rgb(177, 18, 18);
-  --secondary-color: rgb(177, 18, 18);
+  --primary-color: rgb(0, 45, 71);
+  --secondary-color: rgb(0, 45, 71);
   --third-color: #9215f9;
 }
 
@@ -104,13 +104,13 @@ body {
 }
 
 .ant-btn-primary {
-  background: rgb(177, 18, 18) !important;
-  color: white !important;
+  background: rgb(0, 45, 71) !important;
+  color: rgb(0, 45, 71) !important;
 }
 
 .ant-btn-primary:hover {
-  background: rgb(177, 18, 18) !important;
-  color: white !important;
+  background: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 
@@ -120,11 +120,11 @@ body {
 }
 
 #btn{
-  background: rgb(177, 18, 18) ;
+  background: rgb(0, 45, 71) ;
 }
 
 .ant-menu-inline {
-  background: rgb(177, 18, 18);
+  background: rgb(0, 45, 71);
 }
 
 
@@ -132,6 +132,6 @@ body {
 
 
 #text-color{
-  color: rgb(177, 18, 18) !important;
+  color: rgb(0, 45, 71) !important;
 }
 

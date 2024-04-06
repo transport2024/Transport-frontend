@@ -209,7 +209,7 @@
     return (
       <div className="pt-[12vh] !w-[100vw] lg:!w-[82vw] z-20">
       <div className="flex flex-wrap gap-3 pl-6 lg:pl-0 lg:gap-6">
-    <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <div className="bg-gradient-to-br from-[#01577D] to-[#01877D] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
       <PeopleOutlineOutlinedIcon className="text-white lg:text-5xl" />
       <Statistic
         title={<h1 className="text-white font-semibold text-xl">Consigner</h1>}
@@ -222,7 +222,7 @@
       />
     </div>
 
-    <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px]  md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <div className="bg-gradient-to-br from-[#01577D] to-[#01877D] xsm:h-[100px] xsm:w-[140px]  md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
       <Person3OutlinedIcon className="text-white lg:text-5xl" />
       <Statistic
         title={<h1 className="text-white font-semibold text-xl">Consignee</h1>}
@@ -235,7 +235,7 @@
       />
     </div>
 
-    <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <div className="bg-gradient-to-br from-[#01577D] to-[#01877D] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
       <LocalShippingOutlinedIcon className="text-white lg:text-5xl" />
       <Statistic
         title={<h1 className="text-white font-semibold text-xl">Vehicle</h1>}
@@ -248,7 +248,7 @@
       />
     </div>
 
-    <div className="bg-gradient-to-br from-[#ff8080] to-[#ff3333] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
+    <div className="bg-gradient-to-br from-[#01577D] to-[#01877D] xsm:h-[100px] xsm:w-[140px] md:w-[200px] lg:h-[130px] lg:w-[250px] flex flex-col items-center justify-center rounded-md">
       <ContactPageOutlinedIcon className="text-white lg:text-5xl" />
       <Statistic
         title={<h1 className="text-white font-semibold text-xl">Broker</h1>}
@@ -298,8 +298,8 @@
             fill="#8884d8"
             label
           >
-            <Cell fill="#a2de97" />
-            <Cell fill="#e56a93" />
+            <Cell fill="#01877D" />
+            <Cell fill="#01577D" />
           </Pie>
           <Tooltip />
           <Legend />

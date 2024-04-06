@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import image from "../assets/rock.jpeg";
+import image from "../assets/rock.png";
 import axios from "axios";
 import { get } from "lodash";
 import { useLocation } from "react-router";
@@ -83,8 +83,8 @@ function VehicleBills() {
           <p className="border-b-2 border-black">
             SUBJECT TO <strong>NAMAKKAL</strong> JURISDICTION
           </p>
-          <h1 className="text-red-800 text-[36px] font-bold">
-            ROCK FORT ROADWAYS
+          <h1 className="text-green-800 text-[36px] font-bold">
+            JAI BALAJI ROADWAYS
           </h1>
           <p>
             <strong>Transport Contractors</strong>
@@ -98,15 +98,15 @@ function VehicleBills() {
       </div>
       <div>
         <div className="flex items-center  gap-20">
-          <span className="flex pl-8 !mt-[-5px]">
+        <span className="flex pl-8 !mt-[-5px]">
             <span className="">
               <pre className="uppercase"> Lorry no.</pre>
             </span>
             <input
               type="text"
               style={{ width: "25vw", borderColor: "black" }}
-              defaultValue={vehicleno}
-              className="outline-none pl-10 !bg-transparent border-b-2"
+              defaultVaLUE={vehicleno}
+              className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
             />
           </span>
           <span className="text-red-800 w-[140px] underline tracking-wider text-[14px] font-bold">
@@ -187,17 +187,7 @@ function VehicleBills() {
             />
             </span>
           </span>
-          <span className="flex">
-           <span>
-           <span className="">Delivery at:</span>
-            <input
-              type="text"
-              style={{ width: "25vw", borderColor: "black" }}
-              // defaultValue={inputs.lorryno}
-              className="outline-none pl-10 !bg-transparent border-b-2"
-            />
-          </span>
-           </span>
+        
         </div>
       </div>
 
@@ -209,10 +199,10 @@ function VehicleBills() {
                 colSpan={3}
                 className="text-[14px] font-bold border-r-2 text-red-600 py-1"
               >
-                INDIAN BANK, PALAPATTI BRANCH, NAMAKKAL. A/C No. 7669590442
+                 TAMILNADU MERCANTILE BANK, NAMAKKAL BRANCH, NAMAKKAL. A/C No. 127900050900245
               </td>
               <td colSpan={3} className="text-[14px]  font-bold text-red-600 py-1">
-                IFSC Code: IDIB000P092
+                IFSC Code:TMBL0000129
               </td>
             </tr>
           </thead>
@@ -299,9 +289,8 @@ function VehicleBills() {
             <tr className="border-t-2 text-center  h-[3vh]">
               <td className="border-r-2" colSpan={3}>
                 <div className="grid grid-cols-2 uppercase text-[14px] font-bold">
-                  <p>Goods to be insured by party</p>
-                  <p>Direct/door delivery</p>
-                  <p>GST Payable By &nbsp;&nbsp;&nbsp;&nbsp;consignor/Consignee</p>
+                  <p>GST Payable By consignor/Consignee</p>
+                  <p>Consigner should be insure their Goods</p>
                 </div>
               </td>
               <td className="border-r-2">Total</td>
@@ -311,17 +300,17 @@ function VehicleBills() {
             </tr>
             <tr className="border-t-2 text-center">
               <td className="border-r-2" colSpan={1}>
-                PAN NO.:BBQPA7235R
+                PAN NO.: BJTPS6814B
               </td>
               <td className="border-r-2" colSpan={3}>
-                E-WAY BILL REG.NO. 33BBQPA7235R1Z5
+                 E-WAY BILL REG.NO. 33BJTPS6814B1Z1 
               </td>
               <td colSpan={2} rowSpan={2}>
               <div className="flex flex-col gap-4">
                   <p className="text-red-600">
                     For{" "}
                     <span className="uppercase font-semibold">
-                      Rockport roadways
+                      Jai Balaji Roadways
                     </span>
                   </p>
                   <p className="flex flex-col items-center justify-center">
@@ -332,20 +321,8 @@ function VehicleBills() {
             </tr>
             <tr className="border-t-2 text-center text-[13px]">
               <td className="border-r-2" colSpan={4}>
-                <div>
+                <div className="uppercase text-[14px] font-bold">
                   <p> NOTE: G.C.Note Subject to conditions overleaf.</p>
-                  <p>
-                    The consignor has expressly declared that the above
-                    particulars furnished by him or his agent are correct.{" "}
-                  </p>
-                  <p>
-                    No prohibited goods or articles are included and that is
-                    fully aware or and accepts the conditions of carries given
-                    on the back side of the consignment receipt.{" "}
-                    <span className="uppercase pl-2 p-2 mt-2 text-red-600 font-bold text-[12px]">
-                      Good's booked under owner's risk
-                    </span>
-                  </p>
                 </div>
               </td>
               {/* <td className="border-r-2"></td> */}
