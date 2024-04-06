@@ -90,7 +90,7 @@ function LoginAndRegistration() {
               layout="vertical"
             >
               <h1 id="text-color" className=" text-xl md:text-2xl font-medium pb-2 text-center">
-                JAI BALAJI Login
+                Jai Balaji Login
               </h1>
               <Form.Item
                 label={<p id="text-color">Email</p>}

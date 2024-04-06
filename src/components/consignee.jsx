@@ -285,7 +285,7 @@ function Consignee() {
           setUpdateId("");
         }}
         className="!bg-[--primary-color] !text-white"
-        title={<h1 className="text-lg">Consignee</h1>}
+        title={<h1 className="text-lg text-white">Consignee</h1>}
         destroyOnClose
       >
         <Form

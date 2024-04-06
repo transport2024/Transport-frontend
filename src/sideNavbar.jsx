@@ -82,7 +82,7 @@ function SideNavbar() {
             <div className="hidden lg:block">
               <Avatar
                 style={{
-                  backgroundColor: "green",
+                  backgroundColor: "blue",
                 }}
                 size="default"
               >
@@ -92,12 +92,12 @@ function SideNavbar() {
             <div className="lg:hidden">
               <Avatar
                 style={{
-                  backgroundColor: "green",
+                  backgroundColor: "light blue",
                 }}
                 size="small"
                 onClick={()=>{setMenu(!menu)}}
               >
-               R 
+                J
               </Avatar>
             </div>
           </div>

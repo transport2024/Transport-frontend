@@ -38,8 +38,8 @@ body {
 }
 
 .ant-pagination-item a {
-  background: rgb(255, 255, 255);
-  color: white !important;
+  background: rgb(0, 45, 71);
+  color: rgb(255, 255, 255) !important;
   border: none !important;
 }
 
@@ -58,6 +58,7 @@ body {
 
 .ant-menu-item {
   height: 40px !important;
+
 }
 
 @media (max-width: 1180px) {
@@ -73,20 +74,25 @@ body {
 }
 
 .ant-menu-submenu-title {
-  background: rgb(0, 45, 71);
+  background: rgb(0, 45,71);
   color: rgb(255, 255, 255) !important;
 }
 
 
 
 .ant-menu-light {
-  background: rgb(0, 45, 71);
+  background: rgb(0, 65, 71);
   color: white !important;
 }
 
 .ant-form-item-label > label {
-  color: rgb(0, 45, 71) !important;
-  /* background: rgb(19, 16, 174) !important; */
+  color: rgb(255, 255, 255) !important;
+    
+}
+
+components2 .ant-form-item-label > label {
+ -webkit-text-fill-color: rgb(0, 45, 71) !important;
+    
 }
 
 .ant-menu-submenu-arrow {
@@ -127,11 +133,6 @@ body {
   background: rgb(0, 45, 71);
 }
 
-
-
-
-
 #text-color{
-  color: rgb(0, 45, 71) !important;
+  color: rgb(255, 255, 255) !important;
 }
-

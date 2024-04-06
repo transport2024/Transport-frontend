@@ -295,7 +295,7 @@ function Consignor() {
           setUpdateId("");
         }}
         className="!bg-[--primary-color] !text-blue-500"
-        title={<h1 className="text-lg">Consignor</h1>}
+        title={<h1 className="text-lg text-white">Consignor</h1>}
       >
         <Form
           className="flex flex-col"

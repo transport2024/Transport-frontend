@@ -348,7 +348,7 @@ function Vehicle() {
           setUpdateId("");
         }}
         destroyOnClose
-        title={<h1 className="text-lg ">Vehicle</h1>}
+        title={<h1 className="text-lg text-white ">Vehicle</h1>}
         footer={false}
         className="!bg-[--primary-color] !text-white"
       >
