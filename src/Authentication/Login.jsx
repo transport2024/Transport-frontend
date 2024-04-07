@@ -71,7 +71,7 @@ function LoginAndRegistration() {
         }}
       >
         <div className="min-h-[53vh]  w-[90vw] md:w-[80vw] lg:w-[65vw] xl:w-[55vw] px-3 flex rounded-tl-[60px] md:rounded-tl-[120px] rounded-br-[60px] md:rounded-br-[120px] rounded-tr-[10px] rounded-bl-[10px] items-center justify-center shadow-md bg-white/70 backdrop-blur-sm">
-          <div className="w-[50%] pt-5 h-[100%] hidden md:flex border-r-2 border-r-[primary-color]  flex-col items-center px-5 gap-5 md:text-2xl lg:text-3xl">
+          <div className="w-[50%] pt-5 h-[100%] hidden md:flex border-r-2 border-r-[secondary-color]  flex-col items-center px-5 gap-5 md:text-2xl lg:text-3xl">
             <Image
               preview={false}
               width={160}
