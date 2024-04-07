@@ -245,14 +245,14 @@ function Conisgnor(props) {
                   (filterDatas?.lramount / inputs?.bales) * inputs?.bales}
               </td>
               <td rowSpan={7} className="border-l-2">
-                <div className="-rotate-90 flex flex-wrap  gap-1 w-[18vw] text-[13px]">
+                <div className="-rotate-90 flex flex-wrap  gap-1 w-[17vw] text-[13px]">
                   <p className="text-red-600 flex pl-8">
                     Note:
                   </p>
                   <span className="uppercase">
                     {inputs.accountpaid === "Party" ||
                     inputs.accountpaid === "fixed" ? (
-                      <span className="w-[30vw] text-balck">
+                      <span className="w-[28vw] text-balck">
                         Please Pay Lorry Freight Amount In Favour Of
                         <br /> Jai Balaji Roadways Account
                       </span>

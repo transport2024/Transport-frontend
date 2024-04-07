@@ -16,12 +16,12 @@ body {
 
 .ant-menu-item-selected {
   background-color: transparent !important;
-  color: rgb(0, 45, 71) !important;
+  color: rgb(0, 204, 255) !important;
   font-weight: 700 !important;
 }
 
 .active {
-  color: rgb(112, 115, 255) !important;
+  color: rgb(0, 204, 255) !important;
 }
 
 .ant-select-selector {
@@ -30,7 +30,7 @@ body {
 
 
 .ant-menu-sub .ant-menu-inline {
-  background: rgb(0, 45, 71) !important;
+  background: rgb(177, 18, 18) !important;
 }
 
 .ant-menu-submenu {
@@ -39,7 +39,7 @@ body {
 
 .ant-pagination-item a {
   background: rgb(0, 45, 71);
-  color: rgb(255, 255, 255) !important;
+  color: white !important;
   border: none !important;
 }
 
@@ -47,7 +47,7 @@ body {
   background: rgb(0, 45, 71);
 }
 .ant-menu-submenu-title {
-  color: rgb(255, 255, 255) !important;
+  color: black !important;
 }
 
 .ant-menu-inline {
@@ -58,7 +58,6 @@ body {
 
 .ant-menu-item {
   height: 40px !important;
-
 }
 
 @media (max-width: 1180px) {
@@ -74,25 +73,20 @@ body {
 }
 
 .ant-menu-submenu-title {
-  background: rgb(0, 45,71);
-  color: rgb(255, 255, 255) !important;
+  background: rgb(0, 45, 71);
+  color: white !important;
 }
 
 
 
 .ant-menu-light {
-  background: rgb(0, 65, 71);
+  background: rgb(0, 0, 0);
   color: white !important;
 }
 
 .ant-form-item-label > label {
-  color: rgb(255, 255, 255) !important;
-    
-}
-
-components2 .ant-form-item-label > label {
- -webkit-text-fill-color: rgb(0, 45, 71) !important;
-    
+  color: rgb(0, 45, 71) !important;
+  /* background: rgb(19, 16, 174) !important; */
 }
 
 .ant-menu-submenu-arrow {
@@ -100,9 +94,9 @@ components2 .ant-form-item-label > label {
 }
 
 :root {
-  --primary-color: rgb(0, 45, 71);
+  --primary-color: rgb(255, 255, 255);
   --secondary-color: rgb(0, 45, 71);
-  --third-color: #9215f9;
+  
 }
 
 .ant-modal-content {
@@ -111,12 +105,12 @@ components2 .ant-form-item-label > label {
 
 .ant-btn-primary {
   background: rgb(0, 45, 71) !important;
-  color: rgb(0, 45, 71) !important;
+  color: white !important;
 }
 
 .ant-btn-primary:hover {
-  background: rgb(255, 255, 255) !important;
-  color: rgb(255, 255, 255) !important;
+  background: rgb(0, 45, 71) !important;
+  color: white !important;
 }
 
 
