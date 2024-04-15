@@ -161,7 +161,7 @@ function Driver(props) {
                 <input
                   type="text"
                   style={{ width: "36vw", borderColor: "black" }}
-                  defaultValue={inputs.gctin2}
+                  defaultValue={inputs.gctin1}
                   className="outline-none pl-10 !bg-transparent border-b-2"
                 />
               </span>
