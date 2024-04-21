@@ -163,7 +163,7 @@ function Conisgnor(props) {
            <span className="">GSTIN:</span>
             <input
               type="text"
-              style={{ width: "36vw", borderColor: "black" }}
+              style={{ width: "30vw", borderColor: "black" }}
               defaultValue={inputs.gctin1}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
@@ -184,7 +184,7 @@ function Conisgnor(props) {
             <span className="">GSTIN:</span>
             <input
               type="text"
-              style={{ width: "36vw", borderColor: "black" }}
+              style={{ width: "30vw", borderColor: "black" }}
               defaultValue={inputs.gctin2}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
