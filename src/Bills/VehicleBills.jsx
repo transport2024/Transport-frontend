@@ -155,7 +155,7 @@ function VehicleBills() {
            <span className="">Consignor:</span>
             <input
               type="text"
-              style={{ width: "38vw", borderColor: "black" }}
+              style={{ width: "48vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
@@ -174,7 +174,7 @@ function VehicleBills() {
             <span className="">Consignee:</span>
             <input
               type="text"
-              style={{ width: "38vw", borderColor: "black" }}
+              style={{ width: "48vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
             </span>
