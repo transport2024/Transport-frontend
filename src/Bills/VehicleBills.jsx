@@ -90,8 +90,7 @@ function VehicleBills() {
             <strong> Super Jet Line Service for Tamilnadu, Karnataka, Maharashtra, Gujarat</strong>
           </p>
           <p> Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
-          </p>
-          <p>Cell: 91525 25000, 91525 26000 E-Mail:hydjaibalaji@gmail.com</p>
+           Cell: 91525 25000, 91525 26000 E-Mail:hydjaibalaji@gmail.com</p>
         </div>
       </div>
       <div>
