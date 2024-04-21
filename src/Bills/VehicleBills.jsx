@@ -163,7 +163,7 @@ function VehicleBills() {
            <span className="">GSTIN:</span>
             <input
               type="text"
-              style={{ width: "36vw", borderColor: "black" }}
+              style={{ width: "20vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
@@ -182,7 +182,7 @@ function VehicleBills() {
             <span className="">GSTIN:</span>
             <input
               type="text"
-              style={{ width: "36vw", borderColor: "black" }}
+              style={{ width: "20vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
             </span>
