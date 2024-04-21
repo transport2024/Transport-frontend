@@ -310,10 +310,8 @@ function Consignee(props) {
               <tr className="border-t-2 text-center  h-[3vh]">
                 <td className="border-r-2" colSpan={3}>
                   <div className="grid grid-cols-2 uppercase text-[14px] font-bold">
-                  <p>GST Payable By consignor/Consignee</p>
-                  <div className="uppercase text-[14px] font-bold">
-                  <p> NOTE: G.C.Note Subject to conditions overleaf.</p>
-                </div>
+              <p>GST Payable By consignor/Consignee</p>
+                  <p>Consigner should be insure their Goods </p> 
                   </div>
                 </td>
                 <td className="border-r-2">Total</td>
