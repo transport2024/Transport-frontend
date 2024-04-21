@@ -81,13 +81,12 @@ function Driver(props) {
               JAI BALAJI ROADWAYS
             </h1>
             <p>
-              <strong>Transport Contractors</strong>
+              <strong> Super Jet Line Service for Tamilnadu, Karnataka, Maharashtra, Gujarat </strong>
             </p>
             <p>
-              No.4/181,Plot No. 8,1st Floor Sri Ram Tower,Thuraiyur Road,Anna
-              Nagar,NAMAKKAL-637 002
-            </p>
-            <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreenkl@gmail.com</p>
+Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
+</p>
+            <p> Cell: 91525 25000, 91525 26000 E-Mail:rajshreenkl@gmail.com </p>
           </div>
         </div>
         <div>
@@ -98,7 +97,7 @@ function Driver(props) {
             </span>
             <input
               type="text"
-              style={{ width: "25vw", borderColor: "black" }}
+              style={{ width: "20vw", borderColor: "black" }}
               defaultValue={inputs?.lorryno}
               className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
             />
@@ -151,7 +150,7 @@ function Driver(props) {
                 <span className="">Consignor:</span>
                 <input
                   type="text"
-                  style={{ width: "38vw", borderColor: "black" }}
+                  style={{ width: "54vw", borderColor: "black" }}
                   defaultValue={inputs.consignor}
                   className="outline-none pl-10 !bg-transparent border-b-2"
                 />
@@ -171,7 +170,7 @@ function Driver(props) {
                 <span className="">Consignee:</span>
                 <input
                   type="text"
-                  style={{ width: "38vw", borderColor: "black" }}
+                  style={{ width: "54vw", borderColor: "black" }}
                   defaultValue={inputs.consignee}
                   className="outline-none pl-10 !bg-transparent border-b-2"
                 />
