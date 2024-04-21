@@ -84,7 +84,7 @@ function Conisgnor(props) {
             JAI BALAJI ROADWAYS
           </h1>
           <p>
-            <strong> Commision Agent </strong>
+            <strong> Commission Agent </strong>
           </p>
           <p>
               H.O : Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
