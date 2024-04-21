@@ -198,7 +198,7 @@ function VehicleBills() {
                 colSpan={3}
                 className="text-[14px] font-bold border-r-2 text-blue-600 py-1"
               >
-                 TAMILNADU MERCANTILE BANK, NAMAKKAL BRANCH, NAMAKKAL. A/C No. 127900050900245
+                 TAMILNADU MERCANTILE BANK, NAMAKKAL BRANCH, NAMAKKAL. A/C No. 129700050900245
               </td>
               <td colSpan={3} className="text-[14px]  font-bold text-blue-600 py-1">
                 IFSC Code:TMBL0000129
