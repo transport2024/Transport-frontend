@@ -92,7 +92,7 @@ function VehicleBills() {
           <p>
             Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
           </p>
-          <p>Cell: 91525 25000, 91525 26000 E-Mail:rajshreenkl@gmail.com</p>
+          <p>Cell: 91525 25000, 91525 26000 E-Mail:hydjaibalaji@gmail.com</p>
         </div>
       </div>
       <div>
@@ -103,7 +103,7 @@ function VehicleBills() {
             </span>
             <input
               type="text"
-              style={{ width: "25vw", borderColor: "black" }}
+              style={{ width: "20vw", borderColor: "black" }}
               defaultVaLUE={vehicleno}
               className="outline-none pl-10 !bg-transparent border-b-2 uppercase"
             />
