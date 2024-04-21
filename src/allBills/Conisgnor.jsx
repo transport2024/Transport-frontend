@@ -84,12 +84,12 @@ function Conisgnor(props) {
             JAI BALAJI ROADWAYS
           </h1>
           <p>
-            <strong> Super Jet Line Service for Tamilnadu, Karnataka, Maharashtra, Gujarat </strong>
+            <strong> Commision Agent </strong>
           </p>
           <p>
-           Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
-          </p>
-          <p>Cell:91525 25000, 91525 26000 E-Mail:hydjaibalaji@gmail.com</p>
+              H.O : Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
+              B.O :  No.4/181,Plot No. 8,1st Floor Sri Ram Tower,Thuraiyur Road,Anna Nagar,NAMAKKAL-637 002. </p>
+           <p>Cell:91525 25000, 91525 26000 E-Mail:hydjaibalaji@gmail.com</p>
         </div>
       </div>
       <div>
