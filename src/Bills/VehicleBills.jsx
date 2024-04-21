@@ -87,13 +87,12 @@ function VehicleBills() {
             JAI BALAJI ROADWAYS
           </h1>
           <p>
-            <strong>Transport Contractors</strong>
+            <strong> Super Jet Line Service for Tamilnadu, Karnataka, Maharashtra, Gujarat</strong>
           </p>
           <p>
-            No.4/181,Plot No. 8,1st Floor Sri Ram Tower,Thuraiyur Road,Anna
-            Nagar,NAMAKKAL-637 002
+            Shop No.1, H.No.:5-29/2, Near Railway Bridge, NH-44, THONDUPALLY(V), SHAMSHABAD(M), Ranga Reddy District- 509 325. HYDRABAD (Telangana.)
           </p>
-          <p>Cell:91525 26000, 91525 28000 E-Mail:rajshreenkl@gmail.com</p>
+          <p>Cell: 91525 25000, 91525 26000 E-Mail:rajshreenkl@gmail.com</p>
         </div>
       </div>
       <div>
@@ -155,7 +154,7 @@ function VehicleBills() {
            <span className="">Consignor:</span>
             <input
               type="text"
-              style={{ width: "48vw", borderColor: "black" }}
+              style={{ width: "54vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
            </span>
@@ -174,7 +173,7 @@ function VehicleBills() {
             <span className="">Consignee:</span>
             <input
               type="text"
-              style={{ width: "48vw", borderColor: "black" }}
+              style={{ width: "54vw", borderColor: "black" }}
               className="outline-none pl-10 !bg-transparent border-b-2"
             />
             </span>
